@@ -1,0 +1,38 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+body {
+  font-family: 'Lexend', sans-serif;
+}
+
+.navbar-icon i {
+  font-size: 1.2rem;
+}
+
+:root {
+  --ifm-color-primary: #9b87f5;
+  --ifm-color-primary-dark: #8a74e8;
+  --ifm-color-primary-darker: #7d66db;
+  --ifm-color-primary-darkest: #6a54c9;
+  --ifm-color-primary-light: #a897f8;
+  --ifm-color-primary-lighter: #b5a7fa;
+  --ifm-color-primary-lightest: #d0c6fc;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(155, 135, 245, 0.15);
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #b5a7fa;
+  --ifm-color-primary-dark: #a897f8;
+  --ifm-color-primary-darker: #9b87f5;
+  --ifm-color-primary-darkest: #8a74e8;
+  --ifm-color-primary-light: #c0b4fb;
+  --ifm-color-primary-lighter: #d0c6fc;
+  --ifm-color-primary-lightest: #e4dffe;
+  --docusaurus-highlighted-code-line-bg: rgba(181, 167, 250, 0.25);
+}
+
+::selection,
+::-moz-selection {
+  background: #d0c6fc;
+}
