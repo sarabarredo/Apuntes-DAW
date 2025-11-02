@@ -243,3 +243,247 @@ Ventajas del uso de bases de datos:
 - **Consulta directa**: existe una herramienta para poder acceder a los datos interactivamente.
 
 ### 3.2.- Usos
+
+Existen cuatro tipos de personas que pueden hacer uso de una base de datos: 
+
+- El administrador
+- Los diseñadores de la base de datos
+- Los programadores de aplicaciones
+- Los usuarios finales
+
+En la siguiente tabla se muestran las funciones y características de cada uno de estos usuarios:
+
+| Usuario | Funciones y características |
+|----------|----------|
+| **Administrador** | Gestiona el funcionamiento físico, la seguridad y el acceso a la base de datos |
+| **Diseñadores** | Crean la estructura lógica de la base de datos (datos, relaciones y restricciones) |
+| **Programadores** | Desarrollan las aplicaciones que los usuarios finales emplean para interactuar con los datos |
+| **Usuarios finales** | Son los clientes que utilizan la base de datos para gestionar su información |
+
+Las bases de datos se utilizan para almacenar y gestionar información de forma organizada en prácticamente todos los ámbitos, como la banca, las telecomunicaciones, la educación, la medicina, el transporte, el comercio y los servicios públicos.
+
+### 3.3.- Ubicación de la información
+
+Las bases de datos normalmente se almacenan y localizan en discos duros y otros dispositivos de almacenamiento, a los que se accede a través de un ordenador. Una gran base de datos puede necesitar servidores en lugares diferentes, y viceversa, pequeñas bases de datos pueden existir como archivos en el disco duro de un único equipo.
+
+A continuación, se exponen los sistemas de almacenamiento de información más utilizados para el despliegue de bases de datos:
+
+- **Discos SATA.** Discos de uso común, con buen balance entre capacidad y costo. Han evolucionado en velocidad (SATA I: 150 MB/s, SATA II: 300 MB/s, SATA III: 600 MB/s).
+
+- **Discos SCSI.** Discos de alta velocidad y rendimiento, diseñados para servidores. Ofrecen distintas velocidades (de 5 a 20 MB/s en sus primeras versiones) y un controlador puede gestionar hasta 7 discos.
+
+- **RAID.** Sistema que combina varios discos duros en una sola unidad para conseguir mayor capacidad, velocidad o seguridad (copias de datos).
+
+- **Sistemas NAS.** Dispositivo de almacenamiento conectado en red, que permite a múltiples usuarios compartir archivos de forma centralizada. Son sistemas con capacidades muy grandes (varios Terabytes).
+
+- **Sistemas SAN.** Red dedicada y de alta velocidad que interconecta servidores con sistemas de almacenamiento. Separa el almacenamiento de los servidores, permitiendo que varios servidores accedan a un mismo grupo de discos de forma optimizada.
+
+## 4.- Modelos de bases de datos
+
+La clasificación tradicional de las bases de datos establece tres modelos de bases de datos: jerárquico, en red y relacional. En la actualidad el modelo de bases de datos más extendido es el relacional. Aunque, hay que tener en cuenta que dos de sus variantes (modelo de bases de datos distribuidas y orientadas a objetos) son las que se más se están utilizando en los últimos tiempos.
+
+### 4.1.- Modelo jerárquico
+
+También recibe el nombre de **modelo en árbol**, ya que utiliza una estructura en **árbol invertido** para la organización de los datos. Hoy en día está en **desuso**.
+
+La información se organiza con una jerarquía, en la que la relación entre las entidades de este modelo siempre es del tipo **padre/hijo**. De tal manera que existen nodos que contienen atributos o campos y que se relacionarán con sus nodos hijos, pudiendo tener cada nodo **más de un hijo**, pero un nodo siempre tendrá **un sólo padre**.
+
+Los datos de este modelo se almacenan en estructuras lógicas llamadas **segmentos**. Los segmentos se relacionan entre sí utilizando **arcos**. 
+
+### 4.2.- Modelo en red
+
+Este modelo aparece como respuesta a limitaciones del modelo jerárquico.
+
+El modelo en red organiza la información en **registros** (también llamados nodos) y **enlaces**. En los registros se almacenan los datos, mientras que los enlaces permiten relacionar estos datos. Las bases de datos en red son parecidas a las jerárquicas sólo que en ellas puede haber **más de un padre**.
+
+En este modelo se pueden representar perfectamente cualquier tipo de relación entre los datos, pero hace muy complicado su manejo. Al no tener que duplicar la información se ahorra espacio de almacenamiento.
+
+### 4.3.- Modelo relacional
+
+Las bases de datos relacionales son las más comunes en la actualidad.
+
+En este modelo, la información se organiza en **tablas** que el usuario percibe como un conjunto de datos estructurados. Aunque visualmente parezcan simples tablas, internamente pueden estar almacenadas de diferentes maneras según el sistema que las gestione.
+
+Cada **tabla** representa una **relación** y está compuesta por **filas** y **columnas**:
+
+* Cada **fila** (también llamada *registro*, *entidad* o *tupla*) contiene los datos de un elemento concreto.
+* Cada **columna** (también llamada *campo* o *atributo*) define un tipo de dato que describe una característica de los elementos.
+
+El **dominio** es el conjunto de valores posibles que puede tener un atributo.
+
+Una **clave** es uno o varios atributos que permiten identificar de manera única cada registro dentro de la tabla.
+
+Para que una tabla sea válida en el modelo relacional, debe cumplir ciertas reglas:
+
+* Todos los registros tienen la misma estructura.
+* No hay columnas ni campos repetidos.
+* No existen registros duplicados.
+* El orden de los registros no influye.
+* Cada registro se distingue mediante una clave única.
+
+El lenguaje estándar para trabajar con bases de datos relacionales es **SQL (Structured Query Language)**, utilizado para crear, modificar y consultar los datos.
+
+Durante el diseño de una base de datos relacional, se aplica un proceso llamado **normalización**, que busca optimizar su estructura y evitar redundancias en la información.
+
+### 4.4.- Modelo orientado a objetos
+
+El modelo orientado a objetos define una base de datos en términos de objetos, sus propiedades y sus operaciones. Los objetos con la misma estructura y comportamiento pertenecen a una clase, y las clases se organizan en jerarquías. Las operaciones de cada clase se especifican en términos de procedimientos predefinidos denominados métodos. Algunos sistemas existentes en el mercado, basados en el modelo relacional, han sufrido evoluciones incorporando conceptos orientados a objetos. A estos modelos se les conoce como sistemas objeto-relacionales.
+
+El objetivo del modelo orientado a objetos es cubrir las limitaciones del modelo relacional. Gracias a este modelo se incorporan mejoras como la herencia entre tablas, los tipos definidos por el usuario, soporte multimedia, etc.
+
+Los conceptos más importantes del paradigma de objetos que el modelo orientado a objetos incorpora son:
+
+- **Encapsulación:** propiedad que permite ocultar la información al resto de los objetos, impidiendo así accesos incorrectos o conflictos.
+- **Herencia:** propiedad a través de la cual los objetos heredan comportamiento dentro de una jerarquía de clases.
+- **Polimorfismo:** propiedad de una operación mediante la cual puede ser aplicada a distintos tipos de objetos.
+
+### 4.5.- Otros modelos
+
+**Modelo Objeto-Relacional**
+
+Combina elementos del modelo relacional con la orientación a objetos. Su objetivo es mantener las ventajas del modelo relacional incorporando conceptos como la **herencia** y los **tipos de datos definidos por el usuario**.
+Se basa en el estándar **SQL99**, que añade funciones avanzadas como procedimientos almacenados, *triggers*, tipos de datos personalizados, consultas recursivas y soporte para grandes objetos (*LOB*).
+También permite integrar funciones escritas en lenguajes como **SQL, Java o C**.
+Ejemplos de sistemas que usan este modelo son **Oracle** y **SQL Server**.
+
+**Modelo de Bases de Datos Deductivas**
+
+Estas bases de datos no solo almacenan información, sino que también pueden **inferir nuevos datos** a partir de los existentes, utilizando principios de la **lógica matemática**.
+Se crearon para superar las limitaciones del modelo relacional en consultas complejas o recursivas.
+Su lenguaje estándar es **SQL3**, desarrollado en 1999.
+
+**Bases de Datos Multidimensionales**
+
+Diseñadas para el análisis de grandes volúmenes de información, especialmente en entornos empresariales.
+Los datos se organizan en **múltiples dimensiones** y se representan en estructuras llamadas **cubos**, lo que permite realizar consultas complejas con gran rapidez.
+Este tipo de bases se utiliza en sistemas **OLAP (OnLine Analytical Processing)**, orientados al análisis, a diferencia de **OLTP (OnLine Transaction Processing)**, más enfocado en operaciones transaccionales.
+
+**Bases de Datos Transaccionales**
+
+Su principal característica es la **velocidad y fiabilidad** en la ejecución de operaciones.
+Se usan en sistemas donde la integridad de la información es crítica, como bancos o industrias.
+Cada transacción se completa por completo o se cancela, garantizando consistencia en los datos.
+Un ejemplo destacado es **Oracle**.
+
+**Modelo de Bases de Datos Orientadas a Documentos**
+
+El elemento principal es el **documento**, que contiene datos semiestructurados (por ejemplo, en formato **XML o JSON**).
+Este tipo de bases es flexible y adecuado para aplicaciones web modernas.
+Ejemplos: **MongoDB** y **CouchDB**.
+
+## 5.- Tipos de bases de datos
+
+**Según su contenido**
+
+- Con información actual.
+- Directorios.
+- Documentales:
+    - De texto completo.
+    - Archivos electrónicos de imágenes.
+    - Referenciales.
+
+**Según su uso**
+
+- Individual.
+- Compartida.
+- De acceso público.
+- Propietarias o bancos de datos.
+
+**Según la variabilidad de la información**
+
+- Estáticas.
+- Dinámicas.
+
+**Según la localización de la información**
+
+- Centralizadas:
+    - Basada en anfitrión.
+    - Basada en Cliente/Servidor.
+- Distribuidas.
+
+**Según el organismo productor**
+
+- De organismos públicos y de la Administración:
+    - De acceso público.
+    - De uso interno.
+- De instituciones sin ánimo de lucro.
+- De entidades privadas o comerciales:
+    - De uso interno.
+    - De uso interno que ocasionalmente ofrecen servicio hacia el exterior.
+    - Comerciales.
+- Realizadas por cooperación en red.
+
+**Según el modo de acceso**
+
+- De acceso local.
+- En CD-ROM.
+- En línea:
+    - Acceso vía telnet o mediante línea de Internet.
+    - Acceso vía web.
+
+**Según cobertura temática**
+
+- Científico-tecnológicas: 
+    - Multidisciplinares.
+    - Especializadas.
+- Económico-empresariales.
+- De medios de comunicación.
+- De ámbito político-administrativo y jurídico.
+- De ámbito sanitario.
+- Para el gran público.
+
+## 6.- Sistemas gestores de base de datos
+
+Un **Sistema Gestor de Bases de Datos (SGBD)**, o **DBMS (DataBase Management System)**, es un conjunto de programas que permite **crear, administrar y acceder** a la información contenida en una base de datos de forma **eficiente y segura**. Está diseñado para manejar grandes volúmenes de datos y garantizar su integridad y confidencialidad.
+
+El SGBD proporciona a usuarios, analistas, programadores y administradores las herramientas necesarias para **definir, construir y manipular** los datos:
+
+* **Definir** una base de datos implica establecer los tipos de datos, sus estructuras y las restricciones que deben cumplir.
+* **Construir** la base consiste en almacenar físicamente la información bajo la supervisión del sistema gestor.
+* **Manipular** los datos incluye realizar consultas, actualizaciones y generar informes a partir del contenido almacenado.
+
+### Ventajas de los SGBD
+
+* Ofrecen una **visión abstracta** de los datos, ocultando la complejidad del almacenamiento físico.
+* Garantizan **independencia física y lógica**, permitiendo modificar la estructura sin afectar las aplicaciones.
+* Reducen la **redundancia e inconsistencia** de la información.
+* Mantienen la **integridad, seguridad y privacidad** de los datos.
+* Facilitan el **acceso rápido y fiable** a la información.
+* Permiten el **uso compartido y concurrente** de los datos entre múltiples usuarios.
+* Favorecen la **interoperabilidad** entre distintos sistemas.
+* Incluyen mecanismos de **copia de seguridad y recuperación** ante fallos.
+
+El SGBD se comunica directamente con el **sistema operativo**, utilizando sus funciones para gestionar el almacenamiento y el acceso a los datos. Además, actúa como intermediario entre las **aplicaciones** y la base de datos, proporcionando los medios necesarios para consultar y manipular la información de manera controlada.
+
+### 6.1.- Funciones
+
+Un SGBD desarrolla **tres funciones** fundamentales: descripción, manipulación y control o utilización de los datos.
+
+**Descripción o definición** 
+
+Permite al diseñador de la base de datos crear las estructuras apropiadas para integrar adecuadamente los datos. Esta función es la que permite definir las tres estructuras de la base de datos: Estructura interna, Estructura conceptual y Estructura externa.
+
+Esta función se realiza mediante el lenguaje de descripción de datos o DDL, con el cual definen las estructuras de datos, las relaciones entre los mismos y las reglas que han de cumplir. Se especificarán las características de los datos a cada uno de los tres niveles y el SGBD se ocupará de la transformación de las estructuras externas orientadas a los usuarios a las estructuras conceptuales y de la relación de ésta y la estructura física.
+
+- **Estructura interna**. A nivel interno se ha de indicar el espacio de disco reservado para la base de datos, la longitud de los campos, su modo de representación (lenguaje para la definición de la estructura externa).
+- **Estructura conceptual**. A nivel conceptual se proporcionan herramientas para la definición de las entidades y su identificación, atributos de las mismas, interrelaciones entre ellas, restricciones de integridad, etc.; es decir, el esquema de la base de datos (lenguaje para la definición de estructura lógico global).  
+- **Estructura externa**. A nivel externo se deben definir las vistas de los distintos usuarios a través del lenguaje para la definición de estructuras externas.
+
+**Manipulación**
+
+Permite a los usuarios de la base buscar, añadir, suprimir o modificar los datos de la misma, siempre de acuerdo con las especificaciones y las normas de seguridad dictadas por el administrador. Se llevará a cabo por medio de un lenguaje de manipulación de datos (DML) que facilita los instrumentos necesarios para la realización de estas tareas.
+
+También se encarga de definir la  vista externa de todos los usuarios de la base de datos o vistas parciales que cada usuario tiene de los datos definidos con el DDL.
+
+Por manipulación de datos entenderemos:
+
+- Recuperación de información almacenada.
+- Inserción de información nueva.
+- Borrado de información.
+- Modificación de información almacenada.
+
+**Función de control**
+
+Permite al administrador establecer mecanismos de protección de las diferentes visiones de los datos asociadas a cada usuario, proporcionando elementos de creación y modificación de dichos usuarios. Adicionalmente, incorpora sistemas para la creación de copias de seguridad, carga de ficheros, auditoría, protección de ataques, configuración del sistema, etc. El lenguaje que implementa esta función es el lenguaje de control de datos o DCL.
+
+### 6.2.- Componentes
