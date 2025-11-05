@@ -487,3 +487,141 @@ Por manipulación de datos entenderemos:
 Permite al administrador establecer mecanismos de protección de las diferentes visiones de los datos asociadas a cada usuario, proporcionando elementos de creación y modificación de dichos usuarios. Adicionalmente, incorpora sistemas para la creación de copias de seguridad, carga de ficheros, auditoría, protección de ataques, configuración del sistema, etc. El lenguaje que implementa esta función es el lenguaje de control de datos o DCL.
 
 ### 6.2.- Componentes
+
+Un SGBD ha de proporcionar servicios relacionados con el almacenamiento y la explotación de los datos de forma eficiente. Para ello, cuenta con una serie de componentes:
+
+- **Lenguajes de la base de datos**. Cualquier sistema gestor de base de datos ofrece la posibilidad de utilizar lenguajes e interfaces adecuadas para sus diferentes tipos de usuarios. A través de los lenguajes se pueden especificar los datos que componen la BD, su estructura, relaciones, reglas de integridad, control de acceso, características físicas y vistas externas de los usuarios. Los lenguajes del SGBD son: Lenguaje de Definición de los Datos (DDL), Lenguaje de Manejo de Datos (DML) y Lenguaje de Control de Datos (DCL).
+
+- **Diccionario de datos**. Descripción de los datos almacenados. Se trata de información útil para los programadores de aplicaciones. Es el lugar donde se deposita la información sobre la totalidad de los datos que forman la base de datos. Contiene las características lógicas de las estructuras que almacenan los datos, su nombre, descripción, contenido y organización. En una base de datos relacional, el diccionario de datos aportará información sobre:
+    - Estructura lógica y física de la BD.
+    - Definición de tablas, vistas, indices, disparadores, procedimientos, funciones, etc.
+    - Cantidad de espacio asignado y utilizado por los elementos de la BD.
+    - Descripción de las restricciones de integridad.
+    - Información sobre los permisos asociados a cada perfil de usuario.
+    - Auditoría de acceso a los datos, utilización, etc.
+
+- **Gestor de la base de datos**. Es la parte de software encargada de garantizar el correcto, seguro, íntegro y eficiente acceso y almacenamiento de los datos. Este componente es el encargado de proporcionar una interfaz entre los datos almacenados y los programas de aplicación que los manejan. Es un intermediario entre el usuario y los datos. Es el encargado de garantizar la privacidad, seguridad e integridad de los datos, controlando los accesos concurrentes e interactuando con el sistema operativo.
+
+- **Usuarios de la base de datos**. En los SGBD existen diferentes perfiles de usuario:
+    - El administrador, que será la persona encargada de la función de administración de la base de datos. Tiene el control centralizado de la base de datos y es el responsable de su buen funcionamiento. Es el encargado de autorizar el acceso a la base de datos, de coordinar y vigilar su utilización y de adquirir los recursos software y hardware que sean necesarios.
+    - Los usuarios de la base de datos, que se pueden clasificar en:
+        - Diseñadores.
+        - Operadores y personal de mantenimiento.
+        - Analistas y programadores de aplicaciones.
+        - Usuarios finales.
+
+- **Herramientas de la base de datos**. Son un conjunto de aplicaciones que permiten a los administradores la gestión de la base de datos, de los usuarios y permisos, generadores de formularios, informes, interfaces gráficas, generadores de aplicaciones, etc.
+
+### 6.3.- Arquitectura
+
+Un SGBD cuenta con una arquitectura a través de la que se simplifica a los diferentes usuarios de la base de datos su labor. El objetivo fundamental es separar los programas de aplicación de la base de datos física.
+
+Los tres estándares más importantes de las bases de datos son ANSI/SPARC/X3, CODASYL y ODMG (éste sólo para las bases de datos orientadas a objetos). Tanto ANSI (EEUU), como ISO (resto del mundo), son el referente en cuanto a estandarización de bases de datos, conformando un único modelo de bases de datos.
+
+La arquitectura propuesta proporciona tres niveles de abstracción: nivel interno o físico, nivel lógico o conceptual y nivel externo o de visión del usuario:
+
+- **Nivel interno o físico**. En este nivel se describe la estructura física de la base de datos a través de un esquema interno encargado de detallar el sistema de almacenamiento de la base de datos y sus métodos de acceso. Es el nivel más cercano al almacenamiento físico. A través del esquema físico se indican los archivos que contienen la información, su organización, los métodos de acceso a los registros, los tipos de registros, la longitud, los campos que los componen, las unidades de almacenamiento, etc.
+
+- **Nivel lógico o conceptual**. En este nivel se describe la estructura completa de la base de datos a través de un esquema que detalla las entidades, atributos, relaciones, operaciones de los usuarios y restricciones. Los detalles relacionados con las estructuras de almacenamiento se ocultan, permitiendo realizar una abstracción a más alto nivel.
+
+- **Nivel externo o de visión del usuario**. En este nivel se describen las diferentes vistas que los usuarios percibirán de la base de datos. Cada tipo de usuario o grupo de ellos verá sólo la parte de la base de datos que le interesa, ocultando el resto.
+
+Para una base de datos, sólo existirá un único esquema interno, un único esquema conceptual y podrían existir varios esquemas externos definidos para uno o varios usuarios.
+
+Gracias a esta arquitectura, se consigue la independencia de datos a dos niveles:
+
+- **Independencia lógica**: podemos modificar el esquema conceptual sin alterar los esquemas externos ni los programas de aplicación.
+
+- **Independencia física**: podemos modificar el esquema interno sin necesidad de modificar el conceptual o el externo. Es decir, se puede cambiar el sistema de almacenamiento, reorganizar los ficheros, añadir nuevos, etc., sin que esto afecte al resto de esquemas.
+
+### 6.4.- Tipos
+
+**Según su modelo lógico**
+
+- Modelo Jerárquico.
+- Modelo de Red.
+- Modelo Relacional.
+- Modelo Orientado a Objetos.
+
+**Según el número de usuarios**
+
+- Monousuario.
+- Multiusuario.
+
+**Según el número de sitios en los que está distribuida la base de datos**
+
+- Centralizados.
+- Distribuidos (homogéneos o heterogéneos).
+
+**Según el coste**
+
+- Entre 0 y 3.000 euros.
+- Entre 10.000 y 100.000 euros
+- Más de 100.000 euros.
+
+**Según el propósito o finalidad**
+
+- Propósito general.
+- Propósito específico.
+
+## 7.- SGBD comerciales
+
+| SGBD | Descripción |
+|------|-------------|
+| **ORACLE** | Reconocido como uno de los mejores a nivel mundial. Es multiplataforma, potente a nivel transaccional, confiable y seguro. Es Cliente/Servidor, basado en el modelo de datos Relacional. De gran potencia, aunque con un precio elevado que hace que sólo se vea en empresas muy grandes y multinacionales. Ofrece versiones gratuitas, como Oracle Database Express Edition (XE). |
+| **MYSQL** | Sistema muy extendido que se ofrece bajo dos tipos de licencia: comercial o libre. Para empresas que deseen incorporarlo en productos privativos, deben comprar una licencia específica. Es relacional, multihilo, multiusuario y multiplataforma. Su gran velocidad lo hace ideal para consultas de bases de datos y plataformas web. |
+| **DB2** | Multiplataforma, el motor de base de datos relacional integra XML de manera nativa, lo que IBM ha llamado pureXML, permitiendo almacenar documentos completos para realizar operaciones y búsquedas jerárquicas dentro de éste, e integrarlo con búsquedas relacionales. |
+| **INFORMIX** | Otra opción de IBM para el mundo empresarial que necesita un DBMS sencillo y confiable. Es un gestor de base de datos relacional basado en SQL, multiplataforma. Consume menos recursos que Oracle, con utilidades avanzadas respecto a conectividad y funciones relacionadas con tecnologías de Internet/Intranet, XML, etc. |
+| **Microsoft SQL SERVER**  | Sistema Gestor de Base de Datos producido por Microsoft. Es relacional, sólo funciona bajo Microsoft Windows y utiliza arquitectura Cliente/Servidor. Constituye la alternativa a otros potentes SGBD como Oracle, PostgreSQL o MySQL. |
+| **SYBASE** | Un DBMS con bastantes años en el mercado, con tres versiones para ajustarse a las necesidades de cada empresa. Es un sistema relacional, altamente escalable, de alto rendimiento, con soporte a grandes volúmenes de datos, transacciones y usuarios, y de bajo costo. |
+
+## 8.- SGBD libres
+
+| SGBD | Descripción |
+|------|-------------|
+| **MySQL** | Relacional, multihilo y multiusuario con más de seis millones de instalaciones. Distribuido bajo dos tipos de licencias, comercial y libre. Multiplataforma, posee varios motores de almacenamiento, accesible a través de múltiples lenguajes de programación y muy ligado a aplicaciones web. |
+| **PostgreSQL** | Relacional Orientado a Objetos. Considerado como la base de datos de código abierto más avanzada del mundo. Desarrollado por una comunidad de desarrolladores que trabajan de forma desinteresada, altruista, libre y/o apoyados por organizaciones comerciales. Es multiplataforma y accesible desde múltiples lenguajes de programación. |
+| **Firebird** | Relacional, multiplataforma, con bajo consumo de recursos, excelente gestión de la concurrencia, alto rendimiento y potente soporte para diferentes lenguajes. |
+| **Apache Derby** | Escrito en Java, de reducido tamaño, con soporte multilenguaje, multiplataforma, altamente portable, puede funcionar embebido o en modo cliente/servidor. |
+| **SQLite**  | Relacional, basado en una biblioteca escrita en C que interactúa directamente con los programas, reduce los tiempos de acceso siendo más rápido que MySQL o PostGreSQL. Es multiplataforma y con soporte para varios lenguajes de programación. |
+
+## 9.- Bases de datos centralizadas
+
+La arquitectura centralizada es de las menos utilizadas. Es una estructura en la que el SGBD está implantado en una sola plataforma u ordenador desde donde se gestiona directamente la totalidad de los recursos. Es la arquitectura de los centros de proceso de datos tradicionales. Se basa en tecnologías sencillas, muy experimentadas y de gran robustez.
+
+Las principales características de las bases de datos centralizadas son:
+
+- Se almacena completamente en una ubicación central.
+- No posee múltiples elementos de procesamiento ni mecanismos de intercomunicación como las bases de datos distribuidas.
+- Sus componentes son: los datos, el software de gestión de bases de datos y los dispositivos de almacenamiento secundario asociados.
+- Su seguridad puede verse comprometida más fácilmente.
+
+| Ventajas | Inconvenientes |
+|----------|----------------|
+| Se evita la redundancia debido a la posibilidad de inconsistencias y al desperdicio de espacio | Un mainframe, en comparación con un sistema distribuido, no tiene mayor poder de cómputo |
+| Se evita la inconsistencia, ya que si un hecho específico se representa por una sola entrada, la no-concordancia de datos no puede ocurrir | Si este sistema falla, se pierde toda disponibilidad de procesamiento y la información confiada |
+| La seguridad se centraliza | En caso de un desastre o catástrofe, la recuperación es difícil de sincronizar |
+| Puede conservarse la integridad | Las cargas de trabajo no se pueden difundir entre varias computadoras |
+| El procesamiento de los datos ofrece un mejor rendimiento | Los departamentos de sistemas retienen el control de toda la organización |
+| Ahorro en recursos, mantenimiento y recursos humanos | Requieren un mantenimiento central de datos |
+
+## 10.- Bases de datos distribuidas
+
+Una **base de datos distribuida (BDD)** es un conjunto de múltiples bases de datos lógicamente relacionadas las cuales se encuentran distribuidas entre diferentes nodos interconectados por una red de comunicaciones.
+
+Un **sistema de bases de datos distribuida (SBDD)** es un sistema en el cual múltiples sitios de bases de datos están ligados por un sistema de comunicaciones, de tal forma que, un usuario en cualquier sitio puede acceder los datos en cualquier parte de la red exactamente como si los datos estuvieran almacenados en su sitio propio.
+
+Un **sistema gestor de bases de datos distribuida (SGBDD)** es aquel que se encarga del manejo de la BDD y proporciona un mecanismo de acceso que hace que la distribución sea transparente a los usuarios. El término transparente significa que la aplicación trabajaría, desde un punto de vista lógico, como si un solo SGBD ejecutado en una sola máquina administrara esos datos.
+
+Un SGBDD desarrollará su trabajo a través de un conjunto de sitios o nodos, que poseen un sistema de procesamiento de datos completo con una base de datos local, un sistema de gestor de bases de datos e interconectados entre sí. Si estos nodos están dispersos geográficamente se interconectarán a través de una red de área amplia o WAN, pero si se encuentran en edificios relativamente cercanos, pueden estar interconectados por una red de área local o LAN.
+
+| Ventajas | Inconvenientes |
+|----------|----------------|
+| El acceso y procesamiento de los datos es más rápido ya que varios nodos comparten carga de trabajo | La probabilidad de violaciones de seguridad es creciente si no se toman las precauciones debidas |
+| Desde una ubicación puede accederse a información alojada en diferentes lugares | Existe una complejidad añadida que es necesaria para garantizar la coordinación apropiada entre los nodos |
+| Los costes son inferiores a los de las bases centralizadas | La inversión inicial es menor, pero el mantenimiento y control puede resultar costoso |
+| Existe cierta tolerancia a fallos. Mediante la replicación, si un nodo deja de funcionar el sistema completo no deja de funcionar | Dado que los datos pueden estar replicados, el control de concurrencia y los mecanismos de recuperación son mucho más complejos que en un sistema centralizado. |
+| Se adapta más naturalmente a la estructura de las organizaciones. Permiten la incorporación de nodos de forma flexible y fácil | El intercambio de mensajes y el cómputo adicional necesario para conseguir la coordinación entre los distintos nodos constituyen una forma de sobrecarga que no surge en los sistemas centralizados |
+| Aunque los nodos están interconectados, tienen independencia local | Dada la complejidad del procesamiento entre nodos es difícil asegurar la corrección de los algoritmos, el funcionamiento correcto durante un fallo o la recuperación |
+
+### 10.1.- Fragmentación
