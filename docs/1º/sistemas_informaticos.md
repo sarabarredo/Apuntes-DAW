@@ -204,12 +204,169 @@ El proceso se ejecutará y finalizará de forma correcta o por error. Estas idea
 
 Los diferentes estados de un proceso son:
 
-- **En ejecución o activo**. Proceso activo es el que se ejecuta. En cada núcleo de un procesador, solo puede haber un proceso activo.
+- **En ejecución o activo**: es el que se ejecuta. En cada núcleo de un procesador, solo puede haber un proceso activo.
 
-- **Preparado o espera**. Procesos preparados para su ejecución, pero que están a la espera de un procesador libre. (Hay otro proceso en ejecución)
+- **Preparado o espera** : está preparado para su ejecución, pero a la espera de un procesador libre (hay otro proceso en ejecución).
 
-- **Bloqueado o suspendido**. Las tareas que no pueden ejecutarse, porque necesitan un recurso que está ocupado. Por ejemplo: si hay 2 impresiones, la segunda está bloqueada, hasta que la primera acabe.
+- **Bloqueado o suspendido**: no puede ejecutarse, porque necesita un recurso que está ocupado. Por ejemplo: si hay 2 impresiones, la segunda está bloqueada, hasta que la primera acabe.
 
-- **Muerto**. Un proceso está muerto cuando su ejecución ha terminado o el sistema operativo ha detectado un error fatal y lo ha transferido a dicho estado. Si se apaga el equipo por falta de alimentación eléctrica, todos los procesos pasan a muertos.
+- **Muerto**: su ejecución ha terminado o el sistema operativo ha detectado un error fatal y lo ha transferido a dicho estado. Si se apaga el equipo por falta de alimentación eléctrica, todos los procesos pasan a muertos.
 
 **Transición entre estados de los procesos**
+
+El **planificador de procesos** se encarga de pasar los procesos de unos estados a otros. 
+
+Tiene listas independientes para cada estado, pues se gestiona de forma distinta la lista de procesos preparados de la lista de procesos bloqueados.
+
+Cuando un proceso se crea, y se comprueba si se puede ejecutar, pasa a la lista de procesos preparados, y cuando lo decida el planificador, pasa a estar en ejecución (activo).
+
+Una vez en ejecución, puede pasar a cualquiera de los otros estados:
+
+- De **ejecución** puede pasar a **preparado** porque el planificador decida ejecutar otro proceso.
+- De **ejecución** puede pasar a **bloqueado** porque necesita algún dato o está en conflicto con otro proceso.
+- De **bloqueado** puede pasar a **preparado** cuando se ha resuelto el problema. 
+- Desde **todos los estados**, el proceso puede pasar a **muerto**, tanto porque el proceso finalice como debido a errores del sistema operativo o bloqueo infinito.
+
+**Bloque de control de procesos**
+
+El sistema mantiene toda la información sobre un proceso en una tabla llamada **bloque de control de procesos**. Para cada proceso contiene:
+
+1. Identificador único de proceso (*pid*).
+2. Estado del proceso.
+3. Prioridad.
+4. Dirección de la memoria donde está guardada la información relativa al proceso.
+5. Información contable, necesaria para que el planificador realice su trabajo (hora de inicio del proceso, tiempo de espera, tiempo de ejecución que resta, etc.).
+
+#### 4.2.- Planificador de procesos. Algoritmos.
+
+Si la multitarea real no existe, ¿por qué es multitarea y lo parece?
+
+Un PC a 3GHz realiza 3 mil millones de operaciones elementales en 1 segundo. Durante ese segundo, el ordenador cambia muchísimas veces de tarea, de forma que parece que se ejecuta todo a la vez.
+
+**Algoritmos de planificación de procesos**
+
+El planificador de procesos del sistema operativo decide qué proceso de la cola de preparados pasa a estar en ejecución en cada momento. Después, puede decidir dejar el tiempo que necesite el proceso, o que ese proceso pase a preparado, pasando otro de la cola de listos a en ejecución. Estas transiciones continuas, entre procesos listos y en ejecución, es lo que da lugar a la multiprogramación, pues aunque se ejecuta un solo proceso en cada núcleo, da la sensación de que se ejecutan varios procesos a la vez o en paralelo.
+
+Los **algoritmos de planificación de procesos** determinan qué proceso pasa a estar activo. Los algoritmos SRT, Round Robin y Prioridades son los más utilizados en sistemas operativos modernos.
+
+| Algoritmo | Descripción |
+| --------- | ----------- |
+|   FIFO    | Primero en llegar, primero en salir (First Input, First Output). Es el más sencillo, los procesos pasan a activo en el orden que llegaron a preparado. Una vez que el trabajo se inicia, se ejecuta hasta el final. |
+|   SJF     | Primero el trabajo más corto (Shortest Job First). De los procesos que están preparados, se selecciona el que tiene menor tiempo de ejecución. Una vez que el trabajo se inicia, se ejecuta hasta el final. |
+|   SRT     | Tiempo restante más corto (Shortest Remaining Time). El planificador utiliza el criterio SJF, pero tiene en cuenta los nuevos procesos que puedan llegar al estado preparado. Por ejemplo, si se está ejecutando un proceso A que le quedan 3 instantes, pero llega un nuevo proceso B al estado preparado que solo necesita 1 instante, el proceso A pasa al estado preparado, mientras que B pasa a ejecución por necesitar menos tiempo. Es el primer algoritmo que utiliza la multiprogramación (un proceso activo se deja de ejecutar para que se ejecute otro). Son algoritmos expropiativos (se quita el procesador al proceso activo). |
+|   RR (Round Robin)  | Reparte el tiempo del procesador de forma justa y por turnos. Funciona dando a cada proceso una pequeña porción de tiempo, llamada cuanto. Si el proceso no termina en ese tiempo, la CPU lo detiene momentáneamente y lo envía al final de la fila para que espere su próximo turno, pasando inmediatamente al siguiente proceso en la cola. Este ciclo se repite constantemente, asegurando que todos los procesos reciban atención regularmente, lo que se traduce en un tiempo de respuesta rápido y equitativo para el usuario. |
+|   Prioridades  | Cada proceso tiene asignada una prioridad y el de mayor prioridad en el estado listo es el que pasa a estar en ejecución. El valor de prioridad puede ser asignado por el usuario o el sistema. Asimismo, el usuario puede cambiar en cualquier momento la prioridad de un proceso. Las prioridades son buenas, pero por si solas tienen el problema de que un proceso con poca prioridad no se ejecutaría nunca. Para solucionar este problema, se mejora el algoritmo utilizando prioridad por envejecimiento (si un proceso lleva mucho tiempo en estado preparado, se sube su prioridad para tener más posibilidades de pasar a activo). |
+
+Observaciones:
+
+- FIFO puede bloquear procesos muy cortos, por estar ejecutando uno muy largo.
+- SJF y SRT pueden bloquear procesos muy largos, por ejecutarse siempre los más cortos.
+- FIFO y SJF dan malos resultados, pero son muy fáciles de implantar. El sistema operativo realiza pocos cálculos, por lo que no se pierde tiempo. Son los únicos algoritmos monoproceso, monotarea, no multiprogramados o no expropiativos.
+- SRT se utiliza bastante en los sistemas operativos actuales, pues se ha comprobado que da un tiempo medio de espera muy bueno.
+- Los algoritmos SRT, Round Robin y prioridades dan buenos resultados. Aun así, lo habitual es utilizar varios algoritmos mezclados. De esa forma, se intenta obtener lo mejor de cada uno.
+- En sistemas actuales, se suelen utilizar “prioridad con SRT” y “prioridad con Round Robin”. FIFO y SJF, se utilizan como criterios de desempate final.
+
+### 5.- Gestión de memoria
+
+Hemos visto en la gestión de procesos que el recurso compartido es el procesador. Sin embargo, para que un proceso se pueda ejecutar no sólo requiere tiempo de procesamiento sino también estar cargado en memoria principal. Esto es así, porque ningún proceso se puede activar antes de que se le asigne el espacio de memoria que requiere. Así, la memoria se convierte en otro recurso clave que tendrá que gestionar el sistema operativo y la parte encargada de ello se denomina **gestor de memoria**.
+
+#### 5.1.- Particiones fijas, variables y paginación
+
+- Memoria, memoria principal o memoria física: RAM.
+
+- Memoria secundaria: disco duro.
+
+Actualmente la mayoría de los sistemas operativos son sistemas multitarea, en los que va a haber varios procesos simultáneamente en ejecución. Por tanto, deberá haber mecanismos de gestión para distribuir la memoria principal entre todos estos procesos que quieren ejecutarse.
+
+Los primeros algoritmos para este cometido tienen una gestión fácil pero desperdician mucha memoria. Los algoritmos actuales tienen una gestión más complicada a cambio de ser más eficientes.
+
+**Primer Sistema: Gestión de la memoria con particiones fijas**
+
+Consiste en dividir la memoria física disponible en varias particiones de tamaño fijo y asignar cada una de las partes a un proceso.
+
+Ejemplo: Supongamos un equipo antiguo con MS-DOS y una memoria RAM de 4 Mb, los primeros 512 Kb estaban reservados para los programas de MS-Dos. Los 3,5 MB restantes, es donde se cargaban los programas de usuario (procesador de texto, hoja de cálculo,...), se dividen en 3 particiones de distinto tamaño, por ejemplo, 512 KB, 1 MB y 2 MB. Cada tarea o proceso se asigna a una partición. En cada partición, solo puede haber 1 proceso.
+
+En este sistema, se desaprovecha espacio dentro de cada partición. Se produce fragmentación interna (se desperdicia espacio en la memoria, que no puede utilizar otro proceso).
+
+**Segundo sistema: Gestión de la memoria con particiones variables**
+
+No hay particiones, a cada proceso se le asigna el tamaño que hace falta. Cuando termina el proceso se libera ese trozo, y se junta con el espacio libre que haya al lado.
+
+Cada proceso nuevo se carga donde haya espacio, y lo que no se utilice queda libre para otro proceso.
+
+En este sistema, no se pierde espacio dentro de las particiones, pero si pueden desperdiciarse huecos libres que van quedando, pero que no se pueden aprovechar porque son pequeños. Se produce fragmentación externa (se desperdicia espacio en la memoria, pero de forma general, no dentro de una partición)
+
+**Tercer sistema: Paginación**
+
+La memoria se divide en páginas de igual tamaño. Los procesos utilizan las páginas necesarias, no siendo obligatorio que sean contiguas (continuas).
+
+Ejemplo, el tamaño de las páginas suele ser 4KB, si el proceso necesita 31 KB, utilizará 8 páginas libres, independientemente si están juntas o no.
+
+Es más difícil de gestionar y se necesitan computadoras más potentes, pero se aprovecha muy bien la memoria. La fragmentación es casi cero.
+
+Poco a poco, las páginas libres quedan muy desorganizadas. El sistema operativo puede perder tiempo en asignar muchas páginas no contiguas a los procesos, por lo que cada poco tiempo realiza una compactación. Esto consiste en organizar todas las páginas, de forma que tanto las páginas libres como las de los procesos estén juntas.
+
+Por este motivo, la **paginación** es la técnica que se utiliza en la **actualidad**.
+
+#### 5.2.- Memoria virtual (Windows) y memoria swap (Linux)
+
+**Memoria virtual en Windows**
+
+La memoria RAM es cara y limitada. Debido a esto nació este sistema, que consiste en sobrepasar el límite de memoria RAM, guardando la información en el disco duro como si fuera RAM.
+
+La memoria virtual suele tener entre 1 y 2 veces el tamaño de la RAM.
+
+Cada vez que se carga un proceso en la memoria RAM, también se escribe en la memoria virtual. Cuando la RAM se está llenando, se puede borrar las que sobran e introducir las nuevas. Si hacen falta las antiguas, se provocará un fallo de página, y el gestor de memoria traerá dicha parte del proceso de disco a memoria.
+
+De esta forma, aunque la memoria virtual es más lenta que la RAM, si tenemos una RAM de 2 GB, podríamos simular una RAM de 6 GB con la ayuda de la memoria virtual en disco duro.
+
+El archivo `pagefile.sys` oculto en la partición donde está instalado Windows es el archivo de la memoria virtual, también llamado archivo de paginación (pues también utiliza paginación dentro del archivo). Aun así, no hay que confundir la memoria virtual con la paginación a secas.
+
+**Memoria swap o área de intercambio en GNU-Linux**
+
+El concepto es el mismo que memoria virtual. La diferencia es que, en Linux, al instalar el sistema operativo, se crea una partición expresa para este fin. Lo habitual es utilizar entre 1 y 2 veces el tamaño de la RAM.
+
+Ventajas de memoria swap sobre memoria virtual:
+
+- No depende de que la partición de datos esté muy llena.
+- Si se pone la swap en la primera partición del disco duro, gana en velocidad, pues esa zona del disco duro es más rápida.
+
+En Linux se utiliza el comando `free` para ver cuanta memoria principal y cuánta swap tiene el equipo y su consumo.
+
+Tendencia actual en la memoria swap o memoria virtual:
+
+Actualmente, los ordenadores tienen memoria RAM muy grande, por lo que se discute si es necesario poner memoria virtual o swap o no configurarla.
+
+En cualquier caso, en un ordenador con RAM muy grande se suele poner como tamaño de la virtual o swap la misma cantidad que tiene de RAM. Si la cantidad de RAM es justa, pondremos el doble. Una razón para seguirla poniendo en Linux, es que la partición swap se utiliza también cuando se hiberna el sistema.
+
+### 6.- Gestión de entrada y salida
+
+Una de las funciones del ordenador es procesar la información, que es obtenida y mostrada a través de los periféricos. La parte del sistema operativo que se encarga de este proceso es la **gestión de la E/S (entrada/salida)**.
+
+#### 6.1.- Estructura y transferencia de datos
+
+**Controladores de dispositivo**
+
+Hay multitud de tipos y fabricantes de periféricos, esto conlleva que tanto el sistema operativo como los fabricantes de periféricos deben estandarizar el acceso a los dispositivos utilizando los controladores de dispositivos.
+
+**Controlador o Driver**: software suministrado por el fabricante del dispositivo o el desarrollador del sistema operativo que actúa como interfaz entre los programas y el hardware.
+
+**Estructura de datos de la E/S**
+
+Se refiere a la estructura de datos que utilizan los dispositivos periféricos para manejar la información y comunicación entre dispositivos o entre estos y la CPU. Las más utilizadas son:
+
+- **Spool**. Los datos de salida se almacenan de forma temporal en una cola situada en un dispositivo de almacenamiento masivo (*spool*), hasta que el periférico requerido se encuentre libre. De este modo se evita que un programa quede retenido porque el periférico no esté disponible. El sistema operativo dispone de llamadas para añadir y eliminar archivos del spool. Se utiliza en dispositivos que no admiten intercalación, como ocurre en la impresora, ya que no puede empezar una impresión hasta que no haya terminado la anterior.
+
+- **Buffers**. Es para dispositivos que pueden atender peticiones de distintos orígenes. Los datos no tienen que enviarse completos, pueden enviarse porciones que el buffer retiene de forma temporal. También se utilizan para acoplar velocidades de distintos dispositivos. Así, si un dispositivo lento va a recibir información más rápido de lo que puede atenderla se emplea un buffer para retener temporalmente la información hasta que el dispositivo pueda asimilarla. Esto ocurre entre una grabadora de DVD y el disco duro, ya que la primera funciona a una menor velocidad que el segundo.
+
+**Transferencia de los datos de la E/S**
+
+Existen distintas formas de transferir los datos de E/S en los sistemas operativos según la intervención de la CPU. Son las siguientes, ordenadas de menos eficientes a más eficientes:
+
+- **E/S programada**. La CPU tiene todo el protagonismo ya que inicia y lleva a cabo la transferencia. Esta técnica repercute en la velocidad de proceso del ordenador, porque la CPU debe dejar todo lo que está haciendo para ocuparse del proceso de entrada/salida.
+
+- **E/S por interrupciones**. La CPU ejecuta la transferencia pero el inicio es pedido por el periférico que indica así su disponibilidad. La CPU no pregunta a los dispositivos sino que son estos los que la avisan cuando es necesario.
+
+- **Acceso directo a memoria (DMA)**. La transferencia es realizada por un controlador especializado. Esta técnica acelera enormemente el proceso de la E/S y libera a la CPU de trabajo. Lo habitual es que los datos que se quieren escribir en el dispositivo o que son leídos del dispositivo provengan o vayan a la memoria del ordenador, pues bien en este caso. la CPU inicia el proceso, pero luego el dispositivo continúa sin necesitar a la CPU, con lo que se acelera mucho el proceso de entrada/salida y se libera a la CPU del proceso.
+
+### 7.- Gestión de archivos
