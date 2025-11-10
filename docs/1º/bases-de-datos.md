@@ -2,19 +2,20 @@
 id: bases-de-datos
 sidebar_position: 3
 title: Bases de Datos
+toc_max_heading_level: 3
 ---
 
-# UD1.- Almacenamiento de la información
+## UD1.- Almacenamiento de la información
 
-## 1.- Introducción
+### 1.- Introducción
 
 Casi todo lo que nos rodea, en alguna medida, está relacionado con los datos, su almacenamiento y su gestión. El gran volumen de datos que actualmente manejamos y sus innumerables posibilidades requieren de la existencia de técnicos perfectamente formados y capaces de trabajar con ellos.
 
 En esta primera unidad comenzaremos conociendo los primeros sistemas basados en ficheros para el almacenamiento y gestión de la información. Seguidamente, se desarrollarán los conceptos y definiciones básicas relacionadas con las bases de datos, posteriormente analizaremos sus modelos y tipos, un poco más adelante, podremos conocer las características y capacidades de los sistemas gestores de bases de datos y finalmente, identificaremos las herramientas reales con las que llevar a cabo la gestión de dichas bases.
 
-## 2.- Los ficheros de información
+### 2.- Los ficheros de información
 
-### 2.1.- ¿Qué es un fichero?
+#### 2.1.- ¿Qué es un fichero?
 
 Un **fichero o archivo** es conjunto de información relacionada, tratada como un todo y organizada de forma estructurada. Es una secuencia de dígitos binarios que organiza información relacionada con un mismo aspecto.
 
@@ -26,7 +27,7 @@ Como los ficheros suelen ser muy voluminosos, solo se pueden llevar a la memoria
 
 Normalmente en cada operación de lectura/grabación se transfieren varios registros del fichero, es decir, un bloque suele contener varios registros lógicos. Al número de registros que entran en un bloque se le conoce con el nombre de **factor de blocaje** o **factor de bloqueo**, y a esta operación de agrupar varios registros en un bloque se le llama **bloqueo de registros**.
 
-### 2.2.- Tipos de ficheros
+#### 2.2.- Tipos de ficheros
 
 Según la función que vayan a desempeñar los ficheros, éstos pueden ser clasificados de varias maneras.
 
@@ -46,7 +47,7 @@ b. **Ficheros temporales**: almacenan información útil para una parte de la ap
 
     - **Ficheros de resultados**: almacenan datos que van a ser transferidos a un dispositivo de salida.
 
-### 2.3.- Los soportes de información
+#### 2.3.- Los soportes de información
 
 Los ficheros se almacenan en soportes de información manejados por dispositivos periféricos del ordenador, que permiten leer y grabar datos en el soporte. Los soportes más utilizados para almacenar los ficheros son las **cintas magnéticas** y los **discos** (magnéticos, ópticos o magneto-ópticos).
 
@@ -60,7 +61,7 @@ Por tanto, se distinguen dos tipos de soportes para el almacenamiento de datos:
 
 - **De acceso secuencial** (*ej. -> cintas magnéticas*): si deseamos leer un dato que está en la mitad de la cinta, tendremos que leer todo lo que hay hasta llegar a esa posición. Se suelen usar en copias de seguridad.
 
-### 2.4.- Métodos de acceso
+#### 2.4.- Métodos de acceso
 
 A medida que la tecnología ha ido evolucionando, el acceso a la información contenida en los diferentes tipos de ficheros ha variado mucho. Los objetivos fundamentales de estas modificaciones pueden resumirse en los siguientes puntos:
 
@@ -95,7 +96,7 @@ graph TD
 
 A continuación, se detallarán las características de cada uno de estos métodos.
 
-### 2.5.- Fichero secuencial
+#### 2.5.- Fichero secuencial
 
 Sus registros están almacenados de forma contigua de manera que, la única forma de acceder a él, es leyendo un registro tras otro desde el principio hasta el final. En los ficheros secuenciales suele haber una marca indicativa del fin del fichero, que suele denominarse EOF (End of File). Para detectar el final del fichero sólo es necesario encontrar la marca EOF.
 
@@ -114,7 +115,7 @@ Características de estos ficheros:
 - Todos los lenguajes de programación disponen de instrucciones para trabajar con este tipo de ficheros.  
 -  No se pueden insertar registros entre los que ya están grabados.
 
-### 2.6.- Fichero de acceso directo o aleatorio
+#### 2.6.- Fichero de acceso directo o aleatorio
 
 En este tipo de ficheros se puede acceder a un registro indicando la posición relativa del mismo dentro del archivo, o a través de una clave que forma parte del registro como un campo más. Estos archivos deben almacenarse en dispositivos de memoria masiva de acceso directo.
 
@@ -146,7 +147,7 @@ Características de estos ficheros:
 - Permiten la actualización de los registros en el mismo fichero, sin necesidad de copiar el fichero.  
 - Permiten realizar procesos de actualización en tiempo real.
 
-### 2.7.- Ficheros indexados
+#### 2.7.- Ficheros indexados
 
 Se basan en la utilización de índices en el almacenamiento de los registros, que permiten el acceso a un registro del fichero de forma directa sin tener que leer los anteriores. Estos índices son similares a los de los libros.
 
@@ -162,7 +163,7 @@ Características de estos ficheros:
 - Para acceder a este tipo de ficheros utilizando el modo de acceso secuencial los registros son leídos ordenados por el contenido del campo clave, independientemente del orden en que se fueron grabando (el orden lógico no es igual al orden físico), debido a que el acceso a los datos se hace a través del índice, que para hacer más fácil la búsqueda de los registros, permanece siempre ordenado por el campo clave.  
 - Solamente se puede grabar en un soporte direccionable. Por ejemplo, un disco magnético. Si esto no fuera así, no podría emplear el acceso directo.
 
-### 2.8.- Otros (secuenciales indexados y hash)
+#### 2.8.- Otros (secuenciales indexados y hash)
 
 **Ficheros secuenciales indexados**
 
@@ -194,7 +195,7 @@ Para llevar a cabo la transformación existen multitud de métodos, siendo algun
 
 Una buena transformación o función de hash, será aquella que produzca el menor número de colisiones. En este caso hay que buscar una función, a ser posible biunívoca, que relacione los posibles valores de la clave con el conjunto de números correlativos de dirección. Esta función consistirá en realizar una serie de cálculos matemáticos con el valor de la clave hasta obtener un número entre 1 y n, siendo n el número de direcciones que tiene el fichero.
 
-### 2.9.- Parámetros de utilización.
+#### 2.9.- Parámetros de utilización.
 
 En función del uso que se vaya a dar al fichero, serán adecuados unos tipos u otros de organización. Mediante la utilización de parámetros de referencia, podremos determinar el uso de un fichero. Estos parámetros son:
 
@@ -210,13 +211,13 @@ c. **Volatilidad**: mide la cantidad de inserciones y borrados que se efectúan 
 
 d. **Crecimiento**: es la variación de la capacidad del fichero y se mide con la tasa de crecimiento, que es el porcentaje de registros en que aumenta el fichero en cada tratamiento.
 
-## 3.- Bases de datos
+### 3.- Bases de datos
 
 Si las aplicaciones, al ser diseñadas, deben depender directamente de sus ficheros o archivos, se pierde independencia y surgen serios inconvenientes (información duplicada, incoherencia de datos, fallos de seguridad, etc). Para solucionarlo, aparecen las bases de datos. 
 
 Una base de datos permitirá reunir toda la información relacionada en un único sistema de almacenamiento, pudiendo cualquier aplicación utilizarla de manera independiente y ofreciendo una mejora en el tratamiento de la información, así como una evolución para el desarrollo de aplicaciones.
 
-### 3.1.- Conceptos
+#### 3.1.- Conceptos
 
 **Base de datos**: colección de datos relacionados lógicamente entre sí, con una definición y descripción comunes y que están estructurados de una determinada manera. Es un conjunto estructurado de datos que representa entidades y sus interrelaciones, almacenados con la mínima redundancia y posibilitando el acceso a ellos eficientemente por parte de varias aplicaciones y usuarios.
 
@@ -242,7 +243,7 @@ Ventajas del uso de bases de datos:
 - **Interfaz de alto nivel**: mediante la utilización de lenguajes de alto nivel puede utilizarse la base de datos de manera sencilla y cómoda.  
 - **Consulta directa**: existe una herramienta para poder acceder a los datos interactivamente.
 
-### 3.2.- Usos
+#### 3.2.- Usos
 
 Existen cuatro tipos de personas que pueden hacer uso de una base de datos: 
 
@@ -262,7 +263,7 @@ En la siguiente tabla se muestran las funciones y características de cada uno d
 
 Las bases de datos se utilizan para almacenar y gestionar información de forma organizada en prácticamente todos los ámbitos, como la banca, las telecomunicaciones, la educación, la medicina, el transporte, el comercio y los servicios públicos.
 
-### 3.3.- Ubicación de la información
+#### 3.3.- Ubicación de la información
 
 Las bases de datos normalmente se almacenan y localizan en discos duros y otros dispositivos de almacenamiento, a los que se accede a través de un ordenador. Una gran base de datos puede necesitar servidores en lugares diferentes, y viceversa, pequeñas bases de datos pueden existir como archivos en el disco duro de un único equipo.
 
@@ -278,11 +279,11 @@ A continuación, se exponen los sistemas de almacenamiento de información más 
 
 - **Sistemas SAN.** Red dedicada y de alta velocidad que interconecta servidores con sistemas de almacenamiento. Separa el almacenamiento de los servidores, permitiendo que varios servidores accedan a un mismo grupo de discos de forma optimizada.
 
-## 4.- Modelos de bases de datos
+### 4.- Modelos de bases de datos
 
 La clasificación tradicional de las bases de datos establece tres modelos de bases de datos: jerárquico, en red y relacional. En la actualidad el modelo de bases de datos más extendido es el relacional. Aunque, hay que tener en cuenta que dos de sus variantes (modelo de bases de datos distribuidas y orientadas a objetos) son las que se más se están utilizando en los últimos tiempos.
 
-### 4.1.- Modelo jerárquico
+#### 4.1.- Modelo jerárquico
 
 También recibe el nombre de **modelo en árbol**, ya que utiliza una estructura en **árbol invertido** para la organización de los datos. Hoy en día está en **desuso**.
 
@@ -290,7 +291,7 @@ La información se organiza con una jerarquía, en la que la relación entre las
 
 Los datos de este modelo se almacenan en estructuras lógicas llamadas **segmentos**. Los segmentos se relacionan entre sí utilizando **arcos**. 
 
-### 4.2.- Modelo en red
+#### 4.2.- Modelo en red
 
 Este modelo aparece como respuesta a limitaciones del modelo jerárquico.
 
@@ -298,7 +299,7 @@ El modelo en red organiza la información en **registros** (también llamados no
 
 En este modelo se pueden representar perfectamente cualquier tipo de relación entre los datos, pero hace muy complicado su manejo. Al no tener que duplicar la información se ahorra espacio de almacenamiento.
 
-### 4.3.- Modelo relacional
+#### 4.3.- Modelo relacional
 
 Las bases de datos relacionales son las más comunes en la actualidad.
 
@@ -325,7 +326,7 @@ El lenguaje estándar para trabajar con bases de datos relacionales es **SQL (St
 
 Durante el diseño de una base de datos relacional, se aplica un proceso llamado **normalización**, que busca optimizar su estructura y evitar redundancias en la información.
 
-### 4.4.- Modelo orientado a objetos
+#### 4.4.- Modelo orientado a objetos
 
 El modelo orientado a objetos define una base de datos en términos de objetos, sus propiedades y sus operaciones. Los objetos con la misma estructura y comportamiento pertenecen a una clase, y las clases se organizan en jerarquías. Las operaciones de cada clase se especifican en términos de procedimientos predefinidos denominados métodos. Algunos sistemas existentes en el mercado, basados en el modelo relacional, han sufrido evoluciones incorporando conceptos orientados a objetos. A estos modelos se les conoce como sistemas objeto-relacionales.
 
@@ -337,7 +338,7 @@ Los conceptos más importantes del paradigma de objetos que el modelo orientado 
 - **Herencia:** propiedad a través de la cual los objetos heredan comportamiento dentro de una jerarquía de clases.
 - **Polimorfismo:** propiedad de una operación mediante la cual puede ser aplicada a distintos tipos de objetos.
 
-### 4.5.- Otros modelos
+#### 4.5.- Otros modelos
 
 **Modelo Objeto-Relacional**
 
@@ -371,7 +372,7 @@ El elemento principal es el **documento**, que contiene datos semiestructurados 
 Este tipo de bases es flexible y adecuado para aplicaciones web modernas.
 Ejemplos: **MongoDB** y **CouchDB**.
 
-## 5.- Tipos de bases de datos
+### 5.- Tipos de bases de datos
 
 **Según su contenido**
 
@@ -432,7 +433,7 @@ Ejemplos: **MongoDB** y **CouchDB**.
 - De ámbito sanitario.
 - Para el gran público.
 
-## 6.- Sistemas gestores de base de datos
+### 6.- Sistemas gestores de base de datos
 
 Un **Sistema Gestor de Bases de Datos (SGBD)**, o **DBMS (DataBase Management System)**, es un conjunto de programas que permite **crear, administrar y acceder** a la información contenida en una base de datos de forma **eficiente y segura**. Está diseñado para manejar grandes volúmenes de datos y garantizar su integridad y confidencialidad.
 
@@ -442,7 +443,7 @@ El SGBD proporciona a usuarios, analistas, programadores y administradores las h
 * **Construir** la base consiste en almacenar físicamente la información bajo la supervisión del sistema gestor.
 * **Manipular** los datos incluye realizar consultas, actualizaciones y generar informes a partir del contenido almacenado.
 
-### Ventajas de los SGBD
+#### Ventajas de los SGBD
 
 * Ofrecen una **visión abstracta** de los datos, ocultando la complejidad del almacenamiento físico.
 * Garantizan **independencia física y lógica**, permitiendo modificar la estructura sin afectar las aplicaciones.
@@ -455,7 +456,7 @@ El SGBD proporciona a usuarios, analistas, programadores y administradores las h
 
 El SGBD se comunica directamente con el **sistema operativo**, utilizando sus funciones para gestionar el almacenamiento y el acceso a los datos. Además, actúa como intermediario entre las **aplicaciones** y la base de datos, proporcionando los medios necesarios para consultar y manipular la información de manera controlada.
 
-### 6.1.- Funciones
+#### 6.1.- Funciones
 
 Un SGBD desarrolla **tres funciones** fundamentales: descripción, manipulación y control o utilización de los datos.
 
@@ -486,7 +487,7 @@ Por manipulación de datos entenderemos:
 
 Permite al administrador establecer mecanismos de protección de las diferentes visiones de los datos asociadas a cada usuario, proporcionando elementos de creación y modificación de dichos usuarios. Adicionalmente, incorpora sistemas para la creación de copias de seguridad, carga de ficheros, auditoría, protección de ataques, configuración del sistema, etc. El lenguaje que implementa esta función es el lenguaje de control de datos o DCL.
 
-### 6.2.- Componentes
+#### 6.2.- Componentes
 
 Un SGBD ha de proporcionar servicios relacionados con el almacenamiento y la explotación de los datos de forma eficiente. Para ello, cuenta con una serie de componentes:
 
@@ -512,7 +513,7 @@ Un SGBD ha de proporcionar servicios relacionados con el almacenamiento y la exp
 
 - **Herramientas de la base de datos**. Son un conjunto de aplicaciones que permiten a los administradores la gestión de la base de datos, de los usuarios y permisos, generadores de formularios, informes, interfaces gráficas, generadores de aplicaciones, etc.
 
-### 6.3.- Arquitectura
+#### 6.3.- Arquitectura
 
 Un SGBD cuenta con una arquitectura a través de la que se simplifica a los diferentes usuarios de la base de datos su labor. El objetivo fundamental es separar los programas de aplicación de la base de datos física.
 
@@ -534,7 +535,7 @@ Gracias a esta arquitectura, se consigue la independencia de datos a dos niveles
 
 - **Independencia física**: podemos modificar el esquema interno sin necesidad de modificar el conceptual o el externo. Es decir, se puede cambiar el sistema de almacenamiento, reorganizar los ficheros, añadir nuevos, etc., sin que esto afecte al resto de esquemas.
 
-### 6.4.- Tipos
+#### 6.4.- Tipos
 
 **Según su modelo lógico**
 
@@ -564,7 +565,7 @@ Gracias a esta arquitectura, se consigue la independencia de datos a dos niveles
 - Propósito general.
 - Propósito específico.
 
-## 7.- SGBD comerciales
+### 7.- SGBD comerciales
 
 | SGBD | Descripción |
 |------|-------------|
@@ -575,7 +576,7 @@ Gracias a esta arquitectura, se consigue la independencia de datos a dos niveles
 | **Microsoft SQL SERVER**  | Sistema Gestor de Base de Datos producido por Microsoft. Es relacional, sólo funciona bajo Microsoft Windows y utiliza arquitectura Cliente/Servidor. Constituye la alternativa a otros potentes SGBD como Oracle, PostgreSQL o MySQL. |
 | **SYBASE** | Un DBMS con bastantes años en el mercado, con tres versiones para ajustarse a las necesidades de cada empresa. Es un sistema relacional, altamente escalable, de alto rendimiento, con soporte a grandes volúmenes de datos, transacciones y usuarios, y de bajo costo. |
 
-## 8.- SGBD libres
+### 8.- SGBD libres
 
 | SGBD | Descripción |
 |------|-------------|
@@ -585,7 +586,7 @@ Gracias a esta arquitectura, se consigue la independencia de datos a dos niveles
 | **Apache Derby** | Escrito en Java, de reducido tamaño, con soporte multilenguaje, multiplataforma, altamente portable, puede funcionar embebido o en modo cliente/servidor. |
 | **SQLite**  | Relacional, basado en una biblioteca escrita en C que interactúa directamente con los programas, reduce los tiempos de acceso siendo más rápido que MySQL o PostGreSQL. Es multiplataforma y con soporte para varios lenguajes de programación. |
 
-## 9.- Bases de datos centralizadas
+### 9.- Bases de datos centralizadas
 
 La arquitectura centralizada es de las menos utilizadas. Es una estructura en la que el SGBD está implantado en una sola plataforma u ordenador desde donde se gestiona directamente la totalidad de los recursos. Es la arquitectura de los centros de proceso de datos tradicionales. Se basa en tecnologías sencillas, muy experimentadas y de gran robustez.
 
@@ -605,7 +606,7 @@ Las principales características de las bases de datos centralizadas son:
 | El procesamiento de los datos ofrece un mejor rendimiento | Los departamentos de sistemas retienen el control de toda la organización |
 | Ahorro en recursos, mantenimiento y recursos humanos | Requieren un mantenimiento central de datos |
 
-## 10.- Bases de datos distribuidas
+### 10.- Bases de datos distribuidas
 
 Una **base de datos distribuida (BDD)** es un conjunto de múltiples bases de datos lógicamente relacionadas las cuales se encuentran distribuidas entre diferentes nodos interconectados por una red de comunicaciones.
 
@@ -624,4 +625,32 @@ Un SGBDD desarrollará su trabajo a través de un conjunto de sitios o nodos, qu
 | Se adapta más naturalmente a la estructura de las organizaciones. Permiten la incorporación de nodos de forma flexible y fácil | El intercambio de mensajes y el cómputo adicional necesario para conseguir la coordinación entre los distintos nodos constituyen una forma de sobrecarga que no surge en los sistemas centralizados |
 | Aunque los nodos están interconectados, tienen independencia local | Dada la complejidad del procesamiento entre nodos es difícil asegurar la corrección de los algoritmos, el funcionamiento correcto durante un fallo o la recuperación |
 
-### 10.1.- Fragmentación
+#### 10.1.- Fragmentación
+
+La fragmentación es una técnica en bases de datos distribuidas que consiste en dividir una relación (tabla) en partes más pequeñas para distribuirla en distintos servidores. Su objetivo es optimizar el acceso a los datos, equilibrando el grado de fragmentación según las necesidades de las aplicaciones.
+
+**Reglas fundamentales**
+
+- **Completitud**. Todos los datos de la relación original deben estar presentes en al menos uno de los fragmentos.
+- **Reconstrucción**. Debe ser posible reconstruir la relación original a partir de sus fragmentos, manteniendo las restricciones de los datos.
+- **Disyunción**. En la fragmentación vertical, la clave primaria se repite en todos los fragmentos para permitir la reconstrucción.
+
+**Tipos de fragmentación**
+
+- **Horizontal**:
+
+    - Divide la tabla por filas (tuplas).
+    - Cada fragmento contiene un subconjunto de tuplas de la tabla original. 
+    - Variantes: primaria (directa) y derivada (basada en otras tablas).
+
+- **Vertical**:
+
+    - Divide la tabla por columnas (atributos).  
+    - Cada fragmento incluye un subconjunto de atributos, junto con la clave primaria.
+    - Busca minimizar el tiempo de ejecución de las consultas.
+    - Más compleja que la horizontal debido a la gran cantidad de alternativas.
+
+- **Híbrida o mixta**:
+
+    - Combina fragmentación horizontal y vertical.
+    - Se representa mediante árboles para visualizar la estructura.

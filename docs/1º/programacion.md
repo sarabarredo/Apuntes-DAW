@@ -2,16 +2,17 @@
 id: programacion
 sidebar_position: 2
 title: Programación
+toc_max_heading_level: 3
 ---
 
-# UD1.- Introducción a la programación
+## UD1.- Introducción a la programación
 
-## 1.- Introducción
+### 1.- Introducción
 
 En esta primera unidad realizaremos un recorrido por los conceptos fundamentales de la programación de aplicaciones. Iniciaremos nuestro camino conociendo con qué vamos a trabajar, qué técnicas podemos emplear y qué es lo que pretendemos conseguir. Continuaremos con el análisis de las diferentes formas de programación existentes, identificaremos qué fases conforman el desarrollo de una aplicación software y avanzaremos detallando las características relevantes de cada uno de los lenguajes de programación disponibles, para posteriormente, realizar una visión general del lenguaje de programación Java. Finalmente, tendremos la oportunidad de conocer con qué herramientas podríamos desarrollar nuestros programas, escogiendo entre una de ellas para ponernos manos a la obra utilizando el lenguaje Java.
 
-## 2.- Programas y programación
-### 2.1.- Buscando una solución
+### 2.- Programas y programación
+#### 2.1.- Buscando una solución
 
 Como en la vida real, la búsqueda y obtención de una solución a un problema determinado, utilizando medios informáticos, se lleva a cabo siguiendo unos pasos fundamentales.
 
@@ -33,7 +34,7 @@ Resolver el problema adecuadamente, en un tiempo mínimo y con un uso óptimo de
 
 3. **Modularidad:** se trata de dividir el proyecto en módulos independientes, donde cada uno de ellos tendrá su función correspondiente.
 
-### 2.2.- Algoritmos y programas
+#### 2.2.- Algoritmos y programas
 
 Después de analizar en detalle el problema a solucionar, hemos de diseñar y desarrollar el **algoritmo** adecuado. Un **algoritmo** es secuencia ordenada de pasos, descrita sin ambigüedades, que conducen a la solución de un problema dado. Éstos son independientes de los lenguajes de programación y de los ordenadores donde se ejecutan.
 
@@ -51,7 +52,7 @@ Para representar gráficamente los algoritmos, podemos utilizar diferentes herra
 - **Pseudocódigo:** se basa en el uso de palabras clave en lenguaje natural, constantes, variables, otros objetos, instrucciones y estructuras de programación que expresan de forma escrita la solución del problema. Es la técnica más utilizada.  
 - **Tablas de decisión:** en una tabla son representadas las posibles condiciones del problema con sus respectivas acciones. Suele ser una técnica de apoyo al pseudocódigo cuando existen situaciones condicionales complejas.
 
-## 3.- Paradigmas de la programación
+### 3.- Paradigmas de la programación
 
 Un **Paradigma de programación** es un modelo básico para el diseño y la implementación de programas. Este modelo determinará como será el proceso de diseño y la estructura final del programa. Algunos de ellos son:
 
@@ -62,7 +63,7 @@ Puede haber lenguajes de programación que no se clasifiquen únicamente dentro 
 
 El objetivo que se busca con la aplicación de diferentes enfoques, es el de reducir la dificultad para el desarrollo y mantenimiento de las aplicaciones, mejorar el rendimiento del programador y mejorar la productividad y calidad de los programas.
 
-## 4.- Fases de la programación
+### 4.- Fases de la programación
 
 Sea cual sea el estilo que escojamos a la hora de automatizar una determinada tarea, debemos realizar el proceso aplicando un método a nuestro trabajo.
 
@@ -72,7 +73,7 @@ El proceso de creación de software puede dividirse en diferentes fases:
 2. Implementación.
 3. Explotación y mantenimiento.
 
-### 4.1.- Resolución del problema
+#### 4.1.- Resolución del problema
 
 Para el comienzo de esta fase, es necesario que el problema sea definido y comprendido claramente para que pueda ser analizado con todo detalle. A su vez, la fase de resolución del problema puede dividirse en dos etapas:
 
@@ -93,7 +94,7 @@ b. **Diseño**
 
     Hay que tener en cuenta que antes de pasar a la implementación del algoritmo, hemos de asegurarnos que tenemos una solución adecuada. Para ello, todo diseño requerirá de la realización de la **prueba** o **traza del programa**. Este proceso consistirá en un seguimiento paso a paso de las instrucciones del algoritmo utilizando datos concretos. Si la solución aportada tiene errores, tendremos que volver a la fase de análisis para realizar las modificaciones necesarias o tomar un nuevo camino para la solución. Sólo cuando el algoritmo cumpla los requisitos y objetivos especificados en la fase de análisis se pasará a la fase de implementación.
 
-### 4.2.- Implementación
+#### 4.2.- Implementación
 
 Si la fase de resolución del problema requiere un especial cuidado en la realización del análisis y el posterior diseño de la solución, la fase de implementación cobra también una especial relevancia. Llevar a la realidad nuestro algoritmo implicará cubrir algunas etapas más que se detallan a continuación.
 
@@ -122,7 +123,7 @@ b. **Prueba de ejecución y validación**
     - Documentación interna: Encabezados, descripciones, declaraciones del problema y comentarios que se incluyen dentro del código fuente.
     - Documentación externa: Son los manuales que se crean para una mejor ejecución y utilización del programa.
 
-### 4.3.- Explotación
+#### 4.3.- Explotación
 
 Cuando el programa ya está instalado en el sistema y está siendo de utilidad para los usuarios, decimos que se encuentra en fase de explotación.
 
@@ -130,7 +131,7 @@ Periódicamente será necesario realizar evaluaciones y, si es necesario, llevar
 
 Será imprescindible añadir una documentación adecuada que facilite al programador la comprensión, uso y modificación de dichos programas.
 
-## 5.- Ciclo de vida del software
+### 5.- Ciclo de vida del software
 
 Sean cuales sean las fases en las que realicemos el proceso de desarrollo de software, y casi independientemente de él, siempre se debe aplicar un modelo de ciclo de vida.
 
@@ -145,5 +146,4 @@ El proceso de desarrollo puede involucrar siempre las siguientes etapas mínimas
     Instalación y paso a Producción.
     Mantenimiento.
 
-Aprenderás mucho más sobre el ciclo de vida del software en el Módulo Profesional "Entornos de Desarrollo".
-6.- Lenguajes de programación.
+### 6.- Lenguajes de programación

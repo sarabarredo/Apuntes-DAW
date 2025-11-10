@@ -2,11 +2,12 @@
 id: sistemas-informaticos
 sidebar_position: 0
 title: Sistemas Informáticos
+toc_max_heading_level: 3
 ---
 
-# UD1.- Software de un sistema informático
+## UD1.- Software de un sistema informático
 
-## 1.- Sistemas informáticos. Introducción.
+### 1.- Sistemas informáticos. Introducción.
 
 Los **sistemas informáticos** realizan tareas de **almacenamiento**, **elaboración** y **presentación** de datos.
 
@@ -18,8 +19,8 @@ Un sistema informático se compone de:
 - Elementos lógicos o software.
 - El usuario humano.
 
-## 2.- Software de un sistema informático
-### 2.1.- Requisitos e instalación
+### 2.- Software de un sistema informático
+#### 2.1.- Requisitos e instalación
 
 El **software** está formado por **programas**, **estructura de datos** y **documentación**.
 
@@ -71,7 +72,7 @@ Una vez instalada la aplicación, el usuario debe configurar el entorno de traba
 - Ajuste y distribución de la pantalla.
 - Definición de directorios de trabajo.
 
-### 2.2.- Tipos de aplicaciones informáticas
+#### 2.2.- Tipos de aplicaciones informáticas
 
 El software se suele clasificar en dos tipos:
 
@@ -79,7 +80,7 @@ El software se suele clasificar en dos tipos:
 
 - **Aplicaciones de propósito específico**. Son las que se utilizan para el desempeño de funciones específicas, científicas, técnicas o de gestión (administración, contabilidad, facturación, gestión de almacén, entornos de desarrollo, administración de bases de datos, diseño gráfico, ingeniería...)
 
-### 2.3.- Licencias del software
+#### 2.3.- Licencias del software
 
 Las **licencias software** sirven para establecer un contrato entre el **autor de una aplicación** y el **usuario**. En el contrato se definen con precisión los derechos y deberes de ambas partes, es decir, los“**actos de explotación legales**.
 
@@ -129,8 +130,86 @@ Un tipo de licencia libre, muy utilizado hoy día es **GNU-GPL**, que trata de p
 - La letra C normal refleja que hay copyright, y la obra es privada y no se puede copiar.
 - La letra C invertida, refleja que hay copyleft y la obra es libre, se puede copiar, reutilizar pero nombrando siempre al autor, y volviendo a difundir la obra modificada de forma libre.
 
-## 3.- Introducción a sistemas operativos
+### 3.- Introducción a sistemas operativos
 
 Un **sistema operativo** es un conjunto de programas que se encarga de **gestionar los recursos hardware y software del ordenador**, por lo que actúa como una interfaz entre los programas de aplicación del usuario y el hardware puro.
 
-### 3.1.- Definición, objetivos, kernel y subsistemas de los sistemas operativos
+#### 3.1.- Definición, objetivos, kernel y subsistemas de los sistemas operativos
+
+Objetivos de los sistemas operativos:
+
+- Abstraer al usuario de la complejidad del hardware.
+- Permitir que los recursos del ordenador se utilicen de la forma más eficiente posible.
+- Permitir la ejecución de programas.
+- Acceder a los dispositivos de entrada/salida.
+- Proporcionar una estructura y conjunto de operaciones para el sistema de archivos.
+- Detectar y dar respuesta ante errores.
+- Gestionar las comunicaciones en red y permitir a los usuarios compartir datos.
+
+**El kernel o núcleo**
+
+Para realizar todos estas funciones, existe el kernel o núcleo. Representa sólo una pequeña parte de todo lo que es el sistema operativo, pero es una de las partes que más se utiliza. El núcleo reside por lo general en la memoria principal (RAM).
+
+Resumiendo, el núcleo se encarga de:
+
+- Gestión de procesos.
+- Gestión de memoria.
+- Gestión de archivos.
+- Gestión de entrada y salida.
+
+#### 3.2.- Tipos de sistemas operativos
+
+**Clasificación de los SO según su estructura**
+
+- **Monolíticos**. Es la estructura de los primeros sistemas operativos, consistía en un solo programa desarrollado con rutinas entrelazadas que podían llamarse entre sí. Por lo general, eran sistemas operativos hechos a medida, pero difíciles de mantener.
+
+- **Jerárquicos**. Conforme las necesidades de los usuarios aumentaron, los sistemas operativos fueron creciendo en complejidad y funciones. Esto llevó a que se hiciera necesaria una mayor organización del software del sistema operativo, dividiéndose en partes más pequeñas, diferenciadas por funciones y con una interfaz clara para interoperar con los demás elementos. Ejemplo: MULTICS.
+
+- **Capas**. El sistema operativo se organiza por capas, las capas superiores utilizan las inferiores. De esta forma, cada capa solo se fija en los detalles suyos. Ejemplo: THE.
+
+- **Microkernel**. Los ordenadores son muy rápidos y realizan muchos cálculos. Hay muchos fallos. Para incrementar la tolerancia a fallos, se dividen en pequeños núcleos: operaciones de entrada/salida, gestión de memoria, del sistema de archivos, etc. Ejemplo: MINIX.
+
+- **Cliente-servidor**. Basada en la estructura microkernel. El cliente solicita una petición de un servicio en la red, y el servidor responde.
+
+- **Máquina virtual**. Integra distintos sistemas operativos en una sola máquina. En cada una de ellas, se puede ejecutar un sistema operativo distinto. Ejemplo: VMware y VirtualBox.
+
+**Clasificación de los SO por los servicios que ofrecen**
+
+| Criterio | Tipo |
+| :--- | :--- |
+| Número de usuarios | * **Monousuario**: solo un usuario utiliza el SO al mismo tiempo. Ejemplo: Ms-Dos. <br /> * **Multiusuario**: pueden trabajar varios usuarios al mismo tiempo, bien en el mismo ordenador, bien desde otro ordenador a través de consolas. Ejemplos: Unix, Windows 10. |
+| Número de procesos | * **Monoproceso o monotarea**: solo se puede ejecutar un proceso a la vez en cada núcleo. Ejemplo: MS-DOS. <br /> * **Multiproceso o multitarea**: se pueden ejecutar varios procesos a la vez. Ejemplos: Windows actuales, Unix/Linux, Mac OS. |
+| Número de procesadores | * **Monoprocesador**: el SO solo se puede utilizar en ordenadores con 1 procesador. Ejemplo: MS-Dos. <br /> * **Multiprocesador**: el SO se puede utilizar en ordenadores con varios procesadores. Ejemplos: Windows actuales, Unix/Linux. |
+
+**Clasificación de los SO por su forma**
+
+| Criterio | Tipo |
+| :--- | :--- |
+| En red | Estos sistemas tienen la capacidad de interactuar con los sistemas operativos de otras máquinas a través de la red. Ejemplo: Windows Server, Linux. |
+| Distribuidos | Las funciones se distribuyen entre diferentes ordenadores, logrando integrar recursos en una sola máquina virtual que es a la que el usuario accede de forma transparente. En este caso, el usuario no necesita saber la ubicación de los recursos, sino que los referencia por su nombre y los utiliza como si fueran locales a su lugar de trabajo habitual. Ejemplo: MOSIX. |
+
+### 4.- Gestión de procesos
+
+#### 4.1.- Estados de los procesos. Bloque de control de procesos
+
+**Definición de proceso**
+
+Cada vez que se abre un programa informático, se genera un proceso principal. Un programa tiene varias instrucciones, y se ejecuta de forma secuencial, es decir, una instrucción detrás de otra.
+
+Cuando se inicia el programa principal, se inicia el proceso principal que controla el programa hasta que finalice el programa. Para ejecutar cada instrucción se inicia un subproceso, de forma que lo habitual es que un programa tenga varios procesos, también llamados subprocesos o hilos de ejecución.
+
+El proceso se ejecutará y finalizará de forma correcta o por error. Estas ideas nos dejan entrever lo que se llama "estados de los procesos".
+
+**Estados de los procesos**
+
+Los diferentes estados de un proceso son:
+
+- **En ejecución o activo**. Proceso activo es el que se ejecuta. En cada núcleo de un procesador, solo puede haber un proceso activo.
+
+- **Preparado o espera**. Procesos preparados para su ejecución, pero que están a la espera de un procesador libre. (Hay otro proceso en ejecución)
+
+- **Bloqueado o suspendido**. Las tareas que no pueden ejecutarse, porque necesitan un recurso que está ocupado. Por ejemplo: si hay 2 impresiones, la segunda está bloqueada, hasta que la primera acabe.
+
+- **Muerto**. Un proceso está muerto cuando su ejecución ha terminado o el sistema operativo ha detectado un error fatal y lo ha transferido a dicho estado. Si se apaga el equipo por falta de alimentación eléctrica, todos los procesos pasan a muertos.
+
+**Transición entre estados de los procesos**
