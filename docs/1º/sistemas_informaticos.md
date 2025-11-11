@@ -370,3 +370,58 @@ Existen distintas formas de transferir los datos de E/S en los sistemas operativ
 - **Acceso directo a memoria (DMA)**. La transferencia es realizada por un controlador especializado. Esta técnica acelera enormemente el proceso de la E/S y libera a la CPU de trabajo. Lo habitual es que los datos que se quieren escribir en el dispositivo o que son leídos del dispositivo provengan o vayan a la memoria del ordenador, pues bien en este caso. la CPU inicia el proceso, pero luego el dispositivo continúa sin necesitar a la CPU, con lo que se acelera mucho el proceso de entrada/salida y se libera a la CPU del proceso.
 
 ### 7.- Gestión de archivos
+#### 7.1.- Organización lógica: directorios y ficheros
+
+Cada sistema operativo utilizará su propio sistema de archivos, no obstante las operaciones que se pueden realizar sobre el sistema de archivos son bastante similares. Así, todos los sistemas de archivos actuales utilizan los directorios o carpetas para organizar a los archivos.
+
+**Objetivos en la implementación de un sistema de archivos**
+
+- Optimizar el rendimiento mediante un acceso rápido cuando se recupera información.
+- Fácil actualización de los archivos.
+- Intentar que los archivos desperdicien la menor cantidad de espacio en disco posible.
+- Mantenimiento sencillo.
+- Fiabilidad para asegurar que los datos sean correctos y fiables.
+- Incorporar mecanismos de seguridad y permisos.
+- Control de concurrencia.
+
+**Organización lógica del sistema de archivos**
+
+Los sistemas de archivos deben permitir utilizar el medio de almacenamiento (disco) de una forma intuitiva y cómoda, sin conocer los detalles de hardware.
+
+A esto se le llama organización del sistema de archivos y suele coincidir en todos los sistemas de archivos actuales, utilizando el esquema de almacenamiento en archivos y la organización en carpetas o directorios.
+
+Un directorio o carpeta solo es un contenedor, no contiene información, ésta se encuentra en los archivos.
+
+Cada archivo de un sistema tendrá unos atributos que lo identifican:
+
+1. Nombre
+2. Extensión
+3. Permisos
+4. Propietario
+5. Fecha de creación
+6. Fecha del último acceso
+7. Fecha de la última modificación
+8. Tamaño actual
+
+**Jerarquía de directorios. Árboles**
+
+Todos los sistemas operativos tienen una estructura jerárquica de almacenamiento de la información en forma de árbol.
+
+### 8.- Virtualización. Software y configuración de máquinas virtuales.
+
+#### 8.1.- Motivación y ventajas de las máquinas virtuales.
+
+Gracias a la virtualización o máquinas virtuales, en un ordenador puede haber varias máquinas distintas ejecutándose.
+
+Las máquinas virtuales se pueden comunicar en una red, siendo vistas como computadores distintas.
+
+Una máquina virtual, se instala y ejecuta bajo un software, de forma que es una carpeta con algunos archivos. El disco duro es un archivo, y el resto de archivos son la configuración de la máquina. De esta forma, resulta muy fácil el traslado de una máquina virtual de un ordenador a otro ordenador.
+
+Términos:
+
+- **Máquina anfitrión, host o servidor:** máquina real donde se instala la aplicación de virtualización.
+- **Máquina invitada, huésped o guest**: máquina virtual que se ejecuta dentro de la aplicación.
+
+Software de virtualización
+
+Software de varias empresas: Vmware, Oracle, Microsoft, Parallels
