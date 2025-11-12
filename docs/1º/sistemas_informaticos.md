@@ -422,6 +422,92 @@ Términos:
 - **Máquina anfitrión, host o servidor:** máquina real donde se instala la aplicación de virtualización.
 - **Máquina invitada, huésped o guest**: máquina virtual que se ejecuta dentro de la aplicación.
 
-Software de virtualización
+**Software de virtualización**
 
 Software de varias empresas: Vmware, Oracle, Microsoft, Parallels
+
+- **Vmware**. Software propietario. Tiene muchas versiones, algunas de pago y otras gratuitas (Server, Workstation y Player).
+
+- **VirtualBox**. Software original de Sun Microsystems, comprada posteriormente por Oracle. Tiene dos versiones principales (VirtualBox y VirtualBox OSE).
+
+- **HiperV**. Software propietario de Microsoft para ordenadores con Windows. Tiene dos programas (Virtual PC e Hiper V).
+
+- **Parallels**. Software propietario para ordenadores MAC. Se puede virtualizar tanto Windows como Linux.
+
+#### 8.2.- Instalación y configuración de una máquina virtual nueva
+
+Para crear una máquina, se indican los siguientes parámetros:
+
+1. Nombre.
+2. Sistema operativo que se va a instalar.
+3. Memoria RAM.
+4. Disco duro.
+
+**Diferencia de tamaño fijo y tamaño dinámico al crear un disco duro**
+
+Al crear un disco duro, se puede crear de tamaño dinámico (el archivo crece según metemos información en la máquina virtual) o tamaño fijo (el archivo ocupa siempre el tamaño total del disco duro). 
+
+**Configuración de la máquina virtual**
+
+Una vez creada una máquina virtual, se puede:
+
+- Añadir o eliminar medios de almacenamiento.
+- Habilitar los puertos USB de la máquina host.
+- Configurar la red (NAT, puente, red interna).
+- Compartir carpetas entre la máquina host y la invitada.
+
+**Herramientas de optimización**
+
+Para que las máquinas funcionen con mejores características, hay que instalar las herramientas que adaptan el hardware de la máquina real a la invitada (es decir, instalan u optimizan los drivers). Cada programa tiene su propia herramienta para este fin.
+
+Ventajas de instalar estas herramientas:
+
+- Mejor resolución gráfica.
+- Integración del ratón.
+- Acceso a carpetas compartidas.
+- Compartir el portapapeles.
+
+#### 8.3.- Configuración de VirtualBox
+
+**Instantáneas o snapshots**
+
+Si vamos a instalar algún programa, o queremos hacer pruebas al sistema, y pensamos que pueden fallar esas pruebas, podemos realizar instantáneas al sistema. De esa forma, una vez acabada las nuevas instalaciones o pruebas, podemos decidir, si nos quedamos con la versión más actualizada del Sistema Operativo (Eliminar instantánea) o la versión antigua (Restaurar instantánea). Cada instantánea va generando archivo .vdi nuevos con las diferencias.
+
+**Extensiones de los discos duros, según programas**
+
+- VirtualBox → vdi
+- Vmware → vmdk
+- Virtual PC → vhd
+
+Aun así, no hay problema de compatibilidad entre VMware y VirtualBox, pues se pueden exportar e importar las máquinas.
+
+**Trasladar una máquina a otro PC**
+
+1. Disco duro. El disco duro de una máquina virtual, es un único archivo .vdi. Este archivo se puede copiar en cualquier otro ordenador y tener una máquina instalada en un momento. Hay que crear la máquina nueva y en el momento de poner disco duro elegir el disco existente con su ruta.
+
+2. Máquina entera. Para ello se debe exportar el servicio virtualizado, obteniendo un archivo con extensión .ova.
+Este archivo servirá para importar la máquina en ese PC o en otro. La diferencia, es que el archivo .ova es toda la máquina.
+
+**Administrador de discos de VirtualBox**
+
+Al igual que un disco duro físico no puede estar en 2 sitios a la vez, no podemos tener duplicado el disco duro en 2 máquinas virtuales, aunque se llamen de forma distinta y tengan cosas distintas.
+Cada disco tiene un número de serie y no puede haber 2 archivos .vdi con el mismo número de serie.
+
+**Soluciones**
+
+Hay varias soluciones para copiar un disco sin provocar errores por UUID:
+
+1. Copiar el disco (crea una copia con UUID distinto).
+2. Clonar la máquina (no solo copia el disco, sino que crea otra máquina con sus archivos de configuración).
+3. Exportar el servicio virtualizado (se genera el archivo .ova).
+
+**Configuración de red en VirtualBox**
+
+La máquina virtual tiene una tarjeta de red virtual (se pueden poner varias tarjetas de red virtuales).
+Esta tarjeta de red virtual se conecta con la máquina anfitrión según la configuración que se seleccione. Las configuraciones posibles son:
+
+- **No conectado** -> La máquina invitada no tiene red.
+- **NAT: Network Address Translation** -> Modo más simple, pues sin ninguna configuración adicional la máquina virtual navega por Internet. La máquina virtual no se puede conectar ni con la anfitrión ni con otras máquinas virtuales y, por tanto, no puede compartir archivos. La dirección IP en la máquina invitada la asigna dinámicamente Virtualbox. Este modo es perfecto para realizar todo tipo de pruebas, ya que la red no puede infectar a la máquina y al contrario.
+- **Bridged / Adaptador Puente** -> Se forma un puente entre la tarjeta virtual de la máquina invitada y la tarjeta real de la máquina anfitrión. Es como si fueran la misma tarjeta. A todos los efectos la máquina invitada es como si estuviera conectada a la red como una máquina real.
+- **Red Interna** -> Crear una red interna visible entre las máquinas invitadas, pero no con la anfitrión ni con la red general. Se utiliza cuando queremos tener una red entre las máquinas virtuales.
+- **Host-only networking / Adaptador sólo-anfitrión** -> En este modo cada máquina invitada solo puede comunicarse con la máquina anfitrión, sin que se puedan comunicar entre las invitadas. El direccionamiento de las mismas es dinámico y lo asigna VirtualBox.

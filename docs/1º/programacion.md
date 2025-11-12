@@ -133,17 +133,90 @@ Será imprescindible añadir una documentación adecuada que facilite al program
 
 ### 5.- Ciclo de vida del software
 
-Sean cuales sean las fases en las que realicemos el proceso de desarrollo de software, y casi independientemente de él, siempre se debe aplicar un modelo de ciclo de vida.
+El ciclo de vida del software es una sucesión de estados o fases por las cuales pasa un software a lo largo de su vida. El proceso de desarrollo involucra las siguientes etapas:
 
-El Ciclo de vida del software es una sucesión de estados o fases por las cuales pasa un software a lo largo de su "vida".
-
-El proceso de desarrollo puede involucrar siempre las siguientes etapas mínimas:
-
-    Especificación y Análisis de requisitos.
-    Diseño.
-    Codificación.
-    Pruebas.
-    Instalación y paso a Producción.
-    Mantenimiento.
+1. Especificación y Análisis de requisitos.
+2. Diseño.
+3. Codificación.
+4. Pruebas.
+5. Instalación y paso a Producción.
+6. Mantenimiento.
 
 ### 6.- Lenguajes de programación
+
+Un **lenguaje de programación** es un conjunto de reglas sintácticas y semánticas, símbolos y palabras especiales establecidas para la construcción de programas.
+
+Cada lenguaje de programación se basa en una **gramática**, que es un conjunto de reglas aplicables al conjunto de símbolos y palabras especiales del lenguaje de programación para la construcción de sentencias correctas. Esta gramática dispone de:
+
+1. **Léxico**: conjunto finito de símbolos y palabras especiales (vocabulario del lenguaje).
+2. **Sintaxis**: posibles combinaciones de los símbolos y palabras especiales (forma de los programas).
+3. **Semántica**: significado de cada construcción del lenguaje (acción que se llevará a cabo).
+
+Pueden existir sentencias sintácticamente correctas, pero semánticamente incorrectas. Una característica relevante de los lenguajes de programación es que más de un programador pueda usar un conjunto común de instrucciones que sean comprendidas entre ellos. A través de este conjunto se puede lograr la construcción de un programa de forma colaborativa.
+
+Los lenguajes de programación pueden ser clasificados en función de lo cerca que estén del lenguaje humano o del lenguaje de los ordenadores.
+
+#### 6.1.- Lenguaje máquina
+
+Lenguaje utilizado directamente por el procesador, que consta de un conjunto de instrucciones codificadas en binario. Es el sistema de códigos directamente interpretable por un circuito microprogramable.
+
+Fue el primer lenguaje utilizado para la programación, cada máquina tenía su propio conjunto de instrucciones codificadas en ceros y unos. Cuando un algoritmo está escrito en este tipo de lenguaje, decimos que está en código máquina.
+
+Programar en este tipo de lenguaje presenta los siguientes inconvenientes:
+
+- Cada programa es válido sólo para un tipo de procesador.
+- La lectura o interpretación de los programas es extremadamente difícil.
+- Los programadores deben memorizar largas combinaciones de ceros y unos.
+- Los programadores se encargaban de introducir los códigos binarios en el computador, lo que provocaba largos tiempos de preparación y posibles errores.
+
+Dada su complejidad, fue sustituido por otros lenguajes más sencillos. A pesar de ello, todos los programas deben ser traducidos al lenguaje máquina para para poder ser ejecutados.
+
+#### 6.2.- Lenguaje ensamblador
+
+Es la evolución del lenguaje máquina. Las instrucciones ya no son secuencias binarias, se sustituyen por códigos de operación que describen una operación elemental del procesador. Es un lenguaje de bajo nivel, al igual que el lenguaje máquina, ya que dependen directamente del hardware donde son ejecutados. Normalmente, una instrucción en ensamblador se corresponde con una instrucción de lenguaje máquina.
+
+Mnemotécnico: palabras especiales que sustituyen largas secuencias de ceros y unos, utilizadas para referirse a diferentes operaciones disponibles. En ensamblador, cada instrucción (mnemotécnico) se corresponde a una instrucción del procesador. 
+
+Este lenguaje presenta múltiples dificultades:
+
+- Los programas siguen dependiendo directamente del hardware que los soporta.
+- Los programadores deben conocer detalladamente la máquina sobre la que programaban.
+- La lectura, interpretación o modificación de los programas sigue siendo difícil.
+
+Todo programa escrito en lenguaje ensamblador necesita de un **intermediario** que realice la traducción de cada una de las instrucciones que componen su código al lenguaje máquina correspondiente. Este intermediario es el **programa ensamblador**. El programa original escrito en lenguaje ensamblador constituye el código fuente y el programa traducido al lenguaje máquina se conoce como programa objeto que será directamente ejecutado por la computadora.
+
+#### 6.3.- Lenguajes compilados
+
+Nacieron para paliar los problemas derivados del lenguaje ensamblador. Algunos ejemplos son Pascal, Fortran, Algol, C, C++, etc.
+
+Al ser lenguajes más cercanos al humano, también se les denomina lenguajes de alto nivel. Son más fáciles de utilizar y comprender, las instrucciones que forman parte de estos lenguajes utilizan palabras y signos reconocibles por el programador.
+
+Ventajas:
+
+- Mucho más fáciles de aprender y de utilizar.
+- Reducción de tiempo y costes para desarrollar programas.
+- Son independientes del hardware, los programas pueden ejecutarse en diferentes tipos de máquina.
+- La lectura, interpretación y modificación de los programas es mucho más sencilla.
+
+Desventajas:
+
+- El código objeto generado es menos eficiente que el código generado en lenguaje ensamblador, a pesar de que los compiladores realizan procesos de optimización del código.
+- Un programa escrito en un lenguaje de alto nivel también tiene que traducirse a un código que pueda utilizar la máquina. Los programas traductores que realizan esta operación se llaman **compiladores**.
+
+**Compilador**: programa cuya función consiste en traducir el código fuente de un programa escrito en un lenguaje de alto nivel a lenguaje máquina.
+
+El compilador realizará la traducción y además informará de los posibles errores. Una vez subsanados, se generará el programa traducido a código máquina, conocido como **código objeto**. Este programa aún no podrá ser ejecutado hasta que no se le añadan los módulos de enlace o bibliotecas, durante el proceso de **enlazado**. Una vez finalizado el enlazado, se obtiene el código ejecutable.
+
+#### 6.4.- Lenguajes interpretados
+
+Su ejecución se realiza a través de un **intérprete**. Cada instrucción escrita en un lenguaje interpretado se analiza, traduce y ejecuta tras haber sido verificada. Una vez realizado el proceso por el intérprete, la instrucción se ejecuta, pero no se guarda en memoria.
+
+**Intérprete**: programa traductor de un lenguaje de alto nivel en el que el proceso de traducción y de ejecución se llevan a cabo simultáneamente, es decir, la instrucción se pasa a lenguaje máquina y se ejecuta directamente. No se genera programa objeto, ni programa ejecutable.
+
+Los lenguajes interpretados generan programas de menor tamaño que los generados por un compilador, al no guardar el programa traducido a código máquina. Pero son más lentos, ya que han de ser traducidos durante su ejecución. Por otra parte, necesitan disponer en la máquina del programa intérprete ejecutándose, algo que no es necesario en el caso de un programa compilado, para los que sólo es necesario tener el programa ejecutable para poder utilizarlo.
+
+Ejemplos de lenguajes interpretados son Perl, PHP, Python, JavaScript, etc.
+
+A medio camino entre los lenguajes compilados y los interpretados, existen los lenguajes que podemos denominar **pseudo-compilados** o **pseudo-interpretados**, es el caso de Java. Java puede verse como compilado e interpretado a la vez, ya que su código fuente se compila para obtener el código binario en forma de bytecodes, que son estructuras parecidas a las instrucciones máquina, con la importante propiedad de no ser dependientes de ningún tipo de máquina (se detallarán más adelante). Los ficheros que contienen los bytecodes de Java tienen extensión .class. La Máquina Virtual Java se encargará de interpretar este código y, para su ejecución, lo traducirá a código máquina del procesador en particular sobre el que se esté trabajando.
+
+### 7.- El lenguaje de programación Java
