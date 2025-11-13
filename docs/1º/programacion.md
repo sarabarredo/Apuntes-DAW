@@ -220,3 +220,212 @@ Ejemplos de lenguajes interpretados son Perl, PHP, Python, JavaScript, etc.
 A medio camino entre los lenguajes compilados y los interpretados, existen los lenguajes que podemos denominar **pseudo-compilados** o **pseudo-interpretados**, es el caso de Java. Java puede verse como compilado e interpretado a la vez, ya que su código fuente se compila para obtener el código binario en forma de bytecodes, que son estructuras parecidas a las instrucciones máquina, con la importante propiedad de no ser dependientes de ningún tipo de máquina (se detallarán más adelante). Los ficheros que contienen los bytecodes de Java tienen extensión .class. La Máquina Virtual Java se encargará de interpretar este código y, para su ejecución, lo traducirá a código máquina del procesador en particular sobre el que se esté trabajando.
 
 ### 7.- El lenguaje de programación Java
+
+#### 7.1.- ¿Qué y cómo es Java?
+
+Java es un lenguaje de **programación orientado a objetos (POO)**. Fue creado para solucionar problemas que los lenguajes anteriores, como C, no podían manejar eficientemente, especialmente con el crecimiento del volumen del código.
+
+La principal virtud de Java es su **independencia del *hardware***. El código se escribe una sola vez y se puede ejecutar en **cualquier plataforma** gracias a la **Java Virtual Machine (JVM)**. La JVM interpreta el código (llamado *bytecode*) y lo convierte en código específico para el sistema operativo donde se ejecuta.
+
+**Características de Java**
+
+- **Orientado a objetos**: se basa en la división de problemas en objetos con propiedades e interacciones, simplificando el desarrollo.
+- **Independiente de la arquitectura**: el *bytecode* generado es universal.
+- **Sintaxis**: similar a C y C++.
+- **Robustez y seguridad**: realiza comprobaciones del código y restringe el acceso a áreas de memoria delicadas.
+- **Distribuido**: preparado para aplicaciones de red (TCP/IP).
+- **Bibliotecas**: dispone de un amplio conjunto de estas.
+
+#### 7.2.- Breve historia
+
+Java surgió en **1991** en **Sun Microsystems** con el objetivo de crear un lenguaje independiente del dispositivo, inicialmente para pequeños electrónicos. Se renombró a **Java** en **1995** y se lanzó al público como lenguaje para computadoras. Su filosofía de **independencia de plataforma**, potencia, POO y facilidad para aplicaciones de red lo catapultaron a la popularidad. Un punto clave fue su integración en el navegador **Netscape Navigator 2.0**.
+
+La plataforma Java (Java 2 o posterior) incluye:
+
+1.  El lenguaje de programación Java.
+2.  **Java Core:** Un conjunto de bibliotecas estándar.
+3.  **Herramientas de Desarrollo (JDK):** Incluye el compilador de *bytecodes*, el depurador, etc.
+4.  **Entorno de Ejecución (JRE):** La máquina virtual (JVM) que ejecuta el *bytecodes*.
+
+ariantes de la Plataforma Java:V
+
+* **J2SE (Standard Edition):** Para aplicaciones de escritorio y servidores.
+* **J2EE (Enterprise Edition):** Para aplicaciones web empresariales y del lado del servidor.
+* **Java FX:** Para crear Aplicaciones de Internet Enriquecidas (RIAs) con interfaz multiplataforma.
+* **Java Embedded/Card:** Para sistemas embebidos, IoT, y tarjetas inteligentes, respectivamente.
+
+#### 7.3.- La POO y Java
+
+En Java, el código (**métodos**) y los datos (**estado**) se agrupan en **objetos**. Un objeto es una entidad con comportamiento y estado que permite la **reutilización de código**, reduciendo el tiempo de desarrollo.
+
+* **Clases e Instancias:** Los patrones o tipos de objetos se llaman **clases**, y los objetos creados a partir de ellas son **instancias**.
+* **Modelo de Construcción:** La POO funciona como unir "bloques de construcción" (objetos pequeños) para crear estructuras más grandes (programas). 
+* **Pilares de la POO:** Java incorpora los tres conceptos principales de la POO:
+    * **Encapsulación:** Consiste en ocultar el estado (datos) de un objeto para que solo pueda ser modificado mediante sus operaciones (métodos) definidas. Esto aísla y protege los datos.
+    * **Herencia:** Permite que una clase nueva (derivada) extienda la funcionalidad de otra (clase base o superclase), especializándola.
+    * **Polimorfismo:** Es la capacidad de que varias clases derivadas de una misma clase base implementen un mismo método de manera diferente (ej. un método `mover` funciona distinto para un pez que para un ave).
+
+#### 7.4.- Independencia de la plataforma y trabajo en red
+
+Java se distingue por estas dos características:
+
+* **Independencia de la Plataforma:** Los programas de Java son ejecutables en **cualquier tipo de *hardware***.
+    * El código fuente se compila en **Java Bytecode** (instrucciones simplificadas).
+    * Este *bytecode* es interpretado y ejecutado por la **Máquina Virtual Java (JVM)**.
+    * La JVM es la única parte dependiente del sistema, ya que está escrita en código nativo de la plataforma.
+* **Trabajo en Red:** Java ofrece amplias posibilidades para la comunicación **vía TCP/IP**. Dispone de librerías que facilitan la interacción con protocolos como `http` y `ftp`, simplificando las tareas de programación en red.
+
+
+#### 7.5.- Seguridad y simplicidad
+
+Además de su independencia de plataforma y capacidad de red, Java es popular por dos virtudes clave:
+
+**1. Seguridad**
+
+- **Eliminación de Accesos Peligrosos:** Prohíbe el acceso a zonas de memoria "sensibles".
+- **Verificación de Código:** El *bytecode* es rigurosamente comprobado y verificado para garantizar que todas las operaciones, conversiones y usos de clases sean seguras y no produzcan efectos no deseados.
+- **Restricciones:** Java restringe la apertura de archivos locales, la ejecución de aplicaciones nativas de la plataforma y el uso de la máquina como puente para operaciones externas.
+
+Java implementa varias capas de *tests* y restricciones para garantizar un **entorno seguro**.
+
+**2. Simplicidad**
+
+- **Simplificación del Código:** Se eliminaron elementos complejos y propensos a errores presentes en C/C++, como:
+    * La aritmética de **punteros**.
+    * La gestión manual de la memoria.
+    * Los registros y la definición manual de tipos.
+- **Gestión Automática de Memoria (Garbage Collector):**
+    * Java incluye un **Recolector de Basura (*Garbage Collector*)** que libera al programador de la tarea de gestionar la memoria.
+    * Cuando un objeto ya no se utiliza, el entorno Java lo borra automáticamente. Esto permite la reutilización de bloques de memoria y disminuye la **fragmentación de memoria**.
+
+#### 7.6.- Java y los Bytecodes
+
+El código Java logra su independencia de la plataforma gracias a un proceso de dos fases que involucra los **Bytecodes** y la **Máquina Virtual Java (JVM)**.
+
+**1. Generación de Bytecodes**
+
+1.  El código fuente de Java (archivos `.java`) se **precompila**.
+2.  El resultado son los **Bytecodes** (archivos `.class`), que son un conjunto de instrucciones de lenguaje máquina **no específicas** de ningún procesador o sistema.
+
+**2. Ejecución a través de la JVM**
+
+- Los Bytecodes deben ser interpretados por la **Máquina Virtual Java (JVM)**.
+- La JVM es el intérprete específico para cada plataforma (Windows, Linux, etc.) y se encarga de traducir los Bytecodes a **código nativo** que el *hardware* pueda ejecutar. 
+- **Verificación de Seguridad:** Antes de ejecutar, la JVM utiliza un verificador de Bytecodes para asegurar la **integridad del sistema**, comprobando que el código cumple las especificaciones, evita desbordamientos de memoria y realiza operaciones seguras.
+
+En conclusión, para ejecutar un programa Java en cualquier sistema, solo es necesario que este cuente con la JVM adecuada. Este mecanismo es el que garantiza la famosa portabilidad de Java.
+
+### 8.- Programas en Java
+
+#### 8.1.- Estructura de un programa
+
+Todo programa en Java, al ser un lenguaje orientado a objetos, se construye alrededor de clases.
+
+| Elemento | Descripción Clave | Ejemplo |
+| :--- | :--- | :--- |
+| `public class Clase_Principal` | Es la clase principal que contiene todo el programa. Solo una puede ser `public`. El nombre del archivo (`.java`) debe coincidir con el nombre de esta clase. | `public class MiApp { ... }` |
+| `public static void main (String[] args)` | Es el método principal de la aplicación, el primero en ejecutarse. | `main` |
+| Bloques de Código | Conjuntos de instrucciones agrupados. Definen el alcance de la clase o método. | `{ instrucciones }` |
+| Punto y Coma (`;`) | Es obligatorio. Marca el final de cada instrucción de código. | `System.out.println("Hola");` |
+| Comentarios | Anotaciones ignoradas por el compilador, usadas para aclaraciones. | `// Comentario de una línea` o `/* Comentario de bloque */` |
+
+#### 8.2.- El entorno básico de desarrollo Java
+
+Para llevar a la práctica la programación en Java, se requieren herramientas específicas.
+
+- **Java Development Kit (JDK)**. Es el entorno básico y gratuito para construir aplicaciones, *applets* y componentes en Java, cuya función es proveer las herramientas para el desarrollo y prueba de programas. Incluye el **compilador** y el **intérprete**, herramientas esenciales para la precompilación y ejecución del código. 
+
+- **Java Runtime Environment (JRE)**. El JDK incluye una implementación del **JRE**, que es la base para la ejecución de los programas Java, ya que incluye la **Máquina Virtual Java (JVM)**, bibliotecas de clases necesarias y otros archivos de soporte.
+
+En resumen, el **JDK** permite **desarrollar** el programa, y el **JRE** (que viene dentro del JDK) permite **ejecutarlo** en cualquier plataforma mediante la **JVM**.
+
+#### 8.3.- La API de Java
+
+Para acelerar el desarrollo de software, Java incluye un amplio conjunto de bibliotecas. La **API de Java** es una biblioteca de clases orientada a objetos incluida en el **JDK**, que proporciona funcionalidades ya hechas y organizadas en paquetes, permitiendo a los programadores desarrollar programas más rápido mediante la reutilización de código.
+
+#### 8.4.- Afinando la configuración
+
+Para que un sistema operativo pueda compilar y ejecutar programas Java desde la línea de comandos, es necesario realizar ajustes en las variables de entorno para que el sistema sepa dónde encontrar los archivos esenciales.
+
+- **La variable `PATH`**. Le indica al sistema operativo dónde encontrar los programas ejecutables (`javac.exe` para compilar y `java.exe` para ejecutar) cuando se usan desde la línea de comandos. Se debe incluir en esta variable la ruta exacta donde se instaló el **JDK** hasta su directorio `bin`.
+
+- **La variable `CLASSPATH`**. Define las rutas donde el **JDK** debe buscar las **clases** necesarias para ejecutar o compilar un programa. Estas clases incluyen las bibliotecas de la **API de Java** y las clases creadas por el usuario. Las rutas pueden incluir directorios o archivos comprimidos en formato `zip` o `jar` que contengan archivos `.class`. Si esta variable no existe en el sistema, debe ser creada.
+
+#### 8.5.- Codificación, compilación y ejecución de aplicaciones
+
+Una vez que el código fuente de un programa Java está escrito (archivo con extensión `.java`) y el entorno configurado, el proceso para obtener una aplicación ejecutable sigue tres pasos básicos.
+
+**1. Codificación**
+
+Se escribe el código fuente en uno o varios archivos que tienen la extensión **`.java`**.
+
+**2. Compilación**
+
+- Se utiliza el compilador **`javac`**  incluido en el JDK. 
+- Se ejecuta desde la línea de comandos usando: `javac archivo.java`
+- Si no hay errores, el compilador genera un archivo con el mismo nombre y la extensión **`.class`**. Este archivo contiene el **Bytecode** (código precompilado).
+- Si el código fuente tiene múltiples clases, se generará **un archivo `.class` por cada clase**.
+- Si el compilador detecta errores, los muestra en el terminal. El programador debe corregirlos antes de que se genere el archivo `.class`.
+
+**3. Ejecución**
+
+- Se utiliza el intérprete **`java`** incluido en el JDK.
+- La ejecución solo es posible si el archivo contiene el método **`main`**.
+- Se ejecuta desde la línea de comandos usando: `java archivo` (se omite la extensión `.class`).
+
+En resumen: se escribe el código (`.java`), se usa **`javac`** para convertirlo en **Bytecode** (`.class`), y finalmente se usa **`java`** para que el intérprete ejecute la aplicación.
+
+#### 8.6.- Tipos de aplicaciones en Java
+
+| Tipo de Aplicación | Descripción y Características Clave |
+| :--- | :--- |
+| Aplicaciones de consola | Programas independientes que se ejecutan invocando la **JVM**. Carecen de Interfaz Gráfica de Usuario (GUI); leen y escriben a la entrada/salida estándar. Deben incluir obligatoriamente el método **`main`**. |
+| Aplicaciones gráficas | Programas independientes que utilizan bibliotecas con capacidades gráficas (como **Swing**) para crear una GUI. También requieren el método **`main`**. |
+| Applets | Programas pequeños incrustados en **páginas web** y que se ejecutan en el navegador del **cliente**. No tienen método `main`. Tienen restricciones de seguridad. |
+| Servlets | Componentes del lado del **servidor** (Java EE). Están diseñados para desarrollar aplicaciones web que interactúan con las peticiones recibidas de los clientes. |
+| Midlets | Aplicaciones creadas específicamente para la máquina virtual **Java Micro Edition (Java ME)**, destinadas a sistemas de propósito simple o **dispositivos móviles**. |
+
+### 9.- Entornos Integrados de Desarrollo (IDE)
+
+#### 9.1.- ¿Qué son?
+
+Un Entorno Integrado de Desarrollo (IDE) es una aplicación que centraliza todas las herramientas necesarias para el desarrollo de software en un solo programa, ofreciendo una interfaz gráfica amigable. Ofrece funcionalidades que mejoran la productividad, como código fuente coloreado, plantillas y gestión de proyectos.
+
+El IDE es solo una "fachada", ya que **requiere tener instalado el compilador (JDK)** para funcionar. Sin el compilador subyacente, el IDE no puede construir ni ejecutar el programa.
+
+#### 9.2.- IDE's actuales
+
+Existe una amplia variedad de IDEs, tanto gratuitos como de pago. Los más utilizados por la comunidad de programadores Java son **Eclipse**, **IntelliJ IDEA** y **NetBeans**.
+
+| Licencia | Ejemplos |
+| :--- | :--- |
+| Gratuitos | NetBeans, Eclipse, BlueJ, Jgrasp, Jcreator LE |
+| De pago | IntelliJ IDEA, Jbuilder, Jcreator, JDeveloper |
+
+#### 9.3.- El entorno NetBeans
+
+**1. Características**
+
+- Inicialmente centrado en Java, aunque soporta otros lenguajes (C, C++, PHP, Javascript, etc.).
+- Proyecto de código abierto de gran éxito, libre y gratuito , con el apoyo de una gran comunidad y empresas.
+- Desde su origen como el primer IDE escrito en Java, ha competido con Eclipse para ser la plataforma principal de desarrollo Java.
+
+**2. Capacidades**
+
+- Permite escribir código para diversos lenguajes además de Java.
+- Facilita la creación de aplicaciones J2EE al incorporar servidores de aplicaciones (como Glassfish y Tomcat).
+- Permite crear aplicaciones Swing de manera sencilla, similar al estilo de otros IDEs visuales.
+- Capacidad para crear aplicaciones JME (Java Micro Edition) para dispositivos móviles.
+
+**3. Arquitectura Modular**
+
+- Las aplicaciones en NetBeans se desarrollan a partir de componentes llamados módulos. Un módulo es un archivo Java que contiene clases escritas para interactuar con las APIs de NetBeans.
+- Esta arquitectura modular permite que las aplicaciones se extiendan fácilmente con la adición de nuevos módulos desarrollados independientemente.
+
+#### 9.5.- Aspecto del entorno y gestión de proyectos
+
+La vista `Archivos` de NetBeans muestra la estructura del proyecto.
+
+- `src`: contiene el código fuente (.java).
+- `build`: contiene los archivos compilados (.class) listos para ejecutar.
+- El resto de archivos son de configuración interna de NetBeans y no deben borrarse.
