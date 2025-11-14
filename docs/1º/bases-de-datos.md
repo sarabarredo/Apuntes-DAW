@@ -638,19 +638,18 @@ La fragmentación es una técnica en bases de datos distribuidas que consiste en
 **Tipos de fragmentación**
 
 - **Horizontal**:
-
     - Divide la tabla por filas (tuplas).
     - Cada fragmento contiene un subconjunto de tuplas de la tabla original. 
     - Variantes: primaria (directa) y derivada (basada en otras tablas).
 
 - **Vertical**:
-
     - Divide la tabla por columnas (atributos).  
     - Cada fragmento incluye un subconjunto de atributos, junto con la clave primaria.
     - Busca minimizar el tiempo de ejecución de las consultas.
     - Más compleja que la horizontal debido a la gran cantidad de alternativas.
 
 - **Híbrida o mixta**:
-
     - Combina fragmentación horizontal y vertical.
     - Se representa mediante árboles para visualizar la estructura.
+
+## UD2.- Bases de datos relacionales

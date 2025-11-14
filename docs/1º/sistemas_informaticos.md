@@ -511,3 +511,5 @@ Esta tarjeta de red virtual se conecta con la máquina anfitrión según la conf
 - **Bridged / Adaptador Puente** -> Se forma un puente entre la tarjeta virtual de la máquina invitada y la tarjeta real de la máquina anfitrión. Es como si fueran la misma tarjeta. A todos los efectos la máquina invitada es como si estuviera conectada a la red como una máquina real.
 - **Red Interna** -> Crear una red interna visible entre las máquinas invitadas, pero no con la anfitrión ni con la red general. Se utiliza cuando queremos tener una red entre las máquinas virtuales.
 - **Host-only networking / Adaptador sólo-anfitrión** -> En este modo cada máquina invitada solo puede comunicarse con la máquina anfitrión, sin que se puedan comunicar entre las invitadas. El direccionamiento de las mismas es dinámico y lo asigna VirtualBox.
+
+## UD2.- Hardware de un sistema informático

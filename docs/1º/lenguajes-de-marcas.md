@@ -346,47 +346,49 @@ Ciertos caracteres deben ser sustituidos por entidades para evitar conflictos co
 
 Para caracteres especiales como `£` o `©`, se usan las expresiones `&#D;` o `&#H;`, donde **D** y **H** son los números decimal o hexadecimal del código **UNICODE** del carácter.
 
-### 3.2.1. Atributos
+##### 3.2.1. Atributos
 
 Los **atributos** permiten añadir **propiedades** a los elementos. Se usan para información no susceptible de ser dividida, ya que:
 
-* No pueden organizarse jerárquicamente.
-* No pueden contener otros elementos o atributos.
-* No reflejan una estructura lógica.
+- No pueden organizarse jerárquicamente.
+- No pueden contener otros elementos o atributos.
+- No reflejan una estructura lógica.
 
-#### Definición de atributos
+**Definición de atributos**
 
-* Se definen y se les da valor **dentro de la etiqueta de inicio** o de elemento vacío.
-* Van separados del nombre del elemento (y de otros atributos) por un espacio.
-* El valor del atributo va precedido de un igual y debe definirse entre **comillas simples o dobles**.
-    * Ejemplo: `<ejemplar tipo_ejem="libro" titulo="XML práctico">`
+- Se definen y se les da valor **dentro de la etiqueta de inicio** o de elemento vacío.
+- Van separados del nombre del elemento (y de otros atributos) por un espacio.
+- El valor del atributo va precedido de un igual y debe definirse entre **comillas simples o dobles**.
+    - Ejemplo: `<ejemplar tipo_ejem="libro" titulo="XML práctico">`
 
-* Los nombres de los atributos deben cumplir las mismas reglas que los nombres de los elementos y, adicionalmente, **no pueden contener el carácter menor que (`<`)**. 
-
+- Los nombres de los atributos deben cumplir las mismas reglas que los nombres de los elementos y, adicionalmente, **no pueden contener el carácter menor que (`<`)**. 
 
 ### 4.- Documentos XML bien formados
 
-Todos los documentos XML deben verificar las reglas sintácticas que define la recomendación del W3C para el estándar XML. Esas normas básicas son:
+Todos los documentos XML deben **verificar las reglas sintácticas** que define la recomendación del W3C para el estándar XML. Esas normas son:
 
-    El documento ha de tener definido un prólogo con la declaración xml completa.
-    Existe un único elemento raíz para cada documento: es un solo elemento en el que todos los demás elementos y contenidos se encuentran anidados.
-    Hay que cumplir las reglas sintácticas del lenguaje XML para definir los distintos elementos y atributos del documento.
+1. El documento **ha de tener definido un prólogo** con la declaración xml completa.
+2. Existe un **único elemento raíz** para cada documento: es un solo elemento en el que todos los demás elementos y contenidos se encuentran anidados.
+3. Hay que **cumplir las reglas sintácticas** del lenguaje XML para definir los distintos elementos y atributos del documento.
 
 ### 5.- Utilización de espacios de nombres en XML
 
-Permiten definir la pertenencia de los elementos y los atributos de un documento XML al contexto de un vocabulario XML. De este modo se resuelven las ambigüedades que se pueden producir al juntar dos documentos distintos, de dos autores diferentes, que han utilizado el mismo nombre de etiqueta para representar cosas distintas.
+Los **espacios de nombres** (*namespaces*) resuelven las **ambigüedades** que surgen cuando dos documentos XML de diferentes orígenes usan el **mismo nombre de etiqueta** para representar cosas distintas.
 
-Los espacios de nombres, también conocidos como "name spaces", permiten dar un nombre único a cada elemento, indexándolos según el nombre del vocabulario adecuado. Además están asociados a un URI que los identifica de forma única.
+- Permiten definir la **pertenencia** de elementos y atributos a un **vocabulario XML** específico.
+- Asignan un nombre único a cada elemento, asociándolo a un **URI** que lo identifica de forma global.
 
-En el documento, las etiquetas ambiguas se sustituyen por otras en las que el nombre del elemento está precedido de un prefijo, que determina el contexto al que pertenece la etiqueta, seguido de dos puntos, `:`. Esto es:
+Para distinguir entre elementos con el mismo nombre, se utiliza un **prefijo** en las etiquetas:
 
-`<prefijo:nombre_etiqueta></prefijo:nombre_etiqueta>`
+- La etiqueta se convierte en un **nombre cualificado**:
+    `**<prefijo:nombre_etiqueta></prefijo:nombre_etiqueta>**`
 
-Esta etiqueta se denomina "nombre cualificado". Al definir el prefijo hay que tener en cuenta que no se pueden utilizar espacios ni caracteres especiales y que no puede comenzar por un dígito.
+El prefijo indica el contexto al que pertenece la etiqueta, seguido de dos puntos (`:`), y no debe contener espacios o caracteres especiales ni puede empezar con un dígito.
 
-Antes de poder utilizar un prefijo de un espacio de nombres, para resolver la ambigüedad de dos o más etiquetas, es necesario declarar el espacio de nombres, es decir, asociar un índice con el URI asignado al espacio de nombres, mediante un atributo especial xmlns. Esto se hace entre el prólogo y el ejemplar de un documento XML y su sintaxis es la siguiente:
+Antes de usar un prefijo, el espacio de nombres debe ser **declarado**. Esto asocia el prefijo con su URI único.
 
-`<conexion>://<direccionservidor>/<apartado1>/<apartado2>/...`
+- Se realiza mediante el atributo especial **`xmlns`** (XML Name Space), y la declaración se hace habitualmente entre el prólogo y el ejemplar del documento, o en el elemento raíz.
+    - El URI asociado tiene la forma: `**<conexion>://<direccionservidor>/<apartado1>/...**` 
 
 #### 5.1.- Ejemplo: Utilización de espacios de nombres
 
@@ -414,3 +416,5 @@ Supongamos dos documentos que organizan la información sobre profesores y alumn
 Si uniéramos los dos documentos en uno único, sin usar espacios de nombres, no se distinguirían los profesores de los alumnos ya que en los dos casos la etiqueta `<nombre>` se llama igual.
 
 Para resolverlo necesitamos definir un espacio de nombres para cada contexto.
+
+## UD2.- Utilización de lenguajes de marcas en entornos web
