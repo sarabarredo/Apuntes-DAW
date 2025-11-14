@@ -431,3 +431,111 @@ La vista `Archivos` de NetBeans muestra la estructura del proyecto.
 - El resto de archivos son de configuración interna de NetBeans y no deben borrarse.
 
 ## UD2.- Creación de mi primer programa
+
+### 1. Introducción
+
+Los programas de ordenador son aplicaciones que **resuelven problemas** mediante la ejecución de tareas específicas, como usar el correo electrónico o navegar por internet. Para desarrollar *software*, es crucial elegir un **lenguaje de programación** que se domine y que no imponga limitaciones en el desarrollo multiplataforma.
+
+### 2.- Variables e identificadores
+
+Un programa utiliza **variables** para manejar los datos que se usan en cálculos, informes, o interacciones con el usuario. Una variable es simplemente una **zona de la memoria** del ordenador reservada para almacenar un valor que se usará más adelante.
+
+Toda variable se define por tres características principales:
+
+1.  **Nombre (Identificador):** nombre único que permite al programa acceder y manipular el valor almacenado en esa zona de memoria.
+2.  **Tipo de dato:** especifica la clase de información que guarda la variable (por ejemplo, números enteros, caracteres, etc.).
+3.  **Rango de valores:** conjunto de valores que la variable puede admitir, determinado por su tipo de dato (y por tanto, por el tamaño que ocupa en la memoria).
+
+El **identificador** es el nombre específico que se le da a la variable y a otros elementos del programa.
+
+Las variables se deben **declarar** antes de su uso. La sintaxis general es:
+
+```
+tipoVariable identificadorVariable;
+```
+
+#### 2.1.- Identificadores
+
+Un **identificador** en Java es el nombre que se le da a una variable, función o clase. Debe ser una secuencia ilimitada **sin espacios** de letras y dígitos Unicode, comenzando obligatoriamente con una **letra**, un **símbolo de subrayado (`_`)** o el **símbolo dólar (`$`)**.
+
+*Ejemplos válidos:* `x5`, `NUM_MAX`, `numCuenta`, o incluso caracteres de otros alfabetos como `ατη`.
+
+**Código Unicode**
+
+**Unicode** es un **sistema de codificación de caracteres** que recoge prácticamente todos los alfabetos importantes del mundo (Griego, Japonés, etc.).
+
+- **Ventaja en Java:** Permite usar caracteres locales en los identificadores (como la `ñ`), haciendo el código más significativo y fácil de entender para los programadores locales.
+- **Funcionamiento:**
+    - Asigna un **número entero unívoco** a cada carácter. Por ejemplo, a la letra `ñ` le corresponde el entero 164.
+    - Originalmente usaba 16 bits (65.536 caracteres), pero ahora utiliza formatos variables como **UTF-8, UTF-16 o UTF-32**.
+    - Es **compatible con ASCII**: a los caracteres ASCII se les asignan los mismos 8 bits, precedidos por 8 bits a cero.
+
+#### 2.2.- Convenios y reglas para nombrar variables
+
+Aunque Java permite nombrar identificadores con gran libertad, existen normas de estilo que se usan de forma generalizada para escribir código claro y mantenible:
+
+- **Sensibilidad a mayúsculas:** Java **distingue** entre mayúsculas y minúsculas. `Alumno` y `alumno` son dos variables diferentes.
+- **Restricción de valores:** no se puede usar como identificador el valor booleano (`true` o `false`) ni el valor nulo (`null`).
+- **Caracteres iniciales:** no se suelen usar identificadores que comiencen con **`$`** o **`_`**; por convenio, el símbolo dólar (`$`) **no se utiliza nunca**.
+- **Descriptividad:** los identificadores deben ser **descriptivos** (ej., `FicheroClientes` en lugar de `Cl33`), lo cual mejora la legibilidad y ayuda a **autodocumentar** el código.
+
+Existen convenciones de estilo que no son obligatorias, pero son la práctica estándar en la comunidad Java:
+
+| Identificador | Convención | Ejemplo |
+| :--- | :--- | :--- |
+| Nombre de variable | Comienza por letra **minúscula**. Si tiene varias palabras, se escriben juntas y las palabras subsiguientes comienzan con mayúscula (formato *camelCase*) | `numAlumnos`, `sumaTotal` |
+| Nombre de constante | En **letras mayúsculas**, separando las palabras con un **guion bajo** (`_`). El guion bajo no se utiliza en ningún otro sitio por convenio | `TAM_MAX`, `PI` |
+| Nombre de una clase | Comienza por letra **mayúscula** | `String`, `MiTipo` |
+|*Nombre de función (método) | Comienza con letra **minúscula** | `modificaValor`, `obtieneDato` |
+
+#### 2.3. Palabras reservadas
+
+Las **palabras reservadas** (*keywords* o palabras clave) son secuencias de caracteres, formadas con letras **ASCII**, cuyo uso está **exclusivamente reservado** para el lenguaje Java. Por esta razón, **no pueden utilizarse** para nombrar identificadores (variables, clases, funciones, etc.).
+
+**Notas sobre palabras clave y literales**
+
+* **Uso actual:** algunas palabras reservadas como **`const`** y **`goto`** están reservadas pero no se utilizan en la implementación actual del lenguaje Java.
+* **Literales:** existen términos que, aunque no pueden ser usados como identificadores, **no son técnicamente palabras reservadas**, sino **literales**. Este es el caso de los valores booleanos (**`true`** y **`false`**) y el valor nulo (**`null`**).
+* **Ayuda visual:** los editores y entornos de desarrollo integrado (**IDE**) utilizan **colores** para diferenciar automáticamente las palabras reservadas del resto del código, lo que facilita la lectura y la detección de errores de sintaxis.
+
+**Palabras clave en Java**
+
+| | | | | |
+| :--- | :--- | :--- | :--- | :--- |
+| `abstract` | `continue` | `for` | `new` | `switch` |
+| `assert` | `default` | `goto` | `package` | `synchronized` |
+| `boolean` | `do` | `if` | `private` | `this` |
+| `break` | `double` | `implements` | `protected` | `throw` |
+| `byte` | `else` | `import` | `public` | `throws` |
+| `case` | `enum` | `instanceof` | `return` | `transient` |
+| `catch` | `extends` | `int` | `short` | `try` |
+| `char` | `final` | `interface` | `static` | `void` |
+| `class` | `finally` | `long` | `strictfp` | `volatile` |
+| `const` | `float` | `native` | `super` | `while` |
+
+#### 2.4.- Tipos de variables
+
+Java clasifica las variables basándose en varios factores, como el tipo de información que contienen, si su valor cambia, o el lugar donde se declaran en el código.
+
+**Clasificación por tipo de información**
+
+| Tipo de Variable | Descripción |
+| :--- | :--- |
+| **Variables de tipos primitivos** | Contienen valores simples (como números o caracteres). |
+| **Variables referencia** | Almacenan la **dirección** o referencia a un objeto en memoria (no el objeto en sí). |
+
+**Clasificación por cambio de valor**
+
+| Tipo de Variable | Descripción |
+| :--- | :--- |
+| **Variables** | Su valor **puede cambiar** a lo largo de la ejecución del programa. |
+| **Constantes (Variables finales)** | Su valor **no cambia** durante la ejecución del programa. Se definen para mantener un valor fijo. |
+
+**Clasificación por ubicación**
+
+| Tipo de Variable | Ubicación | Ciclo de Vida |
+| :--- | :--- | :--- |
+| **Variables miembro** | Se crean **dentro de una clase**, pero **fuera de cualquier método**. | Pertenecen a los objetos creados a partir de la clase y pueden ser primitivas o referencia, variables o constantes. |
+| **Variables locales** | Se crean y usan **dentro de un método** o dentro de cualquier bloque de código. | **Dejan de existir** cuando la ejecución de ese método o bloque de código finaliza. Pueden ser primitivas o referencia. | 
+
+### 3.- Los tipos de datos
