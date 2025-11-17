@@ -7,6 +7,8 @@ toc_max_heading_level: 3
 
 ## UD1.- Reconocimiento de las características de lenguajes de marcas
 
+![Esquema Unidad 1 Lenguajes de Marcas](../../static/img/lenguajes-de-marcas-unidad-1.jpg)
+
 ### 1.- Lenguajes de Marcas
 
 Un **lenguaje de marcas** es un modo de codificar un documento donde, junto con el texto, se incorporan etiquetas, marcas o anotaciones con información adicional relativa a la estructura del texto o su formato de presentación. Permiten hacer explícita la estructura de un documento, su contenido semántico o cualquier otra información lingüística o extralingüística que se quiera hacer patente.
@@ -418,3 +420,162 @@ Si uniéramos los dos documentos en uno único, sin usar espacios de nombres, no
 Para resolverlo necesitamos definir un espacio de nombres para cada contexto.
 
 ## UD2.- Utilización de lenguajes de marcas en entornos web
+
+![Esquema Unidad 2 Lenguajes de Marcas](../../static/img/lenguajes-de-marcas-unidad-2.jpg)
+
+### 1.- Introducción
+#### 1.1.- HTML: evolución y versiones
+
+**HTML** es el lenguaje estándar utilizado para la mayoría de las páginas web. Es reconocido por todos los navegadores, lo que garantiza una visualización similar del contenido, independientemente del sistema operativo.
+
+**Evolución de HTML**
+
+| Versión | Año (Estándar) | Entidad | Características clave |
+| :--- | :--- | :--- | :--- |
+| **Origen** | 1990 | | Nace como un sistema de hipertexto para compartir documentos. |
+| **HTML 2.0** | Sep. 1995 | IETF | **Primera versión oficial** reconocida como estándar. |
+| **HTML 3.2** | Ene. 1997 | W3C | Incorpora **applets de Java** y la capacidad de rodear imágenes con texto. |
+| **HTML 4.0** | Abr. 1998 | W3C | Introduce las **Hojas de Estilo CSS** y la posibilidad de incluir pequeños programas. |
+| **HTML 4.01** | Dic. 1999 | W3C | Actualización final de la serie 4.0. El W3C detuvo la estandarización hasta 2007. |
+| **HTML 5.x** | Desde 2007 | WHATWG / W3C | Es la **versión más avanzada** y el estándar actual (la última especificación es HTML 5.3, de 2018). |
+
+El cambio más significativo en **HTML 5** es la **separación de responsabilidades**:
+
+- **HTML:** se encarga únicamente de la **información**, la **estructura** y la **semántica** del documento.
+- **CSS (Hojas de Estilo):** asume la **presentación** del documento.
+
+Esta separación hizo que muchos elementos y atributos de HTML 4 relacionados con la presentación (como `<font>`, `<center>`, `align`) queden **obsoletos**. 
+
+#### 1.2.- HTML y XHTML
+
+**XHTML** (*eXtensible HyperText Markup Language*) es una adaptación del lenguaje **HTML** al estándar **XML**. Esto significa que los documentos XHTML deben cumplir con las reglas de **XML bien formado**.
+
+| Característica | HTML (Sintaxis permisiva) | XHTML (Sintaxis estricta, basada en XML) |
+| :--- | :--- | :--- |
+| **Flexibilidad** | Muy flexible: permite etiquetas en mayúsculas/minúsculas y valores de atributos sin comillas. | **No flexible:** impone normas de escritura obligatorias (bien formado). |
+| **Mantenimiento** | Puede generar código desordenado y difícil de mantener. | Código **más regular**, sencillo de editar, mantener y procesar automáticamente. |
+| **Procesamiento** | Los navegadores intentan mostrar el contenido aunque haya errores. | Si se sirve como XML, cualquier **error de sintaxis causa que el documento no se muestre**. |
+
+Para que el código HTML se considere XHTML (XML bien formado), debe cumplir las siguientes normas:
+
+* **Elemento Raíz:** toda la página debe estar contenida en el elemento raíz `<html>`.
+* **Minúsculas:** los nombres de las **etiquetas** y **atributos** deben escribirse **siempre en minúsculas**.
+* **Comillas:** el valor de **todos los atributos**, incluidos los numéricos, debe ir **siempre entre comillas**.
+* **Cierre de Etiquetas:** **Todas las etiquetas deben cerrarse**. Las etiquetas vacías se cierran con una sintaxis especial: `<br/>` en lugar de `<br><br/>`.
+* **Atributos no comprimibles:** no se puede omitir el valor en atributos donde el nombre y el valor coinciden (aunque son poco habituales).
+
+Aunque los diseñadores web suelen preferir HTML, los tres primeros puntos de las reglas sintácticas se consideran **buenas prácticas** que se aplican universalmente para mejorar la calidad del código. 
+
+#### 1.3.- Estructura de un documento HTML
+
+Un documento HTML mantiene la estructura de un documento XML, dividiéndose en un **prólogo** y un **ejemplar**.
+
+El **prólogo** es la declaración inicial que informa al navegador sobre el tipo de documento y la versión de HTML utilizada, lo que permite su correcta interpretación.
+
+```html title="Declaración en HTML 5"
+<!DOCTYPE html>
+```
+
+En **HTML 4.0** existen tres tipos de documentos definidos por su DTD:
+1.  **Strict:** No permite el uso de elementos obsoletos (*deprecated*).
+2.  **Transitional:** Permite tanto los elementos Strict como los obsoletos.
+3.  **Frameset:** Variante de Transitional para documentos que utilizan *frames* (reemplaza la etiqueta `<body>`).
+
+El **ejemplar** está delimitado por las etiquetas `<html>` y `</html>` y se divide en dos secciones principales:
+
+1.  **Cabecera (`<head>...</head>`):**
+    - Contiene **metadatos** sobre la página (autor, palabras clave, etc.).
+    - Es obligatorio incluir el **título** del documento con la etiqueta `<title>...</title>`.
+    - Esta información **no se muestra** en la ventana del navegador, excepto el título, que aparece en la barra superior.
+
+2.  **Cuerpo (`<body>...</body>`):**
+    - Contiene toda la **información que se presentará** en la pantalla del navegador (textos, imágenes, enlaces, etc.).
+    - En documentos *Frameset*, el `<body>` se sustituye por la etiqueta `<frameset>`.
+    
+#### 1.4.- Identificación de etiquetas y atributos HTML
+
+Un documento HTML se construye a partir de **etiquetas** y **atributos**.
+
+**Etiquetas**
+
+Las etiquetas son las marcas que estructuran el contenido (ej., `<etiqueta>` de apertura y `</etiqueta>` de cierre). A diferencia de XML (donde se crean etiquetas personalizadas), el número de etiquetas en HTML está **limitado** a aquellas que están **predefinidas** por el lenguaje (el estándar HTML).
+
+**Atributos**
+
+Los atributos se utilizan para añadir **información adicional o complementaria** a una etiqueta, lo que permite crear elementos complejos (como definir la fuente de una imagen o el destino de un enlace).  La combinación de la etiqueta y sus atributos forma el **elemento** completo. Cada atributo tiene un conjunto definido de valores que se le pueden asignar. Si se proporciona un valor no válido, el navegador simplemente lo **ignora**. Cada etiqueta define qué atributos específicos puede utilizar, aunque algunos son **comunes** a muchas etiquetas. 
+
+#### 1.5.- Clasificación de los atributos comunes según su funcionalidad
+
+Los atributos permiten añadir información adicional a las etiquetas HTML. Aunque existen atributos específicos para cada etiqueta, los siguientes se pueden clasificar según su propósito general:
+
+**Atributos básicos o globales**
+
+Estos atributos se pueden usar en casi **todas las etiquetas** de HTML y son fundamentales para la identificación y el estilo:
+
+| Atributo | Descripción |
+| :--- | :--- |
+| **`name`** | Asigna un **nombre** al elemento, útil para scripts o formularios. |
+| **`title`** | Asigna un **título descriptivo** al elemento. El navegador lo muestra cuando el usuario pasa el ratón por encima, mejorando la **accesibilidad** (especialmente útil en enlaces e imágenes). |
+| **`id`** | Proporciona un **identificador único** al elemento. Es esencial para trabajar con CSS y JavaScript. (Restricción: no puede empezar por números). |
+| **`style`** | Permite aplicar **estilos CSS directamente** al elemento de forma *inline*. |
+| **`class`** | Aplica un **estilo definido en las hojas CSS** al elemento, permitiendo aplicar el mismo estilo a múltiples elementos. (Restricción: no puede empezar por números). | 
+
+**Atributos para internacionalización**
+
+Se utilizan para indicar el **idioma** y la **dirección** del texto, especialmente en páginas multilingües:
+
+| Atributo | Descripción | Valores |
+| :--- | :--- | :--- |
+| **`dir`** | Indica la **dirección del texto** | **`ltr`** (left to right, por defecto) o **`rtl`** (right to left) |
+| **`lang`** | Especifica el **idioma del elemento** mediante un código predefinido | `en` (Inglés), `es` (Español), etc. |
+| **`xml:lang`** | Especifica el idioma en documentos **XHTML** | En XHTML, este atributo es **obligatorio** si se incluye `lang` y tiene mayor prioridad |
+
+**Atributos de eventos**
+
+Esta categoría incluye atributos específicos que solo se utilizan en páginas **dinámicas** (como *eventos* para JavaScript), por lo que no se detallan en este contexto.
+
+### 2.- Elementos HTML
+
+Un **elemento HTML** es la unidad fundamental de un documento y está compuesto por cuatro partes principales:
+
+1.  Una **etiqueta de apertura** (`<etiqueta>`).
+2.  **Cero o más atributos**.
+3.  Opcionalmente, un **texto** encerrado por la etiqueta (no todas las etiquetas lo permiten).
+4.  Una **etiqueta de cierre** (`</etiqueta>`), la cual es opcional o inexistente para ciertos elementos.
+
+Según el modo en que ocupan el espacio en la página, los elementos se dividen en dos tipos de visualización:
+
+1.  **Elementos en línea (*Inline*)**
+    * **Espacio:** Solo ocupan el **espacio estrictamente necesario** para mostrar su contenido.
+    * **Contenido:** Pueden contener texto u otros elementos en línea.
+    * **Ejemplos:** Los **enlaces** (`<a>`) y el **texto resaltado** (`<strong>`).
+
+2.  **Elementos de bloque (*Block*)**
+    * **Espacio:** Siempre comienzan en una **nueva línea** y ocupan **todo el ancho disponible** hasta el final de la línea.
+    * **Contenido:** Pueden contener texto, elementos en línea u otros elementos de bloque.
+    * **Ejemplos:** Los **encabezados** (`<h1>`) y los **párrafos** (`<p>`).
+
+#### 2.1.- Elementos de la estructura básica de un documento
+
+La estructura de un documento HTML está definida por:
+
+- **`<html>`**: El elemento **raíz** que delimita el inicio y el fin de todo el documento.
+- **`<head>`**: Define la **cabecera**. Contiene metadatos, enlaces a estilos y el título (`<title>`). **No se muestra** en la ventana principal.
+- **`<body>`**: Define el **cuerpo visible** del documento. Contiene toda la información que se presenta en la pantalla y permite aplicar **formatos globales** (como color de fondo). 
+
+#### 2.2.- Elementos de la sección de cabecera
+
+Los elementos de la cabecera (`<head>`) contienen metadatos e información de soporte para el documento y se clasifican en dos tipos:
+
+- **Elementos contenedores**: encierran su contenido y requieren etiquetas de apertura y cierre:
+    - **`<title>`**: define el **título del documento** que aparece en la barra del navegador. Es un elemento **obligatorio**.
+    - **`<script>`**: se utiliza para incrustar **código *script*** (como JavaScript) en la página. (Tradicionalmente se recomendaba envolver el contenido en comentarios para evitar su interpretación por navegadores antiguos, pero esto ya no es una práctica común).
+    - **`<style>`**: define las **reglas de estilo CSS** que se aplicarán al documento. (Al igual que con `<script>`, su contenido solía ir entre comentarios).
+
+- **Elementos no contenedores**: no encierran contenido y se cierran a sí mismos (o no tienen etiqueta de cierre):
+    - **`<base>`**: establece la **URI base** para todas las URL relativas que aparecen en el documento.
+    - **`<link>`**: se utiliza para **enlazar documentos externos**, siendo el uso más común la vinculación a hojas de estilo **CSS**.
+    - **`<meta>`**: define **metadatos** sobre la página, como la codificación de caracteres, la descripción del contenido o la información del autor.
+    - **`<isindex>`**: se utilizaba como *prompt* de entrada de datos, pero ha sido **eliminado de los estándares** web actuales. 
+
+#### 2.3.- Encabezados y párrafos

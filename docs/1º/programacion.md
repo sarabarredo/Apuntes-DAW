@@ -7,6 +7,8 @@ toc_max_heading_level: 3
 
 ## UD1.- Introducción a la programación
 
+![Esquema Unidad 1 Programación](../../static/img/programacion-unidad-1.png)
+
 ### 1.- Introducción
 
 En esta primera unidad realizaremos un recorrido por los conceptos fundamentales de la programación de aplicaciones. Iniciaremos nuestro camino conociendo con qué vamos a trabajar, qué técnicas podemos emplear y qué es lo que pretendemos conseguir. Continuaremos con el análisis de las diferentes formas de programación existentes, identificaremos qué fases conforman el desarrollo de una aplicación software y avanzaremos detallando las características relevantes de cada uno de los lenguajes de programación disponibles, para posteriormente, realizar una visión general del lenguaje de programación Java. Finalmente, tendremos la oportunidad de conocer con qué herramientas podríamos desarrollar nuestros programas, escogiendo entre una de ellas para ponernos manos a la obra utilizando el lenguaje Java.
@@ -432,6 +434,8 @@ La vista `Archivos` de NetBeans muestra la estructura del proyecto.
 
 ## UD2.- Creación de mi primer programa
 
+![Esquema Unidad 2 Programación](../../static/img/programacion-unidad-2.png)
+
 ### 1. Introducción
 
 Los programas de ordenador son aplicaciones que **resuelven problemas** mediante la ejecución de tareas específicas, como usar el correo electrónico o navegar por internet. Para desarrollar *software*, es crucial elegir un **lenguaje de programación** que se domine y que no imponga limitaciones en el desarrollo multiplataforma.
@@ -519,23 +523,346 @@ Java clasifica las variables basándose en varios factores, como el tipo de info
 
 **Clasificación por tipo de información**
 
-| Tipo de Variable | Descripción |
+| Tipo de variable | Descripción |
 | :--- | :--- |
-| **Variables de tipos primitivos** | Contienen valores simples (como números o caracteres). |
-| **Variables referencia** | Almacenan la **dirección** o referencia a un objeto en memoria (no el objeto en sí). |
+| Variables de tipos primitivos | Contienen valores simples (como números o caracteres). |
+| Variables referencia | Almacenan la **dirección** o referencia a un objeto en memoria (no el objeto en sí). |
 
 **Clasificación por cambio de valor**
 
-| Tipo de Variable | Descripción |
+| Tipo de variable | Descripción |
 | :--- | :--- |
-| **Variables** | Su valor **puede cambiar** a lo largo de la ejecución del programa. |
-| **Constantes (Variables finales)** | Su valor **no cambia** durante la ejecución del programa. Se definen para mantener un valor fijo. |
+|*Variables | Su valor **puede cambiar** a lo largo de la ejecución del programa. |
+| Constantes (Variables finales) | Su valor **no cambia** durante la ejecución del programa. Se definen para mantener un valor fijo. |
 
 **Clasificación por ubicación**
 
-| Tipo de Variable | Ubicación | Ciclo de Vida |
+| Tipo de variable | Ubicación | Ciclo de vida |
 | :--- | :--- | :--- |
-| **Variables miembro** | Se crean **dentro de una clase**, pero **fuera de cualquier método**. | Pertenecen a los objetos creados a partir de la clase y pueden ser primitivas o referencia, variables o constantes. |
-| **Variables locales** | Se crean y usan **dentro de un método** o dentro de cualquier bloque de código. | **Dejan de existir** cuando la ejecución de ese método o bloque de código finaliza. Pueden ser primitivas o referencia. | 
+| Variables miembro | Se crean **dentro de una clase**, pero **fuera de cualquier método**. | Pertenecen a los objetos creados a partir de la clase y pueden ser primitivas o referencia, variables o constantes. |
+| Variables locales | Se crean y usan **dentro de un método** o dentro de cualquier bloque de código. | **Dejan de existir** cuando la ejecución de ese método o bloque de código finaliza. Pueden ser primitivas o referencia. | 
 
 ### 3.- Los tipos de datos
+
+En lenguajes **fuertemente tipados** como Java, todo dato tiene un **tipo** conocido antes de la ejecución. Este tipo limita el rango de valores que puede tomar una variable y las operaciones válidas sobre ella. Esto facilita la detección de errores por parte del compilador (*tiempo de compilación*).
+
+Los tipos de datos en Java se dividen en dos categorías principales:
+
+- **Tipos de datos sencillos o primitivos:** representan **valores únicos y simples** predefinidos en el lenguaje (números, caracteres, booleanos).
+- **Tipos de datos referencia:** contienen una **dirección en memoria** (puntero o referencia) a un valor o grupo de valores (ej., clases u *arrays*).
+
+#### 3.1.- Tipos de datos primitivos I
+
+Los tipos primitivos son datos sencillos que representan la información más habitual: números, caracteres y valores lógicos (*booleanos*).
+
+- **No son objetos:** a diferencia de otros lenguajes POO, los tipos primitivos en Java no son objetos, lo que permite al compilador una mejor optimización.
+- **Portabilidad:** tienen **idéntico tamaño y comportamiento** en todas las plataformas y versiones de Java (ej., `int` siempre usa 32 bits y complemento a 2). Esto garantiza la portabilidad del programa.
+- **Peculiaridad:** el tipo de dato **`char`** se considera numérico porque almacena el **código Unicode** del carácter (no el carácter en sí), lo que permite realizar operaciones numéricas con caracteres.
+- **Criterio de elección:** para elegir un tipo de dato, se debe considerar la naturaleza de la información (texto, numérico, etc.) y el **rango de valores** que puede alcanzar. (Ej. para la población mundial se necesitaría un `long` en lugar de un `int`).
+
+##### 3.1.1. Tipos de datos primitivos II
+
+El tipo de dato **real** permite representar números con decimales. Debido a que existen infinitos números reales entre dos puntos cualesquiera, su almacenamiento en el ordenador es siempre una **aproximación**.
+
+- **Representación:** Los números reales se representan en **coma flotante**, donde solo se almacena la **mantisa** y el **exponente**.
+    - Los *bits* de la **mantisa** definen la **precisión** (cifras decimales significativas).
+    - Los *bits* del **exponente** definen el **intervalo de representación** (el número más grande y más pequeño que se puede almacenar).
+
+- **Tipos en Java:**
+    - **`float`:** Simple precisión, usa **32 bits** (24 para la mantisa, 8 para el exponente).
+    - **`double`:** Doble precisión, usa **64 bits** (53 para la mantisa, 11 para el exponente).
+
+- **Estándar:** Java utiliza el estándar internacional **IEEE 754** para representar internamente los números en coma flotante, asegurando que los cálculos sean consistentes entre diferentes plataformas.
+- **Recomendación:** La mayoría de los programadores usan **`double`** por defecto para trabajar con datos reales, ya que ofrece **mayor precisión** y minimiza los errores de aproximación. Java trata los valores en coma flotante como `double` por defecto. 
+
+Aquí tienes el resumen conciso sobre la declaración e inicialización de variables en Java:
+
+#### 3.2. Declaración e Inicialización de variables
+
+Para poder utilizar una variable en un programa, primero se debe **declarar**. Esto implica definir su **identificador** (nombre) y su **tipo de dato**. Las variables pueden declararse en cualquier bloque de código (dentro de llaves).
+
+Una variable se declara indicando su tipo seguido de su identificador. Se pueden declarar e **inicializar** varias variables del mismo tipo en una sola línea, separadas por comas.
+
+    ```java title="Sintaxis de declaración e inicialización"
+    int numAlumnos = 15;
+    double radio = 3.14, importe = 102.95;
+    ```
+
+    ```java title="Declaración de constantes"
+    final double PI = 3.1415926536;
+    ```
+
+Lo que sucede si no se asigna un valor a una variable al declararla, depende de su tipo:
+
+| Tipo de variable | Inicialización automática | Valor por defecto si no se asigna |
+| :--- | :--- | :--- |
+| **Variables miembro** (declaradas en la clase) | **Sí** se inicializan automáticamente | **Numéricas:** 0. **Carácter:** carácter `null`. **Booleanas:** `false`. **Referencia:** `null` |
+| **Variables locales** (declaradas dentro de un método) | **No** se inicializan automáticamente | **Debe asignarse un valor** manualmente antes de ser usadas. Si el compilador detecta que la variable podría usarse sin valor (como en una estructura `if` incompleta), produce un error |
+
+Si una variable local se usa sin haber sido inicializada, o si existe la posibilidad lógica de que no haya sido inicializada (como en un `if` sin `else`), el compilador generará un error de tipo "La variable podría no haber sido inicializada".
+
+#### 3.3.- Tipos referenciados
+
+Los **tipos referenciados** (o referencias) son tipos de datos construidos a partir de los ocho tipos primitivos de Java. Su función es almacenar la **dirección en la memoria** del ordenador donde se encuentran los datos reales, en lugar de almacenar el valor en sí.
+
+```java title="Ejemplos de declaración"
+int[] arrayDeEnteros; // Referencia a un array (estructura de datos)
+Cuenta cuentaCliente;  // Referencia a un objeto de tipo Cuenta (una clase)
+```
+
+**Datos estructurados y el tipo String**
+
+1.  **Datos estructurados:**
+
+      * Cuando se manejan conjuntos de datos con características similares, estos se agrupan en estructuras para facilitar su acceso.
+      * Los datos estructurados incluyen **arrays**, listas, árboles, etc. Se consideran tipos referenciados.
+
+2.  **Tipo String (Cadenas de caracteres):**
+
+      * Java le da un tratamiento especial a los textos, o cadenas de caracteres, mediante el tipo **`String`**.
+      * A pesar de que se usan de forma sencilla como si fueran primitivos (ej.: `String mensaje = "Hola";`), las cadenas son en realidad **objetos** y, por lo tanto, son **tipos referenciados**.
+
+**Salida estándar**
+
+Para mostrar información por pantalla, se utiliza **`System.out`**, conocido como la salida estándar del programa.
+
+  - **`System.out.print()`:** escribe el mensaje en la línea de comandos.
+  - **`System.out.println()`:** escribe el mensaje y luego sitúa el cursor al principio de la línea siguiente.
+
+#### 3.4.- Tipos enumerados
+
+Los **tipos de datos enumerados** (**`enum`**) permiten declarar una variable con un **conjunto restringido y predefinido de valores** (por ejemplo, los días de la semana o los meses). Esto esencialmente define un tipo de dato personalizado.
+
+- **Declaración:** Se utiliza la palabra reservada **`enum`**, seguida del nombre del tipo y la lista de valores entre llaves.
+- **Valores:** Los valores dentro de las llaves se tratan como **constantes**, van separados por comas y deben ser únicos.
+- **Naturaleza de clase:** En Java, un tipo `enum` es tratado como una especie de **clase**. Esto le otorga versatilidad, permitiendo no solo definir valores sino también **operaciones (métodos)** y otros elementos.
+- **Acceso:** Para acceder a un elemento, se usa el nombre del `enum` seguido de un punto y el valor (ej., `Dias.LUNES`).
+
+```java title="Ejemplo de enumeración"
+public class tiposenumerados {
+    public enum Dias {Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo};
+
+    public static void main(String[] args) {
+        // codigo de la aplicacion
+        Dias diaactual = Dias.Martes;
+        Dias diasiguiente = Dias.Miercoles;
+
+        System.out.print("Hoy es: ");
+        System.out.println(diaactual);
+        System.out.println("Mañana\nes\n" + diasiguiente);
+
+    } // fin main
+} // fin tiposenumerados
+```
+
+Durante la impresión de texto, se pueden usar **secuencias de escape** (caracteres especiales que dan órdenes al compilador en lugar de imprimirse).
+
+  * **Carácter escape:** Es la barra invertida (**`\`**).
+  * **Secuencia común:** **`\n`** (carácter de **nueva línea**). Mueve el cursor al principio de la línea siguiente.
+
+### 4.- Literales de los tipos primitivos
+
+Un **literal** (o valor literal) es un **valor concreto y fijo** que se asigna a una variable de un tipo primitivo, al tipo `String` o al tipo `null`.
+
+- **Literales booleanos**: solo aceptan dos valores únicos: **`true`** o **`false`**. 
+
+```java title="Ejemplo"
+boolean encontrado = true;
+```
+
+- **Literales enteros**: se pueden representar en tres notaciones:
+    1. **Decimal:** La forma estándar (ej., `20`).
+    2. **Octal:** Debe comenzar con un cero (`0`) seguido de dígitos del 0 al 7 (ej., `024`).
+    3. **Hexadecimal:** Debe comenzar con `0x` seguido de dígitos del 0 al 9 y letras A-F (mayúsculas o minúsculas) (ej., `0x14`).
+
+    Para que un literal sea tratado como tipo **`long`** en lugar de `int` (que es el valor por defecto), debe añadirse el sufijo **`L`** o `l` (ej., `873L`). Se recomienda la mayúscula (`L`) para evitar confusión con el número uno (`1`).
+
+
+- **Literales reales (coma flotante)**: se expresan con una coma decimal o en **notación científica** (seguidos de un exponente `e` o `E`). Por defecto son tratados como **`double`**.
+    - Para un formato **`float`**, se añade el sufijo **`F`** o `f` (ej., `2.f`).
+    - Para forzar el formato **`double`**, se añade el sufijo **`D`** o `d` (ej., `3.141e-9d`).
+
+- **Literales carácter**: se escriben de dos maneras:
+    1. Como un **carácter simple** encerrado entre **comillas simples** (ej., `'a'`, `'ñ'`).
+    2. Por su **código Unicode**, precedido por una secuencia de escape:
+        * **Octal:** Anteponiendo `\ ` (ej., `\101` para la letra 'A').
+        * **Hexadecimal:** Anteponiendo `\u` (ej., `\u0041` para la letra 'A').
+
+Existen secuencias de escape especiales para caracteres no visibles o de control:
+
+| Secuencia | Significado | Secuencia | Significado |
+| :---: | :--- | :---: | :--- |
+| `\b` | Retroceso | `\r` | Retorno de carro |
+| `\t` | Tabulador | `\"` | Comillas dobles |
+| `\n` | Salto de línea | `\'` | Comillas simples |
+| `\f` | Salto de página | `\\` | Barra diagonal |
+
+- **Literales de cadenas (`String`)**: se indican entre **comillas dobles**. Aunque son objetos, se crean implícitamente sin usar la orden `new`. Pueden incluir cualquier carácter Unicode, y se usan **secuencias de escape** (como `\n` o `\"`) para insertar caracteres especiales o de control dentro de la cadena. 
+
+    ```java title="Ejemplo"
+    String texto = "Juan dijo: \"Hoy hace un día fantástico…\"";
+    ```
+
+### 5.- Operadores y expresiones
+
+Los **operadores** son símbolos que realizan operaciones sobre datos llamados **operandos** (literales o identificadores). Se clasifican según el número de operandos que utilizan:
+
+* **Unarios** (1 operando)
+* **Binarios** (2 operandos)
+* **Terciarios** (3 operandos)
+
+Los operadores actúan sobre **tipos de datos primitivos** y siempre devuelven un resultado de tipo primitivo.
+
+Una **expresión** es una combinación de operadores y operandos que se **evalúa** para producir un **único resultado** de un tipo determinado (ej. `i + 1`).
+
+El resultado de una expresión puede ser utilizado en otra expresión o en una **sentencia** (o instrucción). Una sentencia es una acción completa que el programa debe ejecutar (ej. `suma = i + 1;`).
+
+Las expresiones de asignación (como el ejemplo anterior) son únicas porque se consideran tanto **expresiones** (producen un valor) como **sentencias** (realizan una acción completa, el almacenamiento).
+
+#### 5.1.- Operadores aritméticos
+
+Los **operadores aritméticos** crean expresiones matemáticas. El resultado de estas operaciones depende del tipo de dato más grande utilizado (si hay un `double`, el resultado es `double`; si hay un `long`, el resultado es `long`, etc.).
+
+| Operador | Operación | Notación | Efecto |
+| :---: | :--- | :--- | :--- |
+| **+**, **-**, **\***, **/** | Adición, Sustracción, Multiplicación, División. | Binaria | Realizan la operación matemática estándar |
+| **%** | Resto (Módulo). | Binaria | Devuelve el resto de una división entera |
+| **++** / **--** | Incremento / Decremento. | Unaria | Suma/resta 1. La posición (prefijo o postfijo) define cuándo se aplica el cambio en una asignación |
+
+La instrucción **`System.out.printf`** se usa para mostrar resultados con un **formato específico**, utilizando especificadores como `%s` (String) o `%f` (flotante). 
+
+#### 5.2.- Operadores de asignación
+
+El operador principal en esta categoría es el de **asignación simple** (`=`), que se utiliza para dar un valor a una variable.
+
+Además, Java ofrece **operadores de asignación combinados** que permiten abreviar ciertas expresiones aritméticas comunes. Estos operadores realizan una operación y luego asignan el resultado a la misma variable de la izquierda. 
+
+| Operador | Ejemplo en Java | Expresión equivalente |
+| :---: | :--- | :--- |
+| **`+=`** | `op1 += op2` | `op1 = op1 + op2` |
+| **`-=`** | `op1 -= op2` | `op1 = op1 - op2` |
+| **`*=`** | `op1 *= op2` | `op1 = op1 * op2` |
+| **`/=`** | `op1 /= op2` | `op1 = op1 / op2` |
+| **`%=`** | `op1 %= op2` | `op1 = op1 % op2` |
+
+#### 5.3.- Operadores condicionales
+
+El operador condicional (`?:`) es el **único operador ternario** de Java, lo que significa que requiere **tres operandos** para formar una expresión. Su función es evaluar una condición booleana y devolver uno de dos posibles resultados.
+
+| Operador | Expresión en Java | Lectura / Lógica |
+| :---: | :--- | :--- |
+| **`?:`** | `condición ? exp1 : exp2` | **SI** la `condición` es verdadera, devuelve `exp1`; **SI NO**, devuelve `exp2`. |
+
+* **Primer Operando (`condición`):** Uuna expresión **booleana** que se evalúa como `true` o `false`.
+* **Segundo Operando (`exp1`):** el valor devuelto si la condición es **verdadera**.
+* **Tercer Operando (`exp2`):** el valor devuelto si la condición es **falsa**.
+
+El operador condicional es una forma abreviada de la sentencia **`if...then...else`**. 
+
+#### 5.4.- Operadores de relación
+
+Los **operadores relacionales** se utilizan para **comparar** datos de tipo primitivo (numérico, carácter o booleano). El resultado de estas comparaciones es siempre un **valor booleano** (`true` o `false`).
+
+| Operador | Ejemplo en Java | Significado |
+| :---: | :--- | :--- |
+| **`==`** | `op1 == op2` | `op1` es igual a `op2` |
+| **`!=`** | `op1 != op2` | `op1` es distinto de `op2` |
+| **`>`** | `op1 > op2` | `op1` es mayor que `op2` |
+| **`<`** | `op1 < op2` | `op1` es menor que `op2` |
+| **`>=`** | `op1 >= op2` | `op1` es mayor o igual que `op2` |
+| **`<=`** | `op1 <= op2` | `op1` es menor o igual que `op2` | 
+
+Para que el usuario pueda introducir datos en el programa (interactividad), se utiliza la **clase `Scanner`**. Esta clase permite leer datos escritos por teclado y convertirlos al tipo de dato deseado (como `int`), guardándolos en una variable. Su uso requiere importar el paquete de clases que la contiene.
+
+#### 5.5.- Operadores lógicos
+
+Los **operadores lógicos** realizan operaciones sobre **valores booleanos** (o resultados de expresiones relacionales), dando siempre como resultado un valor booleano (`true` o `false`).
+
+| Operador | Ejemplo | Significado | Evaluación optimizada |
+| :---: | :--- | :--- | :--- |
+| **`!`** | `!op` | **NOT** (Negación): Devuelve `true` si el operando es `false`, y viceversa. | N/A (unario) |
+| **`&`** | `op1 & op2` | **AND** (Y lógico). | Se evalúan ambos operandos. |
+| **`|`** | `op1 | op2` | **OR** (O lógico). | Se evalúan ambos operandos. |
+| **`^`** | `op1 ^ op2` | **XOR** (O exclusivo): Devuelve `true` si **solo uno** de los operandos es `true`. | Se evalúan ambos operandos. |
+| **`&&`** | `op1 && op2` | **AND condicional** (Cortocircuito). | Si `op1` es `false`, `op2` **no se evalúa** (ahorro de tiempo), pues el resultado ya es `false`. |
+| **`||`** | `op1 \|\| op2` | **OR condicional** (Cortocircuito). | Si `op1` es `true`, `op2` **no se evalúa**, pues el resultado ya es `true`. | 
+
+Los operadores condicionales (`&&` y `||`) permiten la **evaluación optimizada** (o *cortocircuito*). Por eficiencia, es recomendable colocar el operando más propenso a ser falso en el lado izquierdo del `&&`, y el operando más propenso a ser verdadero en el lado izquierdo del `||`.
+
+#### 5.6.- Operadores de bits
+
+Los **operadores a nivel de bits** realizan operaciones directamente sobre la **representación binaria** de los números enteros (`int`, `long`, `short`, `byte`) o caracteres (`char`), actuando sobre cada dígito binario (bit) individualmente. Aunque existen, rara vez se usan en aplicaciones de gestión cotidianas.
+
+| Operador | Ejemplo en Java | Significado |
+| :---: | :--- | :--- |
+| **`~`** | `~op` | **Complemento binario** (NOT): Invierte el valor de cada bit ($0 \rightarrow 1$ y $1 \rightarrow 0$). |
+| **`&`** | `op1 & op2` | **AND binario** (Devuelve $1$ si ambos bits son $1$). |
+| **`|`** | `op1 \| op2` | **OR binario** (Devuelve $1$ si al menos un bit es $1$). |
+| **`^`** | `op1 ^ op2` | **XOR binario** (Devuelve $1$ si **solo uno** de los bits es $1$). |
+| **`<<`** | `op1 << op2` | **Desplazamiento a la izquierda** (Multiplica por $2^n$). |
+| **`>>`** | `op1 >> op2` | **Desplazamiento a la derecha** con signo (Mantiene el bit de signo). |
+| **`>>>`** | `op1 >>> op2` | **Desplazamiento a la derecha sin signo** (Rellena con ceros). | 
+
+#### 5.7.- Trabajo con cadenas
+
+El objeto **`String`** se corresponde con una secuencia de caracteres entre comillas dobles (un literal, ej., `"hola"`). Aunque es un **tipo referenciado** (un objeto), se utiliza de forma simple, sin necesidad de la orden `new`.
+
+Para aplicar una operación a una variable `String`, se usa la sintaxis `nombreVariable.operación()`. 
+
+| Operación | Método/Operador | Descripción |
+| :--- | :--- | :--- |
+| **Creación** | Asignación simple (`=`) | Se crea asignando un literal entre comillas dobles (ej., `String s = "texto";`). |
+| **Longitud** | `length()` | Devuelve la longitud (número de caracteres) de la cadena. |
+| **Concatenación** | Operador `+` o método `concat()` | Une dos o más cadenas de caracteres. |
+| **Comparación** | `equals()` / `equalsIgnoreCase()` | Devuelve un booleano (`true`/`false`) indicando si las cadenas son iguales. `equalsIgnoreCase()` ignora mayúsculas y minúsculas. |
+| **Subcadenas** | `substring()` | Permite obtener una porción de la cadena original, especificando el índice de inicio y fin. |
+| **Cambio de caja** | `toUpperCase()` / `toLowerCase()` | Devuelven una nueva cadena con todos los caracteres convertidos a mayúsculas o minúsculas. |
+| **Conversión a String**| `valueOf()` | Convierte un tipo de dato primitivo (como `int`, `float`, etc.) a una variable de tipo `String`. |
+
+#### 5.8.- Precedencia de operadores
+
+La **precedencia de operadores** determina la secuencia en la que se deben realizar las operaciones cuando intervienen operadores de distinto tipo en una misma expresión. Las reglas de Java coinciden con las del álgebra convencional (ej., multiplicación y división se evalúan antes que suma y resta).
+
+La **asociatividad** indica qué operador se evalúa primero cuando hay operadores de **igual precedencia**.
+
+- **Asociatividad por la izquierda:** se evalúan en el orden en que aparecen, de **izquierda a derecha**. La mayoría de los operadores (aritméticos, lógicos binarios, relacionales) son asociativos por la izquierda.
+    * *Ejemplo:* En `10 / 2 * 5`, primero se hace `(10 / 2)`, dando como resultado `25`.
+
+- **Asociatividad por la derecha:** se evalúan de **derecha a izquierda**. Esto es crucial para operadores de **asignación**, el **condicional ternario** (`?:`), y ciertos operadores **unarios** (como `++`, `--`, `cast`).
+    * *Ejemplo:* En `x = y = z = 1`, la asignación se realiza como `x = (y = (z = 1))`, asegurando que cada variable tenga un valor antes de ser usada en la siguiente asignación.
+
+### 6.- Conversion de tipo (Casting)
+
+La **conversión de tipo** se realiza para asegurar que el resultado de una expresión sea del tipo de dato deseado. Esto es vital en operaciones como la división de dos enteros, cuyo resultado siempre será entero a menos que se fuerce una conversión a un tipo real.
+
+| Tipo de Conversión | Descripción | Cuándo ocurre | Consecuencia |
+| :--- | :--- | :--- | :--- |
+| **Automática** (Implícita) | Ocurre cuando se asigna un valor a un tipo numérico **más grande** (con más *bits*). | En asignaciones (ej., `int` a `long`) o en operaciones aritméticas con tipos mixtos. El valor menor es **promocionado** al tipo mayor. | **No hay pérdida** de datos, ya que el tipo mayor puede representar todos los valores del menor. |
+| **Explícita** (Forzada) | Ocurre cuando se asigna un valor a un tipo numérico **más pequeño** (más *bits* a menos *bits*). | Requiere el uso del **operador *cast***. Se utiliza cuando hay riesgo de **pérdida de datos**. | **Riesgo de pérdida de datos** si el valor original excede el rango del tipo menor. |
+
+El **operador *cast*** es un operador **unario** que se utiliza para forzar una conversión explícita.
+
+- **Sintaxis:** se coloca el tipo de dato de destino entre paréntesis delante del valor o variable a convertir: `(tipoDato) valorACambiar`.
+- **Ejemplo de corrección:** para asignar un `int` a un `byte`, incluso si el valor cabe, se requiere un *cast* explícito: `byte b = (byte) a;`.
+
+**Regla clave:** un valor numérico nunca puede ser asignado a una variable de un tipo menor en rango (como asignar un `int` a un `byte`) a menos que se use una conversión explícita. 
+
+### 7.- Comentarios
+
+Los **comentarios** son esenciales para **documentar** el código, mejorar su comprensión y facilitar futuras revisiones. Es una buena práctica iniciar cada programa con comentarios que indiquen una breve descripción, el autor y la fecha de última modificación.
+
+El compilador de Java ignora todo el texto dentro de los comentarios. Java ofrece tres tipos:
+
+| Tipo de Comentario | Delimitadores | Uso |
+| :--- | :--- | :--- |
+| **Línea única** | Empieza con **`//`** | Para comentarios cortos que no exceden una sola línea. |
+| **Múltiples líneas** | Empieza con **`/*`** y termina con **`*/`** | Para párrafos de texto o bloques que abarcan varias líneas. |
+| **Javadoc** | Empieza con **`/**`** y termina con **`*/`** | Se utiliza para generar **documentación automática** del programa en formato `.html` mediante la herramienta `javadoc` (incluida en Java SE). | 
+
+Una buena práctica de programación es añadir un comentario a la última llave de cada bloque de código para indicar a qué clase o método pertenece.
+
+## UD3.- Utilización de objetos
+
+![Esquema Unidad 3 Programación](../../static/img/programacion-unidad-3.jpg)
+
+### 1.- Introducción
