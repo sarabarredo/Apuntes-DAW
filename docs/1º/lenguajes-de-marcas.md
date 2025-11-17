@@ -579,3 +579,572 @@ Los elementos de la cabecera (`<head>`) contienen metadatos e información de so
     - **`<isindex>`**: se utilizaba como *prompt* de entrada de datos, pero ha sido **eliminado de los estándares** web actuales. 
 
 #### 2.3.- Encabezados y párrafos
+
+HTML utiliza elementos específicos para agrupar texto y definir títulos jerárquicos:
+
+- **Párrafos**: se utiliza para agrupar el texto en párrafos utilizando la etiqueta `<p>`. Es un **elemento de bloque**, lo que significa que siempre empieza en una nueva línea y ocupa todo el ancho disponible.
+
+- **Encabezados**: sirven para organizar el contenido de la página de forma **jerárquica**, donde `<h1>` es el título principal de la sección o página. Se definen seis niveles de encabezado, desde `<h1>` hasta `<h6>`. Cuanto menor es el número, mayor es la importancia del encabezado.    
+
+##### 2.3.1.- Saltos de línea y espacios en blanco
+
+Al procesar HTML, los navegadores **ignoran** los saltos de línea introducidos en el código fuente y **colapsan** múltiples espacios consecutivos en uno solo.
+
+Para forzar un salto de línea visible, se usa el elemento `<br>`, y para forzar múltiples espacios, se usa la entidad `&nbsp;`. 
+
+##### 2.3.2.- Comentarios
+
+Los comentarios en HTML no son procesados por los navegadores, solo sirven para documentar el código. Pueden ser de dos tipos:
+
+```html title="De una sola línea"
+<!-- comentario -->
+```
+
+```html title="Multilínea"
+<!-- comentario
+  de varias
+  líneas -->
+```
+
+#### 2.4.- Semántica a nivel de texto
+
+Los siguientes elementos HTML se utilizan para dar significado (*semántica*) a porciones de texto:
+
+| Elemento | Función |
+| :--- | :--- |
+| `<a>` | Define **hipervínculos** |
+| `<strong>` | Representa que el texto marcado es de **gran importancia** (negrita) |
+| `<em>` | Indica **énfasis** en el texto (cursiva) |
+| `<br>` | Introduce un **salto de línea** |
+| `<small>` | Utilizado para **comentarios accesorios** (letra pequeña) |
+
+El elemento `<a>` transforma el texto que encierra en un enlace navegable.
+
+* **Atributo clave: `href`**
+    * Especifica la **URL de destino** del vínculo.
+    * Usar **`href="#" `** se refiere a la misma página.
+
+* **Atributo `target`**
+    * Define **dónde se abrirá** el vínculo.
+    * `target="_self"`: abre el enlace en la **misma ventana/pestaña**.
+    * `target="_blank"`: abre el enlace en una **ventana o pestaña nueva**. 
+
+#### 2.5. Elementos de listas en HTML
+
+HTML define tres tipos de listas:
+
+| Elemento | Tipo de lista | Descripción | Función interna |
+| :--- | :--- | :--- | :--- |
+| `<ul>` | **Desordenada** | Delimita la lista completa | Contiene elementos `<li>` |
+| `<ol>` | **Ordenada** | Delimita la lista completa (los ítems se numeran) | Contiene elementos `<li>` |
+| `<dl>` | **De Definición** | Delimita la lista completa de términos y descripciones | Contiene elementos `<dt>` y `<dd>` |
+| `<li>` | Ítem de lista | Define cada **elemento individual** de una lista ordenada o desordenada | |
+| `<dt>` | Término | Define cada **término** que va a ser definido en una lista de definición | |
+| `<dd>` | Definición | Define la **descripción** o definición del término anterior en una lista de definición | | 
+
+
+#### 2.6.- Elementos de tablas
+
+Las tablas son una forma común de presentar información de manera compacta. El elemento principal es `<table>`, que agrupa al resto de los elementos.
+
+Una tabla se construye principalmente con filas (`<tr>`) que contienen celdas de datos (`<td>`) o celdas de cabecera (`<th>`).
+
+| Elemento | Descripción | Función |
+| :--- | :--- | :--- |
+| `<table>` | Delimita el contenido completo de la tabla | Contenedor principal |
+| `<tr>` | Delimita cada una de las **filas** de la tabla | Contiene celdas (`<td>` o `<th>`) |
+| `<th>` | Delimita una **celda de cabecera** | Usualmente se usa en la primera fila para encabezar las columnas |
+| `<td>` | Delimita el contenido de una **celda de datos** estándar | Usualmente se usa en el cuerpo de la tabla |
+
+Hay elementos opcionales de **agrupación y leyenda**, que permiten estructurar la tabla semánticamente:
+
+| Elemento | Descripción |
+| :--- | :--- |
+| `<caption>` | Añade una **leyenda** o título a la tabla |
+| `<thead>` | Define la sección de la **cabecera** de la tabla (las filas iniciales) |
+| `<tbody>` | Permite agrupar las **filas del cuerpo** principal de la tabla |
+| `<tfoot>` | Define la sección del **pie** de la tabla (las filas finales) |
+| `<colgroup>` | Permite **agrupar columnas** para aplicar estilos o lógica | 
+
+***NOTA IMPORTANTE***: aunque era habitual hace años, no es correcto usar tablas para la maquetación de la página.
+
+#### 2.7.- Elementos de formularios
+
+Los **formularios** permiten al navegador **recoger información** introducida por el usuario. Es fundamental **validar** estos datos en el equipo local (cliente), generalmente combinando formularios con código **JavaScript**, para evitar enviar datos erróneos que sobrecarguen la red y el servidor.
+
+##### 2.7.1.- Declaración de formulario
+
+Un formulario se delimita usando el elemento `<form>`, que puede tener varios atributos:
+
+- `name`: asigna un **nombre** al formulario.
+- `action`: especifica la **URL** de la página o *script* que se ejecutará al enviar el formulario.
+- `enctype`: define el **formato** en que se enviarán los datos del formulario.
+- `method`: define el **método de envío** de los datos al servidor. Se puede elegir entre dos métodos: **GET** y **POST**.
+
+| Característica | GET | POST |
+| :--- | :--- | :--- |
+| Visibilidad | Los valores se ven en la **URL** (concatenados con `&`) | Los valores **no son visibles** en la URL |
+| Longitud | Tienen un **límite de longitud** | **Carece de restricciones** de longitud |
+| Contenido | Pasa valores en ASCII | Pasa valores y otros elementos como **archivos** adjuntos | 
+
+##### 2.7.2.- Campos de formulario: `<input>`
+
+El elemento `<input>` es el control más versátil dentro de un formulario y **no tiene etiqueta de cierre**. Su función cambia drásticamente según el valor de su atributo **`type`** (p. ej., `type="text"` por defecto, o `type="radio"` para un botón de radio).
+
+| Atributo | Función |
+| :--- | :--- |
+| `name` | **Nombre** del campo; es la clave con la que se identifica el valor enviado al servidor |
+| `size` | Número de **caracteres visibles** en el campo (por defecto, 20) |
+| `maxlength` | **Número máximo** de caracteres que el usuario puede introducir |
+| `value` | **Valor por defecto** inicial del campo |
+| `placeholder` | **Valor sugerido** (en color gris) que desaparece cuando el usuario enfoca el campo |
+| `readonly` | El valor del campo **no puede ser modificado** por el usuario (solo lectura) |
+| `autofocus` | Sitúa el **cursor del ratón** automáticamente en este campo al cargar la página |
+| `required` | Indica que el campo es **obligatorio**; el formulario no se puede enviar si no está rellenado | 
+
+
+##### 2.7.3.- Campos de formulario: `<textarea>`
+
+El elemento **`<textarea>`** se utiliza para **recoger información abierta** del usuario, permitiendo un **mayor número de caracteres** que un campo de texto simple. A diferencia de `<input>`, el valor por defecto debe escribirse **entre las etiquetas** de apertura y cierre.
+
+| Atributo | Función | Notas |
+| :--- | :--- | :--- |
+| `name` | **Nombre** del campo, usado para identificar el dato al enviarlo | |
+| `rows` | Número de **filas** (altura visible) del área de texto | Reemplazable por la propiedad CSS `height` |
+| `cols` | Número de **columnas** (ancho visible) del área de texto | Reemplazable por la propiedad CSS `width` |
+
+El elemento `<textarea>` también acepta otros atributos comunes a `<input>`, como `placeholder`, `readonly`, `autofocus`, `maxlength`, y `required`. 
+
+##### 2.7.4.- Campos de formularios: `<select>`
+
+Una **lista desplegable** permite al usuario seleccionar una o varias opciones de un conjunto predefinido de valores. Utiliza dos etiquetas:
+
+- `<select>`: etiqueta contenedora que **define la lista** desplegable completa.
+- `<option>`: define **cada una de las opciones** disponibles dentro de la lista.
+
+| Etiqueta | Atributo | Función |
+| :--- | :--- | :--- |
+| `<select>` | `name` | **Nombre** del elemento, utilizado para identificar el valor enviado |
+| `<select>` | `size` | Número de **elementos visibles** de la lista |
+| `<select>` | `multiple` | Permite al usuario seleccionar **varias opciones** a la vez |
+| `<option>` | `value` | **Valor que se transmite** al servidor cuando se envía el formulario |
+| `<option>` | `selected` | Indica que esa opción aparece **seleccionada por defecto** al cargar el formulario |
+
+##### 2.7.5.- Campos de formulario: `checkbox`
+
+La **casilla de verificación** (*checkbox*) se usa para permitir al usuario seleccionar **una o varias opciones** dentro de un grupo, indicando su conformidad o elección.
+
+| Etiqueta | **`<input type="checkbox">`** |
+| :--- | :--- |
+| `name` | **Obligatorio**. Nombre del campo, clave para identificar la opción enviada |
+| `checked` | Si está presente, la casilla aparecerá **marcada por defecto** al cargar el formulario |
+| `value` | **Valor que se transmite** al servidor si la casilla está marcada | 
+
+##### 2.7.6.- Botones de formulario
+
+**Botón de envío (`submit`)**: 
+    - Envía los datos del formulario al destino especificado en el atributo `action` del elemento `<form>`
+    - Su etiqueta es `<input type="submit">`
+    - El atributo `value` define el **texto** que se muestra dentro del botón
+
+**Botón de anulación (`reset`)**:
+    - Borra o **restaura el contenido** de todos los campos del formulario a sus valores por defecto
+    - Su etiqueta es `<input type="reset">`
+    - El atributo `value` define el **texto** que se muestra dentro del botón
+    
+##### 2.7.7.- Otros campos de formulario
+
+Existen múltiples tipos de campos `<input>` que se utilizan para recoger información específica, muchos de los cuales ofrecen **validación automática** y controles de entrada mejorados en HTML5:
+
+| Campo | Etiqueta | Notas y atributos clave |
+| :--- | :--- | :--- |
+| Oculto | `<input type="hidden">` | El campo es **invisible** para el usuario |
+| Contraseña | `<input type="password">` | Los caracteres introducidos se ocultan |
+| Envío de ficheros | `<input type="file">` | Permite al usuario seleccionar un archivo para subirlo. **Requiere** que el formulario use `method="post"` y `enctype="multipart/form-data"`. |
+| Correo electrónico | `<input type="email">` | Valida que el texto tenga el formato de un correo electrónico |
+| URL | `<input type="url">` | Valida que el texto tenga el formato de una URL válida |
+| Números en un rango | `<input type="number">` | Permite recoger solo números enteros o decimales. Atributos para control: **`max`**, **`min`**, **`step`** | 
+
+
+##### 2.7.8.- Campos de formulario con formato de fecha y hora
+
+HTML5 introdujo varios tipos de campos **`<input>`** especializados para recoger fechas y horas, que proporcionan una interfaz de usuario estandarizada y validación automática.
+
+| Tipo de campo | Etiqueta | Información que recoge |
+| :--- | :--- | :--- |
+| Fecha y hora local | `<input type="datetime-local">` | Permite seleccionar día, mes, año y hora |
+| Fecha | `<input type="date">` | Permite seleccionar día, mes y año |
+| Mes | `<input type="month">` | Permite seleccionar mes y año |
+| Semana | `<input type="week">` | Permite seleccionar una semana específica |
+| Hora | `<input type="time">` | Permite seleccionar solo la hora |
+
+Existen atributos que controlan los valores válidos y los incrementos permitidos:
+
+- `min`: define el valor de tiempo o fecha más temprano que puede ser seleccionado.
+- `max`: define el valor de tiempo o fecha más tardío que puede ser seleccionado.
+- `step`: Define el **incremento** del contador del campo, medido en segundos (p. ej., para limitar la selección de horas a intervalos de 30 minutos). 
+
+##### 2.7.9.- Campos de formulario: Rangos
+
+El campo de **rango** (`<input type="range">`) permite seleccionar un valor mediante un **control deslizante** (*slider*).
+
+| Atributo | Función |
+| :--- | :--- |
+| `value` | Valor inicial | 
+| `min` | Valor mínimo |
+| `max` | Valor máximo |
+| `step` | Valor del incremento |
+
+##### 2.7.10. Organización de formularios
+
+Para mejorar la **usabilidad** y la **accesibilidad** de los formularios, HTML proporciona elementos para agrupar y etiquetar los campos:
+
+| Elemento | Función | Uso clave |
+| :--- | :--- | :--- |
+| `<label>` | Asocia una etiqueta a un campo de formulario | Mejora la **accesibilidad** para lectores de pantalla. Se vincula al campo usando el atributo **`for`**, cuyo valor debe ser el **`id`** del campo de destino |
+| `<fieldset>` | **Agrupa** campos relacionados del formulario | Rodea los campos con un **borde visible** para la organización visual |
+| `<legend>` | Define un **título o leyenda** para el grupo de campos | Debe colocarse inmediatamente después de la etiqueta de apertura `<fieldset>` |
+
+
+<details>
+  <summary>Ejemplo de formulario HTML completo</summary>
+
+    ```jsx live
+    <form action="/procesar-matricula" method="post">
+            
+        <fieldset>
+            <legend>Datos Personales</legend>
+            <div>
+                <label htmlFor="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required />
+            </div>
+            <br />
+            <div>
+                <label htmlFor="apellidos">Apellidos:</label>
+                <input type="text" id="apellidos" name="apellidos" required />
+            </div>
+            <br />
+            <div>
+                <label htmlFor="fechaNacimiento">Fecha de nacimiento:</label>
+                <input type="date" id="fechaNacimiento" name="fechaNacimiento" required />
+            </div>
+            <br />
+            <div role="group" aria-labelledby="sexo-label">
+                <span id="sexo-label">Sexo:</span>
+                <input type="radio" id="sexoM" name="sexo" value="M" required />
+                <label htmlFor="sexoM">Masculino</label>
+                
+                <input type="radio" id="sexoH" name="sexo" value="H" />
+                <label htmlFor="sexoH">Femenino</label>
+            </div>
+        </fieldset>
+        
+        <br />
+        
+        <fieldset>
+            <legend>Módulos de Matrícula</legend>
+            <p>Escoge los módulos en los que te matriculas:</p>
+
+            <input type="checkbox" id="mod1" name="modulos[]" value="HW" />
+            <label htmlFor="mod1">Fundamentos de Hardware</label> 
+            <br />
+            
+            <input type="checkbox" id="mod2" name="modulos[]" value="BBDD" />
+            <label htmlFor="mod2">Gestión de Bases de Datos</label>
+            <br />
+            
+            <input type="checkbox" id="mod3" name="modulos[]" value="SO" />
+            <label htmlFor="mod3">Implantación de Sistemas Operativos</label>
+            <br /> 
+            
+            <input type="checkbox" id="mod4" name="modulos[]" value="Redes" />
+            <label htmlFor="mod4">Planificación y Administración de Redes</label>
+            <br />
+            
+            <input type="checkbox" id="mod5" name="modulos[]" value="LM" />
+            <label htmlFor="mod5">Lenguajes de Marcas y Sistemas de Gestión de Información</label>
+            <br />
+            
+            <input type="checkbox" id="mod6" name="modulos[]" value="FOL" />
+            <label htmlFor="mod6">Formación y Orientación Laboral</label> 
+            <br />
+            
+            <input type="checkbox" id="mod7" name="modulos[]" value="Proyecto" />
+            <label htmlFor="mod7">Proyecto de Administración de Sistemas Informáticos en Red</label>
+            <br />
+            
+            <input type="checkbox" id="mod8" name="modulos[]" value="Servicios" />
+            <label htmlFor="mod8">Servicios de Red e Internet</label> 
+            <br />
+            
+            <input type="checkbox" id="mod9" name="modulos[]" value="AdminSO" />
+            <label htmlFor="mod9">Administración de Sistemas Operativos</label> 
+            <br />
+            
+            <input type="checkbox" id="mod10" name="modulos[]" value="AppWeb" />
+            <label htmlFor="mod10">Implantación de Aplicaciones Web</label> 
+            <br />
+            
+            <input type="checkbox" id="mod11" name="modulos[]" value="AdminBBDD" />
+            <label htmlFor="mod11">Administración de Sistemas Gestores de Bases de Datos</label> 
+            <br />
+            
+            <input type="checkbox" id="mod12" name="modulos[]" value="Seguridad" />
+            <label htmlFor="mod12">Seguridad y Alta Disponibilidad</label> 
+            <br />
+            
+            <input type="checkbox" id="mod13" name="modulos[]" value="Empresa" />
+            <label htmlFor="mod13">Empresa e Iniciativa Emprendedora</label>
+            <br />
+            
+            <input type="checkbox" id="mod14" name="modulos[]" value="FCT" />
+            <label htmlFor="mod14">Formación en Centros de Trabajo</label>
+        </fieldset>
+        
+        <br />
+
+        <fieldset>
+            <legend>Estudios Previos</legend>
+            <br />
+            <label htmlFor="estudiosPrevios">Detalle brevemente sus estudios previos:</label>
+            <br />
+            <textarea id="estudiosPrevios" name="estudiosPrevios" rows="5" cols="50"></textarea>
+        </fieldset>
+
+        <br />
+        
+        <input type="submit" value="Enviar" />
+        <input type="reset" value="Restablecer" />
+        
+        <p>Pulsa el botón de "Enviar" para formalizar la matrícula o el botón de "Restablecer" para limpiar el formulario.</p>
+
+    </form>
+    ```
+</details>
+
+#### 2.8.- Multimedia
+
+Los siguientes elementos son los más habituales para incrustar contenido multimedia en una página web:
+
+| Elemento | Descripción |
+| :--- | :--- |
+| `<img>` | Inserta una **imagen** |
+| `<audio>` | Inserta un **audio** |
+| `<video>` | Inserta un **vídeo** |
+| `<object>` | Elemento genérico para incrustar **contenido multimedia** externo (vídeo, audio, PDFs, *applets*) |
+
+El elemento `<img>` se usa para insertar imágenes y **no tiene etiqueta de cierre**. Sus atributos clave son:
+    - `src`: ruta de la imagen. Los formatos comunes soportados incluyen **JPG, PNG y GIF**.
+    - `alt`: texto alternativo. Es **obligatorio** y se muestra si la imagen no carga, o es leído por los *lectores de pantalla* (accesibilidad).
+    - `height` y `width`: definen la **altura** y la **anchura** de la imagen. Si se especifican, la imagen se escala; si no, se usa el tamaño original.
+
+#### 2.9.- Secciones y etiquetas semánticas
+
+El elemento `<div>` se usa para agrupar y organizar contenido. Sin embargo, en **HTML5** surgieron **etiquetas semánticas** con propósitos específicos, por lo que **solo se debe usar `<div>` cuando no exista una etiqueta más apropiada**.
+
+Estas etiquetas añaden significado estructural al contenido:
+
+| Etiqueta | Función semántica | Contenido típico |
+| :--- | :--- | :--- |
+| `<header>` | Contenido **introductorio** para una sección o página | Títulos (`<h1>` a `<h6>`), logotipos. |
+| `<nav>` | Contiene **vínculos** de navegación principales (menús) | Enlaces internos o externos |
+| `<section>` | Representa una **sección genérica** dentro de un documento | Grupos de contenido temáticamente relacionados |
+| `<article>` | Representa un elemento que es **independiente** y **reutilizable** (ej. Una entrada de blog, un comentario) | Contenido autónomo que podría distribuirse por separado |
+| `<aside>` | Contenido **parcialmente relacionado** con el contenido principal | Notas al margen, *sidebars*, publicidad (no necesariamente tiene que estar en un lateral) |
+| `<footer>` | Contiene información de cierre o metadatos de su sección correspondiente | Información de autor, enlaces relacionados (no tiene que estar necesariamente al final de la página) | 
+
+#### 2.10.- Elemento iframe
+
+El elemento `<iframe>` permite **integrar una página web completa dentro de otra**. Este elemento sustituye en ciertos aspectos a la especificación obsoleta de marcos (`frameset`) de HTML 4.
+
+| Atributo | Función | Notas |
+| :--- | :--- | :--- |
+| `src` | Especifica la **ruta** al contenido web inicial que se cargará dentro del *iframe* | Puede ser una URL local o externa |
+| `height` | Define la **altura** del *iframe* | Si el contenido es mayor, se usa una barra de desplazamiento. Se puede fijar con CSS |
+| `width` | Define la **anchura** del *iframe* | Se puede fijar con CSS |
+| `name` | Asigna un **nombre** al *iframe* | Es crucial para que los enlaces externos se dirijan a él |
+
+Para que un **vínculo** (`<a>`) cargue su contenido dentro de un *iframe* específico en lugar de la ventana principal, se debe hacer lo siguiente:
+
+1.  El *iframe* debe tener el atributo `name` con un valor definido.
+2.  El vínculo (`<a>`) debe tener el atributo **`target`** con el **mismo valor** que el `name` del *iframe*.
+
+### 3.- Hojas de estilo o CSS
+
+**CSS** permite a los desarrolladores controlar el **estilo y formato** de múltiples páginas web simultáneamente. Su objetivo principal es **separar los contenidos (HTML/XHTML) de su aspecto**.
+
+Antes de CSS, el estilo se definía dentro de las etiquetas HTML, lo que hacía que las páginas fueran difíciles de actualizar y mantener.
+
+**Funcionalidad y estructura**
+
+- **Separación:** primero se usa **HTML/XHTML** para marcar la **estructura y semántica** del contenido (párrafo, cabecera). Luego se usa **CSS** para definir el **formato** de esos elementos.
+- **Mantenimiento:** cualquier cambio en una regla de estilo CSS afecta a **todas las páginas** vinculadas a esa hoja de estilo.
+- **Ventajas:** CSS obliga a crear documentos **semánticos**, mejora la **accesibilidad**, reduce la complejidad de **mantenimiento** y permite una visualización consistente en **diferentes dispositivos**.
+
+**Evolución y versiones de CSS**
+
+La necesidad de un mecanismo de estilo surgió alrededor de 1970 con el lenguaje SGML. El W3C asumió la estandarización en 1995.
+
+| Versión | Publicación | Características |
+| :--- | :--- | :--- |
+| CSS 1 | 1996 | Primera recomendación oficial |
+| CSS 2 | 1998 | Segunda recomendación oficial |
+| CSS 3 | Desde 1998 | La especificación se divide en **múltiples documentos separados** llamados **módulos**. Permite que los módulos evolucionen de forma independiente |
+| CSS 4 | En desarrollo | Continúa con la división modular de CSS 3, donde cada módulo evoluciona a su propio ritmo | 
+
+#### 3.1.- Cómo incluir CSS en un documento HTML o XHTML
+
+Hay tres métodos para aplicar estilos CSS a los elementos de una página web, ofreciendo diferentes niveles de control y separación de contenido y formato:
+
+1. **Declaración en línea (inline)**
+    - El estilo se declara **directamente dentro de la etiqueta HTML** utilizando el atributo `style`.
+    - Esta opción está **desaconsejada** porque viola el principio de separación de contenido y estilo.
+
+2. **Declaración interna**
+    - Los estilos se definen en la **cabecera** del documento, dentro de las etiquetas `<style>...</style>`.
+    - Su ventaja es que centraliza el estilo para esa página específica.
+
+3. **Declaración en archivo externo**
+    - Se define un archivo con extensión `.css` que contiene todas las reglas de estilo y se **vincula** a la página desde la cabecera mediante la etiqueta `<link>`.
+    - Su ventaja es que permite controlar el estilo de **múltiples páginas** desde un solo archivo, facilitando el mantenimiento.
+    - Tiene dos sintaxis:
+        - `<link>`: es la más recomendada.
+        - `@import`: se importa un archivo CSS desde dentro de otra etiqueta `<style>` o desde otro archivo CSS.
+
+##### 3.1.1.- Elemento `span`
+
+Es un contenedor genérico en línea que se usa para aplicar estilos o lógica a una pequeña porción de texto o contenido. 
+
+#### 3.2.- Sintaxis de las reglas de estilo
+
+Cada estilo definido en una hoja CSS se llama **regla**. Una regla CSS se compone de tres partes principales que definen qué elementos se modifican y cómo:
+
+1.  **Selector:** indica el elemento o elementos HTML a los que se aplicará el estilo (ej., `p` para párrafos).
+2.  **Llave de apertura:** `{`
+3.  **Declaración:** especifica los estilos a aplicar y se forma por:
+      * **Propiedad:** el aspecto del elemento que se va a modificar (ej., `color`).
+      * **Valor:** el nuevo valor asignado a esa propiedad (ej., `blue`).
+4.  **Llave de cierre:** `}`
+
+Una hoja CSS puede contener múltiples reglas. A su vez, una sola regla puede tener varios selectores (separados por comas) y varias declaraciones (separadas por punto y coma).
+
+#### 3.3.- Cascada y herencia de estilos
+
+La **cascada** y la *herencia** determinan qué estilos de CSS se aplican a un elemento.
+
+1. **Cascada**: define qué estilo gana cuando hay conflictos, siguiendo este orden de prioridad (de mayor a menor):
+    1.  **En línea** (`style` en la etiqueta HTML)
+    2.  **Interna** (`<style>` en el `<head>`)
+    3.  **Externa** (`<link>` a archivo `.css`)
+    4.  **Por defecto del navegador**
+
+2. **Herencia**: los elementos internos (hijos) **heredan** las propiedades de estilo de sus elementos contenedores (padres), **a menos que** el elemento hijo defina su propio estilo para esa propiedad. 
+
+#### 3.4.- Selectores
+
+Los **selectores** son mecanismos que permiten **identificar qué elementos** de tu código HTML recibirán los estilos definidos en una regla.
+
+1. **Selector Universal (`*`)**: selecciona **todos los elementos** de la página web. Se usa a menudo para aplicar estilos o reseteos básicos que afectan globalmente al diseño (ej., márgenes y rellenos).
+  * **Ejemplo:**
+    ```css
+    * { 
+        margin: 10px; 
+        padding: 5px;
+    }
+    ```
+
+2. **Selectores de etiqueta**: los estilos se aplican a **todos los elementos** que utilizan una etiqueta HTML específica. Se pueden aplicar los mismos estilos a varias etiquetas diferentes **separándolas por comas**.
+  * **Ejemplo:**
+    ```css
+    p, h1, h2 { 
+        text-align: center;
+    }
+    ```
+
+##### 3.4.1.- Selectores de clase
+
+Los **selectores de clase** permiten aplicar estilos específicos solo a un **subconjunto de etiquetas** sin afectar a todas las de su mismo tipo. Los elementos HTML se asocian a una clase mediante el atributo **`class`**.
+
+**Sintaxis y uso**
+
+1.  **En HTML:** La etiqueta recibe el atributo `class`.
+
+    ```html
+    <p class="parrafoCentrado"> ... </p>
+    ```
+
+2.  **En CSS (específico por etiqueta):** el estilo se aplica solo a un tipo de etiqueta con esa clase.
+
+      * **Sintaxis:** `etiqueta.nombreClase`
+      * **Ejemplo:** `p.parrafoCentrado { text-align: center; }` (Solo centrará los párrafos con esa clase).
+
+3.  **En CSS (genérico):** el estilo se aplica a **cualquier elemento** que tenga esa clase, independientemente de su etiqueta.
+
+      * **Sintaxis:** `.nombreClase`
+      * **Ejemplo:** `.parrafoCentrado { text-align: center; }` (centrará cualquier `<p>`, `<h1>`, `<div>`, etc., con esa clase).
+
+##### 3.4.2.- Selectores de ID
+
+El **selector de ID** se usa para seleccionar un **único elemento** de la página mediante su atributo `id`.
+    - **Uso:** Debe aplicarse de manera excepcional, ya que el valor de `id` **no debe repetirse** en la misma página.
+    - **Sintaxis:** Se referencia usando el símbolo de almohadilla (`#`).
+
+##### 3.4.3.- Selectores descendentes
+
+Permiten seleccionar elementos que se encuentran **dentro de otros elementos**, utilizando un espacio para separar los selectores.
+    - El estilo se aplica a los elementos más internos, siempre que sean descendientes del selector más externo. La anidación **no tiene por qué ser directa** y puede tener múltiples niveles.
+    -  Es fundamental no confundir el selector descendente (separado por espacios, `p a b i`) con la **agrupación de selectores** (separados por comas, `p, a, b, i`), que aplica el mismo estilo a todos esos elementos a la vez.
+    - Se puede usar el selector universal (`*`). Por ejemplo, `p * b` selecciona cualquier etiqueta `<b>` que esté anidada dentro de *cualquier otra etiqueta* (`*`), que a su vez esté dentro de un `<p>`.
+
+##### 3.4.4.- Selector hijo
+
+El selector **hijo** (`>`) es similar al descendente, pero **solo afecta al primer nivel de anidamiento**; es decir, solo selecciona a los descendientes **directos**.
+    - Se utiliza el símbolo **mayor que** (`>`) entre los selectores: `padre > hijo`.
+
+    
+#### 3.5.- Propiedades principales
+
+##### 3.5.1.- Propiedades de color y fondo
+
+Controlan el color del texto y el fondo de los elementos. Se recomienda usar valores **RGB**.
+
+| Propiedad | Función |
+| :--- | :--- |
+| `color` | Color del **texto** |
+| `background-color` | Color de **fondo** |
+| `background-image` | Inserta una **imagen** en el fondo |
+| `background-repeat` | Define si la imagen se repite (`repeat-x`, `repeat-y`, `no-repeat`) |
+| `background-attachment` | Fija la imagen o permite el desplazamiento (`fixed`, `scroll`) |
+| `background-position` | Ubica la imagen de fondo |
+| `background` | Propiedad **abreviada** para definir todas las anteriores a la vez |
+
+##### 3.5.2.- Propiedades de fuente
+ 
+Controlan la tipografía de los elementos de texto.
+
+| Propiedad | Descripción |
+| :--- | :--- |
+| `font-size` | Indica el **tamaño** de la fuente |
+| `font-family` | Establece la **familia tipográfica** de la fuente |
+| `font-weight` | Define el **grosor** de los caracteres |
+| `font-style` | Determina si la fuente es normal o **cursiva** |
+| `font-variant` | Define si la fuente es normal o **mayúsculas pequeñas** (*small-caps*) |
+| `line-height` | Define el **alto de la línea** (el espaciado vertical entre líneas) |
+| `font` | Propiedad **abreviada** para establecer todas las anteriores en un solo paso |
+
+##### 3.5.3.- Propiedades de texto
+
+Controlan el formato, la alineación y el espaciado dentro de un elemento.
+
+| Propiedad | Descripción |
+| :--- | :--- |
+| `text-decoration` | Establece el estilo de la línea sobre o a través del texto |
+| `text-align` | Indica la **alineación horizontal** del contenido |
+| `text-indent` | Determina la **tabulación** o sangría inicial del texto |
+| `text-transform` | Permite **transformar la caja** del texto |
+| `word-spacing` | Determina el **espaciado entre palabras** |
+| `letter-spacing` | Determina el **espaciado entre letras** (kerning) |
+| `vertical-align` | Establece la **alineación vertical** del texto (útil en elementos en línea) |
+| `line-height` | Establece la **altura de la línea** (espaciado vertical entre líneas) | 
+
+##### 3.5.4.- Propiedades de lista
