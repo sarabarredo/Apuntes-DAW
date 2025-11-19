@@ -7,6 +7,8 @@ toc_max_heading_level: 3
 
 ## UD1.- Software de un sistema informático
 
+![Esquema Unidad 1 Sistemas Informáticos](../../static/img/sistemas-informaticos-unidad-1.jpg)
+
 ### 1.- Sistemas informáticos. Introducción.
 
 Los **sistemas informáticos** realizan tareas de **almacenamiento**, **elaboración** y **presentación** de datos.
@@ -513,3 +515,35 @@ Esta tarjeta de red virtual se conecta con la máquina anfitrión según la conf
 - **Host-only networking / Adaptador sólo-anfitrión** -> En este modo cada máquina invitada solo puede comunicarse con la máquina anfitrión, sin que se puedan comunicar entre las invitadas. El direccionamiento de las mismas es dinámico y lo asigna VirtualBox.
 
 ## UD2.- Hardware de un sistema informático
+
+![Esquema Unidad 2 Sistemas Informáticos](../../static/img/sistemas-informaticos-unidad-2.jpg)
+
+### 1.- Computadores digitales. Evolución.
+
+En la actualidad, todos los equipos que utilizamos son **computadores digitales**. Estos operan únicamente manejando dos estados, representados por **0** y **1** (sistema binario). 
+
+- Esta base binaria proviene de los **transistores** dentro del microprocesador, que actúan como interruptores:
+    - **Encendido** (paso de corriente) se asigna al valor **1**.
+    - **Apagado** (sin paso de corriente) se asigna al valor **0**.
+- Cada uno de estos estados se representa mediante un **bit**.
+- Las operaciones lógicas y matemáticas que realiza el microprocesador se ejecutan mediante **circuitos electrónicos** que simulan las funciones booleanas.
+
+El mundo digital es **discreto y finito** (solo representa algunos valores), mientras que el mundo analógico es **continuo e infinito** (puede representar todos los valores).
+
+Aunque la conversión de datos analógicos a digitales produce errores porque solo se representan algunos valores, el mundo digital es preferido en la computación actual por sus ventajas prácticas y técnicas:
+- **Exactitud (Inmunidad al ruido):** la comunicación digital es inherentemente más exacta y más inmune al ruido que la analógica.
+- **Economía:** la comunicación digital es más barata de implementar.
+
+**Conclusión:** los ordenadores actuales son digitales porque, a pesar de no poder representar todos los datos, los valores que sí representan son **más exactos**, **más inmunes al error** y se obtienen de forma **más económica**.
+
+**Evolución de los computadores digitales**
+
+| Generación | Periodo | Tecnología | Características |
+| :--- | :--- | :--- | :--- |
+| **Primera** | 1940-1960 | **Válvulas de vacío** | Eran muy pesados (ej., el **ENIAC** de 1946 pesaba 30 toneladas) y tenían poca potencia |
+| **Segunda** | 1960-1965 | **Transistores** (sustituyen a las válvulas) | Desarrollados por los Laboratorios Bell. El peso disminuye, pero la potencia sigue siendo limitada |
+| **Tercera** | 1965-1975 | **Circuitos Integrados** | Aumenta significativamente la **velocidad** de procesamiento |
+| **Cuarta** | 1975-hoy | **Microprocesador** | Todos los circuitos integrados se condensan en una sola pastilla. Se consolida la **Arquitectura Von Neumann** que se utiliza hasta hoy |
+| **Quinta** | 1985-hoy | **Inteligencia Artificial y Sistemas Expertos** | Los computadores tienen la capacidad de aprender de sus propios errores y cálculos anteriores | 
+
+### 2.- Arquitectura Von Neumann

@@ -7,6 +7,8 @@ toc_max_heading_level: 3
 
 ## UD1.- Desarrollo de software
 
+![Esquema Unidad 1 Entornos de Desarrollo](../../static/img/entornos-de-desarrollo-unidad-1.jpg)
+
 ### 1.- Software y programa. Tipos de software.
 
 El software es el conjunto de programas informáticos que actúan sobre el hardware para ejecutar lo que el usuario desee. Según su **función**, se distinguen tres **tipos de software**: 
@@ -495,3 +497,293 @@ La programación estructurada se basa en el uso de solo tres tipos de sentencias
     ```
 
 ## UD2.- Instalación y uso de entornos de desarrollo
+
+![Esquema Unidad 2 Entornos de Desarrollo](../../static/img/entornos-de-desarrollo-unidad-2.jpg)
+
+### 1.- Concepto de entorno de desarrollo. Evolución histórica.
+
+Un **Entorno Integrado de Desarrollo (IDE)** es un *software* que agrupa un **conjunto de herramientas de programación** esenciales en una única interfaz gráfica. Aunque la codificación puede hacerse con un editor de texto y un compilador por separado, la mayoría de los programadores usan un IDE para ganar **fiabilidad y tiempo** en los proyectos.
+
+Un IDE típicamente incluye:
+    - **Editor de código.**
+    - Acceso integrado al **compilador** (botones/menú).
+    - Acceso integrado a la **ejecución** del programa.
+    - **Depurador** (Debugger).
+    - **Constructor de interfaz gráfico** (GUI Builder).
+
+El principal objetivo es proporcionar al programador componentes con una interfaz uniforme, lo que aumenta la **eficiencia** y reduce el tiempo de codificación.
+
+Originalmente, un IDE estaba dedicado a un solo lenguaje, pero las versiones modernas (como **Eclipse**, **NetBeans** y **Microsoft Visual Studio**) suelen ser **compatibles con varios lenguajes** mediante la instalación de *plugins*.
+
+#### 1.1.- Evolución Histórica
+
+El concepto de IDE no existía en las décadas de la **tarjeta perforada**. La programación se realizaba mediante diagramas de flujo y el código se compilaba tras ser introducido al sistema.
+
+| Período | Hito | Detalles |
+| :--- | :--- | :--- |
+| Primer IDE | El lenguaje **BASIC** fue el primero en utilizar un IDE | Estaba basado exclusivamente en una **consola de comandos** (antes de la interfaz gráfica), pero ya manejaba gestión de archivos, compilación y depuración |
+| Años 70 y 80 | El IDE **Maestro** se considera el primer IDE popular | Nació a principios de los 70 y lideró el campo, siendo instalado por miles de programadores |
+| Años 90 - Actualidad | Masificación de los sistemas con interfaz gráfica | El uso de los IDE se **ratifica y afianza**, llevando a una vasta oferta de herramientas propietarias y de código abierto (ej., NetBeans, Eclipse) |
+
+### 2.- Funciones de un entorno de desarrollo
+
+| Función | Tareas clave del IDE |
+| :--- | :--- |
+| Asistencia de Código | **Coloración** de la sintaxis, **auto-completado** de código, y **refactorización** (cambios de legibilidad sin alterar funcionalidad) |
+| Detección y Corrección | **Detección de errores de sintaxis** en tiempo real, **identificación automática** de código y **depuración** avanzada (puntos de ruptura, seguimiento de variables) |
+| Automatización y Gestión | **Compilación** de proyectos complejos en un solo paso, **generación automática** de herramientas y documentación, y **organización** de archivos fuente/compilados en carpetas |
+| Visual y Diseño | Herramientas de **concepción visual** para crear interfaces gráficas (GUI) |
+| Control de Proyecto | **Control de versiones** (almacén compartido, soporte a cambios simultáneos), mecanismos de **auto-recuperación** ante errores, y gestión de **plugins** para aumentar funcionalidades |
+| Despliegue | **Empaquetar** el *software* para su posterior instalación en el entorno de ejecución | 
+
+### 3.- Entornos integrados libres y propietarios
+
+| Tipo de IDE | Características | Ejemplos |
+| :--- | :--- | :--- |
+| Libre | Tiene **licencia de uso público** (gratis) | Eclipse, NetBeans, CodeLite, JDeveloper |
+| Propietario | Requiere **licencia de pago** | Microsoft Visual Studio, C++ Builder, QtCreator |
+
+**Entornos más relevantes**
+
+| IDE | Licencia | Lenguajes soportados |
+| :--- | :--- | :--- |
+| NetBeans | Libre | C/C++, Java, JavaScript, PHP, HTML5 |
+| Eclipse | Libre | Ada, C/C++, Java, JavaScript, PHP |
+| JDeveloper | Libre | Java, HTML, XML, SQL, Javascript, PHP, UML |
+| CodeLite | Libre | C/C++, PHP, Node.js |
+| IntelliJ | Mixta | Java, Groovy, Python, XML/XSL |
+| Microsoft Visual Studio | Propietario | C#, Visual Basic, C++, Python, JavaScript |
+| C++ Builder | Propietario | C++ |
+| QtCreator | Propietario | C++ (con framework QT) | 
+
+### 4.- Estructura de entornos de desarrollo
+
+Los **IDEs**, ya sean libres o propietarios, se componen de varios elementos clave que definen sus funciones:
+
+| Componente | Funciones principales |
+| :--- | :--- |
+| Editor de textos | **Resaltado y coloreado de la sintaxis**, auto-completado de código, inserción automática de paréntesis/tabulaciones, y ayuda con parámetros de funciones/métodos |
+| Compilador/Intérprete | **Detección de errores** de sintaxis en tiempo real |
+| Depurador | **Ejecución del programa paso a paso**, definición de **puntos de ruptura** y **seguimiento de variables**. Permite depuración en servidores remotos |
+| Generador automático de herramientas | Herramientas para la **visualización, creación y manipulación de componentes visuales** (interfaces gráficas), además de asistentes y utilidades de gestión de código |
+| Interfaz gráfica | Proporciona una interfaz agradable que puede acceder a **bibliotecas y *plugins***, permitiendo programar en **varios lenguajes** con el mismo IDE | 
+
+### 5.- Instalación de entornos integrados de desarrollo
+
+Este apartado trata sobre la instalación del **JDK**, **Netbeans** y **Eclipse**.
+
+### 6.- Configuración y personalización de entornos de desarrollo
+
+La configuración de un entorno de desarrollo se realiza al crear o abrir un proyecto. Los ajustes pueden ser aplicados solo al **proyecto actual** o de forma **global** a todos los proyectos.
+
+Los parámetros configurables abarcan varios aspectos del proyecto y del editor:
+
+- **Organización del proyecto:**
+    - Definición de las **carpetas** donde se alojarán los archivos fuente y de prueba (para mantener la estructura ordenada).
+    - Descripción de los proyectos para su mejor localización.
+- **Gestión del código y la compilación:**
+    - Opciones de **compilación** (ej., compilar al grabar, generar información de depuración).
+    - Opciones de **generación de documentación**.
+    - Opciones de **empaquetado** de la aplicación (ej., nombre del archivo `.jar` y momento del empaquetado).
+    - Administración de la plataforma del entorno.
+- **Personalización del editor:**
+    - Opciones de **formato global** del editor (ej., número de espaciados en las sangrías).
+    - Definición del **color** para errores de sintaxis o etiquetas.
+    - Configuración del **autocompletado** de código y la inserción automática de código.
+    - Opciones de **combinación de teclas** (*shortcuts*). 
+
+### 7.- Gestión de módulos
+
+En entornos de desarrollo como **NetBeans**, se utilizan **módulos** y **plugins** para ampliar las capacidades básicas de la plataforma y facilitar el desarrollo de aplicaciones.
+
+- Un **módulo** es un componente *software* que contiene clases de Java que interactúan con las API del IDE. Se identifica mediante un **manifest file** (archivo especial que lo identifica como módulo).
+- Los módulos se pueden construir y desarrollar de forma **independiente**, lo que facilita su **reutilización** e inserción en otras aplicaciones.
+- Los módulos permiten que una aplicación sea **extendida** (añadiendo nuevas funcionalidades) o **construida** a partir de componentes con finalidades concretas.
+- Existe una gran cantidad de módulos y plugins disponibles, a menudo clasificados por categorías, en la página oficial del IDE. 
+
+Las tareas asociadas a la gestión de módulos incluyen la instalación, desinstalación, desactivación y actualización de los mismos, todo gestionable desde el propio entorno.
+
+#### 7.1.- Añadir
+
+Añadir un módulo o *plugin* dota de **mayor funcionalidad** a los proyectos desarrollados en NetBeans. Existen varias formas de incorporar módulos:
+
+1. **Módulos por defecto:** usar módulos que NetBeans ya instaló.
+2. **Creación propia:** desarrollar el módulo uno mismo.
+3. **Adición *Off-line*** (Descarga manual):
+    - El módulo se descarga desde la web oficial de NetBeans en formato **`.nbm`**.
+    - Posteriormente, el *plugin* se **carga e instala** desde dentro del IDE.
+4. **Adición *On-line*** (Instalación desde el IDE):
+    - Se instalan complementos **sin salir del IDE** ni descargarlos previamente.
+    - Este método requiere que el *plugin* **Portal Update Center** esté instalado.
+
+#### 7.2.- Eliminar
+
+Eliminar un módulo o *plugin* se plantea cuando deja de ser útil o el proyecto que lo requería ha finalizado. Es un proceso sencillo que implica encontrar el complemento en la lista de instalados y elegir la acción deseada.
+
+Al eliminar un módulo, siempre se ofrecen dos opciones:
+    1. **Desactivar:** el módulo o *plugin* **sigue instalado** físicamente en el sistema, pero su estado cambia a **inactivo** (deja de aparecer y funcionar en el entorno).
+    2. **Desinstalar:** el módulo o *plugin* se **elimina físicamente y de forma permanente** del entorno.
+
+#### 7.3.- Funcionalidades
+
+Los módulos y *plugins* se clasifican en varias categorías según el área que mejoran:
+
+- **Lenguajes de programación y bibliotecas:** permiten programar con lenguajes que el IDE no soporta inicialmente.
+- **Construcción de código:** facilitan la labor de programación.
+- **Edición:** hacen el editor más preciso y cómodo para el programador.
+- **Refactorización:** permiten realizar cambios menores en el código para aumentar su legibilidad sin alterar su función.
+- **Depuradores:** hacen más eficiente la depuración de programas.
+- **Prueba:** incorporan utilidades específicas para el *testing* del *software*.
+- **Bases de datos:** ofrecen nuevas funcionalidades para el mantenimiento de las aplicaciones.
+- **Aplicaciones web:** integran utilidades específicas para el desarrollo de aplicaciones web.
+- **Documentación de aplicaciones:** permiten generar la documentación de los proyectos en el formato deseado.
+- **Interfaz gráfica de usuario (GUI):** mejoran la presentación de diversos aspectos del entorno al usuario.
+- **Aplicaciones:** añaden nuevas aplicaciones independientes que pueden ser útiles. 
+
+#### 7.4.- Herramientas concretas
+
+NetBeans ofrece una serie de herramientas integradas diseñadas para simplificar el desarrollo de *software*, especialmente en entornos empresariales y web, cubriendo todas las etapas del ciclo de vida:
+
+- **Importador de Proyectos:** permite trabajar con proyectos creados en otros entornos, como **JBuilder**.
+- **Servidor de Aplicaciones GlassFish:** proporciona una plataforma completa para el desarrollo y despliegue de **aplicaciones empresariales**.
+- **Soporte Java Enterprise Edition (JEE):** asegura el cumplimiento de estándares y mejora el rendimiento para la creación ágil de aplicaciones empresariales.
+- **NetBeans Swing GUI Builder:** simplifica la **creación de interfaces gráficas de usuario (GUI)** para aplicaciones cliente, permitiendo el manejo visual sin salir del IDE.
+- **NetBeans Profiler:** evalúa la **eficiencia y rendimiento** del *software* de forma inmediata para los usuarios finales.
+- **Herramientas XML y Servicios Web:** iIncluye el **Editor WSDL** (para Servicios Web basados en XML) y el **Editor XML Schema Editor** (para refinar la estructura de documentos XML).
+- **Seguridad:** asegura la protección de datos mediante herramientas como **Sun Java System Access Manager**.
+- **Soporte UML (Beta):** cubre actividades de modelado como clases, comportamiento, interacción y secuencias.
+- **Soporte Bidireccional:** permite la **sincronización rápida** de modelos de desarrollo con los cambios en el código a medida que se avanza en las etapas del ciclo de vida de la aplicación. 
+
+### 8.- Uso básico de entornos de desarrollo
+
+La interfaz principal de un IDE como NetBeans se divide en secciones clave para la gestión y la codificación de proyectos:
+
+- **Ventana izquierda (Ventana de proyectos):**
+    - Muestra la relación jerárquica de **proyectos, archivos, módulos o clases** abiertos durante la sesión.
+    - Cada proyecto contiene sus archivos fuente y bibliotecas.
+    - El archivo principal de ejecución en Java suele ser `Main.java* (o la clase que contiene el método principal), siendo recomendable mantener este nombre para facilitar la identificación del punto de inicio del programa.
+
+- **Ventana derecha (Espacio de escritura/Editor):**
+    - Es el área principal donde se **escribe el código fuente**.
+    - Al crear un nuevo proyecto, muestra automáticamente el esqueleto básico del programa (por ejemplo, la estructura de la clase principal en Java).
+
+- **Barra de Herramientas:**
+    - Permite acceder rápidamente a todas las funciones y opciones principales del IDE (ej., guardar, compilar, ejecutar). 
+
+#### 8.1.- Edición de programas
+
+La **ventana de codificación** del IDE es donde se escriben las instrucciones del programa. Mientras se edita el código, NetBeans proporciona varias ayudas clave:
+
+- **Autocompletado de código:** sugiere comandos, métodos y variables a medida que se escribe.
+- **Coloración de comandos:** aplica diferentes colores a las palabras reservadas, comentarios y elementos de la sintaxis para facilitar la lectura.
+- **Detección de errores en tiempo real:** muestra un **subrayado en rojo** (y un icono visual a la izquierda) cuando detecta un error de sintaxis o de compilación, ofreciendo opciones de depuración y corrección inmediata.
+
+#### 8.2.- Generación de ejecutables
+
+Una vez que el código fuente está escrito en la ventana de edición y **libre de errores de sintaxis**, el proceso para obtener y probar el programa ejecutable sigue estos pasos secuenciales:
+    1. **Compilación**
+    2. **Depuración**
+    3. **Ejecución**
+
+Para ejecutar el programa directamente desde NetBeans, se utiliza el atajo `Shift + F6`. Esto compila y ejecuta el archivo de código que hay abierto.
+
+### 9.- Actualización y mantenimiento de entornos de desarrollo
+
+El **mantenimiento** del entorno de desarrollo es crucial y consiste en mantener todos sus componentes periódicamente **actualizados**.
+
+Las tareas de mantenimiento y actualización se realizan generalmente de forma **online**. En NetBeans, el complemento llamado **Auto Update Services** es el encargado de gestionar y aplicar las continuas revisiones y actualizaciones de todos los *plugins*. Este mismo complemento debe estar instalado para poder realizar la adición de nuevos módulos de forma *on-line* (sin descarga previa).
+
+También es de **vital importancia** realizar **copias de seguridad** de las bases de datos asociadas a los proyectos de forma periódica. Esto asegura que, en caso de un fallo o proceso defectuoso, los proyectos puedan ser **restaurados** a un estado anterior estable y que sean compatibles con futuras versiones del entorno. 
+
+### Anexo I.- Crear, compilar y ejecutar un programa (sin usar IDE)
+
+Este proceso demuestra cómo ejecutar un programa Java utilizando solo un editor de texto y el **JDK**, prescindiendo de un IDE. Para ello, se asume que las variables de entorno **`JAVA_HOME`** y **`PATH`** están configuradas correctamente.
+
+**1. Crear el código fuente**
+    - Utiliza un editor de texto (como el Bloc de Notas) para crear un archivo llamado **`Hola.java`**.
+    - El nombre del archivo (`Hola.java`) **debe coincidir** con el nombre de la clase pública (`public class Hola`).
+    - Guarda el archivo en una ubicación conocida.
+
+    ```java
+    public class Hola {
+        public static void main(String[ ] args) {
+            System.out.println("Hola");
+        }
+    }
+    ```
+
+**2. Abrir el terminal y situarse en la ruta**
+    - Abre la línea de comandos.
+    - Si no estás en la ruta, usa el comando `cd` para navegar al directorio del archivo.
+
+**3. Compilar el código fuente**
+    - Ejecuta el compilador de Java (**`javac`**) sobre el archivo fuente.
+        ```bash
+        javac Hola.java
+        ```
+    - **Resultado:** el compilador **`javac`** traduce el código fuente a *bytecode* y genera un nuevo archivo llamado **`Hola.class`**.
+
+**4. Ejecutar el programa**
+    - Ejecuta el intérprete de Java (**`java`**) sobre el nombre de la clase compilada (sin la extensión `.class`).
+        ```bash
+        java Hola
+        ```
+    - **Resultado:** el intérprete **`java`** traduce y ejecuta el *bytecode* línea a línea, mostrando el mensaje "Hola" en la consola.
+
+:::info Diferencia clave
+- `javac` es el **compilador** (genera el archivo `.class`).
+- `java` es el **intérprete** (ejecuta el archivo `.class` a código máquina y no genera ningún archivo nuevo).
+:::
+
+### Anexo II.- Crear, compilar y ejecutar un programa con varias clases (sin usar IDE)
+
+Este ejercicio demuestra la implementación de un problema utilizando múltiples **clases de Java** (simulando tres actores/objetos: Profesor, Estudiante, Ordenador) y la gestión de la compilación e interpretación sin un IDE.
+
+La solución se estructura en un **proyecto** (`semaforo`) con **paquetes** (`principal` y `clases`), donde cada paquete contiene los ficheros de código fuente (`.java`).
+
+El diseño utiliza conceptos de Programación Orientada a Objetos (POO), especialmente la **Herencia** y la **Comunicación entre objetos**:
+
+| Clase | Paquete | Conceptos clave | Función en el Programa |
+| :--- | :--- | :--- | :--- |
+| `ClaseColor` | `principal` | Contiene la función **`main`** (inicio del programa). Utiliza `import` para acceder a la clase `Profesor` | Crea el objeto `Profesor` y recibe la respuesta del sistema |
+| `Ordenador` | `clases` | Utiliza el método **`Random`** de Java | Devuelve aleatoriamente el color del semáforo (`"rojo"`, `"amarillo"`, `"verde"`) |
+| `Persona` | `clases` | **Clase Padre**. No se instancia directamente | Define variables miembro que son **heredadas** por `Estudiante` y `Profesor` (ej., `i_Edad`, `s_Nombre`) |
+| `Estudiante` | `clases` | **Hereda** de `Persona` (cláusula `extends`) | Sobrescribe el constructor y define el método `preguntacolor`, el cual crea un objeto `Ordenador` para obtener el color |
+| `Profesor` | `clases` | **Hereda** de `Persona`. | Define el método `preguntacolor`, que a su vez **llama** al método `preguntacolor` de la clase `Estudiante` para obtener la respuesta |
+
+Los ficheros de código (`.java`) deben estar organizados en directorios que coincidan con sus declaraciones de **`package`**.
+
+**1. Compilación:**
+    - Se inicia desde el directorio raíz del proyecto (ej., `/home/debian/Escritorio/semaforo`).
+    - Se utiliza el compilador `javac`, indicando la ruta relativa del fichero principal (`ClaseColor.java`):
+        ```bash
+        javac principal/ClaseColor.java
+        ```
+    - **Nota:** al ser clases dependientes entre sí, compilar el fichero principal puede compilar automáticamente los demás. Si no es así, se deben compilar individualmente en orden de dependencia.
+    - **Resultado:** se generan los cinco ficheros `bytecode` (`.class`).
+
+**2. Ejecución:**
+    - Se utiliza el intérprete **`java`** sobre la ruta relativa de la clase que contiene `main`:
+        ```bash
+        java principal/ClaseColor
+        ```
+
+---
+
+Para distribuir el proyecto como un único archivo comprimido (`.jar`), se usa el programa `jar` incluido en el JDK.
+
+1.  **Crear `MANIFEST.MF`:** se crea un directorio `META-INF` y dentro un fichero `MANIFEST.MF` que indica la clase de inicio (la que contiene `main`):
+    ```
+    Main-Class: principal.ClaseColor
+    ```
+    *(Debe incluirse un fin de línea después de la última línea de texto).*
+2.  **Generar el archivo `.jar`:** desde la consola, se ejecuta el comando `jar` para empaquetar todos los recursos:
+    ```bash
+    jar cmf META-INF/MANIFEST.MF semaforo.jar clases/*.class principal/*.class
+    ```
+3.  **Ejecutar el `.jar`:**
+    ```bash
+    java -jar semaforo.jar
+    ```
+
+El programa `jar` también permite ver el contenido (`jar tf semaforo.jar`) y descomprimirlo (`jar xf semaforo.jar`).
