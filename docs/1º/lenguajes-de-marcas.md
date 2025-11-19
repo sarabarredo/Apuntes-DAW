@@ -1101,12 +1101,9 @@ Permiten seleccionar elementos que se encuentran **dentro de otros elementos**, 
 El selector **hijo** (`>`) es similar al descendente, pero **solo afecta al primer nivel de anidamiento**; es decir, solo selecciona a los descendientes **directos**.
     - Se utiliza el símbolo **mayor que** (`>`) entre los selectores: `padre > hijo`.
 
-    
 #### 3.5.- Propiedades principales
 
 ##### 3.5.1.- Propiedades de color y fondo
-
-Controlan el color del texto y el fondo de los elementos. Se recomienda usar valores **RGB**.
 
 | Propiedad | Función |
 | :--- | :--- |
@@ -1118,11 +1115,11 @@ Controlan el color del texto y el fondo de los elementos. Se recomienda usar val
 | `background-position` | Ubica la imagen de fondo |
 | `background` | Propiedad **abreviada** para definir todas las anteriores a la vez |
 
-##### 3.5.2.- Propiedades de fuente
- 
-Controlan la tipografía de los elementos de texto.
+*Nota:* se recomienda usar valores **RGB**.
 
-| Propiedad | Descripción |
+##### 3.5.2.- Propiedades de fuente
+
+| Propiedad | Función |
 | :--- | :--- |
 | `font-size` | Indica el **tamaño** de la fuente |
 | `font-family` | Establece la **familia tipográfica** de la fuente |
@@ -1134,9 +1131,7 @@ Controlan la tipografía de los elementos de texto.
 
 ##### 3.5.3.- Propiedades de texto
 
-Controlan el formato, la alineación y el espaciado dentro de un elemento.
-
-| Propiedad | Descripción |
+| Propiedad | Función |
 | :--- | :--- |
 | `text-decoration` | Establece el estilo de la línea sobre o a través del texto |
 | `text-align` | Indica la **alineación horizontal** del contenido |
@@ -1148,3 +1143,125 @@ Controlan el formato, la alineación y el espaciado dentro de un elemento.
 | `line-height` | Establece la **altura de la línea** (espaciado vertical entre líneas) | 
 
 ##### 3.5.4.- Propiedades de lista
+
+| Propiedad | Función | Control |
+| :--- | :--- | :--- |
+| `list-style-type` | Define el **tipo de símbolo marcador** | Disco, círculo, cuadrado, números romanos, letras o `none` |
+| `list-style-image` | Usa una **imagen** como marcador | Ruta a la imagen (`url(...)`) |
+| `list-style-position` | Determina la **posición** del marcador | `outside` o `inside` |
+| `list-style` | Propiedad **abreviada** para establecer las tres anteriores | Orden: `list-style-type`, `list-style-position`, `list-style-image` | 
+
+##### 3.5.5.- Propiedad `display`
+
+La propiedad `display` controla el **comportamiento de renderizado** de un elemento HTML. Se utiliza para dos propósitos principales:
+    1. **Cambiar el tipo de elemento:** permite modificar si un elemento se comporta como de **bloque** (`block`) o de **línea** (`inline`), o como una combinación de ambos (`inline-block`).
+    2. **Ocultar o mostrar un elemento:** se utiliza para **ocultar un elemento** (`none`) o hacerlo visible, a menudo manipulada mediante JavaScript. 
+
+#### 3.6.- Modelo de cajas
+
+El **modelo de cajas**, definido por el W3C, establece que **cada elemento HTML** en una página es tratado como una **caja rectangular** con cuatro capas concéntricas.
+
+Cada capa contribuye al tamaño total y la posición del elemento en relación con otros elementos:
+    1. **Contenido (Content):** el texto, imagen o contenido dentro del elemento.
+    2. **Relleno (Padding):** el **margen interior**; la distancia entre el **contenido** y el **borde** (propiedad `padding` de CSS).
+    3. **Borde (Border):** la línea que rodea el relleno y el contenido (propiedad `border` de CSS).
+    4. **Margen (Margin):** el **margen exterior**; el espacio que rodea el **borde** y separa el elemento de los elementos adyacentes (propiedad `margin` de CSS).
+
+    ![Imagen del modelo de caja de CSS](../../static/img/modelo-de-caja.png)
+
+##### 3.6.1.- Propiedades de caja
+
+| Capa del Modelo | Propiedad Principal | Descripción | Valores Comunes |
+| :--- | :--- | :--- | :--- |
+| Contenido | `width` / `height` | Fijan las dimensiones del contenido *sin* incluir el borde o los márgenes | `auto` o longitud (`px`, `%`) |
+| Relleno | `padding` | Espacio entre el contenido y el borde | `auto`, longitud o porcentaje |
+| Borde | `border` | Define las características visuales del límite del elemento | Color, grosor (`thin`, `medium`, `thick` o longitud), y estilo (`solid`, `dotted`, `dashed`, `none`) |
+| Margen | `margin` | Espacio entre el borde del elemento y los elementos adyacentes | `auto`, longitud o porcentaje |
+
+Las propiedades abreviadas (`padding`, `border`, `margin`) permiten definir los cuatro lados (superior, derecho, inferior, izquierdo) usando de uno a cuatro valores. 
+
+##### 3.6.2.- Unidades de tamaño
+
+CSS permite especificar tamaños utilizando unidades que pueden ser **absolutas** o **relativas**:
+
+1. **Unidades Absolutas:**
+    - Mantienen el **mismo tamaño físico** sin importar la resolución o el elemento contenedor (ej., `cm`, `mm`, `in`, `pt`, `pc`).
+    - Los **píxeles** (`px`) son la unidad absoluta más utilizada, especialmente para definir dimensiones de imágenes y vídeos.
+
+2. **Unidades Relativas:**
+    - Su tamaño **depende de otro elemento** o valor del entorno (ej. el tamaño del elemento padre o de la fuente por defecto).
+    - Son ideales para **diseños *responsive*** que se adaptan a diferentes tamaños de pantalla.
+
+| Unidad relativa | Base de referencia | Uso |
+| :--- | :--- | :--- |
+| `%` | Dimensiones del **elemento contenedor** | Estructura (`width`, `height` de secciones) |
+| `em` | Tamaño del tipo de letra **por defecto** del elemento (o del padre si no está definido) | Tamaños de fuente (`font-size`) |
+| `rem` | Tamaño del tipo de letra del **elemento raíz** (`<html>`) | Útil para mantener la escala consistente en toda la página |
+| `ex` | Relativa a la altura de la letra 'x' de la fuente actual | Raro |
+| `ch` | Relativa al ancho del carácter '0' (cero) de la fuente actual | Raro |
+
+**Ejemplos de uso**
+
+- **Porcentajes (`%`):** Usar `width: 50%` hace que el elemento ocupe la mitad de la anchura de su contenedor (`<body>`). Esto es fundamental para que el diseño se adapte a diferentes pantallas. La altura (`height`) también puede ser relativa si se fija la altura del elemento contenedor.
+- **Unidades `em`:** Se utilizan para especificar el tamaño de la fuente. Si el texto tiene un tamaño normal y se aplica `font-size: 2em`, el texto se duplica en tamaño. 
+
+##### 3.6.3.- Ejemplos del modelo de cajas
+
+<details>
+  <summary>Relleno y margen</summary>
+
+    ```jsx live
+    <div>
+        <section style={{ backgroundColor: '#FFFACD', padding: '2em' }}>Sección con relleno</section>
+        
+        <section>Sección sin relleno</section>
+
+        <section style={{ backgroundColor: '#ADD8E6', marginBottom: '2em' }}>Sección sin relleno, pero con margen inferior</section>
+
+        <section style={{ backgroundColor: '#90EE90', paddingLeft: '2em' }}>Sección con relleno solo a la izquierda</section>
+    </div>
+    ```
+</details>
+
+<details>
+  <summary>Borde</summary>
+
+    ```jsx live
+    <div>
+        <section style={{ backgroundColor: 'yellow', borderColor: 'green', borderStyle: 'solid' }}>Una sección</section>
+        <br/>
+        <section style={{ 
+            backgroundColor: 'pink', 
+            borderWidth: '16px', 
+            borderLeftColor: 'green', 
+            borderTopColor: 'green', 
+            borderLeftStyle: 'dashed', 
+            borderTopStyle: 'dashed' 
+        }}>Otra sección</section>
+    </div>
+
+    ```
+</details>
+
+##### 3.6.4.- Posicionamiento
+
+La propiedad `float` permite modificar el posicionamiento por defecto de los elementos HTML, haciendo que "floten" hacia la izquierda o la derecha.
+    - **Comportamiento:** Los elementos flotados se sitúan uno junto a otro hasta que se agota el espacio horizontal disponible, momento en el que pasan a una nueva línea.
+    - **Uso:** Históricamente se usó para maquetación de columnas y estructuras, ya que se **adapta bien a diferentes tamaños de pantalla** (*responsive*).
+    - **Propiedades implicadas:** La propiedad principal es **`float`** (`left` o `right`), pero el posicionamiento también puede verse afectado por la propiedad **`position`** (no detallada aquí).
+    - **Ejemplo:** En el código, los elementos **`<nav>`** y **`<section>`** usan `float: left` para situarse uno al lado del otro, repartiéndose la anchura definida (`10%` y `90%` respectivamente).
+
+<details>
+  <summary>Ejemplo</summary>
+
+    ```jsx live
+    <div style={{ backgroundColor: '#FFC0CB' }}>
+        <header style={{ backgroundColor: '#ADD8E6'}}>Encabezado</header>
+        <nav style={{ backgroundColor: '#F08080', width: '10%', height: '300px', float: 'left' }}>Vínculos</nav>
+        <section style={{ backgroundColor: '#90EE90', width: '90%', height: '300px', float: 'left' }}>Contenido principal del página</section>
+        <footer style={{ backgroundColor: '#FFFACD'}}>Página creada por...</footer>
+    </div>
+    ```
+</details>
+
+## UD3.
