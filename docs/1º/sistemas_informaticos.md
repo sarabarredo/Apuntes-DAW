@@ -1055,12 +1055,96 @@ Existen herramientas internas del sistema operativo y herramientas externas para
 
 **Administrador de discos de Windows**
 
-El Administrador de discos muestra la estructura completa del disco, incluyendo particiones visibles y ocultas (como la partición de sistema de 500MB) y el **espacio no asignado**.
+El Administrador de discos muestra la estructura completa del disco, incluyendo particiones visibles y ocultas y el **espacio no asignado**.
 
-* **Creación de particiones:** Para crear una partición (ej. de 20 GB), se selecciona el **espacio no asignado**, se usa el menú contextual y se elige **"Nuevo volumen simple"**, especificando el tamaño (ej. 20000 MB), una letra de unidad y un sistema de archivos (ej., **NTFS**).
-* **Montaje de particiones:** Cuando se crea una partición y se le asigna una letra (ej., F:), se dice que "se ha **montado** la partición".
-* **Resolución de conflictos de letras:** Si la letra de unidad asignada a la nueva partición entra en conflicto con un recurso de red ya existente (como una carpeta compartida), se debe usar el Administrador de discos para **"Cambiar letra de unidad"** y seleccionar una letra libre.
+- **Creación de particiones:** para crear una partición, se selecciona el **espacio no asignado**, se usa el menú contextual y se elige *Nuevo volumen simple*, especificando el tamaño, una letra de unidad y un sistema de archivos (ej. NTFS).
+- **Montaje de particiones:** cuando se crea una partición y se le asigna una letra, se dice que "se ha montado la partición".
+- **Resolución de conflictos de letras:** si la letra de unidad asignada a la nueva partición entra en conflicto con un recurso de red ya existente, se debe usar el Administrador de discos para cambiar la letra de la unidad y seleccionar una libre.
 
 **GParted**
 
 GParted es una popular herramienta externa (comúnmente incluida en distribuciones Linux como Ubuntu) que se puede utilizar para gestionar particiones de cualquier sistema operativo arrancando desde un CD o *pendrive*.
+
+#### 2.2.- Particiones: BIOS-MBR
+
+El esquema **BIOS-MBR** es el particionamiento tradicional utilizado desde los primeros PC.
+
+El **MBR (*Master Boot Record*)** es el sector de arranque que ocupa los **primeros 512 bytes** del disco. La limitación estructural del MBR fuerza la siguiente clasificación de particiones:
+    - **Partición primaria:** máximo **cuatro** por disco. Pueden contener datos o un sistema operativo.
+    - **Partición activa o arrancable:** solo puede haber **una** y **debe ser una partición primaria**. Es la que contiene el sistema operativo.
+    - **Partición extendida:** sSe crea para superar el límite de cuatro particiones primarias (sustituye a una de ellas). **Solo puede haber una** por disco MBR.
+    - **Particiones lógicas:** Se crean **dentro** de la partición extendida. En Windows, el límite es **23**. No pueden ser particiones activas.
+
+**Función del MBR:** al arrancar, la BIOS busca el disco configurado, lee el MBR, identifica la partición **activa** y transfiere el control a esa partición para iniciar el SO.
+
+> **Observación:** Cuando se elimina una partición, solo se modifican los 512 bytes del MBR para indicar que el espacio está libre; los datos del disco no se borran.
+
+#### 2.3.- Particiones: UEFI-GPT
+
+El esquema **UEFI-GPT** es el método moderno de particionamiento, introducido con Windows 8 y diseñado para superar las limitaciones del MBR.
+
+- **UEFI (*Unified Extensible Firmware Interface*)**: interfaz de *firmware* que sustituye a la BIOS tradicional. Para el usuario, actúa como una **BIOS gráfica** que admite el uso del ratón.
+- **GPT (*GUID Partition Table*)**: esquema de particionamiento asociado a UEFI, que ofrece importantes ventajas sobre MBR:
+
+    | Característica | GPT | MBR |
+    | :--- | :--- | :--- |
+    | Límite de particiones | Hasta **128 particiones** primarias | Máximo 4 particiones primarias |
+    | Tamaño máximo por partición | Hasta **256 TB** | Máximo 2 TB |
+    | Tipo de particiones | Solo particiones **primarias** | Primarias, extendidas y lógicas |
+
+**Reglas UEFI-GPT**
+
+* **Requisitos:** un sistema operativo en un disco GPT **solo puede arrancar con UEFI**. Además, generalmente solo admite sistemas operativos de **64 bits**.
+* **Compatibilidad:** para trabajar con sistemas antiguos, la configuración UEFI incluye un **modo de compatibilidad** llamado **Legacy** (que simula el modo BIOS-MBR).
+* **Sectores:** GPT utiliza 34 sectores al inicio del disco, mientras que MBR solo usa 1 sector.
+* **Discos dinámicos:** GPT permite crear **discos dinámicos** (particiones que usan espacio no contiguo o se extienden por varios discos), algo no posible con los discos básicos de MBR.
+* **Inicialización:** antes de crear particiones en un disco nuevo, hay que **informar al sistema** si se desea iniciar como MBR o GPT. GPT no se admite en dispositivos extraíbles.
+
+#### 2.4.- Sistemas de archivos. Formato de particiones.
+
+El **sistema de archivos** (o tipo de formato, ej. FAT32, NTFS) es el método lógico que se aplica a una partición para organizar y gestionar los datos. Al **formatear** una partición, se crea una tabla al inicio (como la tabla FAT) que permite localizar los archivos posteriormente.
+
+**Clúster (unidad de asignación):** es la **unidad lógica más pequeña** de almacenamiento de un disco. Está compuesto por un conjunto contiguo de **sectores** (donde 1 sector = 512 bytes, la mínima unidad física).
+    - **Regla de almacenamiento:** un clúster **no puede** almacenar información de dos archivos distintos. Si un archivo es más pequeño que el clúster, el espacio restante se **pierde** (fragmentación interna).
+        - *Ejemplo:* un archivo de 10 bytes ocupa un clúster entero, que puede ser de 4 KB (4096 bytes), desperdiciando 4086 bytes.
+    - **Tamaño:** suele ser potencia de 2 (512 bytes, 1 KB, 2 KB, 4 KB, etc.). El tamaño del clúster es un compromiso entre el rendimiento y el desperdicio de espacio:
+
+    | Clúster | Ventaja | Desventaja |
+    | :--- | :--- | :--- |
+    | Pequeño (ej. 512 bytes) | Menor fragmentación | Menor velocidad, ya que un archivo grande se divide en más clústeres no contiguos, obligando a mover más los cabezales del disco |
+    | Grande (ej. 64 KB) | Mayor velocidad de lectura/escritura | Mayor fragmentación |
+
+**Sistemas de archivos de Microsoft (Windows)**
+
+| Formato | Uso | Limitaciones y ventajas |
+| :--- | :--- | :--- |
+| FAT16 | Medios de almacenamiento muy pequeños o antiguos | Obsoleto |
+| FAT32 | Medios extraíbles | Mayor compatibilidad con distintos sistemas operativos | Límite crucial: 4 GB por archivo |
+| exFAT | Medios extraíbles | Creado para solucionar la limitación de FAT32. Admite archivos mayores a 4 GB. |
+| NTFS | Estándar actual para todas las particiones internas de Windows | Mayor seguridad, mayor fiabilidad y límites máximos de archivo/partición muy superiores |
+
+### 3.- Arranque dual de Windows. Gestor de arranque.
+
+El **arranque múltiple** o **arranque dual** (*dual boot*) es una configuración que permite instalar dos o más sistemas operativos, generalmente en distintas particiones, en el mismo equipo. Al iniciar, el usuario es presentado con un menú para elegir el SO que desea cargar.
+
+#### 3.1.- Instalación de segundo sistema operativo Windows en un equipo
+
+El proceso de instalación de un segundo Windows en el mismo equipo es idéntico al de una instalación normal, pero requiere una selección crucial en la etapa de particionamiento.
+
+**Opciones de instalación:**
+    - **Actualización:** sustituye el Windows instalado, manteniendo archivos y configuraciones del usuario. **Resultado:** solo queda un nuevo Windows. (*Solo se puede actualizar desde SO compatibles, ej. de Windows 7 a Windows 10*).
+    - **Personalizada:** permite instalar un nuevo SO, ya sea borrando el anterior o dejando **instalados dos sistemas operativos** (arranque dual).
+
+**Proceso para arranque dual:**
+
+1.  Seleccionar la opción **Personalizada** en la instalación.
+2.  **Preparar la partición:** crear una partición **libre y disponible** para el segundo Windows. Si se desea usar espacio que contiene datos, la partición debe ser eliminada.
+3.  **Selección de partición:** seleccionar el **espacio libre** deseado (ej. 30 GB) para la instalación del nuevo Windows.
+4.  El proceso de instalación continúa con los mismos pasos que el primer SO.
+
+Una vez instalado el segundo SO, al iniciar el equipo, aparece una ventana del **gestor de arranque** para seleccionar qué sistema operativo arrancar.
+
+- En el menú, los sistemas operativos se diferencian por el **volumen** del disco en el que están instalados.
+- El usuario tiene un tiempo límite (por defecto 30 segundos) para elegir qué SO quiere iniciar.
+
+#### 3.2.- Configuración de gestores de arranque
