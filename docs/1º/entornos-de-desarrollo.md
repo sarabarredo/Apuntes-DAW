@@ -787,3 +787,156 @@ Para distribuir el proyecto como un único archivo comprimido (`.jar`), se usa e
     ```
 
 El programa `jar` también permite ver el contenido (`jar tf semaforo.jar`) y descomprimirlo (`jar xf semaforo.jar`).
+
+## UD3.- Diseño y realización de pruebas
+
+### 1.- Planificación de las pruebas
+
+Durante el desarrollo de *software* es inevitable incurrir en errores (de especificación, diseño o codificación). Por ello, es necesario un conjunto de pruebas para asegurar que el producto es **correcto** y **cumple con los requisitos** del usuario.
+
+Las pruebas tienen dos objetivos clave:
+    - **Verificación:** comprueba que el sistema se está **construyendo correctamente**; es decir, que cumple con las **condiciones internas** impuestas (ej. el código sigue el diseño).
+    - **Validación:** evalúa si el sistema **satisface los requisitos** especificados por el usuario (ej., el producto final hace lo que el cliente pidió).
+
+**Estrategias y proceso de pruebas**
+
+<img src="/img/entornos-de-desarrollo-modelo-espiral.jpg" alt="Representación del modelo en espiral" width="50%" />
+
+Siguiendo una metodología como el **modelo en espiral** , las pruebas se planifican y ejecutan de manera progresiva y secuencial:
+
+1. **Pruebas unitarias:** comienzan con la validación de cada **porción individual** de código.
+2. **Pruebas de integración:** ensamblan todas las partes del código para comprobar que su interconexión y funcionamiento conjunto cumplen con lo establecido en la fase de **diseño**.
+3. **Prueba de validación:** verifica que el sistema construido cumple con las especificaciones del **análisis de requisitos** de *software*.
+4. **Prueba de sistema:** fase final, que verifica el **funcionamiento total** del *software* y su interacción con otros elementos del sistema.
+
+:::info Recomendación
+Se recomienda que el **programador evite probar sus propios programas**, ya que la misma persona podría pasar por alto aspectos no considerados durante la codificación.
+:::
+
+### 2.- Tipos de prueba
+
+En la Ingeniería del Software, los enfoques fundamentales para realizar pruebas se centran en el conocimiento que se tiene de la estructura interna del código:
+
+* **Prueba de la Caja Negra (*Black Box Testing*):** se prueba la aplicación usando únicamente su **interfaz externa**, sin conocer o preocuparse por su implementación interna. El foco está en verificar que los **resultados de la ejecución son los esperados** para una entrada dada.
+
+* **Prueba de la Caja Blanca (*White Box Testing*):** se prueba la aplicación **desde dentro**, analizando y probando directamente el **código fuente** para localizar **estructuras incorrectas** o **ineficientes** en la implementación. Requiere un conocimiento específico de la lógica interna.
+
+#### 2.1.- Funcionales (pruebas de la caja negra)
+
+Las **pruebas funcionales** siguen el enfoque de la Caja Negra. Tienen como objetivo verificar que la aplicación o componente realiza las **funciones** que se esperan de él, basándose exclusivamente en sus entradas y salidas, sin considerar la estructura interna. Se enfocan en responder: "¿Puede el usuario hacer esto?" o "¿Funciona correctamente esta utilidad?"
+
+Dentro de las pruebas funcionales, se pueden destacar tres tipos de estrategias para la selección de casos de prueba:
+
+* **Particiones equivalentes:** consiste en reducir el número de casos de prueba creando **clases de equivalencia**. Se prueba solo un valor representativo de cada clase, asumiendo que el resultado es extrapolable a todos los demás valores de esa clase.
+* **Análisis de valores límite:** se eligen como entradas aquellos valores que se encuentran justo en los **límites de las clases de equivalencia**.
+* **Pruebas aleatorias:** consiste en generar un **gran volumen de entradas aleatorias** para alimentar la aplicación (usando generadores de prueba). Es más adecuado para aplicaciones no interactivas. 
+
+#### 2.2.- Pruebas estructurales (pruebas de la caja blanca)
+
+Las **pruebas estructurales** son el conjunto de pruebas de la **Caja Blanca** (*White Box Testing*). Se centran en verificar la **estructura interna** de los componentes de la aplicación, analizando **cómo** se ejecuta el programa, en lugar de solo el resultado (como hacen las pruebas funcionales).
+
+Su función principal es garantizar que:
+    - Se ejecutan **todas las instrucciones** del programa.
+    - **No existe código no usado** (*código muerto*).
+    - Se recorren los **caminos lógicos** del programa.
+
+**Criterios de cobertura lógica**
+
+El cumplimiento de estos criterios determina el nivel de seguridad en la detección de errores y el nivel de **cubrimiento** de la prueba:
+
+| Criterio de cobertura | Ejecución mínima requerida |
+| :--- | :--- |
+| Cobertura de sentencias | Cada **instrucción** del programa debe ser ejecutada, al menos, una vez |
+| Cobertura de decisiones | Cada **prueba lógica** (ej. la condición de un `if`) debe evaluarse al menos una vez a **cierto** y otra a **falso** |
+| Cobertura de condiciones | Cada **elemento individual** dentro de una condición compuesta (ej. `x<0` o `y>0`) debe evaluarse a **cierto** y a **falso** al menos una vez |
+| Cobertura de condiciones y decisiones | Se cumplen **simultáneamente** los dos criterios anteriores |
+| Cobertura de caminos | Se establece que se debe ejecutar al menos una vez cada **secuencia encadenada de sentencias** (*camino*) desde el inicio hasta el fin del programa |
+
+**Cobertura de caminos de prueba**
+
+Debido a que el número de caminos puede ser enorme, este criterio se reduce al **camino prueba**. La variante más rigurosa recomienda probar cada **bucle** de control tres veces:
+    1. Sin entrar en su interior (0 veces).
+    2. Ejecutándolo una vez.
+    3. Ejecutándolo dos veces.
+
+> **CUBRIMIENTO:** tarea realizada por el programador para verificar que todas las funciones, sentencias, decisiones y condiciones son susceptibles de ser ejecutadas y recorridas con éxito.
+
+Existen herramientas (ej. **Clover para Java**) que automatizan y facilitan estas pruebas de cubrimiento.
+
+#### 2.3.- Pruebas de regresión
+
+Las **pruebas de regresión** son la repetición de pruebas realizadas previamente para **verificar** que los cambios (correcciones de errores o nuevas mejoras) no han introducido **efectos no deseados** o **errores adicionales** (*errores colaterales*) en componentes que no fueron modificados. 
+
+- **Momento de ejecución:** deben llevarse a cabo **cada vez** que se realiza un cambio en el sistema.
+- **Objetivo:** asegurar que el sistema sigue funcionando correctamente y que la modificación no ha comprometido la integridad de otros componentes.
+- **Composición del Conjunto de Pruebas de Regresión:**
+    1.  Una **muestra representativa** que ejercite todas las funciones principales del *software*.
+    2.  Pruebas que se centran en las funciones que tienen mayor **probabilidad de verse afectadas** por el cambio.
+    3.  Pruebas que se centran directamente en los **componentes modificados**.
+* **Eficiencia:** para evitar que el número de pruebas crezca excesivamente, el diseño debe ser **selectivo**, incluyendo solo aquellas pruebas que cubran una o más clases de errores en las funciones principales del programa.
+* **Métodos:** se pueden realizar **manualmente** (seleccionando un subconjunto de casos) o utilizando **herramientas automáticas**.
+
+### 3.- Procedimientos y casos de prueba
+
+Una **prueba** es la ejecución de un programa bajo condiciones específicas para encontrar errores. Un **caso de prueba** es un artefacto documentado que consta de tres elementos definidos por el IEEE:
+
+    1. Un conjunto de entradas
+    2. Condiciones de ejecución
+    3. Resultados esperados
+
+Debido a la complejidad de las aplicaciones, es imposible probar todas las combinaciones posibles. Por lo tanto, el diseño de casos de prueba debe buscar un **compromiso** entre los **recursos consumidos** y la **probabilidad de detectar errores**.
+
+Existen tres procedimientos principales para el diseño de casos de prueba:
+
+- **Enfoque Funcional o de Caja Negra:**
+    - Se centra en **funciones, entradas y salidas**.
+    - Verifica que la salida es correcta sin verificar el proceso interno.
+    - Se utilizan técnicas como el **análisis de valores límite** y **clases de equivalencia**.
+- **Enfoque Estructural o de Caja Blanca:**
+    - Se centra en la **implementación interna** del programa.
+    - El objetivo es probar todos los **caminos de ejecución** posibles dentro del código.
+- **Enfoque Aleatorio:**
+    - Se centra en modelos estadísticos para elaborar casos de prueba.
+    - Se utilizan **generadores automáticos** de casos de prueba para alimentar la aplicación con entradas al azar.
+
+### 4.- Herramientas de depuración
+
+Cada IDE suministra herramientas de depuración esenciales para verificar el código y realizar pruebas estructurales y funcionales. 
+
+Durante el desarrollo de *software*, se distinguen dos tipos de errores:
+
+1.  **Errores de compilación (errores de codificación):** son fallos **sintácticos**. Estos errores **impiden que el programa se compile** y el IDE proporciona información inmediata para su corrección.
+2.  **Errores lógicos (Bugs):** no impiden la compilación, pero causan que el programa devuelva **resultados erróneos**, termine antes de tiempo, o no termine nunca.
+
+El **depurador** es la herramienta del IDE utilizada para supervisar la ejecución de programas compilados y localizar y eliminar estos **errores lógicos**. Permite suspender la ejecución, examinar y establecer valores de variables, y comprobar resultados de métodos o comparaciones.
+
+#### 4.1.- Puntos de ruptura
+
+Los **puntos de ruptura (*breakpoints*)** son marcadores que se establecen en cualquier **línea de código ejecutable** para detener temporalmente la ejecución del programa:
+    - Permiten al programador inspeccionar una parte específica del código sin necesidad de ejecutar el programa completo. Una vez que se alcanza el punto de ruptura, el programa se suspende.
+    - El programador puede **examinar las variables** para verificar sus valores y confirmar que son correctos, o iniciar una **ejecución paso a paso** para seguir el camino lógico que toma el programa a partir de ese punto.
+    - Se pueden insertar varios puntos de ruptura en un programa y se eliminan con la misma facilidad con la que se insertan.
+
+#### 4.2.- Tipos de ejecución
+
+Para poder depurar un programa, podemos ejecutar el programa de diferentes formas, de manera que en función del problema que queramos solucionar, nos resulte más sencillo un método u otro. Nos encontramos con lo siguientes tipo de ejecución: paso a paso por instrucción, paso a paso por procedimiento, ejecución hasta una instrucción, ejecución de un programa hasta el final del programa,
+
+    Algunas veces es necesario ejecutar un programa línea por línea, para buscar y corregir errores lógicos. El avance paso a paso a lo largo de una parte del programa puede ayudarnos a verificar que el código de un método se ejecute en forma correcta.
+    El paso a paso por procedimientos, nos permite introducir los parámetro que queremos a un método o función de nuestro programa, pero en vez de ejecutar instrucción por instrucción ese método, nos devuelve su resultado. Es útil, cuando hemos comprobado que un procedimiento funciona correctamente, y no nos interese volver a depurarlo, sólo nos interesa el valor que devuelve.
+    En la ejecución hasta una instrucción, el depurador ejecuta el programa, y se detiene en la instrucción donde se encuentra el cursor, a partir de ese punto, podemos hacer una depuración paso a paso o por procedimiento.
+    En la ejecución de un programa hasta el final del programa, ejecutamos las instrucciones de un programa hasta el final, sin detenernos en las instrucciones intermedias.
+
+Los distintos modos de ejecución, se van a ajustar a las necesidades de depuración que tengamos en cada momento. Si hemos probada un método, y sabemos que funciona correctamente, no es necesario realizar una ejecución paso a paso en él.
+
+En el IDE NetBeans, dentro del menú de depuración, podemos seleccionar los modos de ejecución especificados, y algunos más. El objetivo es poder examinar todas la partes que se consideren necesarias, de manera rápida, sencilla y los más clara posible.
+
+#### 4.3.- Examinadores de variables
+
+Durante el proceso de implementación y prueba de software, una de las maneras más comunes de comprobar que la aplicación funciona de manera adecuada, es comprobar que las variables vayan tomando los valores adecuados en cada momento.
+
+Los examinadores de variables, forman uno de los elementos más importantes del proceso de depuración de un programa. Iniciado el proceso de depuración, normalmente con la ejecución paso a paso, el programa avanza instrucción por instrucción. Al mismo tiempo, las distintas variables, van tomando diferentes valores. Con los examinadores de variables, podemos comprobar los distintos valores que adquiere las variables, así como su tipo. Esta herramienta es de gran utilidad para la detección de errores.
+Captura de pantalla en la que se muestra el examinador de variables de NetBeans, indicando su tipo y valor.
+
+En el caso del entorno de desarrollo NetBeans, nos encontramos con un panel llamado Ventana de Inspección. En la ventana de inspección, se pueden ir agregando todas aquellas variables de las que tengamos interés en inspeccionar su valor. Conforme el programa se vaya ejecutando, NetBeans irá mostrando los valores que toman las variables en al ventana de inspección.
+
+Como podemos apreciar, en una ejecución paso a paso, el programa llega a una función de nombre potencia. Esta función tiene definida tres variables. A lo largo de la ejecución del bucle, vemos como la variable result, van cambiando de valor. Si con valores de entrada para los que conocemos el resultado, la función no devuelve el valor esperado, "Examinando las variables" podremos encontrar la instrucción incorrecta.
