@@ -1148,3 +1148,430 @@ Una vez instalado el segundo SO, al iniciar el equipo, aparece una ventana del *
 - El usuario tiene un tiempo límite (por defecto 30 segundos) para elegir qué SO quiere iniciar.
 
 #### 3.2.- Configuración de gestores de arranque
+
+El proceso de arranque de un PC depende de su *firmware* (BIOS o UEFI) y del esquema de particionamiento (MBR o GPT).
+
+**Proceso de arranque**
+
+* **BIOS-MBR:** el programa POST verifica el *hardware*, la BIOS busca el dispositivo de arranque, accede al sector **MBR** del disco, lee la **partición activa**, y ejecuta el código de arranque inicial de esa partición para cargar el SO.
+* **UEFI-GPT:** el *firmware* UEFI inicializa los dispositivos y cede el control a los **servicios de arranque de UEFI**, que localizan un gestor de arranque o un cargador de sistema en el disco para iniciar el SO.
+
+**Estudio del arranque de Windows 10**
+
+Al instalar Windows 7 o posterior, se crea automáticamente una partición de sistema que es crucial para el arranque dual:
+
+- **Partición *Reservado para el sistema*:** partición separada (inicialmente 550 MB en Windows 10) que contiene los archivos necesarios para el gestor de arranque, utilidades de recuperación y seguridad.
+    - Esta partición es la **Partición Activa** y **Partición de Sistema**.
+    - Windows **la protege** especialmente: no le asigna letra de unidad y **no aparece** en el Explorador de Windows.
+- **Partición de Arranque:** es donde está **instalado el sistema operativo** (ej. la partición de 50 GB donde reside Windows).
+- **Regla de Instalación Dual:** solo puede existir **una partición de sistema** por equipo. Las instalaciones subsiguientes de Windows la reconocen y simplemente **actualizan su contenido** para incluir las nuevas opciones en el menú de arranque.
+
+> **Importante:** una partición donde Windows no está arrancado (ej. la partición del primer Windows) es considerada solo una **partición de Datos** y puede ser formateada o eliminada. Sin embargo, la partición de arranque actual (C:) no permite ser eliminada ni formateada.
+
+**Configuración del gestor de arranque `bcd`**
+
+Desde Windows Vista, el proceso de inicio se basa en los ficheros de configuración de arranque:
+    - **`bootmgr`:** es el primer archivo que se ejecuta en la partición de sistema (tras ser leído el MBR).
+    - **`bcd.log` (*Boot Configuration Data*):** es el **gestor de arranque** propiamente dicho. El `bootmgr` lo lee para obtener las entradas de los sistemas operativos disponibles.
+        - Si hay **más de una entrada**, muestra el menú de arranque.
+        - Si hay **solo una entrada**, el gestor no se muestra y el inicio procede directamente con `winload.exe`.
+
+**Programa `bcdedit`**
+    - Herramienta oficial de Windows para **editar el archivo `bcd.log`**.
+    - Permite eliminar, editar o agregar entradas al menú de arranque, incluso configurando la carga de sistemas operativos como GNU/Linux.
+    - Útil para **cambiar la descripción** por defecto de los sistemas operativos.
+    - Existe una utilidad gráfica no oficial y gratuita llamada **EasyBCD** con propósitos similares.
+
+:::info Otros gestores de arranque y compatibilidad
+**GNU/Linux** utiliza el gestor de arranque **GRUB**, que sí reconoce las particiones de Windows sin configuración adicional.
+:::
+
+:::tip Recomendaciones para el arranque dual
+1.  **Orden de Instalación (Microsoft):** se deben instalar los sistemas operativos Windows por **orden de antigüedad** (primero el más antiguo). Si se instala Windows 7 después de Windows 10, los archivos más antiguos de Windows 7 pueden sobrescribir e inutilizar el gestor de arranque de Windows 10.
+2.  **Windows y Linux:** si se desea instalar ambos, se debe instalar **Windows primero**. Luego, al instalar Linux, el gestor **GRUB** reconocerá la instalación de Windows y creará la entrada correspondiente. 
+:::
+
+### 4.- Terminal de comandos de Windows
+
+La terminal de comandos de Windows (o **Símbolo de sistema**) es una interfaz de texto que permite realizar las mismas tareas de gestión de archivos (crear, copiar, mover, eliminar, renombrar) que se hacen gráficamente con el "Explorador de Windows".
+
+#### 4.1.- Primeros comandos
+
+* **Acceso:** se abre ejecutando `cmd` o seleccionando "Símbolo de sistema" en el menú de Windows.
+* **Directorios y unidades:** un directorio es una zona para almacenar ficheros. Cada partición lógica (ej. `C:`) es la **raíz** de un **árbol de directorios** distinto.
+* **Ruta de archivo:** indica la ubicación completa del archivo.
+* **Prompt del sistema:** indica la ruta actual. Espera una orden y se devuelve cuando el comando ha finalizado.
+* **Sintaxis:** las órdenes tienen la forma `Comando [Parámetros] [Opciones o modificadores]`.
+* **Ejecución de ficheros:** los archivos ejecutables (`.exe`, `.com`, `.bat`) se ejecutan tecleando su ruta y nombre. Si la ruta tiene espacios, debe ir entre comillas (ej. `"C:\Program Files\..."`).
+* **Sensibilidad:** Windows **no diferencia** mayúsculas de minúsculas en nombres de archivo, pero sí permite el uso de **tildes**.
+* **Ayuda:** se puede solicitar ayuda sobre cualquier comando usando `/?` o `help comando`. El símbolo `|` se usa para filtrar la salida de un comando con otro (ej. `comando /? | more` para ver la ayuda pantalla a pantalla).
+
+**Comandos esenciales y de gestión de particiones**
+
+| Comando | Función | Notas |
+| :--- | :--- | :--- |
+| `help` | Muestra todos los comandos disponibles | `comando /?` o `help comando` muestra la ayuda específica |
+| `ECHO` | Repite un mensaje en pantalla | `ECHO Mensaje` |
+| `CLS` | Limpia la pantalla | |
+| `VER` | Muestra la versión de Windows | |
+| `DATE` | Muestra o cambia la fecha actual | Usar `/T` para solo mostrar la fecha sin pedir entrada |
+| `TIME` | Muestra o cambia la hora actual | Usar `/T` para solo mostrar la hora sin pedir entrada |
+| `LABEL` | Crea o modifica la **etiqueta** de una partición | `LABEL [unidad:]` |
+| `MORE` | Filtra la salida de un comando para mostrarla **pantalla a pantalla** | |
+| `FORMAT` | **Formatea** una partición | `/FS:sistArch` especifica el sistema de archivos (ej., NTFS) |
+| `DEFRAG` | **Desfragmenta** la unidad | No es necesario en discos SSD/pendrive por su acceso aleatorio optimizado |
+| `CHKDSK` | **Comprueba el disco**. Da información de unidades de asignación libres/defectuosas. | `/F` corrige los errores encontrados y guarda archivos dañados en la carpeta `found000`. Se ejecuta automáticamente tras apagados incorrectos. |
+
+#### 4.2.- Comandos para directorios y ficheros
+
+Esta sección detalla la gestión de archivos y directorios mediante la terminal de Windows, incluyendo la navegación por rutas y la manipulación de atributos.
+
+**Estructura base y rutas**
+
+Tras la instalación de Windows, la raíz (`C:\`) contiene carpetas principales: `Windows` (archivos del sistema), `Program Files` (programas de usuario por defecto) y `Users` (contiene carpetas individuales de usuario).
+
+- **Rutas absolutas:** empiezan desde la **raíz** y siempre se escriben igual, independientemente de dónde esté situado el usuario.
+- **Rutas relativas:** empiezan a partir del **directorio activo** actual, por lo que su sintaxis cambia según la ubicación.
+- **Directorio actual (`.`):** representa el directorio en el que estás.
+- **Directorio padre (`..`):** representa el directorio inmediatamente superior.
+
+**Comandos para directorios**
+
+| Comando | Alias | Función | Notas |
+| :--- | :--- | :--- | :--- |
+| `CD` | | Cambiar de directorio activo | `CD ..` (sube al padre), `CD \` (va a la raíz) |
+| `DIR` | | Visualiza directorios y ficheros | `/s` (incluye subdirectorios), `/p` (pausa al llenar la pantalla) |
+| `MKDIR` | `MD` | Crea un nuevo directorio | |
+| `RMDIR` | `RD` | Borra un directorio | `/s` (borra aunque no esté vacío, incluyendo subdirectorios), `/q` (borrado silencioso, sin confirmación) |
+| `XCOPY` | | Copia directorios con todos sus ficheros | `/E` (copia todos los subdirectorios, incluso los vacíos, realizando una copia idéntica) |
+
+**Comandos para ficheros**
+
+| Comando | Función | Notas |
+| :--- | :--- | :--- |
+| `COPY` | Copia ficheros | Se usa cuando se copian solo ficheros |
+| `DEL` | Borra ficheros | `/S` (borra ficheros en subdirectorios) |
+| `REN` | Renombra un fichero | Solo se indica el nombre antiguo y el nombre nuevo |
+| `MOVE` | Mueve un fichero a otro directorio | Permite mover y renombrar el fichero simultáneamente |
+| `TYPE` | Muestra en pantalla el contenido de un fichero de texto plano | |
+
+**Atributos de archivos. Comando `ATTRIB`**
+
+El comando `ATTRIB` se utiliza para ver o modificar las características de un fichero o directorio. Los signos `+` añaden el atributo y los signos `-` lo quitan.
+
+| Atributo | Símbolo | Significado |
+| :--- | :--- | :--- |
+| Lectura | `R` | El archivo se abre en modo solo lectura, no se puede modificar ni borrar |
+| Oculto | `H` | El archivo no se muestra al listar con `DIR` (ni por defecto en el Explorador de Windows) |
+| Sistema | `S` | Archivo esencial del sistema (no se puede borrar fácilmente) |
+| Archivo | `A` | Archivo de lectura y escritura normal |
+
+> **Nota:** para borrar un archivo con el atributo `R`, `H` o `S` (o cualquier combinación) primero debe ser eliminado el atributo con el signo `-` (ej. `attrib -R archivo.txt`).
+
+#### 4.3.- Direccionamiento y tuberías
+
+El direccionamiento y las tuberías permiten manipular las entradas y salidas de los comandos más allá de la pantalla del terminal.
+
+**Operadores de direccionamiento de salida**
+
+Por defecto, la salida de un comando es la terminal (*salida estándar*). Los operadores de salida redirigen esta información hacia un archivo.
+
+| Operador | Nombre | Función | Ejemplo |
+| :---: | :--- | :--- | :--- |
+| `>` | Redirección | Guarda la salida en un archivo. Si el archivo **ya existe, lo sobrescribe**. | `dir /S > archivo.txt` (crea o sobrescribe `archivo.txt` con el listado) |
+| `>>` | Adición | Guarda la salida en un archivo. Si el archivo existe, la nueva información se añade al final del contenido existent | `date /T >> Listado.txt` (añade la fecha a `Listado.txt`) |
+
+> **Potencia del terminal:** estos operadores permiten ejecutar varios comandos seguidos (`date /T > L.txt`, `time /T >> L.txt`, `dir /S >> L.txt`) para construir un archivo de informe organizado y completo.
+
+**Tuberías y Filtros: `MORE`, `SORT` y `FIND`**
+
+El concepto de **tubería** es introducir la información de salida de un comando en un canal (la tubería) para que sea procesada como entrada por un **filtro** (otro comando), en lugar de mostrarla en la pantalla.
+
+El operador de tubería es el símbolo `|`.
+
+| Comando (filtro) | Función | Modificadores |
+| :--- | :--- | :--- |
+| `MORE` | Filtra la información de salida para mostrarla **pantalla a pantalla** | Se pulsa `Intro` para avanzar |
+| `SORT` | **Ordena** un conjunto de filas de texto | `/R` (Orden inverso o *Reverse*). `/+n` (Especifica la **columna** por la que ordenar). |
+| `FIND` | **Busca una cadena de texto** y devuelve las líneas que la contienen | `/V` (Líneas que **no** contienen la cadena). `/C` (Solo cuenta el **número** de líneas). `/N` (Muestra las líneas con su **número de línea**). `/I` (Búsqueda **sin distinción** de mayúsculas/minúsculas). |
+
+> **Ejemplo de tubería:** `attrib /s | more` (muestra los atributos de todos los archivos del árbol C, pausando cada vez que la pantalla se llena).
+
+**Ficheros por lotes (BATCH) y *Scripts***
+
+Un **fichero por lotes** (*batch file*) es un archivo de **texto plano** (extensión `.bat`) que contiene múltiples órdenes. Al ejecutarse, ejecuta una tarea tras otra **sin intervención del usuario**.
+
+* **Ejemplo:** un fichero `lote.bat` puede contener los comandos `date /T`, `time /T`, y `dir /S` para generar un informe completo.
+* **Comando `@echo off`:** se usa al inicio de un fichero `.bat` para desactivar la visualización de los comandos mientras se ejecutan.
+* **Ejecución:** se ejecuta escribiendo el nombre del archivo en la terminal (`lote.bat`) o haciendo doble clic en el entorno gráfico.
+
+> **Nota:** **PowerShell** es una consola moderna y más potente que `cmd` para la ejecución de scripts.
+
+## UD4. Administración básica del sistema Windows
+
+![Esquema Unidad 4 Sistemas Informáticos](../../static/img/sistemas-informaticos-unidad-4.jpg)
+
+### 1.- Administración de usuarios y grupos
+
+La administración de usuarios y grupos es fundamental para controlar el acceso y los permisos en Windows. Las **cuentas de usuario** están diseñadas para uso individual, mientras que los **grupos** facilitan la administración de múltiples usuarios a la vez.
+
+Windows ofrece dos programas gráficos para gestionar usuarios y grupos:
+
+1. **Cuentas de usuario:**
+    - Accesible desde el **Panel de Control**.
+    - Está disponible en **todas las versiones de Windows**.
+
+2. **Usuarios y grupos locales:**
+    - Accesible desde la herramienta **Administración de equipos**.
+    - Es la herramienta **más completa** para administración.
+    - **No está incluida en las versiones Home**, por lo que se utiliza por defecto en las versiones **Profesionales** o superiores.
+
+Al instalar Windows, el sistema crea automáticamente varias cuentas integradas: **Administrador** e **Invitado**. Ambas cuentas integradas se encuentran **deshabilitadas** por defecto y deben habilitarse manualmente si se desean utilizar. Aparte de estas, se crea una cuenta de usuario solicitada durante la instalación (ej. "Pepito") que tiene **permisos de administrador**.
+
+#### 1.1.- Cuentas de usuario en panel de control
+
+La herramienta "Cuentas de usuario" en el Panel de Control permite gestionar las cuentas y definir sus niveles de privilegio:
+
+- **Cuenta de usuario estándar:** posee **privilegios limitados**. Puede usar la mayoría de los programas, pero **no** puede instalar/desinstalar *software* o *hardware*, eliminar archivos esenciales del sistema, o cambiar configuraciones que afecten a otros usuarios.
+- **Cuenta de administrador:** tiene el **máximo control** sobre el equipo. Solo debe usarse para tareas de administración que **afectan a otros usuarios** (ej., configuración de seguridad, instalación de *software* y acceso a todos los archivos).
+- **Cuenta Invitado:** está deshabilitada por defecto y no aparece en la ventana principal de "Cuentas de usuario".
+
+Para crear una nueva cuenta, se accede a **Administrar otra cuenta**, se selecciona **Crear una nueva cuenta**, se asigna un nombre y se elige el tipo de privilegio (`Estándar` o `Administrador`).
+
+> **Eliminación:** Borrar una cuenta es **definitivo**. No se recuperan los permisos al crear una cuenta con el mismo nombre, ya que el sistema asigna un **nuevo SID** (*Security Identifier*) diferente al de la cuenta antigua.
+
+#### 1.2.- *Usuarios y grupos* desde *Administración de equipos*
+
+Esta herramienta, también accesible ejecutando*`lusrmgr.msc`, es la opción preferida y más completa para administrar usuarios y grupos en versiones de Windows **no Home**.
+
+Los **grupos** simplifican la administración al permitir asignar permisos a un conjunto de usuarios en lugar de hacerlo individualmente (ej. compartir una carpeta a un grupo entero).
+
+**Tipos de grupos:**
+    - **Grupos creados por el administrador.**
+    - **Grupos integrados:** cuentas de grupo creadas por Windows.
+    - **Grupos especiales (de seguridad):** grupos implícitos basados en la actividad que no aparecen explícitamente pero pueden recibir permisos.
+
+> **Diferencia clave:** El grupo `Usuarios avanzados` tiene la capacidad adicional de **instalar aplicaciones**, a diferencia del grupo `Usuarios` estándar.
+
+Las propiedades de un usuario se gestionan en varias pestañas:
+
+- **Solapa "General":**
+    - Define el nombre completo y la descripción.
+    - **Opciones de contraseña:**
+        - `El usuario debe cambiar la contraseña en el siguiente inicio de sesión`
+        - `El usuario no puede cambiar la contraseña`
+        - `La contraseña nunca caduca`
+    - Permite **deshabilitar o habilitar** la cuenta.
+
+- **Solapa "Miembro de":**
+    - Muestra los grupos a los que pertenece el usuario.
+    - Permite **agregar o eliminar** al usuario de grupos.
+
+#### 1.3.- UAC (User Account Control, Control de Cuentas de Usuario)
+
+El **UAC (Control de Cuentas de Usuario)** es una característica de seguridad de Windows que lanza una **alerta de seguridad** cada vez que se intenta realizar una acción en el sistema que requiere privilegios de administrador (ej. instalación de programas). El UAC busca prevenir cambios no autorizados por *software* malicioso o por errores accidentales del usuario.
+- La alerta es configurable y se gestiona en el panel **Cuentas de usuario**.  Existen **cuatro niveles** de configuración, desde el más restrictivo (**notificar siempre**) hasta el más permisivo (**no notificar nunca**). 
+
+### 2.- Seguridad local. Permisos locales o NTFS.
+
+La **seguridad local** permite a los usuarios proteger sus archivos y carpetas en un mismo PC, controlando el acceso de otros usuarios. Para que esta funcionalidad esté disponible, la partición de disco **debe ser de tipo NTFS**.
+
+#### 2.1.- Solapa *Seguridad*
+
+Si la partición es FAT32, se puede convertir a NTFS sin perder datos mediante el comando: `convert unidad: /fs:ntfs`.
+
+- **Solapa Compartir:** permisos aplicados cuando se accede al recurso a través de la red (desde otro equipo).
+- **Solapa Seguridad:** **permisos locales** o **NTFS** que se aplican a los usuarios cuando acceden al recurso desde el mismo equipo.
+
+#### 2.2.- Modificar permisos estándar. Botón editar de la solapa *Seguridad*.
+
+Los permisos se conceden a **usuarios y grupos**. Por defecto, se **heredan** de la carpeta padre. El **propietario** del objeto (quien lo creó) y los **administradores** pueden modificar estos permisos (un administrador puede convertirse en propietario de cualquier objeto).
+
+Al pulsar **Editar** en la solapa Seguridad, se accede a la modificación de los permisos estándar:
+
+**Permisos estándar (de menos a más potentes)**
+
+| Permiso | Aplicación en carpetas | Aplicación en archivos |
+| :--- | :--- | :--- |
+| Mostrar el contenido de la carpeta | Permite ver nombres de archivos y subcarpetas (solo en carpetas) | N/A |
+| Lectura | Incluye `Mostrar contenido` más ver atributos, propietarios y permisos | Permite leer el archivo, ver atributos y permisos |
+| Lectura y ejecución | Incluye `Lectura` más la capacidad de navegar por la carpeta y ejecutar programas | Permite ejecutar programas |
+| Escritura | Incluye `Lectura y ejecución`, crear archivos/subcarpetas y cambiar atributos | Permite cambiar el contenido y cambiar atributos |
+| Modificar | Incluye `Escritura` más la capacidad de borrar la carpeta | Permite borrar el archivo |
+| Control total | Incluye `Modificar` más cambiar permisos y cambiar propietario | Incluye `Modificar` más cambiar permisos y cambiar propietario |
+
+:::info ¿Cómo calcular los permisos de un objeto?
+Cuando un usuario pertenece a varios grupos con permisos configurados, se aplican dos reglas fundamentales:
+    1.  **Regla de denegación:** si el **usuario** o **cualquiera de sus grupos** tiene un permiso **denegado** explícitamente, el usuario **NO tendrá** ese permiso, incluso si otros grupos lo permiten.
+    2.  **Regla de permisos acumulativos:** si **no** hay denegaciones explícitas, el usuario tendrá el **máximo** nivel de permiso permitido por el usuario mismo y por todos sus grupos.
+:::
+
+#### 2.3.- Botón *Opciones avanzadas* en solapa *Seguridad*
+
+El botón **Opciones Avanzadas** accede a configuraciones de seguridad más detalladas:
+
+- **Deshabilitar/Habilitar la Herencia:** la herencia de permisos de la carpeta padre está habilitada por defecto. Para modificar permisos heredados que aparecen sombreados, es necesario **deshabilitar la herencia**.
+    - Al deshabilitar, se puede elegir entre:
+        - **Convertir los permisos heredados en permisos explícitos:** se quita la herencia, pero se mantienen todos los permisos que existían.
+        - **Quitar todos los permisos heredados.**
+- **Cambiar el propietario del objeto.**
+- **Permisos especiales:** en esta ventana, los permisos estándar se desglosan en **13 permisos especiales** (por ejemplo, `Lectura` se divide en `Leer datos`, `Leer atributos`, `Leer permisos`, etc.).
+- **Solapa `Acceso efectivo`:** permite **consultar** los permisos reales y concretos que tiene un usuario o grupo específico en el objeto.
+
+#### 2.4.- Recomendaciones y ejemplo final
+
+Para evitar el caos en la administración de permisos locales (NTFS), es importante seguir estas pautas:
+    - **Evitar la denegación:** se debe evitar en lo posible denegar permisos explícitamente.
+    - **Priorizar grupos:** administrar permisos preferiblemente a **grupos**, en lugar de a usuarios individuales, para una gestión más eficiente.
+    - **Priorizar carpetas:** administrar permisos preferiblemente en **carpetas**, en lugar de en archivos.
+
+La estrategia ideal es aplicar el permiso más amplio a un grupo grande (ej. Lectura) y usar denegaciones solo mínimamente para **excluir** usuarios o grupos específicos.
+
+El comportamiento de los permisos de un objeto (conservarlos o heredarlos) depende de si la acción es una copia o un movimiento, y si se realiza dentro de la misma partición NTFS o entre particiones distintas.
+
+| Operación | Destino | Permisos resultantes | Analogía |
+| :--- | :--- | :--- | :--- |
+| Copiar (misma o diferente partición) | Siempre hereda | Se considera la creación de un **objeto nuevo** | Es una acción de escritura que crea un nuevo objeto en el destino |
+| Mover (dentro de la misma partición) | Conserva los originales | Solo se **cambia la ruta** del objeto; no hay nueva escritura de datos | Es una operación rápida que solo actualiza el puntero en la tabla de archivos |
+| Mover (entre diferentes particiones) | Hereda del destino | Se requiere una **escritura física** en la nueva partición | Equivale a Copiar y luego Borrar el original | 
+
+### 3.- Registro de Windows. Directivas de grupo y seguridad local.
+
+Windows 10 permite una gestión centralizada de la seguridad y configuración del sistema mediante **Directivas**. Estas reglas se configuran a través de consolas dedicadas:
+    - **Directivas de seguridad local:** se utilizan para aplicar restricciones de seguridad sobre **cuentas de usuario y contraseñas**.
+    - **Directivas de grupo local:** permiten configurar equipos (local o remota), **instalar o eliminar aplicaciones**, y **restringir derechos** de los usuarios.
+
+#### 3.1.- Registro de Windows
+
+El **Registro de Windows** es una base de datos jerárquica que almacena el **historial completo** y toda la configuración esencial del sistema operativo.
+    - El Registro crece constantemente, lo que contribuye a que el ordenador **tarde más en arrancar** con el tiempo.
+    - El Registro es muy delicado y **no debe tocarse** manualmente a menos que se sepa exactamente lo que se está haciendo, ya que la modificación incorrecta puede inutilizar el sistema.
+    - Incluso tras desinstalar un *software*, su entrada permanece en el Registro, permitiendo al sistema saber que ya fue instalado previamente.
+
+**Ejecución del editor de registro y copia de seguridad**
+
+1.  **Editor:** el registro se edita manualmente con el programa `regedit`.
+2.  **Copia de seguridad:** antes de cualquier modificación, es **crítico** realizar una copia de seguridad total. En el Editor de registro, se selecciona el total del equipo y se usa *Archivo / Exportar* para obtener un fichero de texto con extensión `.reg`.
+3.  **Restauración:** en caso de error grave, se utiliza *Archivo / Importar* para restaurar el sistema.
+
+Existen herramientas (ej. **RegClean, CCleaner, Regseeker**) que son más amigables que `regedit`. Su función es **borrar entradas innecesarias** e intentar corregir posibles errores de forma automática. **Regseeker**, por ejemplo, puede realizar una limpieza automática. Además, es útil para **desinstalar aplicaciones** que no ofrecen opción de desinstalación en *Agregar o quitar programas*. 
+
+#### 3.2.- Directivas de grupo o política local
+
+Las **Directivas de grupo local** son un conjunto de reglas que permiten gestionar de forma centralizada la configuración de seguridad y operación de un equipo Windows.
+    - **Acceso:** se abre ejecutando el programa `gpedit.msc` como administrador.
+    - **Función:** permite modificar el Registro de Windows de forma más amigable.
+    - **Alcance (Sin Windows Server):** las políticas son **locales** y controlan solo los aspectos de la máquina actual (*grupo de trabajo*).
+
+**Aplicación y configuración**
+
+- **Tipos de configuración:**
+    - **Configuración del equipo:** las directivas aquí definidas tienen **preferencia** en caso de conflicto.
+    - **Configuración del usuario:** directivas aplicables a usuarios individuales.
+- **Ejemplos de acciones:** deshabilitar el Administrador de equipos, modificar la configuración de red, obligar a un fondo de escritorio, o asignar *scripts* ejecutables al encendido/apagado/inicio/cierre de sesión.
+- **Valores de directiva:**
+    1.  **No configurada:** se aplica el criterio por defecto.
+    2.  **Habilitada:** la directiva se pone en marcha.
+    3.  **Deshabilitada:** se impide la ejecución de la directiva.
+
+#### 3.3.- Directivas de seguridad local
+
+Las **Directivas de seguridad local** se enfocan en aplicar restricciones de seguridad específicas sobre cuentas de usuario y contraseñas. Se puede acceder directamente ejecutando `SecPol.msc`, o a través del editor de directivas de grupo (`gpedit.msc`) navegando a *Configuración de seguridad*.
+
+**Directivas de cuenta**
+
+Se dividen en políticas de contraseña y políticas de bloqueo:
+
+| Directiva | Categoría | Función |
+| :--- | :--- | :--- |
+| Exigir el historial de contraseñas | Contraseña | Impide que el usuario reutilice sus contraseñas más recientes |
+| Complejidad de la contraseña | Contraseña | Obliga a las contraseñas a cumplir requisitos |
+| Longitud mínima de la contraseña | Contraseña | Indica el número mínimo de caracteres requeridos |
+| Vigencia máxima/mínima | Contraseña | Define el tiempo máximo antes de que la contraseña caduca y el tiempo mínimo que debe transcurrir antes de poder cambiarla de nuevo |
+| Umbral de bloqueo de cuenta | Bloqueo | Número de intentos erróneos de contraseña permitidos antes de bloquear la cuenta |
+| Duración del bloqueo de cuenta | Bloqueo | Tiempo que la cuenta permanecerá bloqueada |
+| Restablecer el bloqueo | Bloqueo | Indica la frecuencia con la que el contador de intentos erróneos se pone a cero | 
+
+### 4.- Herramientas del sistema. Herramientas administrativas.
+
+#### 4.1.- Introducción
+
+Aunque el aspecto de Windows varíe, las **herramientas integradas** son esencialmente las mismas; las diferencias radican en cómo acceder a ellas. En Windows 10:
+
+- **Tecla Windows + R:** abre el cuadro **Ejecutar**, donde se puede escribir directamente el nombre del programa.
+* **Menú Contextual de Inicio (clic derecho en el botón Inicio):** proporciona acceso rápido a herramientas administrativas importantes.
+
+Las herramientas clásicas de gestión (`Panel de Control`, `Configuración`, y el menú contextual de `Equipo > Propiedades` y `Administrar`) siguen siendo importantes.
+
+#### 4.2.- Cuotas de disco
+
+La herramienta **Cuotas de disco** permite **limitar el espacio** que cada usuario puede utilizar para guardar datos en una partición.
+
+Esta funcionalidad puede habilitarse de dos maneras:
+
+1. **A través del Explorador de Windows**
+    - Accede a **Propiedades** de la unidad (volumen de disco).
+    - Selecciona la solapa **Cuota** y pulsa **"Mostrar la configuración de cuota"**.
+    - Se marca **"Habilitar la administración de disco"** y se definen dos límites:
+        * **"Limitar espacio en disco a..."**: El límite absoluto que no se puede superar.
+        * **"Establecer el nivel de advertencia en..."**: El umbral en el que se notifica al usuario que se está acercando al límite.
+
+2. **A través de Directivas de grupo**
+    - Se accede a **Configuración del equipo / Plantillas administrativas / Sistema / Cuotas de disco**.
+    - **Diferencia:** La cuota establecida por directiva es la suma de lo admitido entre **todas las unidades** del PC.
+
+#### 4.3.- Desfragmentar y Comprobar unidad
+
+La **desfragmentación** es el proceso que ayuda a reorganizar los archivos para que sus unidades de asignación (**clústeres**) queden **contiguas** en el disco:
+    - Aumenta el rendimiento y reduce el tiempo que tarda el cabezal del disco duro en encontrar la información (ya que el archivo ya no está disperso).
+    - La desfragmentación **no recupera espacio** perdido en los clústeres.
+    - Se puede acceder buscando el programa o mediante `Propiedades de la unidad > Herramientas`. Por defecto, se ejecuta con una **programación semanal**, pero se puede anular.
+    - La operación se puede ejecutar en la terminal con `defrag [unidad:]`.
+    - Las unidades **SSD no se deben desfragmentar** porque están optimizadas para lectura aleatoria y tienen un número limitado de escrituras. Se debe anular la Ejecución programada en estos casos.
+
+:::note Comprobar errores
+La opción **Comprobar errores** (ubicada junto al desfragmentador en la solapa Herramientas) es la interfaz gráfica para ejecutar el comando `chkdsk /F [unidad:]`, que busca y repara errores en el sistema de archivos de la unidad.
+:::
+
+#### 4.4.- Programador de tareas
+
+El **Programador de tareas** es una herramienta que permite **programar la ejecución automática** de aplicaciones, utilidades o archivos por lotes en momentos específicos.
+    - Se accede desde la herramienta **Administración de equipos**.
+    - Para cambiar las configuraciones que afectan al sistema, es necesario **iniciar sesión como administrador**. Si no se inició como administrador, solo se pueden modificar las tareas que afectan a la cuenta de usuario actual.
+
+#### 4.5.- Protección del sistema. Puntos de restauración.
+
+La **Protección del sistema** es una funcionalidad de Windows que permite **Restaurar el sistema** a un **punto anterior** de estabilidad, lo cual revierte la configuración y elimina los cambios realizados (*software* malintencionado, controladores defectuosos, errores de usuario, etc.) desde la creación de dicho punto. La protección del sistema viene **deshabilitada** por defecto porque los puntos de restauración consumen espacio en disco.
+
+**Creación de un Punto de Restauración (manual)**
+    1. Abrir **Propiedades** en "Equipo".
+    2. Ir a la pestaña **Protección del sistema**.
+    3. Pulsar **Configurar** y seleccionar **"Activar protección del sistema"**.
+    4. Definir el **espacio máximo** de disco que pueden ocupar los puntos de restauración.
+    5. Pulsar el botón **Crear**, asignar un nombre al punto y confirmar.
+
+:::note Importante
+Windows crea automáticamente puntos de restauración periódicamente, o cuando se instalan controladores o *software* considerados importantes. Si el espacio de disco asignado se llena, Windows **elimina el punto de restauración más antiguo**.
+:::
+
+#### 4.6.- Configuración. Actualización y seguridad.
+
+La utilidad **Actualización y Seguridad** centraliza varias herramientas de mantenimiento y seguridad en Windows 10:
+
+- **Windows Update:** servicio de actualizaciones automáticas de Windows.
+    - Permite configurar un máximo de 18 horas al día en las que el sistema **no se reiniciará** por actualizaciones.
+    - Hay opciones avanzada que permiten desactivar las actualizaciones automáticas por un tiempo limitado.
+    - Puede deshabilitarse permanentemente, aunque no es recomendable ya que las actualizaciones de seguridad son vitales.
+- **Windows Defender:** centro de seguridad integrado de Windows.
+    - Incluye un **antivirus**, **antispyware** y el **firewall** de Windows.
+    - Si se instala otro antivirus, se debe **desactivar** el de Defender para evitar conflictos.
+- **Copias de seguridad:** herramienta para crear copias de seguridad de carpetas y de la instalación de Windows.
+- **Recuperación (Restablecer Windows):** permite reinstalar Windows sin necesidad de un CD o ISO. Ofrece dos opciones:
+    - **Mantener mis archivos:** se elimina *software* y se restablece Windows, pero se **conservan los archivos** del usuario.
+    - **Quitar todo:** restablece Windows a su estado inicial. Se puede elegir entre eliminar solo la unidad donde está Windows o **todas las unidades** (borrando todas las particiones). 
+
+---
+
+*Fin de la 1ª Evaluación*
+
+---
