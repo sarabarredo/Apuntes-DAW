@@ -790,6 +790,8 @@ El programa `jar` también permite ver el contenido (`jar tf semaforo.jar`) y de
 
 ## UD3.- Diseño y realización de pruebas
 
+![Esquema Unidad 3 Entornos de Desarrollo](../../static/img/entornos-de-desarrollo-unidad-3.jpg)
+
 ### 1.- Planificación de las pruebas
 
 Durante el desarrollo de *software* es inevitable incurrir en errores (de especificación, diseño o codificación). Por ello, es necesario un conjunto de pruebas para asegurar que el producto es **correcto** y **cumple con los requisitos** del usuario.
@@ -919,24 +921,120 @@ Los **puntos de ruptura (*breakpoints*)** son marcadores que se establecen en cu
 
 #### 4.2.- Tipos de ejecución
 
-Para poder depurar un programa, podemos ejecutar el programa de diferentes formas, de manera que en función del problema que queramos solucionar, nos resulte más sencillo un método u otro. Nos encontramos con lo siguientes tipo de ejecución: paso a paso por instrucción, paso a paso por procedimiento, ejecución hasta una instrucción, ejecución de un programa hasta el final del programa,
+El depurador de un IDE permite ejecutar un programa de diversas maneras para simplificar la detección de errores lógicos:
 
-    Algunas veces es necesario ejecutar un programa línea por línea, para buscar y corregir errores lógicos. El avance paso a paso a lo largo de una parte del programa puede ayudarnos a verificar que el código de un método se ejecute en forma correcta.
-    El paso a paso por procedimientos, nos permite introducir los parámetro que queremos a un método o función de nuestro programa, pero en vez de ejecutar instrucción por instrucción ese método, nos devuelve su resultado. Es útil, cuando hemos comprobado que un procedimiento funciona correctamente, y no nos interese volver a depurarlo, sólo nos interesa el valor que devuelve.
-    En la ejecución hasta una instrucción, el depurador ejecuta el programa, y se detiene en la instrucción donde se encuentra el cursor, a partir de ese punto, podemos hacer una depuración paso a paso o por procedimiento.
-    En la ejecución de un programa hasta el final del programa, ejecutamos las instrucciones de un programa hasta el final, sin detenernos en las instrucciones intermedias.
+- **Ejecución paso a paso (por instrucción):** ejecuta el programa **línea por línea** para verificar el flujo y corregir errores lógicos.
+- **Ejecución paso a paso (por procedimiento):** permite saltarse la ejecución interna de un método o función, ejecutándolo por completo y devolviendo solo el **resultado**. Es útil cuando se sabe que el procedimiento ya funciona correctamente y solo interesa el valor que devuelve.
+- **Ejecución hasta una instrucción:** el programa se ejecuta normalmente hasta que el cursor lo detiene en una línea específica, a partir de la cual se puede iniciar la depuración paso a paso.
+- **Ejecución hasta el final:** ejecuta el programa de forma completa sin detenerse en instrucciones intermedias.
 
-Los distintos modos de ejecución, se van a ajustar a las necesidades de depuración que tengamos en cada momento. Si hemos probada un método, y sabemos que funciona correctamente, no es necesario realizar una ejecución paso a paso en él.
-
-En el IDE NetBeans, dentro del menú de depuración, podemos seleccionar los modos de ejecución especificados, y algunos más. El objetivo es poder examinar todas la partes que se consideren necesarias, de manera rápida, sencilla y los más clara posible.
+Estos modos se ajustan a las necesidades del momento, permitiendo concentrar el esfuerzo de inspección solo en las partes del código que se sospecha que contienen errores.
 
 #### 4.3.- Examinadores de variables
 
-Durante el proceso de implementación y prueba de software, una de las maneras más comunes de comprobar que la aplicación funciona de manera adecuada, es comprobar que las variables vayan tomando los valores adecuados en cada momento.
+Los **examinadores de variables** son herramientas fundamentales en el proceso de depuración. Su función es permitir al programador **supervisar los valores** que adquieren las variables y sus tipos a medida que el programa avanza instrucción por instrucción.
+    - **Utilidad:** al seguir la ejecución paso a paso, el programador puede comprobar si las variables toman los valores esperados. Si el programa no devuelve el resultado correcto, el examinador ayuda a **localizar la instrucción incorrecta** que causó el desvío.
+    - **Implementación:** NetBeans utiliza un panel llamado **Ventana de Inspección**, donde se pueden agregar variables de interés para observar cómo cambian sus valores durante la ejecución del código.
 
-Los examinadores de variables, forman uno de los elementos más importantes del proceso de depuración de un programa. Iniciado el proceso de depuración, normalmente con la ejecución paso a paso, el programa avanza instrucción por instrucción. Al mismo tiempo, las distintas variables, van tomando diferentes valores. Con los examinadores de variables, podemos comprobar los distintos valores que adquiere las variables, así como su tipo. Esta herramienta es de gran utilidad para la detección de errores.
-Captura de pantalla en la que se muestra el examinador de variables de NetBeans, indicando su tipo y valor.
+### 5.- Validaciones 
 
-En el caso del entorno de desarrollo NetBeans, nos encontramos con un panel llamado Ventana de Inspección. En la ventana de inspección, se pueden ir agregando todas aquellas variables de las que tengamos interés en inspeccionar su valor. Conforme el programa se vaya ejecutando, NetBeans irá mostrando los valores que toman las variables en al ventana de inspección.
+La **validación** es la etapa del proceso de prueba donde interviene de manera decisiva el **cliente**. Su objetivo es determinar si la aplicación desarrollada **satisface los requisitos** establecidos durante la fase de análisis. En esencia, se busca descubrir errores desde la **perspectiva del cliente y de los requisitos funcionales**.
 
-Como podemos apreciar, en una ejecución paso a paso, el programa llega a una función de nombre potencia. Esta función tiene definida tres variables. A lo largo de la ejecución del bucle, vemos como la variable result, van cambiando de valor. Si con valores de entrada para los que conocemos el resultado, la función no devuelve el valor esperado, "Examinando las variables" podremos encontrar la instrucción incorrecta.
+La validación se consigue mediante una serie de **pruebas de caja negra** diseñadas para demostrar la conformidad con los requisitos.
+
+- **Plan de Prueba:** traza y define la **clase general de pruebas** que se llevarán a cabo.
+- **Procedimiento de Prueba:** define los **casos de prueba específicos** que intentarán descubrir errores de acuerdo con los requisitos.
+
+Tanto el plan como el procedimiento están diseñados para asegurar que se cumplen todos los **requisitos funcionales**, se alcanzan los **requisitos de rendimiento**, la **documentación es correcta** e inteligible, y se satisfacen otros requisitos como la portabilidad, compatibilidad, recuperación de errores y facilidad de mantenimiento. 
+
+### 6.- Normas de calidad
+
+Los estándares de calidad se utilizan para formalizar y guiar la fase de prueba de *software*. Anteriormente, existía una dispersión de normas que no cubrían todos los aspectos del proceso de prueba.
+
+Antes de la norma unificadora, los estándares clave utilizados eran:
+
+- **Estándares BSI:**
+    * **BS 7925-1:** define el **vocabulario** de las pruebas de *software*.
+    * **BS 7925-2:** regula las pruebas de los componentes de *software* (junto con IEEE 1008).
+- **Estándares IEEE:**
+    * **IEEE 829:** define la **documentación** de la prueba de *software*.
+    * **IEEE 1008:** regula las **pruebas de unidad** (*unit testing*).
+- Otros estándares incluyen Metodología Métrica v3, ISO/IEC 12207 y 15289.
+
+Esta falta de cobertura total en la organización, gestión y pruebas no funcionales motivó el desarrollo de un estándar unificado.
+
+**Norma ISO/IEC 29119 (Unificación)**
+
+La norma **ISO/IEC 29119** fue creada para **unificar** todos los estándares de prueba, proporcionando una estructura completa que cubre **todo el ciclo de vida** de las pruebas (*testing*) para cualquier proyecto de desarrollo o mantenimiento de *software*.
+
+Esta norma abarca desde estrategias organizativas y políticas de prueba hasta la ejecución e informe final.
+
+**Estructura de la norma ISO/IEC 29119**
+
+La norma se compone de **cuatro partes** principales:
+
+| Parte | Contenido | Estándares relacionados |
+| :--- | :--- | :--- |
+| 1 | **Conceptos y vocabulario**. Introduce conceptos clave, pruebas basadas en riesgo, tipos de prueba (unidad, integración, validación), ciclos de vida, roles y métricas | BS 7925-1 |
+| 2 | **Procesos de prueba**. Define la política de la organización, la gestión del proyecto de prueba y los procesos de prueba estática y dinámica | BS 7925-2, IEEE 1008 |
+| 3 | **Documentación**. Establece el contenido y las plantillas requeridas para la documentación de las pruebas | IEEE 829 |
+| 4 | **Técnicas de prueba**. Describe y ejemplifica las técnicas de prueba: **estáticas** (revisiones, inspecciones) y **dinámicas** (caja negra, caja blanca, y técnicas de pruebas no funcionales como rendimiento y usabilidad) | BS 7925-2 |
+
+### 7.- Pruebas unitarias
+
+Las **pruebas unitarias** tienen como objetivo principal verificar el correcto funcionamiento de la **unidad** (la parte más pequeña y aislada de la aplicación que se puede probar), que puede ser una **función**, **procedimiento** o **método**. El fin es asegurar que cada módulo funciona correctamente por **separado**, antes de la integración.
+
+| Categoría | Requisitos | Ventajas |
+| :--- | :--- | :--- |
+| Diseño | Automatizables | Fomentan el cambio |
+| Ejecución | Repetibles o Reutilizables | Simplifican la integración |
+| Cobertura | Completas | Documentan el código |
+| Aislamiento | Independientes | Aíslan y acotan errores |
+| Estándar | Profesionales | Separación |
+
+#### 7.1.- Herramientas para Java
+
+Existen varios *frameworks* que automatizan la elaboración de pruebas unitarias en Java:
+
+| Herramienta | Base | Características |
+| :--- | :--- | :--- |
+| JUnit | Estándar de facto | El más extendido y soportado por la mayoría de los IDEs. Utiliza anotaciones de Java desde la versión 4. Soporta múltiples aserciones y organiza pruebas en Suites. |
+| TestNG | Inspirado en JUnit y NUnit | Diseñado para cubrir todo tipo de pruebas. Utiliza anotaciones de Java 1.5. Permite distribución de pruebas en máquinas esclavas y organización de métodos en*grupos |
+| Jtiger | Framework de código abierto | Utiliza anotaciones de Java para metadatos. Permite la exportación de informes en HTML, XML o texto, e incluye tareas de Ant para automatizar | 
+
+#### 7.2.- Herramientas para otros lenguajes
+
+Existe una amplia gama de *frameworks* de automatización de pruebas unitarias para la mayoría de los lenguajes de programación modernos. Muchos de estos *frameworks* se basan en la arquitectura **xUnit** (el diseño original de JUnit).
+
+| Herramienta | Lenguaje / Plataforma | Características |
+| :--- | :--- | :--- |
+| CppUnit | C++ | Framework libre basado en xUnit. Puede integrarse con IDEs como Eclipse y utiliza entornos gráficos de ejecución |
+| Nunit | Plataforma .NET | Framework de código abierto basado en xUnit. Dispone de expansiones específicas para entornos web y formularios |
+| PHPUnit | PHP | Framework principal para realizar pruebas unitarias en PHP |
+| SimpleTest | PHP | Entorno de pruebas para aplicaciones PHP |
+| FoxUnit | Microsoft Visual FoxPro | Framework OpenSource para pruebas unitarias |
+| MOQ | Genérico | Framework especializado en la creación dinámica de objetos simuladores (*mocks*), usados para aislar dependencias durante las pruebas | 
+
+### 8.- Documentación de la prueba
+
+La **documentación de las pruebas** es un requisito indispensable en el desarrollo de aplicaciones. Unas pruebas bien documentadas sirven como base de conocimiento para futuras tareas de comprobación.
+
+Las metodologías modernas (como **Métrica v3**) se basan en los **estándares ANSI/IEEE** sobre verificación y validación de *software* para la documentación. Estos estándares tienen como objetivo facilitar la **comunicación** entre desarrolladores y asegurar que se ha cubierto **todo el proceso de prueba**.
+
+Los documentos que se van a generar son:
+
+| Documento | Etapa | Contenido |
+| :--- | :--- | :--- |
+| Plan de pruebas | Inicia con el análisis del sistema | Es la planificación general de las pruebas a realizar |
+| Especificación del diseño de pruebas | Detalle del plan de pruebas | Define la ampliación y el detalle de la estrategia de pruebas |
+| Especificación de un caso de prueba | Detalle del diseño de pruebas | Concreta un conjunto de entradas, condiciones y resultados esperados para un objetivo específico |
+| Especificación de procedimiento de prueba | Ejecución | Detalla el modo exacto en que se ejecutarán los casos de prueba |
+| Registro de pruebas | Ejecución | Documenta los sucesos que tienen lugar durante la ejecución de las pruebas |
+| Informe de incidente de pruebas | Resultados | Se elabora por cada defecto detectado, incidente, o solicitud de mejora |
+| Informe sumario de pruebas | Final | Resume las actividades y resultados de prueba vinculados a las especificaciones de diseño |
+
+---
+
+*Fin de la 1ª Evaluación*
+
+---

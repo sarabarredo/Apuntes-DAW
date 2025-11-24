@@ -1264,4 +1264,135 @@ La propiedad `float` permite modificar el posicionamiento por defecto de los ele
     ```
 </details>
 
-## UD3.
+## UD3. Aplicación de los lenguajes de marcas a la sindicación de contenidos
+
+![Esquema Unidad 3 Lenguajes de Marcas](../../static/img/lenguajes-de-marcas-unidad-3.jpg)
+
+### 1.- Sindicación de contenidos
+
+La **redifusión** o **sindicación de contenidos** permite a un sitio web utilizar y ofrecer contenidos o servicios cuyo **origen** está en una página web diferente. Este proceso mantiene a los usuarios actualizados con la información de la fuente original.
+
+Los servicios y metadatos de la fuente original se agrupan en **canales de contenidos** o **feeds**. Para leer o acceder a un canal, el usuario debe **suscribirse** a él utilizando un **agregador**.
+
+- **Licencia:** la redifusión se regula generalmente mediante una licencia de normas de uso o un contrato que define los derechos de los contenidos.
+- **Codificación:** los canales suelen codificarse en **XML**, aunque es válido usar cualquier lenguaje transportable mediante el protocolo **HTTP**.
+
+#### 1.1.- Características
+
+La **sindicación** convierte una web en el **origen o suministradora** de un canal de información que puede ser consumido por terceros.
+
+**Vinculación del Canal a la Web (Proveedor)**
+
+Para que una página web sea una fuente sindicada, debe incluir un enlace al canal de contenidos en la sección `<head>`, justo después del elemento `<title>`.
+
+- El enlace utiliza la etiqueta `<link>` con el atributo `rel="alternate"`.
+- El formato se define con el atributo `type`, siendo los estándares más comunes:
+    - **RSS:** `type="application/rss+xml"`
+    - **Atom:** `type="application/atom+xml"`
+
+**Flujo de información y CMS**
+
+Actualmente es habitual usar **Sistemas de Gestión de Contenidos (CMS)**, donde el origen del contenido es un **repositorio** (en lugar de un fichero HTML estático). Los CMS permiten generar simultáneamente **ficheros HTML** y **canales RSS** a partir del mismo origen de datos. 
+
+En este caso, la información sufre una **transformación** antes de ser servida al cliente. Esta transformación puede ser replicada para generar múltiples salidas desde la misma fuente:
+
+| Origen | Transformación de Ejemplo | Resultado |
+| :--- | :--- | :--- |
+| Repositorio/Base de datos | *Script* en Perl o XSLT | Documento HTML o XHTML |
+| Repositorio/CMS | Una única transformación |*Varias salidas (ej., el *fichero HTML* para el navegador y el *canal RSS* para el agregador) |
+
+#### 1.2.- Ventajas de la sindicación de contenidos
+
+- Aumenta el tráfico de nuestro sitio web de origen.
+- Ayuda a que los usuarios visiten frecuentemente el sitio web al recibir actualizaciones.
+- Favorece el posicionamiento del sitio en buscadores (*SEO*).
+- Ayuda a establecer relaciones y colaboraciones entre distintos sitios web.
+- Permite a otras personas añadir características y servicios al contenido utilizando tecnologías adicionales.
+- Enriquece Internet al impulsar la tecnología semántica y fomentar la reutilización del contenido.
+
+### 2.- Ámbito de aplicación
+
+La redifusión web se aplica a todo tipo de contenidos —**texto, audio, vídeos e imágenes**— y no está limitada solo a los *weblogs*. Se utiliza para compartir y mostrar **contenidos propios** de un sitio web de forma integrada en otras páginas.
+
+- **Valor añadido:** esto aumenta el valor tanto de la página que muestra el contenido sindicado como de la fuente original, ya que la redifusión **siempre enlaza con los contenidos originales**.
+- **Suscriptores:** desde la perspectiva del usuario, la suscripción a canales de contenidos permite la **actualización profesional**, manteniendo al usuario al día con noticias e información relevante a través de su agregador.
+
+### 3.- Tecnologías de creación de canales de contenidos
+
+Los estándares más utilizados para la creación de canales de contenidos (*feeds*) se clasifican en dos grupos principales, ambos codificados en XML: **RSS** y **Atom**.
+
+| Estándar | Significado | Características| Evolución |
+| :--- | :--- | :--- | :--- |
+| RSS | Familia de formatos XML desarrollada para compartir información que se actualiza con frecuencia | Se utiliza para conectar con sistemas de mensajería instantánea, convertir *feeds* en correos electrónicos y transformar enlaces favoritos del navegador | Tuvo un desarrollo disperso por tres organizaciones, resultando en siete formatos diferentes, siendo las versiones más conocidas RSS 0.90, RSS 0.91 y RSS 2.0 |
+| Atom | Estándar propuesto por la IETF (*RFC4287*) | Alternativa de RSS, busca evitar la confusión y la incompatibilidad entre los diferentes formatos RSS existentes. Es flexible y permite un mayor control sobre la cantidad de información que se muestra en los agregadores | Convive actualmente con los estándares RSS existentes |
+
+### 4.- Estructura de los canales de contenidos
+
+Para construir un **canal de contenido** (*feed*), se crea un fichero con extensión `.rss` o `.atom` basado en **XML**, que se publica en el sitio web proveedor.
+
+Un canal está formado por:
+
+* **Declaración XML:** Indica la versión del documento y la codificación, preferentemente **UTF-8**.
+* **Canal:** Define el sitio web asociado a la fuente.
+* **Secciones (*Items*):** Múltiples referencias al contenido (servicios, noticias, artículos) que se ofrecen. Un solo canal puede contener un gran número de enlaces independientes.
+
+No hay restricciones en la cantidad de canales que puede ofrecer un sitio web.
+
+#### 4.1.- RSS
+
+El formato **RSS** es la estructura más común para crear canales de contenido sindicado.
+
+**Estructura básica de un *Feed* RSS**
+
+El documento comienza con la declaración XML y está anidado en dos niveles principales:
+
+1.  **Elemento Raíz (`<rss>`):** declara que es un documento RSS y especifica la versión utilizada.
+2.  **Canal (`<channel>`):** describe el *feed* RSS propiamente dicho.
+
+| Elemento | Estado | Función |
+| :--- | :--- | :--- |
+| `<title>` | Obligatorio | Define el título del canal |
+| `<link>` | Obligatorio | Define el hiperenlace al canal |
+| `<description>` | Obligatorio | Describe el propósito del canal |
+| `<language>`, `<category>`, `<copyright>` | Opcional | Define el idioma, la categoría o los derechos de autor del *feed* |
+
+**Artículos del canal (`<item>`)**
+
+Cada artículo o noticia dentro del canal se define mediante la etiqueta `<item>`. Un canal contiene uno o más `<item>`:
+
+| Elemento | Estado | Función |
+| :--- | :--- | :--- |
+| `<title>` | Obligatorio | Define el título del artículo |
+| `<link>` | Obligatorio | Define el hiperenlace al artículo |
+| `<description>` | Obligatorio | Describe el contenido del artículo |
+| `<author>`, `<category>`, `<guid>` | Opcional | Define el autor, la categoría del artículo o un identificador único |
+
+### 5.- Validación
+
+La **validación** de un documento RSS o Atom comprueba que su **URI es válida** y que el contenido **no contiene errores** de sintaxis.
+
+Una vez que el *feed* es validado, estos servicios suelen proporcionar una **imagen** (generalmente de color naranja con los logos "XML" o "RSS") que el proveedor puede incluir en su página principal. Al pulsar sobre este icono, el visitante accede directamente al contenido actual del canal.
+
+### 6. Agregadores
+
+Un **agregador** (o lector de fuentes) es una aplicación de *software* utilizada para **suscribirse a canales de contenidos** en formatos RSS y Atom. Su función es notificar al usuario qué páginas web han incorporado contenido nuevo desde la última lectura y mostrar dicho contenido.
+
+Para funcionar, el usuario debe indicar al agregador la **dirección web** (`URI`) del archivo fuente (RSS o Atom).
+
+Existen tres tipos principales de agregadores:
+
+- **Agregadores web (en línea):**
+    - Aplicaciones que residen en sitios web y se ejecutan a través del navegador. Son ideales para usuarios que acceden a Internet desde diferentes ordenadores.
+    - **Ejemplos:** Feedly, Inoreader, NewsBlur.
+- **Agregadores de escritorio:**
+    - Aplicaciones que se instalan en el ordenador del usuario. Su interfaz gráfica es similar a la de un cliente de correo. Son aconsejables para quienes acceden siempre desde el mismo ordenador.
+    - **Ejemplos:** RSSOwl, QuiteRSS (o versión escritorio de Feedly).
+ - **Complementos de navegador:**
+    - Agregadores disponibles como extensiones que se integran directamente en el navegador web.
+    - **Ejemplos:** Awesome RSS, Livemarks.
+
+## UD4.- Definición de esquemas y vocabularios en XML
+
+![Esquema Unidad 4 Lenguajes de Marcas](../../static/img/lenguajes-de-marcas-unidad-4.jpg)
+
+### 1.- Documento XML. Estructura y sintaxis
