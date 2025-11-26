@@ -1396,3 +1396,467 @@ Existen tres tipos principales de agregadores:
 ![Esquema Unidad 4 Lenguajes de Marcas](../../static/img/lenguajes-de-marcas-unidad-4.jpg)
 
 ### 1.- Documento XML. Estructura y sintaxis
+
+Un documento XML básico se compone de un **prólogo** y un **ejemplar**. El ejemplar (o elemento raíz) contiene los datos del documento estructurados en árbol, pero estos documentos básicos están incompletos porque solo declaran el tipo de documento, sin definir sus cualidades internas.
+
+Para definir en profundidad las cualidades y restricciones del ejemplar, se utilizan las **DTDs** (*Document Type Definitions*) o los **XML Schemas**.
+
+- **Prólogo:** informa al intérprete sobre los datos necesarios para el procesamiento:
+    - **Definición de XML:** Indica la versión, el código de los datos (ej., UTF-8) y la **autonomía** del documento (que ha sido `standalone="yes"` para documentos independientes).
+    - **Declaración del tipo de documento:** El nombre del ejemplar precedido de `<!DOCTYPE`.
+- **Ejemplar:** contiene los datos y es el **elemento raíz** (debe ser único). Está compuesto por elementos estructurados en un árbol, que pueden incluir atributos.
+
+#### 1.1.- Declaración de tipo de documento
+
+La declaración del tipo de documento asocia una definición DTD al documento XML, permitiendo al autor definir restricciones, elementos, atributos y valores por defecto. La declaración consta de dos partes:
+
+1.  **Declaración del tipo de documento propiamente dicha:** comienza con `<!DOCTYPE` seguido del nombre del tipo (que debe ser **idéntico** al nombre del elemento raíz del documento).
+2.  **Definición del tipo de documento (DTD):** se encarga de definir las cualidades del tipo, usando **declaraciones de marcado** que pueden ser **internas** o **externas**.
+
+El procesamiento de las declaraciones de marcado sigue un orden de prioridad: **primero el subconjunto interno** y **después el externo**.
+
+| Subconjunto | Ubicación | Autonomía | Función |
+| :--- | :--- | :--- | :--- |
+| Interno | Dentro de corchetes `[ ]` que siguen a la declaración del tipo de documento | El documento es autónomo (`standalone="yes"`) | Contiene declaraciones exclusivas del documento (no se pueden compartir) |
+| Externo | Localizado en un fichero con extensión `.dtd` | El documento no es autónomo (`standalone="no"`) | Contiene declaraciones que se comparten entre múltiples documentos XML del mismo tipo |
+
+Cuando se utiliza un subconjunto externo, se debe indicar dónde encontrar las declaraciones, forzando la autonomía del documento a ser negativa (lo que ralentiza el procesamiento):
+    - **Ruta del sistema:** se especifica la URI donde se localizan las declaraciones.
+        ```
+        <!DOCTYPE nombre_ejemplar SYSTEM "URI">
+        ```
+    - **Identificador público:** se especifica un identificador público, además de la URI. El procesador puede usar este ID para intentar generar una URI alternativa.
+        ```
+        <!DOCTYPE nombre_ejemplar PUBLIC "id_publico" "URI">
+        ```
+
+#### 1.2.- Definición de la sintaxis de documentos XML
+
+Un documento XML tiene una estructura de **árbol jerarquizada** donde los **elementos** se pueden **anidar** pero no entrelazar. Para los **atributos**, el orden no es significativo, pero no pueden repetirse.
+
+**Elemento vs. Atributo**
+
+| Usar elemento si el dato... | Usar atributo si el dato... |
+| :--- | :--- |
+| Contiene subestructuras o es de tamaño considerable | Es de pequeño tamaño y su valor raramente cambia |
+| Su valor cambia frecuentemente o se va a mostrar | Solo tiene unos pocos valores fijos o guía el procesamiento XML (no se muestra) |
+
+**Espacios de Nombres (*Namespaces*)**
+
+Los *namespaces* resuelven la **ambigüedad** de nombres idénticos usados en distintos vocabularios XML y facilitan la organización.
+    - **Declaración con prefijo:** `xmlns:prefijo="URI_namespace"`
+    - **Función:** asocia el prefijo a una URI que identifica el conjunto del vocabulario.
+
+### 2.- Definiciones de tipo de documento: DTD
+
+Las **Definiciones de Tipo de Documento (DTD)** establecen una relación precisa de **qué elementos pueden aparecer, dónde** en un documento XML, y cuál es su **contenido** y **atributos**. Su fin es garantizar que el documento XML cumple con las restricciones de integridad.
+
+**Inconvenientes principales de DTD**
+    - Su sintaxis no es XML.
+    - No soporta *namespaces*.
+    - No define tipos de datos.
+    - No permite secuencias no ordenadas de elementos.
+    - No permite formar claves a partir de múltiples atributos o elementos.
+    - No es extensible: una vez definido, no se puede añadir nuevo vocabulario.
+
+El DTD externo se define en un **fichero de texto plano con extensión `.dtd`**.
+
+#### 2.1.- Declaraciones de tipos de elementos terminales
+
+Los elementos terminales son las **hojas** del árbol de datos (no contienen más elementos). Su declaración comienza con la cadena `<!ELEMENT>`.
+
+| Declaración de Contenido | Significado | Ejemplo |
+| :--- | :--- | :--- |
+| `EMPTY` | El elemento **no es contenedor** (está vacío) | `<!ELEMENT A EMPTY>` |
+| `ANY` | El elemento puede contener **cualquier cosa** (cualquier contenido válido) | `<!ELEMENT A ANY>` |
+| `(#PCDATA)` | El elemento solo contiene **datos de tipo carácter** (*Parsed Character Data*), no puede contener otros elementos | `<!ELEMENT alumno (#PCDATA)>` |
+
+#### 2.2.- Declaraciones de tipos de elementos no terminales
+
+Los elementos no terminales (ramas) se definen haciendo referencia a los grupos de elementos que contienen (subelementos).
+
+| Operador | Cardinalidad | Símbolo | Significado |
+| :--- | :--- | :--- | :--- |
+| Secuencia | Obligatorio y en orden | `,` | `<!ELEMENT A (B, C)>` (A tiene B seguido de C) |
+| Opción | Cero o uno | `?` | `trabajo?` (trabajo es opcional) |
+| Uno-o-más | Uno o más | `+` | `(cp, ciudad)+` (el grupo aparece una o varias veces) |
+| Cero-o-más | Cero, uno o más | `*` | `(cp, ciudad)*` (el grupo es opcional y repetible) |
+| Elección | Elegir uno de los elementos | `|` (barra) | `(cp | ciudad)` (el elemento tendrá `cp` o `ciudad`, no ambos) |
+
+**EJEMPLO:** Para un elemento `<alumno>` con `<nombre>`, `<apellidos>` y `<dirección>`:
+
+```dtd
+<!ELEMENT alumno (nombre, apellidos, direccion)>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT dirección (#PCDATA)>
+```
+
+#### 2.3.- Declaraciones de listas de atributos para los tipos de elementos
+
+Los atributos asociados a un elemento se declaran usando `<!ATTLIST`, seguido del nombre del elemento, el nombre del atributo, su tipo y un modificador de obligatoriedad.
+
+| Tipo de atributo | Uso | Modificador | Obligatoriedad |
+| :--- | :--- | :--- | :--- |
+| Enumeración | El valor solo puede ser uno de los definidos entre paréntesis (separados por `|`) | `#REQUIRED` | Obligatorio |
+| `CDATA` | El valor es una cadena de texto | `#IMPLIED` | Opcional |
+| `ID` | El valor es un identificador único en el documento | `#FIXED` | Define un valor fijo |
+| `IDREF` | El valor debe referenciar un `ID` existente en el documento | Literal | Asigna un valor por defecto (entre comillas) |
+| `NMTOKEN` | El valor debe ser una **sola palabra** con caracteres XML válidos | | |
+
+**EJEMPLO:** Declarando el atributo `edad` como obligatorio en `<alumno>`:
+
+```dtd
+<!ATTLIST alumno edad CDATA #REQUIRED>
+```
+
+#### 2.4.- Declaraciones de entidades
+
+Las **entidades** permiten definir **valores constantes** dentro de un documento XML. Se usan dentro del documento delimitadas por `&` y `;` (ej. `&entidad;`), siendo sustituidas por su valor por el intérprete. Se definen con `<!ENTITY>`.
+
+| Tipo de entidad | Delimitador | Sintaxis | Función |
+| :--- | :--- | :--- | :--- |
+| Internas | `&entidad;` | `<!ENTITY nombre_entidad "valor">` | Definir constantes de texto (ej. `&lt;`, `&amp;` son predefinidas) |
+| Externas | `&entidad;` | `<!ENTITY nombre SYSTEM "URI">` | Relacionar el documento XML con otro documento externo (que se analiza) |
+| De parámetro | `%entidad;` | `<!ENTITY % nombre "valor">` | Dar nombres a partes de un DTD para reutilizarlas dentro del mismo DTD (macro) |
+| De parámetro externas | N/A | `<!ENTITY % nombre SYSTEM "DTD_URI">` | Incluir elementos de otros ficheros DTD |
+
+> Si se incluye un fichero binario (no analizado), se usa la palabra reservada `NDATA` en la definición de la entidad.
+
+#### 2.5.- Declaraciones de notación
+
+Las **notaciones** se usan para indicar qué **aplicación** debe encargarse de procesar un fichero con un **formato binario** externo (ej., un `.gif`).
+
+- **Sintaxis:** `<!NOTATION nombre SYSTEM aplicacion>`
+- **Asociación:** se asocia a una entidad externa no analizada: `<!ENTITY dibujo SYSTEM "imagen.gif" NDATA gif>`
+
+#### 2.6.- Secciones condicionales
+
+Permiten incluir o ignorar partes de la declaración de un DTD:
+    - **`INCLUDE`:** hace que la sección de declaraciones sea **visible** y procesada.
+        ```
+        <![INCLUDE [Declaraciones visibles] ] >
+        ```
+    - **`IGNORE`:** hace que la sección de declaraciones sea **oculta** e ignorada por el procesador.
+        ```
+        <![IGNORE [Declaraciones ocultas] ] >
+        ```
+
+### 3.- XML Schema
+
+Los **XML Schemas** (o **XSD**) se definen para superar las limitaciones de los DTD, particularmente en lo relativo a la definición de tipos de datos. Un XML Schema es un documento **XML válido** y se guarda en ficheros de texto plano con extensión `.xsd` (por eso también se les llama documentos XSD).
+
+  * **Namespaces:** los elementos utilizados en un esquema deben pertenecer al *namespace* `www.w3.org/2001/XMLSchema`.
+  * **Ejemplar:** el elemento raíz de un documento XSD es `<xs:schema>`.
+  * **Contenido:** el ejemplar contiene declaraciones de todos los elementos y atributos que pueden aparecer en un documento XML asociado válido.
+  * **Declaración de elementos:** el elemento hijo inmediato es `<xs:element>`, que se usa para crear elementos de forma global (es decir, el elemento creado puede ser el elemento raíz del documento XML asociado).
+
+```xml title="Ejemplo de esquema básico para un elemento <alumno>"
+< ?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="alumno" type="xs:string"/>
+</xs:schema>
+```
+
+#### 3.1.- Tipos de datos
+
+Los **tipos de datos** en XML Schema son los valores predefinidos que puede tomar el atributo `type` al declarar un elemento o un atributo. Representan el tipo de información que contendrá el valor asociado.
+
+| Tipo de dato | Descripción | Ejemplo de uso |
+| :--- | :--- | :--- |
+| `string` | Cadena de caracteres UNICODE | Texto plano |
+| `boolean` | Valor lógico (`true` o `false`) | |
+| `integer` | Número entero | |
+| `positiveInteger` | Número entero positivo | |
+| `decimal` | Número con decimales | |
+| `dateTime` | Fecha y hora absolutas | |
+| `date` | Fecha en formato `CCYY-MM-DD` | |
+| `time` | Hora en formato `hh:mm:ss` | |
+| `duration` | Duración de tiempo | Formato `PnYnMnDTnHnMnS` (ej. 2 años, 4 meses, 3 días: `P2Y4M3D`) |
+| `ID`, `IDREF`, `ENTITY`, `NOTATION`, `NMTOKEN` | Tienen el mismo significado que en las DTD | |
+| Otros de fecha | `gYearMonth` (`CCYY-MM`), `gYear` (`CCYY`), `gMothDay` (`--MM-DD`), `gDay` (`---DD`), `gMonth` (`--MM`) | |
+| Otros varios | `anyURI` (URI), `language` (identificadores RFC 1766) | |
+
+##### 3.1.1.- Facetas de los tipos de datos
+
+Las **facetas** son un conjunto de **restricciones** que se aplican sobre los **tipos de datos simples** de un elemento o atributo en XML Schema. Se aplican dentro del elemento **`<xs:restriction>`** y pueden combinarse para refinar los valores permitidos.
+
+| Faceta | Descripción | Aplicación |
+| :--- | :--- | :--- |
+| `length`, `min/maxlength` | Define la longitud exacta, mínima o máxima del dato | Cadenas de caracteres |
+| `enumeration` | Restringe el valor a un conjunto discreto de valores predeterminados. | Listas de valores fijos |
+| `whitespace` | Define el tratamiento de los espacios en blanco (`preserve`, `replace`, `collapse`). | Cadenas de caracteres |
+| `(max/min)(In/Ex)clusive` | Establece los límites superiores e inferiores del valor | Números y fechas |
+| `totalDigits`, `fractionDigits` | Define el número total y el número de dígitos decimales para un número | Números decimales |
+| `pattern` | Permite construir máscaras (expresiones regulares) que deben cumplir los datos | Validar formatos específicos (ej. códigos postales) |
+
+> **Límites inclusivos vs. exclusivos:** en `maxInclusive`, el valor límite es válido; en `maxExclusive`, el valor límite no es válido.
+
+##### 3.1.2.- Facetas: ejercicios
+
+<details>
+<summary>**1.** Creación de una cadena de texto con una longitud máxima de 9 caracteres y dos valores posibles</summary>
+
+```xml
+<xs:simpleType name="estado">
+  <xs:restriction base="xs:string">
+    <xs:maxLength value="9"/>
+    <xs:enumeration value="conectado"/>
+    <xs:enumeration value="ocupado"/>
+  </xs:restriction>
+</xs:simpleType>
+```
+</details>
+
+<details>
+<summary>**2.** Creación de un elemento en el que se respetan los espacios tal y como se han introducido</summary>
+
+```xml
+<xs:simpleType name="nombre">
+  <xs:restriction base="xs:string">
+    <xs:whitespace value="preserve"/>
+  </xs:restriction>
+</xs:simpleType>
+```
+</details>
+
+<details>
+<summary>**3.** Creación de un elemento calificaciones de dos dígitos cuyo valor es un número entero comprendido entre 1 y 10, ambos inclusive</summary>
+
+```xml
+<xs:simpleType name="calificaciones">
+  <xs:restriction base="xs:integer">
+    <xs:totalDigits value="2"/>
+    <xs:minExclusive value="0"/>
+    <xs:maxInclusive value="10"/>
+  </xs:restriction>
+</xs:simpleType>
+```
+</details>
+
+<details>
+<summary>**4.** Creación de la máscara de un DNI mediante pattern</summary>
+
+```xml
+<xs:simpleType name="dni">
+  <xs:restriction base="xs:string">
+    <xs:pattern value="[0-9] [0-9] [0-9] [0-9] [0-9] [0-9] [0-9] [0-9] [A-Z]"/>
+  </xs:restriction>
+</xs:simpleType>
+```
+</details>
+
+#### 3.2.- Elementos del lenguaje
+
+Los siguientes son elementos clave utilizados en los documentos XML Schema (`.xsd`) para definir la estructura y los tipos de datos:
+
+| Elemento | Función | Notas |
+| :--- | :--- | :--- |
+| `<xs:schema>` | Elemento raíz que contiene toda la definición del esquema | |
+| `<xs:complexType>` | Define tipos complejos (elementos que contienen otros elementos y/o atributos) | El atributo `mixed="true"` permite mezclar texto con elementos hijos |
+| `<xs:simpleType>` | Define tipos simples que restringen los valores de un tipo base (mediante facetas) | |
+| `<xs:restriction>` | Permite establecer una restricción** sobre un tipo de base (donde se aplican las facetas) | |
+| `<xs:group>` | Permite nombrar y agrupar elementos y atributos para reutilizarlos por referencia | |
+| `<xs:sequence>` | Construye elementos complejos enumerando sus componentes en un orden estricto | |
+| `<xs:choice>` | Define una alternativa: el elemento puede contener uno y solo uno de los componentes listados | |
+| `<xs:all>` | Representa una secuencia de elementos en cualquier orden | |
+
+##### 3.2.1.- Ejemplo de esquema
+
+<details>
+<summary>**Ejercicio**: define un esquema correspondiente a un documento XML para estructurar la información personal sobre los alumnos de un centro educativo</summary>
+
+```xml
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <!-- elemento raíz -->
+    <xs:element name="alumnos" type="datosAlum"/>
+    <!-- Definicion del tipo datosAlum -->
+    <xs:complexType name="datosAlum">
+        <xs:sequence>
+            <xs:element name="alumno" type="datos" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Definicion del tipo datos -->
+    <xs:complexType name="datos">
+        <xs:sequence>
+            <xs:element name="nombre" type="xs:string" minOccurs="1"  maxOccurs="1"/>
+            <xs:element name="apellidos" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="direccion" type="datosDireccion" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="contactar" type="datosContactar" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+        <!-- Atributos  del elemento usuario -->
+        <xs:attribute name="id" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="datosDireccion">
+        <xs:sequence>
+            <xs:element name="domicilio" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="codigo_postal" minOccurs="0" maxOccurs="1" >
+                <xs:complexType>
+                        <xs:attribute name="cp" type="xsd:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="localidad" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="provincia" type="xs:string" minOccurs="0" maxOccurs="1"/>
+          </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="datosContactar">
+        <xs:sequence>
+            <xs:element name="telf_casa" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="telf_movil" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="telf_trabajo" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="email" minOccurs="0" maxOccurs="unbounded" >
+                <xs:complexType>
+                    <xs:attribute name="href" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+           </xs:sequence>
+    </xs:complexType>
+</xs:schema>
+```
+</details>
+
+#### 3.3.- Definición de tipos de datos XML Schema
+
+Al igual que en los DTD, XML Schema diferencia entre tipos de datos para construir la estructura del documento: **tipos simples** y **tipos compuestos** (o complejos).
+
+- **Tipos de datos simples (`<xs:simpleType>`):**
+    - Se utilizan para definir restricciones (facetas) sobre un tipo de dato XSD ya predefinido (ej., `xs:string`), estableciendo el rango de valores que puede tomar.
+    - También se pueden crear tipos simples basados en listas de valores (usando el atributo `derivedBy`).
+- **Tipos de datos compuestos (`<xs:complexType>`):**
+    - Se utilizan para definir estructuras complejas de datos (elementos que contienen anidamiento).
+    - Su contenido son declaraciones o referencias a otros elementos y atributos.
+    - El propio elemento `<xs:complexType>` determina el orden en que deben aparecer los elementos hijos en el documento XML asociado.
+
+##### 3.3.1.- Definición de tipos de datos: soluciones
+
+<details>
+<summary>1. Creación de un elemento simple de nombre edad que representa la edad de un alumno de la ESO, por tanto su rango está entre los 12 y los 18 años</summary>
+
+```xml
+<xs:element name="edad">
+ <xs:simpleType>
+     <xs:restriction base="xs:positiveInteger">
+         <xs:minInclusive value="12"/>
+         <xs:maxInclusive value="18"/>
+     </xs:restriction>
+ </xs:simpleType>
+</xs:element>
+```
+</details>
+
+<details>
+<summary>2. Creación de una lista con los días de la semana en letras</summary>
+
+```xml
+<xs:simpleType name="dia_semana" base="xs:string" derivedBy="list"/>
+    <dia_semana>Lunes Martes Miercoles Jueves Viernes Sabado Domingo<dia_semana>
+</xs:simpleType>
+```
+</details>
+
+<details>
+<summary>3. Creación de un elemento compuesto de nombre alumno, formado por los elementos nombre, apellidos, web personal</summary>
+
+```xml
+<xs:complexType name="alumno">
+    <xs:secuence>
+        <xs:element name="nombre" type="xs:string" minOccurs="1" maxOccurs="1"/>
+        <xs:element name="apellidos" type="xs:string" minOccurs="1" maxOccurs="1"/>
+        <xs:element name="web" type="xs:string" minOccurs="0" maxOccurs="5">
+        <xs:complexType>
+            <xs:attribute name="href" type="xs:string"/>
+        </xs:complexType>
+        </xs:element>
+    <xs:secuence>
+ </xs:complexType>
+```
+</details>
+
+#### 3.4.- Asociación con documentos XML
+
+Para asociar el fichero XSD (el esquema) a un documento XML, se debe incluir el **espacio de nombres XML Schema Instance (`xsi:`)** en el elemento raíz del documento. Este espacio de nombres se utiliza para indicar la ruta de localización (URI) del fichero XSD. 
+
+<details>
+<summary>Dado el ejemplo de esquema de la sección 3.2.1., construye un documento XML que cumpla las especificaciones definidas en el archivo XML Schema</summary>
+
+```xml
+<?xml version="1.0" encoding="ISO-8859-1"? >
+<alumnos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:SchemaLocation="file:/D:/ubicación/del archivo/alumnos.xsd">
+    <alumno>
+        <nombre>Jose Ramón</nombre>
+        <apellidos>García González</apellidos>
+        <direccion>
+            <domicilio>El Pez, 12</domicilio>
+            <codigo_postal>85620</código_postal>
+            <localidad>Suances</localidad>
+            <provincia>Cantabria</provincia>
+        </direccion>
+        <contactar>
+            <telf._casa>985623165</telf._casa>
+            <telf._movil>611233544</telf._movil>
+            <telf._trabajo>965847536</telf._trabajo>
+            <email>pepito@educadistancia.com</email>
+        </contactar>
+    </alumno>
+    <alumno>
+        <nombre>Carlos</nombre>
+        <apellidos>López Pérez</apellidos>
+        <direccion>
+            <domicilio>El Cangrejo, 25</domicilio>
+            <codigo_postal>86290</código_postal>
+            <localidad>Santillana</localidad>
+            <provincia>Cantabria</provincia>
+        </direccion>
+        <contactar>
+            <telf._casa>931132565</telf._casa>
+            <telf._movil>623863544</telf._movil>
+            <telf._trabajo>984657536</telf._trabajo>
+            <email>carlos@educadistancia.com</email>
+        </contactar>
+    </alumno>
+</alumnos>
+```
+</details>
+
+#### 3.5.- Documentación del esquema
+
+Para incorporar documentación (autor, derechos, utilidad) en un XML Schema, se utiliza el elemento `<xs:annotation>` en lugar de comentarios, ya que los analizadores no garantizan que los comentarios se mantengan durante el procesamiento. El elemento `<xs:annotation>` contiene dos elementos principales:
+
+1.  **`<xs:documentation>`:**
+      - Diseñado para ser legible por los usuarios.
+      - Puede contener elementos XML bien estructurados y se le puede definir el idioma mediante el atributo `xml:lang`.
+2.  **`<xs:appinfo>`:**
+      - Diseñado para guardar información para los programas de *software*.
+
+```xml title="Ejemplo"
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+    <xs:annotation>
+        <xs:documentation xml:lang ="es-es">
+            Materiales para formación e-Learning
+            <modulo>Lenguajes de marcas y sistemas de gestión de información.</modulo>
+            <fecha_creación> 2011</fecha_creación>
+            <autor> Nuky La Bruji</autor>
+        </xs:documentation>
+    </xs:annotation>
+    <xs:element name="lmsgi"  type="xs:string">
+        <xs:annotation>
+            <xs:appinfo>
+                <texto_de_ayuda>Se debe de introducir el nombre completo del tema</texto_de_ayuda>
+            </xs:appinfo>
+        </xs:annotation>
+    </xs:element>
+</xs:schema>
+```
+
+### 4.- Herramientas de creación y validación
+
+Aunque un editor de texto plano y un navegador bastan para trabajar con XML y XSD, existen herramientas especializadas (IDEs XML) que facilitan la edición, visualización y validación de documentos:
+    - **Herramientas libres/gratuitas:** Editix XML Editor, Microsoft Core XML Services, XMLFox, XML Copy Editor.
+    - **Herramientas propietarias/comerciales:** Altova XML Spy, Editor XML xmlBlueprint, Stylus Studio, Oxygen XML Editor, Exchanger XML Editor.
+
+---
+
+*Fin de la 1ª Evaluación*
+
+---

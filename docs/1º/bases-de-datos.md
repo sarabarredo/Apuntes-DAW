@@ -7,6 +7,8 @@ toc_max_heading_level: 3
 
 ## UD1.- Almacenamiento de la información
 
+![Esquema Unidad 1 Bases de Datos](../../static/img/bases-de-datos-unidad-1.jpg)
+
 ### 1.- Introducción
 
 Casi todo lo que nos rodea, en alguna medida, está relacionado con los datos, su almacenamiento y su gestión. El gran volumen de datos que actualmente manejamos y sus innumerables posibilidades requieren de la existencia de técnicos perfectamente formados y capaces de trabajar con ellos.
@@ -653,3 +655,5 @@ La fragmentación es una técnica en bases de datos distribuidas que consiste en
     - Se representa mediante árboles para visualizar la estructura.
 
 ## UD2.- Bases de datos relacionales
+
+![Esquema Unidad 2 Bases de Datos](../../static/img/bases-de-datos-unidad-2.jpg)
