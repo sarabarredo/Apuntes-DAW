@@ -5,7 +5,7 @@ title: Lenguajes de marcas y sistemas de gestión de información
 toc_max_heading_level: 3
 ---
 
-## UD1.- Reconocimiento de las características de lenguajes de marcas
+## **UD1.- Reconocimiento de las características de lenguajes de marcas**
 
 ![Esquema Unidad 1 Lenguajes de Marcas](../../static/img/lenguajes-de-marcas-unidad-1.jpg)
 
@@ -419,7 +419,7 @@ Si uniéramos los dos documentos en uno único, sin usar espacios de nombres, no
 
 Para resolverlo necesitamos definir un espacio de nombres para cada contexto.
 
-## UD2.- Utilización de lenguajes de marcas en entornos web
+## **UD2.- Utilización de lenguajes de marcas en entornos web**
 
 ![Esquema Unidad 2 Lenguajes de Marcas](../../static/img/lenguajes-de-marcas-unidad-2.jpg)
 
@@ -1264,7 +1264,7 @@ La propiedad `float` permite modificar el posicionamiento por defecto de los ele
     ```
 </details>
 
-## UD3. Aplicación de los lenguajes de marcas a la sindicación de contenidos
+## **UD3. Aplicación de los lenguajes de marcas a la sindicación de contenidos**
 
 ![Esquema Unidad 3 Lenguajes de Marcas](../../static/img/lenguajes-de-marcas-unidad-3.jpg)
 
@@ -1391,7 +1391,7 @@ Existen tres tipos principales de agregadores:
     - Agregadores disponibles como extensiones que se integran directamente en el navegador web.
     - **Ejemplos:** Awesome RSS, Livemarks.
 
-## UD4.- Definición de esquemas y vocabularios en XML
+## **UD4.- Definición de esquemas y vocabularios en XML**
 
 ![Esquema Unidad 4 Lenguajes de Marcas](../../static/img/lenguajes-de-marcas-unidad-4.jpg)
 

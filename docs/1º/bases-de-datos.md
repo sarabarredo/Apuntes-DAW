@@ -5,7 +5,7 @@ title: Bases de Datos
 toc_max_heading_level: 3
 ---
 
-## UD1.- Almacenamiento de la información
+## **UD1.- Almacenamiento de la información**
 
 ![Esquema Unidad 1 Bases de Datos](../../static/img/bases-de-datos-unidad-1.jpg)
 
@@ -654,6 +654,6 @@ La fragmentación es una técnica en bases de datos distribuidas que consiste en
     - Combina fragmentación horizontal y vertical.
     - Se representa mediante árboles para visualizar la estructura.
 
-## UD2.- Bases de datos relacionales
+## **UD2.- Bases de datos relacionales**
 
 ![Esquema Unidad 2 Bases de Datos](../../static/img/bases-de-datos-unidad-2.jpg)

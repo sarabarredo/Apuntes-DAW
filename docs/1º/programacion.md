@@ -5,7 +5,7 @@ title: Programación
 toc_max_heading_level: 3
 ---
 
-## UD1.- Introducción a la programación
+## **UD1.- Introducción a la programación**
 
 ![Esquema Unidad 1 Programación](../../static/img/programacion-unidad-1.png)
 
@@ -432,7 +432,7 @@ La vista `Archivos` de NetBeans muestra la estructura del proyecto.
 - `build`: contiene los archivos compilados (.class) listos para ejecutar.
 - El resto de archivos son de configuración interna de NetBeans y no deben borrarse.
 
-## UD2.- Creación de mi primer programa
+## **UD2.- Creación de mi primer programa**
 
 ![Esquema Unidad 2 Programación](../../static/img/programacion-unidad-2.png)
 
@@ -861,7 +861,7 @@ El compilador de Java ignora todo el texto dentro de los comentarios. Java ofrec
 
 Una buena práctica de programación es añadir un comentario a la última llave de cada bloque de código para indicar a qué clase o método pertenece.
 
-## UD3.- Utilización de objetos
+## **UD3.- Utilización de objetos**
 
 ![Esquema Unidad 3 Programación](../../static/img/programacion-unidad-3.jpg)
 
@@ -1268,3 +1268,725 @@ Los **métodos estáticos** (o **métodos de clase**) son aquellos métodos defi
 La **API** de Java define muchos métodos estáticos en clases de utilidad, como todas las operaciones que podíamos hacer con la clase `String` o las funciones matemáticas de la clase `Math` (ej. `Math.sqrt()`).
 
 ### 6.- Librerías de objetos (paquetes)
+
+Un **paquete de clases** es una agrupación lógica de clases que están relacionadas o tratan sobre un tema común. Su objetivo es mantener las clases bien organizadas en proyectos grandes.
+
+  * **Encapsulamiento:** los paquetes actúan como unidades de **encapsulamiento y ocultación de información**, ya que las clases dentro del mismo paquete tienen un **acceso privilegiado** a los atributos y métodos de las otras clases del grupo.
+
+  * **Declaración:** para indicar a qué paquete pertenece una clase, se utiliza la palabra clave `package` seguida del nombre del paquete, colocada al principio del archivo `.java`.
+
+    ```java
+    package Nombre_de_Paquete;
+    ```
+
+#### 6.1.- Sentencia import
+
+La sentencia `import` se utiliza cuando una clase necesita acceder y usar una clase que se encuentra en un **paquete distinto**.
+
+  * **Ubicación:** debe aparecer al principio de la clase, justo después de la sentencia `package` (si existe).
+
+  * **Importación de una sola clase:** se especifica la ruta completa hasta el nombre de la clase.
+
+    ```java
+    import java.util.Scanner;
+    ```
+
+  * **Importación de todas las clases:** se utiliza el asterisco (`*`) para importar todas las clases de un paquete específico.
+
+    ```java
+    import java.awt.*;
+    ```
+
+  * **Uso sin `import`:** se puede usar una clase sin la sentencia `import`, pero en este caso, se debe especificar la **ruta completa del paquete** cada vez que se usa la clase.
+
+    ```java
+    java.util.Scanner teclado = new java.util.Scanner (System.in); 
+    ```
+
+> **Nota:** al trabajar con paquetes, Java impone una estructura de directorios específica, y las formas de compilar y ejecutar deben ajustarse a esa estructura.
+
+#### 6.2.- Compilar y ejecutar clases con paquetes
+
+Para que una clase pertenezca a un paquete, se debe crear un **subdirectorio** con el mismo nombre del paquete y alojar el archivo `.java` dentro. El nombre en la sentencia `package` debe coincidir exactamente con el nombre del subdirectorio (respetando mayúsculas y minúsculas).
+
+Para compilar y ejecutar una clase con paquetes desde la terminal (sin IDE), se deben seguir estos pasos, situándose siempre en el **directorio padre** del paquete:
+
+1.  **Situarse en el directorio raíz del proyecto:**
+    ```bash
+    $ cd /<directorio_usuario>/Proyecto_Bienvenida
+    ```
+2.  **Compilar:** se utiliza `javac` e indicando el nombre de la clase incluyendo la ruta del paquete.
+    ```bash
+    $ javac ejemplos/Bienvenida.java
+    ```
+    Si la compilación es exitosa, se crea el archivo `Bienvenida.class` dentro del subdirectorio `ejemplos/`.
+3.  **Ejecutar:** se utiliza `java` e indicando el **nombre completo de la clase** (`paquete.clase`).
+    ```bash
+    $ java ejemplos/Bienvenida
+    ```
+    El resultado esperado es la salida del programa: `Bienvenido a Java`.
+
+#### 6.3.- Jerarquía de paquetes
+
+Los paquetes pueden contener **otros paquetes (subpaquetes)**, lo que permite una mejor organización de las clases relacionadas (ej., `ejemplos.basicos`).
+
+  * **Declaración:** se usan puntos para indicar la jerarquía de paquetes:
+    ```java
+    package ejemplos.basicos;
+    ```
+  * **Estructura del Sistema Operativo:** cada punto en el nombre del paquete corresponde a un **subdirectorio** en el sistema de archivos.
+
+**Compilación y Ejecución (Subpaquetes)**
+
+El proceso de compilación y ejecución es el mismo, pero se debe usar la ruta completa:
+
+1.  **Compilación:**
+    ```bash
+    $ javac ejemplos/basicos/Bienvenida.java
+    ```
+2.  **Ejecución:** se usa el nombre completo de la clase y todos sus paquetes: `ejemplos.basicos.Bienvenida`.
+    ```bash
+    $ java ejemplos/basicos/Bienvenida
+    ```
+
+La **Biblioteca de Clases de Java (API)** utiliza esta jerarquía extensamente (ej., `java.util.Date`).
+
+**Sentencia `import` y jerarquía**
+
+Cuando se utiliza una clase de otro paquete jerárquico (ej., `java.util.Date`), se debe indicar su ruta completa en la sentencia `import`:
+
+```java
+import java.util.Date;
+```
+
+#### 6.4.- Librerías Java
+
+Cuando se descarga el entorno de compilación y ejecución de Java, se obtiene la **API de Java** (*Application Programming Interface*), que es un conjunto de bibliotecas con clases útiles. Utilizar estas clases reduce el tiempo de desarrollo considerablemente.
+
+Los paquetes más importantes que ofrece el lenguaje Java son:
+
+- `java.lang`: contiene las **clases básicas** del lenguaje (ej. `Object`, que es la raíz de la jerarquía de clases de Java, y `System`). **No es necesario importarlo**, ya que el entorno de ejecución lo hace automáticamente. También incluye clases *Wrapper* que "envuelven" los tipos primitivos para dotarlos de métodos de utilidad.
+- `java.util`: biblioteca de **clases de utilidad general** (ej. `Scanner` para la entrada por teclado, `Date` para el tratamiento de fechas).
+- `java.io`: contiene clases para la **gestión de entrada y salida** (*input/output*), como la manipulación de ficheros, y las clases para leer/escribir en pantalla o memoria (ej. `BufferedReader` para entrada por teclado).
+- `java.math`: contiene herramientas para **manipulaciones matemáticas** avanzadas.
+- `java.awt` y `java.swing`: contienen conjuntos de clases para la construcción de **interfaces de usuario**. **AWT** es la biblioteca original, mientras que **Swing** es una alternativa más potente y avanzada.
+- `java.net`: clases para la **programación en red** (local e Internet).
+- `java.sql`: clases necesarias para el acceso a **bases de datos**.
+- `java.security`: biblioteca de clases para implementar mecanismos de **seguridad**.
+
+### 7.- Programación de la consola: entrada y salida de la información
+
+El acceso a los dispositivos de entrada/salida estándar (teclado y pantalla) se gestiona a través de la clase `System`, que pertenece al paquete `java.lang`.
+
+La clase `System` no permite la creación de objetos; se utiliza directamente llamando a sus atributos (que son objetos) y métodos con el operador punto (`.`).
+
+Los atributos de la clase `System` son tres objetos que se utilizan para la entrada y salida estándar:
+    - `System.in`: objeto de **entrada estándar** (teclado).
+    - `System.out`: objeto de **salida estándar** (pantalla), utilizado para mostrar la salida normal del programa (ej. `System.out.println("Mensaje");`).
+    - `System.err`: objeto de **salida de error estándar**. También se produce por pantalla, pero está implementado como un fichero distinto a `System.out` para distinguir los mensajes de error de la salida normal del programa.
+
+#### 7.1.- Conceptos sobre la clase System.
+
+El atributo `System.in` (del paquete `java.lang`) es una instancia de la clase `InputStream` de Java, la cual permite leer datos en formato de **bytes** desde el teclado o cualquier dispositivo de entrada.
+
+Para facilitar la entrada de datos (leyendo texto o números en lugar de bytes), se utilizan clases envolventes:
+
+  * `InputStreamReader`: convierte los **bytes** leídos de `System.in` en **caracteres**.
+  * `BufferedReader`: lee los caracteres hasta encontrar un **fin de línea** (salto de línea), lo cual permite usar el método `readLine()` para obtener líneas de texto completas.
+
+**Forma de instanciar las clases para su uso:**
+
+```java
+InputStreamReader isr = new InputStreamReader(System.in);
+BufferedReader br = new BufferedReader (isr);
+```
+
+Para leer números, la cadena de texto obtenida con `br.readLine()` debe ser convertida. Por ejemplo, para obtener un entero, se usa el método estático `Integer.parseInt()` de la clase `Integer`:
+
+```java
+int numero = Integer.parseInt (br.readLine());
+```
+
+#### 7.2.- Entrada por teclado: clase `System`
+
+<details>
+<summary>Ejemplo de uso de la clase `System` para la entrada de datos por teclado</summary>
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+/**
+ * Ejemplo de entrada por teclado con la clase System
+ */
+public class entradaTeclado {
+
+    /**
+     * @author rro
+     */
+    public static void main(String[] args) throws IOException { // Se añade throws IOException para manejar la excepción de lectura
+        
+        try
+        {
+            InputStreamReader isr = new InputStreamReader(System.in);
+            BufferedReader br = new BufferedReader(isr);
+
+            System.out.print("Introduce el texto: ");
+            String cad = br.readLine();
+
+            //salida por pantalla del texto introducido
+            System.out.println(cad);
+            
+            System.out.print("Introduce un número: ");
+            int num = Integer.parseInt(br.readLine());
+            
+            //salida por pantalla del número introducido
+            System.out.println(num);
+
+        } catch (Exception e) {
+            System.out.print("Error al leer datos");
+            e.printStackTrace();
+        }
+    }
+}
+```
+</details>
+
+El ejemplo anterior demuestra el uso de la clase `System` para la entrada de datos por teclado. El código se encierra en una estructura `try-catch` para manejar **excepciones** (errores) que pueden ocurrir durante la lectura o la conversión de datos (ej., si se introduce texto en lugar de un número).
+
+  * **Bloque `try`:** contiene el código que podría fallar (la lectura y la conversión).
+  * **Bloque `catch`:** contiene el tratamiento o aviso de la excepción (ej. "Error al leer datos").
+
+Tratar las excepciones es crucial para evitar que el programa se detenga abruptamente en caso de fallo.
+
+#### 7.3.- Entrada por teclado: clase `Scanner`
+
+El método anterior para la entrada por teclado era inconveniente porque solo permitía la lectura fácil del tipo `String`, obligando a realizar conversiones manuales para otros tipos de datos.
+
+La clase `java.util.Scanner`, incorporada en el Kit de Desarrollo de Java a partir de la versión 1.5, soluciona esto. Permite leer directamente diversos tipos de datos, como `String`, `int`, `long`, etc., desde la consola.
+
+**Uso y sintaxis**
+
+Para utilizar la clase `Scanner`, primero se debe crear (instanciar) un objeto de esa clase, pasándole la entrada básica del sistema (`System.in`) al constructor:
+
+```java
+Scanner teclado = new Scanner (System.in); 
+```
+
+Una vez instanciado el objeto (`teclado`), se utilizan sus métodos específicos para leer diferentes tipos de datos:
+
+  * **Leer un entero (`int`):**
+    ```java
+    int i = teclado.nextInt (); 
+    ```
+  * **Leer una línea completa (`String`):**
+    ```java
+    String cadena = teclado.nextLine();
+    ```
+
+**Importación**
+
+Es necesario **importar** la clase `Scanner` antes de instanciar un objeto de esa clase, o se producirá un error de compilación.
+
+> **Ayuda del IDE:** NetBeans facilitan esto al sugerir automáticamente la importación de la clase `Scanner` cuando se detecta el error, añadiendo el `import` necesario al código.
+
+#### 7.4.- Salida por pantalla
+
+La salida por pantalla en Java se realiza con el objeto `System.out`, que es una instancia de la clase `PrintStream` (paquete `java.lang`).
+
+Los métodos principales para mostrar datos son:
+
+* `print(String s)`: escribe una cadena de texto sin añadir un salto de línea.
+* `println(String x)`: escribe una cadena de texto y **termina la línea** (añade un salto de línea).
+* `printf(String format, Object... args)`: escribe una cadena de texto utilizando **formato**.
+
+**Uso y formato**
+
+1.  `print` y `println`: para mostrar un mensaje junto con el valor de una variable, se utiliza el operador de concatenación de cadenas (`+`).
+    * *Ejemplo:* `System.out.println(“Bienvenido, “ + nombre);`
+    * Consideran todas las variables como **cadenas de texto sin formato**.
+
+2.  `printf` (salida formateada):
+    * Se utiliza para aplicar formato específico, como puntos de miles, número fijo de decimales, o notación científica, lo cual no es posible con `print`/`println`.
+    * Utiliza **códigos de conversión** precedidos por el símbolo `%` para indicar el tipo de dato y formato a mostrar.
+
+| Código de conversión | Tipo de dato |
+| :--- | :--- |
+| `%c` | Carácter |
+| `%s` | Cadena de texto |
+| `%d` | Entero |
+| `%f` | Número en punto flotante |
+| `%e` | Número en punto flotante en notación científica |
+
+* *Ejemplo de formato:* la orden `System.out.printf("% ,.2f\n", 12345.1684);` mostraría el número con separador de miles y solo dos cifras decimales (12.345,17).
+
+Estas órdenes de salida también admiten **secuencias de escape** (ej., `\n` para salto de línea, `\t` para tabulación).
+
+#### 7.5.- Salida de error
+
+La salida de error está representada por el objeto `System.err`. Este objeto es una instancia de la clase `PrintStream`, lo que significa que utiliza los mismos métodos que `System.out` (como `println()` o `print()`).
+
+Aunque en la consola del sistema ambas salidas (`System.out` y `System.err`) se muestren igual, están implementadas como **ficheros distintos**. La utilidad de esta separación es evidente en los IDEs como **NetBeans o Eclipse**, donde la salida de error (`System.err`) se visualiza en un **color diferente** al de la salida estándar (`System.out`), ayudando al programador a distinguir los mensajes de error de la salida normal del programa:
+
+```java
+System.out.println("Salida estándar por pantalla");
+System.err.println("Salida de error por pantalla");
+```
+
+![Diferencia de salida entre System.out y System.err](../../static/img/diferencia-systemout-systemerr.png)
+
+## **UD4.- Uso de estructuras de control**
+
+![Esquema Unidad 4 Programación](../../static/img/programacion-unidad-4.png)
+
+### 1.- Introducción
+
+En unidades anteriores, has aprendido la sintaxis básica de Java: variables, tipos de datos, operadores y objetos. Sin embargo, para que los programas puedan representar la realidad y resolver problemas complejos, necesitan estructuras que permitan **tomar decisiones** y realizar **operaciones repetitivas**.
+
+Estas estructuras se denominan **sentencias de control de flujo** y son comunes a la gran mayoría de lenguajes de programación, facilitando el aprendizaje de nuevos lenguajes.
+
+*Analogía:* Piensa en un fontanero (programador) que dirige el **agua (datos)** a través de **tuberías y llaves de paso (sentencias de control de flujo)** para que fluya por el camino adecuado.
+
+Las estructuras de programación utilizadas para controlar el flujo de datos son:
+
+  * **Secuencia:** la estructura más simple, donde 0, 1 o N sentencias se ejecutan en el **orden en que han sido escritas**. Todas las demás estructuras se construyen sobre esta.
+  * **Selección:** tipo de sentencia de **decisión** (que resulta en verdadero o falso). En función de ese resultado, se ejecuta **una secuencia de instrucciones u otra**. Pueden ser simples, compuestas o múltiples.
+  * **Iteración (Repetición):** tipo de sentencia de **decisión** donde una secuencia de instrucciones se ejecuta **repetidamente** si la condición es correcta, y se detiene en caso contrario.
+
+Además de estas, la unidad abordará las sentencias de **salto** (aunque no son recomendables) y el manejo de **excepciones** para controlar situaciones especiales y errores.
+
+### 2.- Sentencias y bloques
+
+Este epígrafe reafirma conceptos básicos de la sintaxis de Java:
+
+  * **Programa sencillo:** las sentencias se colocan una detrás de otra, en el **orden exacto** en que deben ejecutarse.
+  * **Formato y legibilidad:** aunque es posible poner múltiples sentencias en una sola línea separadas por puntos y comas, se recomienda escribir **cada sentencia en una línea** para mejorar la legibilidad y simplificar la localización de errores.
+  * **Finalización de sentencias:** en Java, casi todas las sentencias se terminan con **punto y coma** (`;`). Sin embargo, en algunas **estructuras de control de flujo**, la cabecera no debe llevar punto y coma.
+  * **Sentencia nula:** es una línea que solo contiene un **punto y coma** (`;`) y no realiza ninguna instrucción.
+  * **Bloque de sentencias:** es un **conjunto de sentencias** que se encierra entre **llaves** (`{ }`). El bloque se ejecuta como si fuera una única orden. Se utiliza para agrupar sentencias y clarificar el código, siendo habitual en estructuras de control de flujo, clases y métodos.
+  * **Orden en el bloque:** en general, el orden de las sentencias dentro de un bloque es importante, aunque puede variar si el resultado final de la ejecución no se altera.
+
+Independientemente de cómo se construya un programa, se deben tener siempre en cuenta las siguientes premisas:
+
+1. Se debe **declarar cada variable antes de utilizarla**.
+2. Las variables declaradas **dentro de un método** (variables locales) **no se inicializan automáticamente** con un valor. Por ello, es necesario asignarles un valor inicial antes de trabajar con ellas.
+3. Las variables declaradas **fuera de los métodos** (datos de la clase o variables miembro) se inicializan automáticamente si el programador no lo hace:
+    * Variables numéricas: se les asigna el valor `0`.
+    * Objetos (referencias): se les asigna el valor `null`.
+    * Variables booleanas: se les asigna el valor `false`.
+    * Variables de tipo `char`: se les asigna el valor `''` (carácter nulo).
+4. **No se deben usar variables no inicializadas**, ya que esto puede provocar errores o resultados imprevistos en los programas.
+5. Se deben utilizar sentencias que permitan **minimizar el código** siempre que este se mantenga **fácilmente legible**.
+
+### 3.- Estructuras de selección
+
+Las **estructuras de selección** (o condicionales) permiten que los programas tomen **decisiones** sobre qué bloque de código ejecutar en función de la evaluación de una condición.
+
+Su funcionamiento se basa en una **sentencia especial de decisión** que se evalúa y devuelve un valor **verdadero** o **falso**. En función del valor devuelto, se ejecutará una secuencia de instrucciones u otra.
+
+> **Recomendación sobre el booleano:** en lenguajes como C, los valores verdadero o falso se representan con literales enteros (0 para falso, 1 para verdadero). En Java, sin embargo, las variables de tipo primitivo `boolean`* solo pueden tomar los valores `true` o `false`.
+
+Las estructuras de selección se clasifican en los siguientes tipos, aunque un mismo problema a menudo puede resolverse con distintas combinaciones de ellas:
+
+- Estructuras de selección **simples** o estructura `if`.
+- Estructuras de selección **compuestas** o estructura `if-else`.
+- Estructuras de selección basadas en el operador condicional (`?:`).
+- Estructuras de selección **múltiples** o estructura `switch`.
+
+#### 3.1.- Estructura if / if-else
+
+La estructura `if` es una estructura de **selección o condicional** que evalúa una **expresión lógica** y ejecuta un bloque de código basado en el resultado (verdadero o falso).
+
+La estructura `if` simple ejecuta una sentencia o un bloque de sentencias solo si la `expresión-lógica` se evalúa como **verdadera** (`true`).
+
+    ```java title="Sintaxis"
+    if (expresión-lógica)
+        sentencia1; // Sin llaves si es una sola instrucción
+
+    if (expresión-lógica)
+    {
+        sentencia1;
+        // ...
+        sentenciaN;
+    }
+    ```
+
+  * Si la evaluación es falsa, **no se ejecuta** ninguna instrucción asociada al `if`, y el programa continúa con la siguiente sentencia después de la estructura condicional.
+
+La estructura `if-else` permite ejecutar una secuencia de instrucciones cuando la condición es verdadera y **otra secuencia diferente** cuando la condición es **falsa**.
+
+    ```java title="Sintaxis"
+    if (expresión-lógica)
+        sentencia1;
+    else
+        sentencia2;
+    ```
+
+  * Si la `expresión-lógica` es verdadera, se ejecuta el primer bloque (`if`). Si es falsa, se ejecuta el bloque asociado a la cláusula `else`.
+
+Las estructuras `if` e `if-else` pueden ser **anidadas** (incluidas dentro del bloque de sentencias de otro `if` o `if-else`).
+
+- Un nivel de anidamiento excesivamente profundo no es recomendable, ya que puede reducir la **eficiencia** y la **legibilidad** del código, e incluso indicar la necesidad de usar otra estructura de selección más adecuada.
+- En el anidamiento, un `else` siempre estará asociado con el `if` inmediatamente superior o más cercano que exista dentro del mismo bloque y que aún no esté asociado a otro `else`.
+
+#### 3.2.- Estructura switch
+
+La estructura `switch` es una estructura de **selección múltiple** que se utiliza cuando un programa debe elegir entre **más de dos alternativas** y es más eficiente que usar estructuras `if` anidadas para estas situaciones.
+
+El funcionamiento consiste en **comparar el valor de una expresión** con un conjunto de valores constantes (`case`). Si hay coincidencia, se ejecuta el bloque de instrucciones asociado a ese `case`. Si no hay coincidencia con ningún `case`, se ejecutan las sentencias por defecto (`default`).
+
+| Componente | Sintaxis | Condiciones |
+| :--- | :--- | :--- |
+| Cabecera | `switch (expresion)` | La `expresion` debe ser de tipo `char`, `byte`, `short` o `int`, y debe ir entre paréntesis |
+| Casos | `case valorN:` | Las constantes de cada `case` deben ser del mismo tipo o de un tipo compatible con la expresión. Cada `case` finaliza con dos puntos. |
+| Bloque | `sentenciaN_1; ...` | Son las instrucciones asociadas al valor del `case` |
+| Salto | `break;` | Causa la ruptura y la salida inmediata de la estructura `switch` (sin `break`, la ejecución "cae" al siguiente `case`) |
+| Por defecto | `default:` | Bloque de instrucciones que se ejecuta si la expresión no coincide con ningún `case`. Puede terminar con `break` o no. |
+
+```java title="Esquema de la estructura"
+switch (expresion) {
+
+ case valor1:
+    sentencia1_1;
+    // ....
+    break;
+
+ case valorN:
+    sentenciaN_1;
+    // ....
+    break;
+
+ default:
+    sentencias-default;
+}
+```
+
+### 4.- Estructuras de repetición
+
+Las **estructuras de repetición** (o **bucles/estructuras iterativas**) permiten repetir la ejecución de una secuencia de instrucciones basándose en una condición.
+
+En Java, existen cuatro clases de bucles:
+
+  - `for` y `for/in`: se consideran bucles **controlados por contador**.
+  - `while` y `do...while`: se consideran bucles **controlados por sucesos**.
+
+La elección de un bucle depende de si se conoce o no *a priori* la cantidad de veces que se necesita repetir la acción.
+
+#### 4.1.- Estructura for
+
+El bucle `for` es un bucle **controlado por contador** que se ejecuta un **número determinado de veces** y utiliza una variable contadora para controlar las iteraciones.
+
+Existen tres operaciones que se llevan a cabo dentro de la estructura `for`:
+
+1. **Inicialización:** se inicializa la variable contadora.
+2. **Condición:** se evalúa la variable contadora para determinar si debe continuar la iteración.
+3. **Iteración:** sSe modifica o actualiza el valor del contador (incremento o decremento) en cada repetición.
+
+```java title="Sintaxis de la estructura for"
+for (inicialización; condición; iteración) 
+    sentencia; // Sin llaves para una sola instrucción
+
+for (inicialización; condición; iteración)
+{
+    sentencia1;
+    sentencia2;
+    // ...
+    sentenciaN;
+}
+```
+
+  - `inicialización`: expresión que inicializa la variable de control.
+  - `condición`: expresión que se evalúa en cada iteración. Mientras la condición sea verdadera (`true`), el cuerpo del bucle se repite. Cuando se vuelve falsa, el bucle termina.
+  - `iteración`: indica la manera en que la variable de control cambia (incremento o decremento).
+
+#### 4.2.- Estructura for/in
+
+La estructura `for/in` (también llamada **bucle *foreach***) es un bucle **controlado por contador** incorporado en la versión 5.0 de Java. Su propósito es simplificar los **recorridos sobre *arrays* y colecciones de objetos** (elementos iterables).
+
+  * **Funcionamiento:** para cada **elemento** de la colección o *array* (la `expresión`), el bucle guarda ese elemento en la `declaración` de la variable y luego ejecuta las instrucciones del cuerpo. Recorrerá la colección desde el primer elemento hasta el último.
+
+    ```java title="Sintaxis"
+    for (declaración: expresión) {
+        sentencia1;
+        …
+        sentenciaN;
+    }
+    ```
+
+  * **Ventaja:** permite al programador despreocuparse del número de iteraciones, aunque no se sabrá en qué iteración exacta se encuentra a menos que se añada una variable contadora artificial.
+
+#### 4.3.- Estructura while
+
+El bucle `while` es la estructura de repetición fundamental **controlada por sucesos**. Responde a la necesidad de repetir un conjunto de instrucciones **mientras se cumpla una determinada condición**.
+
+  * **Característica principal:** la condición se evalúa **siempre al principio** del bucle. Esto significa que el cuerpo del bucle **podría no ejecutarse nunca** si la condición inicial no es verdadera (`true`).
+
+  * **Flujo:** mientras la `condición` sea cierta, el bucle se repite. Cuando la condición se vuelve falsa, el flujo del programa salta a la siguiente instrucción después del bucle.
+
+    ```java title="Sintaxis"
+    while (condición)
+        sentencia; // Con una sola instrucción
+
+    while (condición) {
+        sentencia1;
+        …
+        sentenciaN;
+    }
+    ```
+
+  * **Requisito de seguridad:** es imprescindible que en el interior del bucle `while` se realice alguna acción que **modifique la condición** que lo controla; de lo contrario, se creará un **bucle infinito**.
+
+> En NetBeans, al escribir `for` y pulsar `Ctrl + Espacio`, el IDE ofrece opciones para la construcción automática de bucles `for`.
+
+#### 4.4.- Estructura do-while
+
+La estructura `do-while` es la segunda estructura de repetición controlada por sucesos. Es útil en los casos donde se requiere que el conjunto de instrucciones se ejecute **al menos una vez**, y que luego continúe repitiéndose.
+
+  - **Característica principal:** el cuerpo del bucle se ejecuta la primera vez **antes** de evaluar la condición. Por lo tanto, las instrucciones contenidas en él **siempre se ejecutarán** al menos una vez.
+  - **Flujo:** el cuerpo del bucle se ejecuta primero, luego se evalúa la `condición`. Si la condición es **cierta** (`true`), el cuerpo del bucle se repite.
+  - **Terminación:** el bucle finaliza cuando la evaluación de la condición es **falsa** (`false`).
+  - **Requisito de seguridad:** es **imprescindible** que en el interior del bucle se realice una acción que **modifique la condición** para evitar la creación de un bucle infinito.
+
+```java title="Sintaxis"
+do
+    sentencia; // Sin llaves para una sola sentencia
+while (condición);
+
+do
+{
+    sentencia1;
+    // ...
+    sentenciaN;
+}
+while (condición);
+```
+
+### 5.- Estructuras de salto
+
+Las **estructuras de salto** son sentencias que alteran el flujo secuencial normal de un programa. Se **desaconseja** el uso de sentencias de salto incondicional en la mayoría de los programas, ya que provocan una **mala estructuración** del código y complican su mantenimiento.
+
+Las estructuras de salto que incorpora Java son `break`, `continue`, `return` y las etiquetas de salto.
+
+#### 5.1.- Sentencias `break` y `continue`
+
+Las sentencias*`break` y `continue` son instrucciones que permiten **modificar el flujo** de las estructuras de control (`switch`, `while`, `for`, `do-while`) donde están incluidas.
+
+| Sentencia | Estructuras afectadas | Funcionamiento | Efecto en bucles anidados |
+| :--- | :--- | :--- | :--- |
+| `break` | `switch`, `while`, `for`, `do-while` | Termina inmediatamente la estructura más interna. Rompe el flujo de control, incluso si la condición del bucle no se ha cumplido. | Solo finaliza la sentencia de iteración más interna |
+| `continue` | `while`, `for`, `do-while` | Da por terminada la iteración actual y fuerza la ejecución de una nueva iteración, volviendo a evaluar la expresión condicional del bucle | Solo afecta a la sentencia de iteración más interna |
+
+#### 5.2.- Sentencia `return`
+
+La sentencia `return` permite **modificar la ejecución de un método**, deteniendo su procesamiento antes de que finalice todo el código asociado a él. Puede utilizarse de dos formas principales:
+    1.  **Terminar la ejecución:** detiene la ejecución del método y transfiere el control de vuelta al punto desde el que se realizó la llamada, continuando el programa por la sentencia inmediatamente posterior.
+    2.  **Devolver un valor:** finaliza el método y **retorna un valor** al punto de llamada.
+        - El valor de retorno (la expresión que acompaña a `return`) debe ser del mismo tipo o de un tipo compatible con el **tipo de retorno** definido en la cabecera del método.
+        - Si el método se define como `void` (no retorna nada), la sentencia `return;` simplemente sirve para salir del método.
+
+> Aunque es posible utilizar `return` en cualquier punto de un método, por regla general, se recomienda **no incluir más de un `return`** y colocarlo **al final** del método para mantener una única entrada y salida, favoreciendo la legibilidad.
+
+### 6.- Excepciones
+
+Los **errores** que pueden ocurrir en los programas se dividen en dos tipos: los errores de **compilación** (sintácticos, que el compilador detecta) y los **Errores en tiempo de ejecución**, conocidos como **excepciones**.
+
+Si una excepción no se captura, el programa se detendrá. Java incorpora un potente sistema de manejo de errores, cuya potencia radica en que:
+
+1.  El código para manejar los Errores es **perfectamente identificable** y puede estar separado del código de la aplicación.
+2.  Java tiene una **gran cantidad de Errores estándar** asociados a fallos comunes (ej., divisiones por cero o fallos de entrada de datos), lo que permite una **gestión específica** para cada uno.
+
+En Java, las excepciones están representadas por **clases**. Todas las excepciones derivan de la clase base `Throwable`:
+    - `Error`: maneja los errores que se producen en la **máquina virtual** (no en los programas del usuario).
+    - `Exception`: gestiona los errores **provocados en los programas** del usuario.
+        - Java lanza una excepción generando un **objeto** asociado (de la clase `Exception` o una de sus herederas), que es pasado al código de manejo.
+
+Las excepciones se dividen en dos grupos principales: las que ocurren en tiempo de ejecución (por descuidos del programador) y las que indican que ha sucedido algo inesperado o fuera de control.
+
+#### 6.1.- Capturar una excepción
+
+Para gestionar las excepciones, se utiliza la estructura de captura de excepciones **`try-catch-finally`**. Los fragmentos de código que pueden causar un error se encierran en un bloque `try`, y si ocurre una excepción, el flujo es **lanzado (`throw`)** hacia los bloques `catch` para su tratamiento.
+
+```java title="Sintaxis"
+try {
+    código que puede generar excepciones;
+} catch (Tipo_excepcion_1 objeto_excepcion) {
+    Manejo de excepción de Tipo_excepcion_1;
+} catch (Tipo_excepcion_2 objeto_excepcion) {
+    Manejo de excepción de Tipo_excepcion_2;
+}
+...
+finally {
+    instrucciones que se ejecutan siempre;
+}
+```
+
+- **Bloques `catch`:** puede repetirse tantas veces como excepciones diferentes se deseen capturar. Recibe un objeto asociado a la excepción para manipular sus propiedades.
+- **Bloque `finally`:** es **opcional**, solo puede aparecer una vez, y contiene instrucciones que se **ejecutan siempre**, independientemente de si ocurrió o no una excepción.
+
+El orden de los bloques `catch` es crucial:
+
+  * Cuando se produce una excepción, se busca el primer `catch` que posea un manejador de excepción adecuado (que coincida con el tipo producido).
+  * La clase **`Exception`** es la superclase de todas las demás. Por lo tanto, los bloques **`catch` deben ir de los más específicos a los más genéricos**. Si el primer `catch` captura el tipo genérico `Exception`, será ese el que se ejecute, ignorando los `catch` más específicos que le sigan.
+
+<details>
+<summary>**Ejercicio resuelto**</summary>
+
+> Realiza un programa en Java en el que se solicite al usuario la introducción de un número por teclado comprendido entre el 0 y el 100. 
+> Utilizando manejo de excepciones, debes controlar la entrada de dicho número y volver a solicitarlo en caso de que ésta sea incorrecta.
+---
+> En este programa se solicita repetidamente un número utilizando una estructura `do-while`, mientras el número introducido sea menor que 0 y mayor que 100. Como al solicitar el número pueden producirse los errores siguientes:
+>      - De entrada de información a través de la excepción `IOException` generada por el método `readLine()` de la clase `BufferedReader`.
+>      - De conversión de tipos a través de la excepción `NumberFormatException` generada por el método `parseInt()`.
+>
+> Entonces se hace necesaria la utilización de bloques `catch` que gestionen cada una de las excepciones que puedan producirse. Cuando se produce una excepción, se compara si coincide con la excepción del primer `catch`. Si no coincide, se compara con la del segundo `catch` y así sucesivamente. Si se encuentra un catch que coincide con la excepción a gestionar, se ejecutará el bloque de sentencias asociado a éste.
+> 
+> Si ningún bloque `catch` coincide con la excepción lanzada, dicha excepción se lanzará fuera de la estructura `try-catch-finally`.
+> 
+> El bloque `finally`, se ejecutará tanto si `try` terminó correctamente, como si se capturó una excepción en algún bloque `catch`. Por tanto, si existe bloque `finally` éste se ejecutará siempre.
+>
+```
+package ejercicio_resuelto_excepciones;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Ejercicio_resuelto_excepciones {
+
+    public static void main(String[] args){
+        int numero=-1;
+        int intentos=0;
+        String linea;
+        
+        BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+        
+        do{
+            try{
+                System.out.print("Introduzca un número entre 0 y 100: ");
+                linea = teclado.readLine();
+                numero = Integer.parseInt(linea);
+                
+            }catch(IOException e){
+                System.out.println("Error al leer del teclado.");
+                
+            }catch(NumberFormatException e){
+                System.out.println("Debe introducir un número entre 0 y 100.");
+                
+            }finally{
+                intentos++;
+            }
+        }while (numero < 0 || numero > 100);
+        
+        System.out.println("El número introducido es: " + numero);
+        System.out.println("Número de intentos: " + intentos);
+          
+    }
+    
+}
+```
+</details>
+
+#### 6.2.- El manejo de excepciones
+
+Cuando ocurre una excepción, existen dos formas de tratar el fallo:
+    - **Interrupción:** se asume que el error es irrecuperable. La operación que causó la excepción se **anula**, y el programa **no regresa** al código que provocó el error. Java utiliza primariamente esta forma.
+    - **Reanudación:** se maneja el error y el programa intenta **regresar** al código que provocó el error.
+
+> **Simulación en Java:** la reanudación puede ser simulada en Java utilizando un bloque `try` anidado en un bucle `while`, el cual se repetirá hasta que el error deje de existir.
+
+#### 6.3.- Delegación de excepciones con `throws`
+
+La **delegación de excepciones** ocurre cuando un método que puede generar una excepción **no la captura ni la trata** internamente, sino que encarga su gestión al **código que hizo la llamada** (el invocador).
+
+  * **Mecanismo:** para delegar la responsabilidad, se utiliza la sentencia `throws` en la **cabecera del método**, seguida de una lista de los tipos de excepciones que puede generar.
+
+    ```java title="Sintaxis"
+    public int leeaño(BufferedReader lector) throws IOException, NumberFormatException {
+        String linea = teclado.readLine();
+        return Integer.parseInt(linea);
+    } 
+    ```
+
+  * **Funcionamiento:** si ocurre una excepción dentro del método, el código **abandona ese método** inmediatamente y regresa al punto desde donde fue llamado. Allí, la excepción será capturada por el `catch` apropiado. Un método puede listar múltiples excepciones delegadas, separándolas por comas.
+
+### 7.- Depuración de programas
+
+La **depuración de programas** (*debugging*) es el proceso por el cual se **identifican y corrigen errores lógicos** o **bugs** en el código. Esta fase, que sigue a las pruebas de caja negra y caja blanca, a menudo requiere una cantidad de tiempo considerable, similar al dedicado a la codificación inicial. 
+
+**Etapas que generan errores**
+
+1.  **Compilación:** se detectan y eliminan **errores de sintaxis** (ej. punto y coma faltante) que el compilador identifica.
+2.  **Enlazado (*Linking*):** se realizan comprobaciones para asegurar que los métodos y librerías llamados **existen** y que sus parámetros son **correctos** en número y tipo.
+3.  **Ejecución:** ocurren los errores más sutiles (**bugs**). El programa puede fallar, terminar antes de tiempo, o tener un **comportamiento no esperado** (ej. acceder a un índice de *array* inexistente). La depuración implica investigar estos síntomas para encontrar la causa.
+
+El **depurador** es la herramienta del IDE que ayuda a localizar y eliminar errores. Muestra el código fuente, la ejecución activa y los valores actuales de las variables.
+
+Los dos elementos fundamentales del *debugger* son:
+
+* **Breakpoints (puntos de ruptura):** marcadores insertados en líneas de código específicas donde la ejecución se **detiene (congela)**. Esto permite al programador examinar el valor de las variables en ese momento y detectar cualquier discrepancia.
+* **Ejecución paso a paso:** permite ejecutar el programa **línea por línea** para seguir el progreso del flujo de control. El *debugger* ofrece la opción de **no entrar** en métodos de librerías estándar para ahorrar tiempo, ya que se asume que no contienen errores.
+
+> Es **totalmente recomendable** utilizar el depurador, especialmente cuando el código aumenta, ya que es el método más efectivo para encontrar errores lógicos.
+
+### 8.- Documentación del código
+
+La documentación del código fuente es de gran importancia para facilitar el **mantenimiento** y la **reutilización** del código por parte de sus autores y otros desarrolladores.
+
+Es obligatorio documentar **clases, paquetes, constructores, métodos y atributos**. Opcionalmente, se pueden documentar bucles y partes específicas de los algoritmos.
+
+La herramienta estándar para generar documentación en Java es **Javadoc**. Javadoc toma **comentarios especiales** del código fuente y genera archivos **HTML** navegables.
+
+El formato general del comentario de documentación se divide en dos partes:
+
+1.  **Zona de descripción:** el programador escribe un comentario sobre la clase, atributo o método. Puede incluir **etiquetas HTML** para formatear mejor el texto en la documentación final generada.
+2.  **Zona de etiquetas:** se colocan etiquetas especiales (ej. `@author`, `@param`) a las que se asocian textos. Estas etiquetas aparecerán en lugares determinados de la documentación generada por Javadoc.
+
+#### 8.1.- Etiquetas y posición
+
+Para documentar el código fuente con **Javadoc**, es necesario saber dónde y qué etiquetas utilizar en los comentarios de documentación. Existen dos tipos generales de etiquetas:
+
+* **Etiquetas de bloque:** solo pueden incluirse **después de la descripción principal** del código y comienzan con el símbolo arroba (`@`).
+* **Etiquetas en texto:** pueden colocarse en **cualquier punto** de la descripción o en cualquier punto de la documentación asociada a una etiqueta de bloque. Se definen entre llaves, de la siguiente forma: `{@etiqueta}`.
+
+A continuación, se muestra una referencia sobre el ámbito de uso de las etiquetas más comunes de Javadoc:
+
+| | `@author` | `{@code}` | `{@docRoot}` | `@deprecated` | `@exception` | `{@inheritDoc}` | `{@link}` | `{@literal}` |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| **Descripción** | ✓ | ✓ | ✓ | ✓ | | | ✓ | ✓ |
+| **Paquete** | ✓ | ✓ | ✓ | | | | | ✓ |
+| **Clases e interfaces** | ✓ | ✓ | ✓ | ✓ | | | ✓ | ✓ |
+| **Atributos** | | | ✓ | ✓ | | | ✓ | ✓ |
+| **Constructores y métodos** | | | ✓ | ✓ | ✓ | ✓ | | |
+
+#### 8.2.- Uso de las etiquetas
+
+| Etiqueta | Aplicación | Función y notas |
+| :--- | :--- | :--- |
+| `@author` | Clases e interfaces | Indica el nombre del autor. Se pueden incluir varias etiquetas de este tipo. |
+| `@version` | Clases e interfaces | Indica el texto de la versión (ej. número de versión y fecha). Se pueden incluir varias etiquetas. |
+| `@deprecated` | Todos los apartados | Indica que el elemento no debe utilizarse y debe incluir las causas. Si hay un reemplazo, debe indicarse (ej. usando `{@link metodoCorrecto}`). |
+| `@param` | Constructores y métodos | Describe los parámetros del constructor o método. `nombre-atributo` debe ser idéntico al nombre del parámetro real. Se requiere una etiqueta por cada parámetro. |
+| `@return` | Métodos que devuelven un valor | Describe el valor de retorno. Debe explicitar el tipo o clase del valor que devuelve y sus posibles rangos. Se puede omitir en métodos `void`. |
+| `@exception` o `@throws` | Constructores y métodos | Documenta una excepción que el método puede lanzar explícitamente (`throws`). `nombre-excepción` debe ser el nombre completo. Se recomienda ordenarlas alfabéticamente. |
+| `@see` | Clases, interfaces, constructores, métodos, atributos y paquetes | Añade enlaces de referencia a otras partes de la documentación, que pueden ser: cadenas de caracteres, enlaces HTML a páginas externas, o enlaces a otras partes del código (ej. `String#equals(Object)`). |
+
+### 8.3.- Orden de las etiquetas
+
+Al generar la documentación con Javadoc, las etiquetas de bloque deben seguir un **orden determinado** para estandarizar la presentación y facilitar la lectura:
+
+| Etiqueta | Aplicación | Orden de colocación |
+| :--- | :--- | :--- |
+| `@author` | Clases e interfaces | Es preferible colocarlas en orden cronológico |
+| `@version` | Clases e interfaces | Se coloca después de `@author` |
+| `@param` | Métodos y constructores | Se colocan tantas etiquetas como parámetros haya, preferiblemente en el mismo orden en que se encuentran declarados en el método o constructor |
+| `@return` | Métodos | Se coloca después de `@param` y antes de las excepciones |
+| `@exception` / `@throws` | Constructores y métodos | Se recomienda colocarlas en el mismo orden en que se han declarado o en orden alfabético. Se puede usar `@throws` o `@exception`. |
+| `@see` | Clases, interfaces, constructores, métodos, atributos y paquetes | Se pueden poner varias. Se comienza por las referencias más generales y se continúa con las más específicas |
+| `@deprecated` | Todos los apartados | Se coloca generalmente al final, indicando que el elemento no debería utilizarse |
+
+---
+
+*Fin de la 1ª Evaluación*
+
+---

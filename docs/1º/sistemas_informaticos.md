@@ -5,7 +5,7 @@ title: Sistemas Informáticos
 toc_max_heading_level: 3
 ---
 
-## UD1.- Software de un sistema informático
+## **UD1.- Software de un sistema informático**
 
 ![Esquema Unidad 1 Sistemas Informáticos](../../static/img/sistemas-informaticos-unidad-1.jpg)
 
@@ -514,7 +514,7 @@ Esta tarjeta de red virtual se conecta con la máquina anfitrión según la conf
 - **Red Interna** -> Crear una red interna visible entre las máquinas invitadas, pero no con la anfitrión ni con la red general. Se utiliza cuando queremos tener una red entre las máquinas virtuales.
 - **Host-only networking / Adaptador sólo-anfitrión** -> En este modo cada máquina invitada solo puede comunicarse con la máquina anfitrión, sin que se puedan comunicar entre las invitadas. El direccionamiento de las mismas es dinámico y lo asigna VirtualBox.
 
-## UD2.- Hardware de un sistema informático
+## **UD2.- Hardware de un sistema informático**
 
 ![Esquema Unidad 2 Sistemas Informáticos](../../static/img/sistemas-informaticos-unidad-2.jpg)
 
@@ -995,7 +995,7 @@ Antes de manipular los componentes de un computador, es crucial aplicar medidas 
 Se aconseja leer completamente el **manual de la placa base** para entender la ubicación precisa y las especificaciones de todos los conectores y *hardware* a conectar.
 :::
 
-## UD3.- Explotación de Windows. Particiones de discos.
+## **UD3.- Explotación de Windows. Particiones de discos.**
 
 ![Esquema Unidad 3 Sistemas Informáticos](../../static/img/sistemas-informaticos-unidad-3.jpg)
 
@@ -1307,7 +1307,7 @@ Un **fichero por lotes** (*batch file*) es un archivo de **texto plano** (extens
 
 > **Nota:** **PowerShell** es una consola moderna y más potente que `cmd` para la ejecución de scripts.
 
-## UD4. Administración básica del sistema Windows
+## **UD4. Administración básica del sistema Windows**
 
 ![Esquema Unidad 4 Sistemas Informáticos](../../static/img/sistemas-informaticos-unidad-4.jpg)
 

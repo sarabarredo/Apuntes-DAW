@@ -5,7 +5,7 @@ title: Entornos de Desarrollo
 toc_max_heading_level: 3
 ---
 
-## UD1.- Desarrollo de software
+## **UD1.- Desarrollo de software**
 
 ![Esquema Unidad 1 Entornos de Desarrollo](../../static/img/entornos-de-desarrollo-unidad-1.jpg)
 
@@ -496,7 +496,7 @@ La programación estructurada se basa en el uso de solo tres tipos de sentencias
     };
     ```
 
-## UD2.- Instalación y uso de entornos de desarrollo
+## **UD2.- Instalación y uso de entornos de desarrollo**
 
 ![Esquema Unidad 2 Entornos de Desarrollo](../../static/img/entornos-de-desarrollo-unidad-2.jpg)
 
@@ -788,7 +788,7 @@ Para distribuir el proyecto como un único archivo comprimido (`.jar`), se usa e
 
 El programa `jar` también permite ver el contenido (`jar tf semaforo.jar`) y descomprimirlo (`jar xf semaforo.jar`).
 
-## UD3.- Diseño y realización de pruebas
+## **UD3.- Diseño y realización de pruebas**
 
 ![Esquema Unidad 3 Entornos de Desarrollo](../../static/img/entornos-de-desarrollo-unidad-3.jpg)
 
