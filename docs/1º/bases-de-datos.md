@@ -657,3 +657,288 @@ La fragmentación es una técnica en bases de datos distribuidas que consiste en
 ## **UD2.- Bases de datos relacionales**
 
 ![Esquema Unidad 2 Bases de Datos](../../static/img/bases-de-datos-unidad-2.jpg)
+
+### 1.- Modelo de datos
+
+Un **modelo** es un esquema teórico o una representación de una realidad compleja o sistema.
+
+Un **modelo de datos** describe los elementos que intervienen en un problema y la forma en que se relacionan entre sí. En el contexto informático, es un conjunto de métodos y reglas que indican cómo almacenar y manipular la información.
+
+En la implementación de una base de datos, el modelo de datos se utiliza para describir:
+    - Estructuras de los datos
+    - Restricciones de integridad (condiciones que los datos deben cumplir)
+    - Operaciones de manipulación
+
+Este lenguaje se divide en dos sublenguajes:
+    - **Lenguaje de Definición de Datos (DDL):** describe las estructuras de datos y las restricciones de integridad de forma abstracta.
+    - **Lenguaje de Manipulación de Datos (DML):** describe las operaciones de manipulación de los datos.
+
+El diseño de una base de datos se realiza en tres fases basadas en su nivel de abstracción:
+
+1.  **Modelo de datos conceptual:** se utiliza en el diseño conceptual. Es una representación (usualmente gráfica) de la realidad que **no está comprometida** con ningún entorno informático. Describe las estructuras y restricciones, estando orientado a representar los elementos y sus relaciones. Es una fase crítica, ya que los errores aquí se arrastran a las siguientes.
+    * *Ejemplo:* **Modelo entidad-relación**
+2.  **Modelo Lógico:** se utiliza en el diseño lógico. Determina los criterios de **almacenamiento** y las **operaciones de manipulación** de datos dentro de un tipo de entorno informático. Los Sistemas Gestores de Bases de Datos (SGBD) comerciales se basan en un modelo lógico específico.
+    * *Ejemplo:* **Modelo relacional**
+3.  **Modelo Físico:** se utiliza en el diseño físico. Es la **implementación física** del modelo lógico en estructuras de datos de bajo nivel, utilizando un SGBD comercial específico (ej., Oracle, MySQL).
+
+### 2.- Terminología del modelo relacional
+
+El **modelo relacional** fue propuesto por **Edgar Frank Codd** en los laboratorios de IBM. Se trata de un **modelo lógico** que permite representar la información del mundo real de una manera intuitiva y establece una estructura sobre los datos, independiente del modo en que se almacenarán físicamente. El nombre del modelo se debe a su estrecha relación con el concepto matemático de **relación**.
+
+**Producto cartesiano**
+
+Una relación entre dos conjuntos, *A* y *B*, es un subconjunto del **producto cartesiano** *A* x *B*.
+
+El producto cartesiano da como resultado la relación de **todos los elementos de un conjunto con todos los elementos de los otros conjuntos** de ese producto. Al trabajar con conjuntos, no puede haber elementos repetidos.
+
+> *Ejemplo:* si tienes un conjunto *Marcas* y un conjunto *Modelos*, el producto cartesiano es la combinación de todos los elementos de *Marcas* con todos los de *Modelos*. 
+
+El diseño de las tablas en el modelo relacional es la segunda fase del diseño de la base de datos, que se realiza después de completar el diseño conceptual (análisis, identificación de tablas, atributos, restricciones y relaciones).
+
+#### 2.1.- Relación o tabla. Tuplas. Dominios.
+
+El modelo relacional, basado en la teoría de conjuntos y la lógica de predicados, utiliza una terminología específica para describir sus componentes, siendo los principales: **relaciones (tablas), tuplas (filas)** y **atributos (columnas)**.
+
+En el modelo relacional, una **relación** se visualiza como una **tabla** compuesta por filas y columnas.
+
+**Atributos (columnas)**
+Un **atributo** es el nombre de cada dato que se almacena en la relación. En una tabla de *Alumnos*, los atributos serían *DNI*, *nombre* y *apellidos*.
+
+* El nombre del atributo debe describir el significado de la información que representa.
+* A veces se añade una descripción para aclarar el contenido (ej., si el sueldo es neto o bruto).
+
+**Tuplas (filas)**
+Una **tupla** se refiere a cada elemento de la relación o tabla. Una tupla se corresponde con la idea de **registro**.
+
+* Cada tupla debe corresponderse con un elemento del mundo real.
+* No puede haber dos tuplas iguales (con todos sus valores idénticos).
+
+**Dominios**
+Un **dominio** es un **conjunto de valores previamente establecidos** al que debe pertenecer un atributo. Esto evita errores (ej., guardar "250€" en un atributo *Población*).
+
+* Un dominio se puede definir mediante la declaración de un **tipo de dato** (ej., número entero entre 1 y 16) o ser más complejo (ej., que el atributo *Sexo* solo admita "M" o "F").
+* Una característica fundamental es que los dominios deben ser **atómicos**, es decir, los valores contenidos en los atributos no se pueden separar en valores de dominios más simples.
+* Un dominio debe tener **Nombre**, **Definición lógica**, **Tipo de datos** y **Formato**.
+    * *Ejemplo:* Para el atributo *Sueldo*: Nombre (*Sueldo*), Definición Lógica (*Sueldo neto del empleado*), Tipo de datos (*número entero*), y Formato (*9.999€*).
+
+#### 2.2.- Grado. Cardinalidad.
+
+El **grado** es el **tamaño de una tabla en base a su número de atributos (columnas)**. A mayor grado, mayor es la complejidad para trabajar con la tabla.
+
+La **cardinalidad** es el **número de tuplas o filas** de una relación o tabla.
+
+> Ejemplo (producto cartesiano):
+>
+> Dadas las relaciones `A={Carlos, María}, B={Matemáticas, Lengua, Inglés} y C={Aprobado, Suspenso}`.
+> 
+> El **producto cartesiano** A x B x C da como resultado una relación de **grado 3** (pues tiene 3 columnas o atributos).
+>
+> Si se toma un subconjunto de este producto cartesiano con 5 filas, se obtiene una relación de **cardinalidad 5**. 
+
+#### 2.3.- Sinónimos
+
+Los conceptos fundamentales del modelo relacional tienen distintas nomenclaturas dependiendo del contexto o de la perspectiva utilizada (matemática, informática o de programación de ficheros):
+
+| Modelo relacional | Tablas | Ficheros |
+| :--- | :--- | :--- |
+| RELACIÓN | TABLA | FICHERO |
+| TUPLA | FILA | REGISTRO |
+| ATRIBUTO | COLUMNA | CAMPO |
+| GRADO | Nº COLUMNAS | Nº CAMPOS |
+| CARDINALIDAD | Nº FILAS | Nº REGISTROS |
+
+### 3.- Relaciones. Características de una relación (tabla).
+
+Para que una relación (tabla) sea válida dentro del modelo relacional, debe cumplir una serie de propiedades estrictas que aseguran la consistencia de los datos:
+
+- Cada tabla dentro del modelo debe tener un **nombre distinto**.
+- Cada atributo (columna) de la tabla debe tomar **un solo valor** en cada tupla (fila).
+- Cada atributo (columna) debe tener un **nombre distinto** dentro de la misma tabla (aunque el mismo nombre puede usarse en tablas distintas).
+- No puede haber dos tuplas (filas) **completamente iguales**; es decir, la combinación de todos los valores debe ser única para cada registro.
+- El **orden de las tuplas (filas) no importa**.
+- El **orden de los atributos (columnas) no importa**.
+- Todos los datos de un atributo (columna) deben pertenecer al **mismo dominio** definido para ese atributo (ej. si el dominio del atributo *Nota* solo incluye *Aprobado* o *Suspenso*, el dato *NOTABLE* sería incorrecto).
+
+#### 3.1.- Tipos de relaciones (tablas)
+
+Las relaciones o tablas se pueden clasificar según su permanencia y la forma en que almacenan sus datos:
+
+**Tablas persistentes**: solo pueden ser borradas por los usuarios. Se dividen en:
+    - **Base:** son tablas **independientes** que se crean definiendo su estructura y el conjunto de tuplas (filas) que contienen.
+    - **Vistas:** son tablas que solo almacenan una **definición de consulta**. Los datos que muestran provienen de otras tablas base, de otras vistas o de instantáneas. Si los datos de las tablas base cambian, los datos de la vista también cambiarán, ya que se obtienen dinámicamente a partir de la consulta que la define.
+    - **Instantáneas:** son conceptualmente como vistas (se crean de la misma forma), pero a diferencia de ellas, sí **almacenan los datos** que muestran, además de la consulta que las creó. Solo modifican su resultado cuando el sistema se **refresca** cada cierto tiempo. Actúan como una "fotografía" de la relación que es válida solo durante un periodo de tiempo concreto. Dependiendo del SGBD (Sistema Gestor de Base de Datos) que se utilice, pueden ser de solo lectura.
+
+**Tablas temporales**: son eliminadas automáticamente por el sistema (SGBD).
+
+### 4.- Tipos de datos
+
+En el modelado de datos, cada **atributo** (columna) debe tener asociado un **tipo de dato** para especificar formalmente su **dominio** (conjunto de valores posibles) y las operaciones que se pueden realizar con él.
+
+Al crear una tabla, el proceso de asignación de tipos de datos a los atributos implica:
+- Asignar un **nombre** al campo (relacionado con el dato que contiene).
+- Asignar un **tipo de dato** (que restringe los valores que puede tomar y las operaciones que se pueden realizar).
+
+En términos de bases de datos, el dominio se especifica indicando el **tipo de dato** (general) y el **conjunto de valores restringidos** (específico, indicado en la definición de la tabla si el SGBD lo permite).
+
+La mayoría de los lenguajes y SGBD utilizan tipos de datos que caen en las siguientes categorías comunes, aunque su sintaxis y nombre varían:
+
+* **Texto:** almacena cadenas de caracteres (letras, números o símbolos) con las que no se realizarán operaciones matemáticas.
+* **Numérico:** almacena números. Se usa cuando se van a realizar **operaciones matemáticas** con el valor (ej., Sueldo).
+* **Fecha/Hora:** almacena fechas y horas.
+* **Sí/No (Booleano):** almacena datos con solo dos posibilidades (verdadero/falso).
+* **Autonumérico:** subtipo de Numérico que almacena valores numéricos secuenciales que el SGBD incrementa automáticamente al añadir un registro (fila).
+* **Memo:** almacena texto largo (mayor que un tipo Texto).
+* **Moneda:** almacena valores numéricos con la característica especial de representar **cantidades de dinero**.
+* **Objeto OLE:** almacena gráficos, imágenes o textos creados por otras aplicaciones.
+
+Para determinar el tipo de dato y su tamaño, se deben considerar el conjunto de valores que puede tomar y las operaciones que se realizarán.
+
+>**Ejemplo de criterio:** un código postal (`06800`) se define mejor como una cadena de 5 caracteres (texto) en lugar de numérico, porque no se usa para operaciones matemáticas y los ceros a la izquierda deben conservarse. El número de teléfono es un caso similar.
+>
+>Es fundamental que el tipo de dato y el tamaño/longitud se definan correctamente. Una mala definición podría no permitir almacenar la información o causar que se almacene incompleta (ej. si se define el DNI con longitud 8 y el valor tiene 9 caracteres, el sistema podría almacenar un valor truncado).
+
+### 5.- Claves
+
+Las **claves** son atributos o conjuntos de atributos que se utilizan para **identificar de modo único** las tuplas (filas) de una relación (tabla) y para establecer relaciones entre tablas.
+
+* **Superclaves:** atributo o conjunto de atributos que identifica de modo único las tuplas de una relación. Puesto que no puede haber dos tuplas completamente iguales, la tupla completa es siempre una superclave.
+
+En el modelo relacional, se trabaja con los siguientes tipos de claves:
+    - Claves candidatas
+    - Clave primaria
+    - Claves alternativas
+    - Claves ajenas (externas)
+
+#### 5.1.- Clave candidata. Clave primaria. Clave alternativa.
+
+**Clave candidata**: atributo o conjunto de atributos que identifica de manera **única** e **irreductible** cada tupla (fila) de la relación. Toda tabla debe tener al menos una clave candidata.
+    - **Clave compuesta:** clave candidata formada por más de un atributo.
+    - Requisitos de una clave candidata:
+        1.  **Unicidad:** no puede haber dos tuplas con los mismos valores para esos atributos.
+        2.  **Irreductibilidad:** si se elimina cualquiera de los atributos, el conjunto resultante deja de ser único.
+    - La identificación de claves candidatas se basa en el **significado real** de los atributos y no en la observación de un estado temporal de los datos.
+
+**Clave primaria (Primary Key - PK)**: clave candidata que se escoge para identificar de modo único sus tuplas dentro de una relación.
+    - Una relación siempre tendrá una clave primaria. En el peor caso, estará formada por todos los atributos de la relación, pero generalmente es un subconjunto pequeño. A menudo, se utiliza un campo único artificial (ej. un código de usuario autonumérico).
+
+**Clave alternativa**: clave candidata que no ha sido escogida como clave primaria.
+
+#### 5.2.- Clave externa, ajena o secundaria (Foreign Key - FK)
+
+Una **clave ajena** es un atributo o conjunto de atributos en una relación (tabla) cuyos valores **coinciden con los valores de la clave primaria de otra relación** (o de la misma). Su propósito es representar las **relaciones** o conexiones entre los datos de diferentes tablas.
+    - Los valores de una clave ajena deben cumplir una de estas condiciones:
+        1.  Estar presentes como un valor de la **clave primaria** en la tabla a la que hacen referencia.
+        2.  Ser **valores nulos** (si se permite).
+    - A diferencia de la clave primaria a la que referencian, las claves ajenas **sí pueden repetirse** en su tabla.
+    - Si una clave ajena contiene un valor que no existe en la clave primaria de la tabla referenciada, la información se considera **inconsistente** (no fiable).
+
+### 6.- Índices. Características.
+
+Un **índice** es una estructura de datos que se define sobre uno o varios campos de una tabla para permitir un **acceso mucho más rápido a las filas**.
+
+Al igual que un índice en un diccionario facilita la búsqueda de palabras, los índices en una base de datos agilizan las operaciones de búsqueda. 
+
+- Son útiles cuando se realizan consultas frecuentes a un rango de filas o a una fila específica de una tabla, especialmente en bases de datos grandes.
+- Los cambios en los datos de las tablas (agregar, actualizar o borrar filas) se incorporan automáticamente a los índices con total transparencia.
+- Los índices son **independientes, lógica y físicamente, de los datos**. Por lo tanto, pueden ser creados y eliminados en cualquier momento sin afectar a las tablas ni a otros índices.
+- **Impacto en el rendimiento:**
+    * Crear índices agiliza las operaciones de **búsqueda**.
+    * Crear índices **ralentiza** las operaciones de **modificar o agregar datos**, ya que es necesario actualizar tanto la tabla como el índice. Por ello, se debe pensar bien cuándo definirlos.
+    * No conviene indexar columnas de **gran tamaño** porque puede ser contraproducente.
+- **Relación con claves:** el SGBD utiliza índices para la gestión de las **claves ajenas** y de las **claves primarias**. En el caso de las claves primarias, se utilizan **índices únicos** (no admiten valores repetidos).
+
+### 7.- El valor NULL. Operaciones con este valor.
+
+El valor especial **NULO (NULL)** se utiliza para designar la **ausencia de dato** en un campo, independientemente del dominio al que pertenezca.
+
+Se asigna NULO cuando:
+* Se **desconoce** el valor de un campo (ej., desconocemos el teléfono de un usuario).
+* El campo **carece de sentido** para esa tupla (ej., un usuario no tiene teléfono).
+* En claves secundarias, indica que la tupla **no está relacionada** con ninguna otra tupla.
+
+**Distinciones**
+Es fundamental notar que:
+* **NULO** no es lo mismo que **ESPACIO EN BLANCO**. Un espacio en blanco es un carácter que pertenece al dominio texto.
+* **NULO** tampoco es lo mismo que el valor **CERO**.
+
+**Lógica con el valor NULO**
+El valor NULO no es ni **VERDADERO** ni **FALSO** en la lógica booleana. Esto afecta a las operaciones lógicas (`AND`, `OR`, `NOT`):
+
+* VERDADERO Y (AND) NULO → **NULO**
+* FALSO Y (AND) NULO → **FALSO**
+* VERDADERO O (OR) NULO → **VERDADERO**
+* FALSO O (OR) NULO → **NULO**
+* NO (NOT) NULO → **NULO**
+
+Para comparar un campo con este valor, las bases de datos relacionales utilizan el operador `IS NULL` (ES NULO), que devuelve **VERDADERO** si el valor comparado es NULO.
+
+### 8.- Vistas
+
+Una **vista** es una tabla **"virtual"** cuyas filas y columnas se obtienen a partir de una o varias tablas del modelo. Lo que se almacena no es la tabla en sí, sino su **definición de consulta**, razón por la que se considera "virtual". Una vista actúa como un filtro de las tablas a las que hace referencia.
+
+- **Origen de datos:** la consulta que define una vista puede provenir de una o varias tablas, o de otras vistas de la base de datos actual o de otras bases de datos.
+- **Restricciones:** aunque no existen restricciones para consultar vistas, sí hay restricciones para **modificar los datos** de estas, establecidas para mantener la integridad y consistencia de los datos. La posibilidad de actualizar datos a través de una vista depende de su complejidad y del gestor de base de datos (SGBD) (ej. Oracle no lo permite, mientras que SQL Server sí).
+- **Propiedades:** las vistas no tienen una copia física de los datos; son sentencias de consultas a los datos existentes en las tablas. Si se actualizan los datos de una vista, se está actualizando realmente la tabla, y si se actualiza la tabla, los cambios son visibles desde la vista.
+
+**Razones para crear vistas:**
+* **Seguridad:** permite que los usuarios accedan solo a una **parte específica** de la información contenida en una tabla, sin acceso a la tabla completa.
+* **Comodidad:** simplifica el uso de sentencias de consulta que podrían ser bastante complejas si se escribieran directamente en el lenguaje de base de datos.
+
+### 9.- Usuarios. Roles. Privilegios
+
+Para conectarse a una base de datos, se utiliza un modo de acceso que describe los permisos disponibles durante la conexión, definidos en función del nombre de usuario.
+
+**Usuario**: es un conjunto de permisos que se aplican a una conexión de base de datos.
+    - Es el **propietario** de ciertos objetos (tablas, vistas, etc.).
+    - Realiza las **copias de seguridad**.
+    - Tiene asignada una **cuota de almacenamiento**.
+    - Tiene asignado un *tablespace* por defecto para los objetos (en Oracle).
+
+**Privilegio**: es un permiso que se otorga a un usuario para que realice ciertas operaciones. Se clasifica en dos tipos:
+    - **De sistema:** necesario para configurar parámetros del sistema.
+    - **Sobre objeto:** necesario para realizar operaciones sobre un objeto específico (ej., permiso sobre una tabla para modificarla).
+
+**Rol**: es una agrupación de permisos (de sistema y de objeto).
+    - Permite asignar un grupo de permisos a un usuario.
+    - Si se asigna un rol a varios usuarios y luego se necesita añadir un permiso nuevo, este se propaga automáticamente a todos los usuarios que tienen asignado ese rol, simplificando la administración.
+    - Los roles son fundamentales en los CMS (Sistemas Gestores de Contenidos) para definir las interacciones de usuarios y gestores con el entorno.
+
+### 10.- SQL
+
+**SQL** es un lenguaje de **dominio específico** fundamental para los SGBD. Está diseñado para **administrar y recuperar información** de estas bases de datos.
+
+* **Naturaleza:**eEs un lenguaje **declarativo**. Lo más importante es definir **qué se desea hacer**, y el SGBD se encarga de determinar **cómo hacerlo**.
+* **Estándar:** es un lenguaje **normalizado** que permite trabajar en combinación con casi cualquier lenguaje de programación (ASP, PHP) y cualquier base de datos (Oracle, MySQL, SQL Server, etc.).
+    * Aunque es estándar, determinadas bases de datos implementan **funciones específicas** que no necesariamente funcionan en otras. Siempre se recomienda revisar la documentación del SGBD para conocer su sintaxis concreta.
+* **Características:** SQL es apreciado por su **potencia** y **versatilidad**, contrastando con su **facilidad de aprendizaje**, ya que utiliza un lenguaje bastante natural. Por esta última característica, se le considera un **Lenguaje de Cuarta Generación**.
+* **Capacidades:** a pesar de ser llamado "lenguaje de consulta," SQL abarca mucho más que solo la consulta de datos:
+    * Definición de la estructura de los datos (**DDL**).
+    * Manipulación de datos (**DML**).
+    * Especificación de conexiones seguras (**DCL**).
+
+**Formas de trabajar con SQL:**
+1.  **SQL embebido:** las sentencias se escriben **dentro de un programa** escrito en otro lenguaje (como Java o PHP).
+2.  **SQL interpretado:** las sentencias se escriben y ejecutan en un **entorno gráfico** (como SQL Developer) o mediante un programa de **línea de comandos** (como SQLPlus para Oracle).
+
+#### 10.1.- Elementos del lenguaje. Normas de escritura.
+
+SQL se compone de comandos, cláusulas, operadores, funciones y literales, los cuales se combinan para formar instrucciones o sentencias que manipulan la base de datos.
+
+| Elemento | Descripción |
+| :--- | :--- |
+| COMANDOS | Las instrucciones principales de SQL, que se distinguen en tres grupos: |
+|| • **DDL:** permiten crear y definir nuevas bases de datos, tablas, campos, etc. |
+|| • **DML:** permiten generar consultas para ordenar, filtrar y extraer datos |
+|| • **DCL:** administran los derechos y restricciones de los usuarios |
+| CLÁUSULAS | Palabras especiales que permiten modificar el funcionamiento de un comando |
+| OPERADORES | Permiten crear expresiones complejas |
+| FUNCIONES | Se utilizan para conseguir valores complejos |
+| LITERALES | Valores concretos o constantes |
+
+**Normas de escritura primordiales**
+    - Todas las instrucciones deben terminar con `;`
+    - No se distingue entre mayúsculas y minúsculas
+    - Cualquier comando puede ser dividido con saltos de línea o espacios para facilitar su lectura
+    - Los comentarios comienzan con `/*` y terminan con `*/`
+
+### 11.- Lenguaje de descripción de datos (DDL)
