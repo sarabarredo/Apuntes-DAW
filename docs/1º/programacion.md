@@ -1971,7 +1971,7 @@ A continuación, se muestra una referencia sobre el ámbito de uso de las etique
 | `@exception` o `@throws` | Constructores y métodos | Documenta una excepción que el método puede lanzar explícitamente (`throws`). `nombre-excepción` debe ser el nombre completo. Se recomienda ordenarlas alfabéticamente. |
 | `@see` | Clases, interfaces, constructores, métodos, atributos y paquetes | Añade enlaces de referencia a otras partes de la documentación, que pueden ser: cadenas de caracteres, enlaces HTML a páginas externas, o enlaces a otras partes del código (ej. `String#equals(Object)`). |
 
-### 8.3.- Orden de las etiquetas
+#### 8.3.- Orden de las etiquetas
 
 Al generar la documentación con Javadoc, las etiquetas de bloque deben seguir un **orden determinado** para estandarizar la presentación y facilitar la lectura:
 

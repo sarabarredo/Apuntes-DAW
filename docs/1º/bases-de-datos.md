@@ -942,3 +942,1215 @@ SQL se compone de comandos, cláusulas, operadores, funciones y literales, los c
     - Los comentarios comienzan con `/*` y terminan con `*/`
 
 ### 11.- Lenguaje de descripción de datos (DDL)
+
+El **DDL** es la primera fase del trabajo con cualquier base de datos y es imprescindible para crear, modificar y eliminar objetos de la base de datos (metadatos).
+
+- Antes de almacenar y recuperar información, se deben definir las estructuras donde se guardarán los datos. Las estructuras básicas con las que trabaja SQL son las **tablas**.
+- Aunque existen herramientas visuales que facilitan la labor, es imprescindible conocer el lenguaje SQL en profundidad para manipular los objetos sin depender de dichas herramientas.
+- Las instrucciones DDL generan acciones que **no se pueden deshacer**, por lo que deben usarse con precaución y respaldadas por copias de seguridad.
+
+En Oracle, cada usuario tiene un **esquema** con el mismo nombre que el usuario. Este esquema sirve para **almacenar los objetos** que posea ese usuario.
+
+- Los objetos de los que hablamos pueden ser **tablas, vistas, índices** u otros objetos relacionados con la definición de la base de datos.
+- En principio, solo el **usuario propietario** (quien los creó) y los **administradores** de la base de datos pueden crearlos y manipularlos. Estos privilegios pueden modificarse para permitir el acceso a otros usuarios.
+
+#### 11.1.- Creación de bases de datos: objetos
+
+La creación de una base de datos implica, en esencia, crear las tablas que la componen. Esto requiere primero definir un **espacio de nombres separado** para cada conjunto de tablas (esquemas o usuarios).
+
+- La instrucción estándar para crear una base de datos es `CREATE DATABASE NombreBasedeDatos;`.
+    * *Ejemplo:* `CREATE DATABASE RyMjuegos;`
+- Según los estándares, una base de datos es un **conjunto de objetos** utilizados para gestionar los datos. Estos objetos están contenidos en **esquemas**, y los esquemas suelen estar asociados a un usuario.
+
+> En Oracle, la sentencia `CREATE DATABASE` tiene un sentido distinto al de otros SGBD como MySQL. Nosotros trabajaremos creando las tablas **directamente en el esquema del usuario** creado previamente, por lo que **no utilizaremos la sentencia `CREATE DATABASE`**.
+
+#### 11.2.- Creación de tablas
+
+Antes de ejecutar la sentencia DDL para crear una tabla, es crucial tener clara la información obtenida en la fase de diseño lógico:
+    - Nombre que se asignará a la tabla
+    - Nombre que se asignará a cada columna (atributo)
+    - Tipo y tamaño de datos que se almacenará en cada columna (dominio)
+    - Restricciones que se aplicarán a los datos
+
+Existen reglas estrictas para nombrar las tablas y otros objetos:
+    - No puede haber nombres de tablas duplicados en el mismo esquema (usuario)
+    - Deben comenzar por un carácter alfabético
+    - La longitud máxima suele ser de **30 caracteres
+    - Solo se permiten letras del alfabeto inglés, dígitos o el signo de guión bajo
+    - No pueden coincidir con palabras reservadas de SQL
+    - No se distingue entre mayúsculas y minúsculas por defecto
+    - Si se utilizan comillas dobles alrededor del nombre, el nombre se vuelve sensible a mayúsculas*
+
+```sql title="Instrucción DDL para crear una tabla"
+CREATE TABLE [esquema.] nombredeTabla ( columna1 Tipo_Dato,columna2 Tipo_Dato, ...  columnaN Tipo_Dato );
+```
+
+```sql title="Ejemplo de creación de tabla básica"
+CREATE TABLE USUARIOS (Nombre VARCHAR(25));
+```
+
+#### 11.3.- Restricciones
+
+Una **restricción (Constraint)** es una **condición que una o varias columnas deben cumplir obligatoriamente** en una tabla. Las restricciones son fundamentales para asegurar la integridad y la consistencia de los datos.
+
+Es una buena práctica asignar un nombre a cada restricción (si no se hace, el SGBD lo hará automáticamente). El nombre debe ser único para cada esquema (usuario) y ayudar a identificar la tabla, los campos involucrados y el tipo de restricción.
+
+**Recomendación de Oracle para nombres de restricciones:**
+
+1.  Tres letras para el nombre de la tabla.
+2.  Carácter de subrayado (`_`).
+3.  Tres letras con la columna afectada por la restricción.
+4.  Carácter de subrayado (`_`).
+5.  Dos letras con la abreviatura del tipo de restricción:
+      * **PK** = Primary Key.
+      * **FK** = Foreign Key.
+      * **NN** = Not Null.
+      * **UK** = Unique.
+      * **CK** = Check (validación).
+
+**Sintaxis de restricciones**
+
+Las restricciones se definen durante la creación de la tabla (`CREATE TABLE`).
+
+La sintaxis básica en SQL estándar (donde los corchetes `[]` indican opcionalidad) es:
+
+```sql
+CREATE TABLE NOMBRETABLA (
+     Columna1 Tipo_Dato
+          [CONSTRAINT nombredelarestricción]
+          [NOT NULL]
+          [UNIQUE]
+          [PRIMARY KEY]
+          [FOREIGN KEY]
+          [DEFAULT valor]
+          [REFERENCES nombreTabla [(columna [, columna ])]
+          [ON DELETE CASCADE]]
+          [CHECK condición],
+     Columna2 Tipo_Dato
+          [CONSTRAINT nombredelarestricción]
+          [NOT NULL]
+          [UNIQUE]
+          [PRIMARY KEY]
+          [FOREIGN KEY]
+          [DEFAULT valor]
+          [REFERENCES nombreTabla [(columna [, columna ])]
+          [ON DELETE CASCADE]]
+          [CHECK condición],...);
+```
+
+  * **`CONSTRAINT nombredelarestricción`**: asigna un nombre personalizado a la restricción
+  * **`NOT NULL`**: asegura que el campo debe contener un valor
+  * **`UNIQUE`**: garantiza que todos los valores en la columna o grupo de columnas sean diferentes
+  * **`PRIMARY KEY`**: define la clave primaria
+  * **`FOREIGN KEY` / `REFERENCES`**: define la clave ajena que hace referencia a una clave primaria en otra tabla
+  * **`DEFAULT valor`**: especifica un valor por defecto si no se proporciona uno durante la inserción
+  * **`CHECK condición`**: define una condición que debe ser verdadera para que los datos puedan ser insertados
+  * **`ON DELETE CASCADE`**: (para `FOREIGN KEY`) especifica que si se elimina la fila padre, las filas hijas dependientes también se eliminan
+
+```sql title="Ejemplo de restricciones en línea"
+CREATE TABLE USUARIOS (
+    Login VARCHAR(15) CONSTRAINT usu_log_PK PRIMARY KEY,
+    Password VARCHAR (8) NOT NULL,
+    Fecha_Ingreso DATE DEFAULT SYSDATE
+);
+```
+
+##### 11.3.1.- Restricción NOT NULL
+
+`NOT NULL` obliga a que una columna **tenga siempre un valor**, prohibiendo la asignación del valor nulo (`NULL`) a esa columna.
+
+Se puede aplicar al crear o modificar el campo, añadiendo la cláusula `NOT NULL` después del tipo de dato.
+
+```sql title="Sintaxis (con nombre de restricción)"
+CREATE TABLE USUARIOS (
+    F_Nacimiento DATE
+    CONSTRAINT Usu_Fnac_NN NOT NULL
+);
+```
+
+```sql title="Sintaxis (simplificada)"
+CREATE TABLE USUARIOS (
+    F_Nacimiento DATE NOT NULL
+);
+```
+
+> **Cuidado:** se debe tener precaución con los valores nulos, ya que cualquier operación aritmética con `NULL` (ej., `1 * NULL`) resulta en `NULL`.
+
+##### 11.3.2.- Restricción UNIQUE
+
+`UNIQUE` asegura que **no se puedan repetir valores** en la columna o conjunto de columnas a la que se aplica.
+
+    - **Índice automático:** Oracle (y otros SGBD) crea automáticamente un índice cuando se habilita esta restricción.
+
+```sql title="Sintaxis (con nombre de restricción)"
+CREATE TABLE USUARIOS (
+    Login VARCHAR2 (25)
+    CONSTRAINT Usu_Log_UK UNIQUE
+);
+```
+
+```sql title="Sintaxis (simplificada)"
+CREATE TABLE USUARIOS (
+    Login VARCHAR2 (25) UNIQUE
+);
+```
+
+**Clave compuesta (aplicación a múltiples campos):** se define la restricción después de la declaración de todas las columnas a las que afecta, referenciando los campos entre paréntesis:
+
+```sql
+CREATE TABLE USUARIOS (
+    Login VARCHAR2 (25),
+    Correo VARCHAR2 (25),
+    CONSTRAINT Usuario_UK UNIQUE (Login, Correo)
+);
+```
+
+##### 11.3.3.- Restricción PRIMARY KEY
+
+`PRIMARY KEY` define la **clave primaria** de la tabla, que es el campo o conjunto de campos que identifica de modo único cada tupla.
+
+  * **Regla:** solo puede haber **una clave primaria por tabla**.
+  * **Propiedades implicadas:** la clave primaria automáticamente obliga a que los campos sean **`NOT NULL`** y **`UNIQUE`**.
+  * **Referenciabilidad:** dicha clave puede ser referenciada como clave ajena en otras tablas.
+
+```sql title="Sintaxis (clave simple)"
+CREATE TABLE USUARIOS (
+    Login VARCHAR2 (25) PRIMARY KEY
+);
+```
+
+```sql title="Sintaxis (clave compuesta):"
+/* Se debe utilizar este formato al final de la definición de los campos, antes del paréntesis de cierre */
+CREATE TABLE USUARIOS (
+    Nombre VARCHAR2 (25),
+    Apellidos VARCHAR2 (30),
+    F_Nacimiento DATE,
+    CONSTRAINT Usu_PK PRIMARY KEY(Nombre, Apellidos, F_Nacimiento)
+);
+```
+
+##### 11.3.4.- Restricción REFERENCES. FOREIGN KEY.
+
+`FOREIGN KEY` establece que un campo o conjunto de campos hace **referencia** a la clave primaria (o clave candidata) de otra tabla.
+
+```sql title="Sintaxis con REFERENCES (opción de columna)"
+CREATE TABLE USUARIOS (
+    Cod_Partida NUMBER(8)
+        CONSTRAINT Cod_Part_FK
+        REFERENCES PARTIDAS(Cod_Partida)
+);
+```
+
+```sql title="Sintaxis simplificada (si se referencia la clave primaria de la otra tabla)"
+CREATE TABLE USUARIOS (
+    Cod_Partida NUMBER(8)
+        CONSTRAINT Cod_Part_FK
+        REFERENCES PARTIDAS
+);
+```
+
+```sql title="Sintaxis con FOREIGN KEY (opción de tabla o clave compuesta)"
+CREATE TABLE USUARIOS (
+    Cod_Partida NUMBER(8),
+    F_Partida DATE,
+    CONSTRAINT Partida_Cod_F_FK FOREIGN KEY (Cod_Partida, F_Partida)
+    REFERENCES PARTIDAS
+);
+```
+
+**Orden de creación/borrado:**
+    - **Creación:** siempre se deben crear las tablas que tienen claves ajenas **después** de aquellas donde esos campos son claves primarias o candidatas.
+    - **Borrado:** se deben borrar las tablas que tienen claves ajenas **antes** que las tablas que contienen las claves primarias referenciadas.
+
+**Acciones de Integridad Referencial (Junto a `REFERENCES`):**
+Estas opciones definen qué debe hacer el SGBD cuando se borra o modifica la fila referenciada:
+    - `ON DELETE CASCADE`: permite borrar todos los registros cuya clave ajena sea igual a la clave del registro borrado.
+    - `ON DELETE SET NULL`: coloca el valor `NULL` en todas las claves ajenas relacionadas con la borrada.
+    - `ON DELETE SET DEFAULT xxxx`: coloca el valor `xxxx` (valor por defecto) en todas las claves ajenas relacionadas.
+
+> **Nota:** estas opciones también son válidas para la operación de modificación, especificando `ON UPDATE` en lugar de `ON DELETE`.
+
+##### 11.3.5.- Restricción DEFAULT Y VALIDACIÓN
+
+`DEFAULT` asigna un **valor por defecto** a una columna si no se proporciona uno durante la inserción de la tupla.
+
+```sql title="Sintaxis (valor constante)"
+CREATE TABLE USUARIOS (
+    Pais VARCHAR2(20) DEFAULT 'España'
+);
+```
+
+```sql title="Sintaxis (uso de funciones)"
+CREATE TABLE USUARIOS (
+    Fecha_ingreso DATE DEFAULT SYSDATE
+);
+```
+
+`CHECK` comprueba que se cumpla una **condición determinada** al rellenar una columna. Dicha condición puede ser construida con otras columnas de la misma tabla.
+
+```sql title="Sintaxis"
+CREATE TABLE USUARIOS (
+    Credito NUMBER(4) CHECK (Credito BETWEEN 0 AND 2000)
+);
+```
+
+> **Múltiples CHECK:** una misma columna puede tener varios `CHECK` asociados, separando los `CONSTRAINT` por comas.
+
+#### 11.4.- Eliminación de tablas
+
+Cuando una tabla deja de ser útil, se puede eliminar para liberar espacio y permitir la reutilización de su nombre. El comando utilizado para esto es `DROP TABLE`.
+
+```sql
+DROP TABLE NombreTabla [CASCADE CONSTRAINTS];
+```
+
+- Esta instrucción elimina la tabla de la base de datos, incluyendo todos sus datos (filas) y toda la información de definición almacenada en el Diccionario de Datos.
+- `CASCADE CONSTRAINTS`: esta opción es necesaria cuando la tabla a borrar tiene alguna columna que actúa como clave ajena en otras tablas (tablas secundarias). Al incluirla, se borran automáticamente las restricciones de clave ajena relacionadas **antes** de eliminar la tabla principal.
+
+```sql title="Ejemplo de eliminación"
+DROP TABLE USUARIOS;
+```
+
+> El comando `DROP TABLE` es **irreversible**, y el SGBD no pide confirmación antes de ejecutarse.
+
+**Consecuencias del borrado:**
+    - Desaparecen todos los datos de la tabla.
+    - Cualquier vista asociada a esa tabla seguirá existiendo, pero **dejará de funcionar** al no encontrar la tabla base.
+
+> **Alternativa:** la orden `TRUNCATE TABLE` elimina solo los datos (filas) de una tabla, **sin eliminar su estructura**.
+
+#### 11.5.- Modificación de tablas (I)
+
+Para modificar la estructura, las columnas o las restricciones de una tabla ya creada, se utiliza el comando `ALTER TABLE`, salvo para el cambio de nombre de la tabla.
+
+```sql title="Renombrar una tabla"
+RENAME NombreViejo TO NombreNuevo;
+```
+
+```sql title="Añadir columnas"
+ALTER TABLE NombreTabla ADD
+(
+    ColumnaNueva1 Tipo_Datos [Propiedades],
+    ColumnaNueva2 Tipo_Datos [Propiedades]
+);
+```
+
+```sql title="Eliminar columnas"
+ALTER TABLE NombreTabla DROP COLUMN (Columna1 [, Columna2, ...]);
+```
+
+```sql title="Modificar columnas"
+ALTER TABLE NombreTabla MODIFY
+(
+    Columna1 TipoDatos [propiedades] [, columna2 TipoDatos [propiedades] ...]
+);
+```
+
+Se pueden modificar el tipo de datos y las propiedades de una columna. Los cambios son posibles sin restricciones **si la tabla no contiene datos**.
+
+Si la tabla **no está vacía**, se puede:
+    - Aumentar la longitud de una columna
+    - Aumentar o disminuir el número de posiciones decimales en tipos `NUMBER`
+    - Reducir la anchura, siempre que los datos existentes no ocupen todo el espacio reservado
+
+```sql title="Renombrar columnas"
+ALTER TABLE NombreTabla RENAME COLUMN NombreAntiguo TO NombreNuevo;
+```
+
+```sql title="Ejemplo de renombrar columna"
+ALTER TABLE USUARIO RENAME COLUMN User TO Login;
+```
+
+<details>
+<summary>**Ejercicio resuelto**</summary>
+
+> Tenemos creada la siguiente tabla:
+
+```sql
+CREATE TABLE EMPLEADOS (
+    Cod_Cliente VARCHAR(5) PRIMARY KEY,
+    Nombre VARCHAR(10),
+    Apellidos VARCHAR(25),
+    Sueldo NUMBER(2));
+```
+
+> Ahora queremos poner una restricción a sueldo para que tome valores entre 1000 y 1200, ¿cómo lo harías?
+
+```sql
+ALTER TABLE EMPLEADOS MODIFY (Sueldo NUMBER(2) CHECK (Sueldo BETWEEN 1000 AND 1200));
+```
+</details>
+
+##### 11.5.1.- Modificación de tablas (II)
+
+El comando `ALTER TABLE` no solo se utiliza para modificar columnas, sino también para manipular las **restricciones (constraints)** de una tabla.
+
+| Operación | Sintaxis SQL | Notas |
+| :--- | :--- | :--- |
+| Borrar restricciones | `ALTER TABLE NombreTabla DROP CONSTRAINT NombreRestriccion;` | Elimina la restricción especificada de la tabla. |
+| Renombrar restricciones | `ALTER TABLE NombreTabla RENAME CONSTRAINT NombreViejo TO NombreNuevo;` | Permite cambiar el nombre de una restricción existente. |
+| Desactivar restricciones | `ALTER TABLE NombreTabla DISABLE CONSTRAINT NombreRestriccion [CASCADE];` | Desactiva temporalmente una restricción, lo que puede ser útil para pruebas o para insertar datos que temporalmente incumplen la regla. La opción `CASCADE` desactiva las restricciones que dependen de ella. |
+| Activar restricciones | `ALTER TABLE NombreTabla ENABLE CONSTRAINT NombreRestriccion [CASCADE];` | Vuelve a activar una restricción previamente desactivada. |
+
+#### 11.6.- Creación y eliminación de índices
+
+Los índices son estructuras que mejoran la velocidad de acceso y localización de la información contenida en las tablas.
+
+```sql title="Sintaxis para crear un índice"
+CREATE INDEX NombreIndice ON NombreTabla (Columna1 [, Columna2 ...]);
+```
+
+  * Es aconsejable utilizar índices en campos de tablas grandes que se usen frecuentemente en consultas (`SELECT`) o en condiciones de búsqueda (`WHERE`).
+  * Se deben evitar índices sobre:
+      * Campos de tablas pequeñas
+      * Campos que se actualicen con mucha frecuencia (ya que la actualización de la tabla también implica la actualización del índice)
+      * Campos que no se usan en consultas o expresiones frecuentemente
+
+> **Importancia:** el diseño de índices es crítico. Un diseño pobre causa ineficiencia, y un uso excesivo puede ralentizar gravemente las operaciones de inserción y modificación (`INSERT`/`UPDATE`), e incluso bloquear la Base de Datos.
+
+
+```sql title="Sintaxis para eliminar un índice"
+DROP INDEX NombreIndice;
+```
+
+> La mayoría de los índices se crean automáticamente (implícitamente) cuando se definen las restricciones `PRIMARY KEY`, `FOREIGN KEY` o `UNIQUE`.
+
+<details>
+<summary>**Ejercicio resuelto**</summary>
+
+> Tenemos creada la siguiente tabla:
+
+```sql
+CREATE TABLE EMPLEADOS (
+    Cod_Cliente VARCHAR(5) PRIMARY KEY,
+    Nombre VARCHAR(10),
+    Apellidos VARCHAR(25),
+    Sueldo NUMBER(2));
+```
+
+> Crea un índice con el campo *Apellidos*, luego elimínalo. 
+
+```sql
+CREATE INDEX miIndice ON EMPLEADOS (Apellidos);
+    DROP INDEX miIndice;
+```
+</details>
+
+### 12.- Lenguaje de control de datos (DCL)
+
+El **DCL** se utiliza para administrar los derechos y restricciones de los usuarios, gestionando el acceso y los permisos dentro de la base de datos.
+
+Las claves de acceso de los usuarios se almacenan encriptadas en una tabla del diccionario de datos (ej., `DBA_USERS` en Oracle).
+
+```sql title="Sintaxis de creación de usuarios"
+CREATE USER NombreUsuario
+IDENTIFIED BY ClaveAcceso
+[DEFAULT TABLESPACE tablespace ]
+[TEMPORARY TABLESPACE tablespace]
+[QUOTA int {K | M} ON tablespace]
+[QUOTA UNLIMITED ON tablespace]
+[PROFILE perfil];
+```
+
+| Cláusula | Función | Notas |
+| :--- | :--- | :--- |
+| `CREATE USER` | Crea un nombre de usuario que será reconocido por el sistema. | |
+| `IDENTIFIED BY` | Asigna la clave de acceso al usuario. | |
+| `DEFAULT TABLESPACE` | Asigna el *Tablespace* por defecto para almacenar los objetos que cree el usuario. Si se omite, suele ser `SYSTEM`. | |
+| `TEMPORARY TABLESPACE` | Especifica el *Tablespace* para trabajos temporales. Por defecto suele ser `SYSTEM`. | |
+| `QUOTA` | Asigna un límite de espacio (`K` o `M`) en el *Tablespace* asignado. | Si no se especifica, el usuario no tendrá espacio y no podrá crear objetos. |
+| `PROFILE` | Asigna un perfil al usuario. Si se omite, se asigna el perfil por defecto. | |
+
+```sql title="Ejemplo de creación de usuario limitado"
+CREATE USER UsuarioLimitado IDENTIFIED BY passworddemiusuariolimitado;
+```
+
+> Para ver los usuarios creados, se consultan las vistas `ALL_USERS` y `DBA_USERS`.
+
+```sql title="Sintaxis de modificación de usuarios"
+ALTER USER NombreUsuario
+IDENTIFIED BY clave_acceso
+[DEFAULT TABLESPACE tablespace ]
+[TEMPORARY TABLESPACE tablespace]
+[QUOTA int {K | M} ON tablespace]
+[QUOTA UNLIMITED ON tablespace]
+[PROFILE perfil];
+```
+
+> Un usuario sin privilegios de Administrador solo puede cambiar su propia clave de acceso. Al modificar una contraseña cifrada, su contenido debe insertarse ya cifrado en la base de datos.
+
+```sql title="Sintaxis de eliminación de usuarios"
+DROP USER NombreUsuario [CASCADE];
+```
+
+- `CASCADE` borra automáticamente **todos los objetos** (tablas, vistas, etc.) propiedad del usuario antes de eliminarlo. Sin esta opción, el comando fallará si el usuario tiene objetos creados.
+
+#### 12.1.- Permisos (I)
+
+Para poder llevar a cabo cualquier operación o acceder a objetos en la base de datos, un usuario debe haber sido **concedido el permiso (privilegio)** para realizar dicha acción.
+    - Los privilegios se pueden agrupar en **roles**, lo que simplifica la administración. Un permiso puede ser asignado a un usuario o a un rol.
+    - Los permisos se conceden utilizando el comando DCL `GRANT`.
+
+```sql title="Concesión de privilegios sobre objetos"
+GRANT {privilegio_objeto [, privilegio_objeto]...|ALL|[PRIVILEGES]}
+ON [usuario.]objeto
+TO {usuario1|rol1|PUBLIC} [,{usuario2|rol2|PUBLIC] ...
+[WITH GRANT OPTION];
+```
+
+| Cláusula | Función |
+| :--- | :--- |
+| `ON [usuario.]objeto` | Especifica el **objeto** (tabla, vista, etc.) sobre el que se conceden los privilegios. |
+| `TO {usuario1\|rol1\|PUBLIC}` | Señala a los **usuarios o roles** que reciben los privilegios. `PUBLIC` otorga el privilegio a todos los usuarios. |
+| `ALL` | Concede **todos los privilegios** posibles sobre el objeto especificado. |
+| `[WITH GRANT OPTION]` | Permite que el receptor del privilegio pueda, a su vez, **concederlo a otros**. |
+
+```sql title="Ejemplos"
+-- Permite a Ana insertar datos en la tabla Usuarios
+GRANT INSERT ON Usuarios TO Ana;
+
+-- Concede a Ana todos los privilegios sobre la tabla Partidas
+GRANT ALL ON Partidas TO Ana;
+```
+
+```sql title="Concesión de privilegios de sistema"
+GRANT {Privilegio1 | rol1 } [, privilegio2 | rol2}, ...]
+TO {usuario1 | rol1| PUBLIC} [, usuario2 | rol2 | PUBLIC} ... ]
+[WITH ADMIN OPTION];
+```
+
+| Cláusula | Función |
+| :--- | :--- |
+| `TO {usuario1\|rol1\|PUBLIC}` | Señala a los usuarios o roles a los que se conceden los privilegios de sistema. |
+| `[WITH ADMIN OPTION]` | Permite que el receptor de los privilegios pueda **conceder esos mismos privilegios** a otros usuarios o roles (similar a `WITH GRANT OPTION` para objetos). |
+
+```sql title="Ejemplos"
+-- Concede a Ana el rol de CONNECT (con todos sus privilegios asociados)
+GRANT CONNECT TO Ana;
+
+-- Concede a Ana el privilegio de borrar usuarios y el derecho a conceder este mismo privilegio a otros
+GRANT DROP USER TO Ana WITH ADMIN OPTION;
+```
+
+##### 12.1.1.- Permisos (II)
+
+Para retirar los permisos o privilegios que han sido concedidos, se utiliza el comando DCL `REVOKE`.
+
+```sql title="Revocación de privilegios sobre objetos"
+REVOKE {privilegio_objeto [, privilegio_objeto]...|ALL|[PRIVILEGES]}
+ON [usuario.]objeto
+FROM {usuario|rol|PUBLIC} [,{usuario|rol|PUBLIC] ...;
+```
+
+```sql title="Ejemplo"
+-- Juan retira el permiso de seleccionar y actualizar sobre la tabla Usuarios a Ana
+REVOKE SELECT, UPDATE ON Usuarios FROM Ana;
+```
+
+```sql title="Revocación de privilegios de sistema o roles a usuarios"
+REVOKE {privilegio_stma | rol} [, {privilegio_stma | rol}]...|ALL|[PRIVILEGES]}
+FROM {usuario|rol|PUBLIC} [,{usuario|rol|PUBLIC] ...;
+```
+
+```sql title="Ejemplo"
+-- Juan retira el permiso de eliminar usuarios a Ana
+REVOKE DROP USER FROM Ana;
+```
+
+### Anexo - Elementos del lenguaje SQL
+
+#### Comandos
+
+##### DDL
+
+| Comando | Descripción |
+| :--- | :--- |
+| **`CREATE`** | Crear nuevas tablas, campos e índices |
+| **`DROP`** | Eliminar tablas e índices |
+| **`ALTER`** | Modificar la estructura de las tablas |
+
+##### DML
+
+| Comando | Descripción |
+| :--- | :--- |
+| **`SELECT`** | Consultar filas que satisfagan un criterio determinado |
+| **`INSERT`** | Cargar datos en la tabla en una única operación |
+| **`UPDATE`** | Modificar valores de campos y filas específicos |
+| **`DELETE`** | Eliminar filas de una tabla |
+
+##### DCL
+
+| Comando | Descripción |
+| :--- | :--- |
+| **`GRANT`** | Dar permisos a uno o varios usuarios o roles para realizar tareas determinadas |
+| **`REVOKE`** | Eliminar permisos que previamente se han concedido con `GRANT` |
+
+#### Cláusulas
+
+| Cláusulas | Descripción |
+| :--- | :--- |
+| **`FROM`** | Especificar la tabla o tablas de la(s) que se van a seleccionar las filas |
+| **`WHERE`** | Especificar las condiciones que deben reunir las filas que se van a seleccionar |
+| **`GROUP BY`** | Separar las filas seleccionadas en grupos específicos |
+| **`HAVING`** | Expresar la condición que debe satisfacer cada grupo (filtra grupos, a diferencia de `WHERE` que filtra filas) |
+| **`ORDER BY`** | Ordenar las filas seleccionadas de acuerdo a un orden específico |
+
+#### Operadores
+
+##### Lógicos
+
+| Operadores | Descripción |
+| :--- | :--- |
+| **`AND`** | Evalúa dos condiciones y devuelve un valor de verdad sólo si **ambas** son ciertas |
+| **`OR`** | Evalúa dos condiciones y devuelve un valor de verdad si **alguna** de las dos es cierta |
+| **`NOT`** | Devuelve el valor contrario de la expresión |
+
+##### De comparación
+
+| Operadores | Descripción |
+| :--- | :--- |
+| **`<`** | Menor que |
+| **`>`** | Mayor que |
+| **`< >`** | Distinto de |
+| **`<=`** | Menor o igual |
+| **`>=`** | Mayor o igual |
+| **`=`** | Igual |
+| **`BETWEEN`** |Especificar si un valor está dentro de un intervalo de valores |
+| **`LIKE`** | Comparar una cadena de caracteres con un patrón |
+| **`IN`** | Especificar si un valor coincide con alguno de una lista de valores |
+
+#### Funciones
+
+| Función | Descripción |
+| :--- | :--- |
+| **`AVG`** | Calcula el promedio (media) de los valores de un campo determinado |
+| **`COUNT`** | Devuelve el número de filas de la selección |
+| **`SUM`** | Devuelve la suma de todos los valores de un campo determinado |
+| **`MAX`** | Devuelve el valor más alto de un campo determinado |
+| **`MIN`** | Devuelve el valor mínimo de un campo determinado |
+
+#### Literales
+
+| Literales | Descripción |
+| :--- | :--- |
+| **`'23/03/97'`** | Literal fecha |
+| **`'María'`** | Literal de caracteres (texto) |
+| **`5`** | Literal número (entero o decimal) |
+
+## **UD3.- Interpretación de diagramas entidad/relación**
+
+![Esquema Unidad 3 Bases de Datos](../../static/img/bases-de-datos-unidad-3.jpg)
+
+### 1.- Análisis y diseño de bases de datos
+
+El desarrollo de bases de datos se divide en dos fases principales: **Análisis** y **Diseño**, orientadas a la creación del **Esquema Conceptual**, que representa la estructura de la información de manera **independiente del SGBD**. Saltarse la fase conceptual puede llevar a la pérdida de información del mundo real.
+
+Fases de Trabajo| Fase de Análisis | Fase de Diseño |
+| --- | --- |
+| **Análisis de Entidades** (localizar y definir entidades y atributos). | **Diseño de Tablas** y **Normalización**. |
+| **Análisis de Relaciones** (definir vínculos entre entidades). | **Diseño de Transacciones** y **Diseño de Sendas de Acceso**. |
+| Obtención del **Esquema Conceptual** (usando el modelo E-R). | Aplicación de retrodiseño y enfoque relacional. |
+
+**Modelos conceptuales clave** 
+- **Modelo Entidad/Relación (E-R):** presentado por Peter Chen, es la base para el esquema conceptual.
+- **Modelo Entidad/Relación Extendido (ERE)** es actualmente el más aceptado.
+
+**Fases del Diseño de la Base de Datos**
+
+El diseño progresa en tres niveles de abstracción:
+
+1. **Diseño Conceptual:** Alto nivel de abstracción. Se usa el **Modelo E-R**.
+2. **Diseño Lógico:** Nivel medio/lógico. Transformación a estructuras soportables por un SGBD (ej., **tablas**). Se usa el **Modelo Relacional**.
+3. **Diseño Físico:** Implementación final. Se usa el lenguaje **DDL de SQL** en el SGBD específico (ej., Oracle).
+
+**Diferencias entre Modelos**
+
+| Modelo Conceptual (MC) | Modelo Lógico (ML) |
+| --- | --- |
+| **Independiente del SGBD** (no lleva estructuras de *hardware*). | **Dependiente del SGBD** (contiene estructuras soportadas por el ordenador, como tablas). |
+| Nivel de abstracción **más alto**. | Nivel de abstracción **menor** (más concreto). |
+| Mejor **capacidad semántica** (más significado conceptual). | Menor **capacidad semántica** (más enfocado en la relación física). |
+| Interfaz entre el **usuario y la informática**. | Interfaz entre el **informático y el SGBD**. |
+
+### 2.- ¿Qué es el Modelo E/R?
+
+El **Modelo Entidad-Relación (E/R)** es una herramienta conceptual clave para representar problemas del mundo real y facilitar el diseño de bases de datos.
+
+* **Objetivo:** especificar un **Esquema Conceptual** que represente la estructura lógica completa de una base de datos, partiendo de descripciones textuales de la realidad.
+* **Naturaleza:** es un **modelo semántico**, lo que significa que representa el significado de los datos. Por ello, es independiente de cualquier sistema físico o ámbito informático puro; puede describir procesos de producción o estructuras empresariales.
+* **Base:** el modelo, creado por Peter Chen en los años setenta, se basa en la percepción de **objetos básicos llamados entidades** y las **relaciones** entre estos objetos.
+
+### 3.- Entidades
+
+Una **Entidad** es un objeto (físico o abstracto), un concepto o cualquier elemento que tenga importancia para la organización y del cual se desee **guardar información**. Cada entidad debe poseer características que la hagan única frente al resto de objetos (ej., un ALUMNO distinguido por su Número de Identificación Escolar - NIE).
+
+> **Entidad:** objeto real o abstracto, con características diferenciadoras capaces de distinguirse de otros objetos, acerca del cual se desea guardar información.
+
+* **Ejemplos:** `camping`, `río`, `pico` (concretos), o `préstamo`, `reserva` (abstractos).
+* **Conjunto de Entidades:** es un grupo de entidades que poseen las mismas características o propiedades (ej., el conjunto de entidades `CLIENTE` representa todas las personas que hacen reservas en un hotel). Generalmente, el término "entidad" se usa para identificar el "conjunto de entidades".
+* **Ocurrencia de Entidad:** cada elemento individual dentro del conjunto de entidades.
+* **Símil con POO:** el concepto de entidad es análogo al de **instancia de objeto**, y el conjunto de entidades es análogo al de **clase**.
+
+**Representación Gráfica:** en el modelo E/R, la entidad se representa con el nombre encerrado en un **rectángulo**.
+
+#### 3.1.- Tipos: fuertes y débiles
+
+Las entidades se clasifican en:
+
+- **Entidades fuertes o regulares**: tienen existencia por sí mismas, es decir, su existencia no depende de la existencia de otras entidades. (Ej., la existencia de un `DOCTOR` no depende de la existencia de un `PACIENTE`).
+    - **Representación:** rectángulo simple.
+
+- **Entidades débiles**: su existencia depende de la existencia de otra entidad fuerte con la que se relaciona.
+    > **Entidad débil:** tipo de entidad cuyas propiedades o atributos no la identifican completamente, sino solo de forma parcial. Requiere participar en una relación que ayude a identificarla (ej., `AULA` necesita la clave de `EDIFICIO` para ser única).
+    - **Representación:** el nombre de la entidad encerrado en un **rectángulo doble**.
+
+Las entidades débiles presentan dos tipos de dependencia:
+    1. **Dependencia en existencia:** si desaparece una instancia de la entidad fuerte, desaparecen las instancias de la entidad débil que dependen de ella.
+    * *Representación:* Se incluye una **E** en el interior de la relación débil.
+    2. **Dependencia en identificación:** requiere la dependencia en existencia y, además, la ocurrencia de la entidad débil no puede identificarse por sí misma, necesitando la clave de la entidad fuerte asociada.
+    * *Representación:* Se incluye una **ID** en el interior de la relación débil.
+
+> **Recomendación:** tanto las entidades fuertes como las débiles se nombran habitualmente con sustantivos en singular.
+
+### 4.- Atributos
+
+Los **atributos** son las propiedades o características que describen a una entidad o relación, y se utilizan para guardar información sobre ellas.
+
+* Cada ocurrencia de entidad tendrá su propio valor para cada atributo (ej. cada paciente tendrá una fecha de nacimiento distinta).
+* **Definición:** Cada una de las propiedades o características que tiene un tipo de entidad o un tipo de relación. Los atributos toman valores de uno o varios **dominios**.
+
+**Representación gráfica:** en el modelo E/R, los atributos se representan mediante el nombre del atributo rodeado por una **elipse** y conectado a la entidad mediante una línea recta. El nombre debe ser único y en minúscula.
+
+El **dominio** es el conjunto de valores permitidos para un atributo. Todos los posibles valores que puede tomar un atributo deben estar dentro de su dominio (ej. cadenas de caracteres de cierta longitud). Es recomendable establecer límites adecuados para que el SGBD pueda verificar los datos y garantizar la integridad.
+
+#### 4.1.- Tipos de atributos
+
+Los atributos se clasifican según varias características:
+
+**Obligatorios y Opcionales**
+- **Obligatorio:** aquel que siempre debe estar definido para una entidad o relación (ej., el DNI de un jugador). Una clave es siempre un atributo obligatorio.
+- **Opcional:** aquel que **podría no estar definido** o no tener valor para algunas ocurrencias de entidad.
+
+**Atómicos o Compuestos**
+- **Simple o Atómico:** no puede dividirse en partes o atributos más pequeños que tengan significado propio (ej., el `dni` de un jugador).
+- **Compuesto:** puede dividirse en subpartes que constituyen otros atributos con significado propio (ej., la `Dirección` se compone de `calle`, `número` y `localidad`).
+
+**Monovaluados o Multivaluados**
+- **Monovaluado:** tiene un **único valor** para cada ocurrencia de entidad (ej., `dni`).
+- **Multivaluado:** puede tomar **diferentes valores** para cada ocurrencia de entidad (ej., un empleado puede tener varias direcciones de `e-mail`). Se representa con una elipse doble. En este tipo de atributos hay que tener en cuenta los siguientes conceptos:
+        - **Cardinalidad de un Atributo:** indica el número **mínimo** y **máximo** de valores que puede tomar para cada ejemplar de la entidad a la que pertenece.
+        - **Cardinalidad Mínima:** cantidad mínima de valores que debe existir (casi siempre 0 -opcional- o 1 -obligatorio-).
+        - **Cardinalidad Máxima:** cantidad máxima de valores (generalmente 1 o *n* -múltiples-).
+
+        *Ejemplo:* El atributo `E_mail` con cardinalidad **(0,n)** significa que es opcional (mínimo 0 valores) y puede almacenar múltiples cuentas (máximo *n* valores).
+
+**Derivados, Calculados o Almacenados**  
+El valor de este tipo de atributos se puede **obtener (calcular)** a partir del valor o valores de otros atributos relacionados.
+
+*Ejemplo:* la **Edad** es un atributo derivado, ya que se calcula a partir de la **Fecha de Nacimiento** (atributo almacenado). Por lo tanto, no se debe almacenar la edad, sino la fecha de nacimiento. Se representa con una elipse discontinua o punteada.
+
+#### 4.2.- Claves
+
+Para identificar correctamente cada ocurrencia de entidad o relación, se utilizan las **claves**, que son un subconjunto de atributos cuyos valores permiten identificar a la entidad de forma unívoca.
+
+* **Superclave (Superllave):** es cualquier conjunto de atributos que permite identificar de forma única a una ocurrencia de entidad. (La combinación de *todos* los atributos de una entidad es siempre una superclave).
+* **Clave Candidata:** es una superclave que es **irreductible**; es decir, si se elimina cualquiera de sus atributos, el subconjunto restante ya no es una superclave.
+* **Criterios de elección (basados en el dominio):** los valores deben ser conocidos (no nulos), la memoria que ocupen debe ser mínima, la codificación sencilla y el contenido de sus valores no debe variar.
+
+
+* **Clave Primaria (Primary Key - PK):** es la clave candidata que el diseñador de la base de datos **escoge** para identificar unívocamente a cada ocurrencia de entidad.
+* **Propiedades:** toma valores únicos y **no puede contener valores nulos**.
+* **Criterios de elección (entre claves candidatas):**
+    - Menor longitud
+    - Simples sobre compuestas
+    - Numéricas sobre no numéricas
+    - Codificadas sobre no codificadas
+    - Las de ámbito local sobre las de ámbito más general
+
+* **Claves Alternativas o Secundarias:** las restantes claves candidatas que no fueron escogidas como clave primaria.
+
+**Representación en el Modelo E/R:**
+    - Si se usan elipses para atributos: se **subrayarán** aquellos que formen la clave primaria.
+    - Si se usan círculos para atributos: se utilizará un **círculo negro** para aquellos que formen la clave primaria.
+
+#### 4.3.- Atributos de una relación
+
+Una **relación** también puede tener atributos que la describan. Estos atributos almacenan información específica sobre la asociación entre las entidades.
+
+* **Ejemplo 1:** en la relación **CURSA** (entre ALUMNO y ASIGNATURA), el atributo `nota` se asocia a la relación para registrar la nota obtenida por un alumno en una asignatura determinada.
+* **Ejemplo 2:** en relaciones que representan históricos (ej., CLIENTE y FACTURA), se puede crear un atributo `fecha_emision` asociado a la relación para registrar el momento de la acción.
+
+**Representación en el Modelo E/R:**
+
+La representación de atributos asociados a relaciones es **exactamente igual** a la que se utiliza para entidades (elipse con el nombre conectada a la relación).
+
+### 5.- Relaciones
+
+Las **relaciones** (o interrelaciones) son el elemento del modelo E/R que permite asociar datos entre sí, vinculando una ocurrencia de una entidad con otra de una entidad distinta.
+
+* **Definición:** asociación entre diferentes entidades. En una relación, no pueden aparecer dos veces relacionadas las mismas ocurrencias de las entidades.
+* **Representación gráfica:** se representan mediante un **rombo** que contiene un nombre (habitualmente un verbo en singular como "imparte", "posee" o "atiende"). El rombo se conecta a las entidades participantes mediante líneas rectas.
+
+Para definir una relación, se deben considerar tres conceptos clave: el grado, la cardinalidad de la relación y la cardinalidad de las entidades.
+
+#### 5.1.- Grado de una relación
+
+El grado es el **número de entidades que participan** en una misma relación.
+
+* **Relación Unaria (Grado 1):** participa una única entidad. También se denominan **reflexivas** o recursivas.
+* **Relación Binaria (Grado 2):** participan dos entidades. Es el tipo de relación más común y el objetivo de la mayoría de los diseños lógicos.
+* **Relación Ternaria (Grado 3):** participan tres entidades simultáneamente.
+* **Relación N-aria (Grado n):** unvolucra *n* entidades. No son usuales y suelen simplificarse a relaciones de menor grado.
+* **Relación Doble:** dos entidades están conectadas mediante dos relaciones distintas (ej. un empleado "dirige" un departamento y también "trabaja" en él).
+
+#### 5.2.- Cardinalidad de relaciones
+
+Indica el **número máximo** de ocurrencias de cada entidad que pueden intervenir en una ocurrencia de relación. Se expresa mediante etiquetas como **1:1, 1:N o M:N**.
+
+| Tipo de relación | Descripción | Ejemplo |
+| --- | --- | --- |
+| **Uno a uno (1:1)** | Una instancia de A se relaciona con una de B, y viceversa. | Un `ALUMNO` tiene un único `EXPEDIENTE`. |
+| **Uno a muchos (1:N)** | Una instancia de A se relaciona con muchas de B, pero una de B solo con una de A. | Un `DOCENTE` imparte varias `ASIGNATURAS`. |
+| **Muchos a uno (N:1)** | Varias instancias de A se asocian con una única de B. | Muchos `JUGADORES` pertenecen a un `EQUIPO`. |
+| **Muchos a muchos (M:N)** | Una instancia de A se relaciona con muchas de B, y viceversa. | Un `ALUMNO` puede cursar muchas `ASIGNATURAS`. |
+
+#### 5.3.- Cardinalidad de entidades
+
+A diferencia de la anterior, esta especifica el **número mínimo y máximo** de correspondencias en las que puede participar **cada ejemplar** de una entidad. Se representa con un paréntesis del tipo **(min, max)**.
+
+* **Cardinalidad mínima:** indica el número mínimo de asociaciones (habitualmente **0** para participación opcional o **1** para participación obligatoria/total).
+* **Cardinalidad máxima:** indica el número máximo de asociaciones (habitualmente **1** o **n** para representar "muchos").
+
+**Ubicación en el diagrama:** los valores se colocan junto a la entidad con la que se relaciona (en el lado opuesto de la relación) para indicar su participación.
+
+**Ejemplo Práctico:**
+    - Un `JUGADOR` pertenece a **(0,1)** `EQUIPOS`: Puede no estar en ninguno o como máximo en uno.
+    - Un `EQUIPO` tiene **(1,n)** `JUGADORES`: Debe tener al menos uno y puede tener muchos.
+
+### 6.- Simbología del modelo E/R
+
+![Simbología del modelo Entidad/Relación 1](../../static/img/bbdd-simbologia-1.jpg)
+![Simbología del modelo Entidad/Relación 2](../../static/img/bbdd-simbologia-2.jpg)
+![Simbología del modelo Entidad/Relación 3](../../static/img/bbdd-simbologia-3.jpg)
+
+### 7.- El modelo E/R Extendido
+
+El **Modelo Entidad/Relación Extendido (ERE)** incorpora elementos adicionales al modelo tradicional para mejorar su capacidad de representar circunstancias complejas y requisitos semánticos específicos.
+
+Estas nuevas características incluyen restricciones avanzadas en las relaciones, así como conceptos de abstracción como la especialización, generalización, herencia y agregación.
+
+#### 7.1.- Restricciones en las relaciones
+
+El modelo extendido permite definir cómo deben comportarse las ocurrencias de entidades cuando participan en múltiples relaciones simultáneamente.
+
+| Tipo de restricción | Descripción |
+| --- | --- |
+| **Exclusividad** | Una entidad participa en dos o más relaciones, pero cada ocurrencia solo puede pertenecer a **una de ellas** a la vez. Ej: Un músico dirige *o* toca en una orquesta, pero no ambas. |
+| **Exclusión** | Las ocurrencias de las entidades solo pueden asociarse utilizando **una única relación específica** entre ellas. Ej: Si un monitor imparte un curso concreto, no puede estar recibiendo ese mismo curso. |
+| **Inclusividad** | Para que una entidad participe en una relación, debe haber participado previamente en otra. Ej: Un monitor debe recibir al menos 2 cursos antes de poder impartir cualquiera. |
+| **Inclusión** | Es una restricción más fuerte que la inclusividad. Una ocurrencia de entidad asociada a otra a través de una relación, debe estar unida a **esa misma ocurrencia** a través de la otra relación. |
+
+Representación de restricción de exclusión:  
+![Representación de restricción de exclusión](../../static/img/bbdd-restriccion-exclusion.jpg)
+
+Representación restricción inclusividad:  
+![Representación de restricción de inclusividad](../../static/img/bbdd-restriccion-inclusividad.jpg)
+
+Representación restricción inclusión:  
+![Representación de restricción de inclusión](../../static/img/bbdd-restriccion-inclusion.jpg)
+
+#### 7.2.- Generalización y especialización
+
+Esta extensión del modelo ERE permite modelar la realidad mediante **jerarquías** de entidades, utilizando los conceptos de refinamiento ascendente (**generalización**) y descendente (**especialización**).
+
+* **Superclase (Supertipo):** Conjunto de entidades de nivel superior que engloba características comunes.
+* **Subclase (Subtipo):** Conjunto de entidades de nivel inferior que poseen atributos específicos además de los comunes.
+
+Identificamos una jerarquía cuando un grupo de entidades comparte ciertos atributos (**superclase**) pero se diferencian por otros atributos únicos (**subclase**).
+
+La **herencia** es la característica fundamental de las jerarquías. Las **subclases heredan todos los atributos** de su superclase. Además, si una superclase participa en una relación, sus subclases también se consideran partícipes de dicha relación.
+
+**Representación gráfica**
+
+Se utiliza la notación **"ES UN" (IS A)** para indicar que una subclase "es un tipo de" superclase. En el diagrama se representa con un **triángulo invertido**:
+    - La superclase se sitúa arriba, conectada al triángulo.
+    - Las subclases se conectan a la base del triángulo mediante líneas rectas.
+
+*Ejemplo:* `USUARIO` sería la superclase, mientras que `INVITADO`, `REGISTRADO` y `ADMINISTRADOR` serían sus subclases.
+
+**Restricciones semánticas**
+
+Las jerarquías pueden clasificarse según cómo se distribuyen los ejemplares de la superclase entre las subclases:
+
+| Restricción | Descripción |
+| --- | --- |
+| **Totalidad** | Todo ejemplar de la superclase **debe** pertenecer obligatoriamente a alguna de las subclases. |
+| **Parcialidad** | Existen ejemplares de la superclase que **no pertenecen** a ninguna de las subclases. |
+| **Exclusividad** | Un ejemplar de la superclase pertenece **solo a una** de las subclases. |
+| **Solapamiento** | Un mismo ejemplar de la superclase puede pertenecer a **varias subclases** simultáneamente. |
+
+Las diferentes restricciones semánticas descritas tienen su representación gráfica:
+
+![Representación de restricciones semánticas](../../static/img/bbdd-tipos-de-especializacion.jpg)
+
+<details>
+<summary>**Ejercicio resuelto: ejemplo de generalización y especialización**</summary>
+
+> Supongamos la existencia de dos entidades: `TURISMO` y `CAMION`. Los atributos de la entidad `TURISMO` son: *Num_bastidor*, *Fecha_fab*, *precio* y *Num_puertas*. Los atributos de la entidad `CAMION` son: *Num_bastidor*, *Fecha_fab*, *precio*, *Num_ejes* y *Tonelaje*.
+>
+> Si analizamos ambas entidades existen algunos atributos comunes y otros que no. Por tanto, podremos establecer una jerarquía. Para ello, reuniremos los atributos comunes y los asociaremos a una nueva entidad superclase denominada `VEHICULO`. Las subclases `TURISMO` y `CAMI0N`, con sus atributos específicos, quedarán asociadas a la superclase `VEHICULO` mediante una jerarquía parcial con solapamiento.
+>
+> ¿Cómo lo representarías?
+---
+![Ejercicio de jerarquía resuelto](../../static/img/bbdd-ejercicio-jerarquia.jpg)
+
+</details>
+
+#### 7.3.- Agregación
+
+La **agregación** es una abstracción que permite tratar una relación (junto con las entidades que asocia) como si fuera una **entidad de nivel más alto**. Esto soluciona la limitación del modelo E/R tradicional que no permite representar relaciones entre relaciones.
+
+* **Propósito:** expresar relaciones entre una relación previa y otra entidad, o entre dos relaciones distintas.
+* **Representación gráfica:** se engloban las entidades y la relación que se desea abstraer dentro de un **rectángulo**. Esta nueva "entidad agregada" puede entonces conectarse a otras relaciones.
+* **Cardinalidad:** en esta estructura, la cardinalidad de la entidad agregada siempre es **(1,1)**, por lo que no suele indicarse en el esquema.
+
+Existen dos formas de entender cómo se compone el "todo" a partir de sus partes:
+
+1. **Compuesto/Componente:** el agregado se obtiene por la unión de partes que pueden ser **tipos de entidades distintos** y que desempeñan papeles diferentes en la unión.
+2. **Miembro/Colección:** el agregado es una colección de miembros del **mismo tipo de entidad** y con el mismo rol.
+* Esta clase puede incluir una **restricción de orden** para los miembros, utilizando un atributo de ordenación específico.
+
+En la siguiente figura se muestran los tipos de agregación y su representación gráfica:
+
+![Tipos de agregación](../../static/img/bbdd-tipos-de-agregacion.jpg)
+
+### 8.- Elaboración de diagramas E/R
+
+La creación de un diagrama Entidad/Relación es una tarea fundamental en el diseño conceptual. Funciona como un **plano** que permite comprender y solucionar el problema real de forma independiente al SGBD.
+
+Saltarse esta fase conlleva una **pérdida de información**, por lo que es necesario realizar esquemas previos antes de realizar la conversión a tablas del modelo relacional. La destreza se adquiere con la práctica, retocando y rehaciendo esquemas según sea necesario.
+
+#### 8.1.- Identificación de entidades y relaciones
+
+El punto de partida es el **documento de especificación de requerimientos** (enunciado del problema). Las etapas principales son:
+
+**Identificación de entidades:**
+    - Se buscan **nombres o sustantivos** en el texto que representen objetos importantes con existencia propia.
+    - **Reglas para ser entidad:** debe tener existencia propia, cada ejemplar debe ser diferenciable y todos deben compartir las mismas propiedades.
+    - **Truco de descarte:** si solo existe una ocurrencia de algo (ej. el propio "Hospital" que se está modelando), no se representa como entidad.
+    - *Nomenclatura:* sustantivos en mayúsculas y en singular.
+
+
+**Identificación de relaciones:**
+    - Se buscan **verbos o expresiones verbales** que conecten entidades.
+    - Se debe definir el tipo de correspondencia (**1:1, 1:N, M:N**) y representar la cardinalidad mínima y máxima.
+    - En relaciones recursivas (unarias), es esencial indicar los **roles** que desempeña la entidad.
+    - *Nomenclatura:* verbos en minúsculas. Si se usan varias palabras, se recomienda usar guiones bajos (ej. `trabaja_para`).
+
+#### 8.2.- Identificación de atributos, claves y jerarquías
+
+Una vez establecida la estructura base, se procede a detallar los componentes:
+
+**Identificación de atributos:**
+    - Se buscan nombres relativos a características o cualidades de las entidades y relaciones.
+    - **Simplificación:** los atributos compuestos deben descomponerse en simples. Los atributos **derivados o calculados** (como la edad) generalmente **no se incluyen** en esta etapa de diseño conceptual.
+    - *Nomenclatura:* en minúsculas, representativos de su función.
+
+**Identificación de claves:**
+    - Se eligen las claves candidatas y se selecciona una como **clave primaria (PK)**, la cual identifica unívocamente cada ocurrencia.
+    - Este proceso determina si una entidad es **fuerte** (tiene clave propia) o **débil** (depende de otra para su identificación).
+
+**Determinación de jerarquías:**
+    - Se analiza si existen entidades con atributos comunes que puedan agruparse en una **superclase** (generalización) o si una entidad debe dividirse en **subclases** con atributos específicos (especialización).
+    - Es necesario definir si la jerarquía es **total/parcial** y **exclusiva/solapada**.
+
+#### 8.3.- Metodologías
+
+Para construir un diagrama E/R definitivo, se suele partir de una versión preliminar que se somete a sucesivos refinamientos. Las estrategias principales son:
+
+* **Descendente (Top-Down):** se parte de conceptos generales y abstractos, descomponiéndolos en niveles con mayor detalle hasta llegar al esquema final.
+* **Ascendente (Bottom-Up):** comienza desde los elementos más básicos (atributos), agrupándolos en entidades y estableciendo luego relaciones y jerarquías.
+* **Dentro-fuera (Inside-Out):** se inicia el desarrollo en una parte central del problema y se va extendiendo hacia afuera, añadiendo entidades y relaciones a medida que se analizan los requerimientos.
+* **Mixta:** ideal para problemas complejos. Divide los requerimientos en subconjuntos que se analizan de forma independiente (descendente para dividir, ascendente para construir cada parte) y luego se integran en una estructura común.
+
+#### 8.4.- Redundancia en diagramas E/R
+
+La **redundancia** es el almacenamiento de los mismos datos en diferentes lugares. Un buen diseño debe controlarla para evitar graves problemas.
+
+**Consecuencias de la redundancia**
+    - **Aumento de carga de trabajo:** los datos deben grabarse o actualizarse en múltiples sitios.
+    - **Gasto de espacio:** se ocupa innecesariamente mayor capacidad de almacenamiento.
+    - **Inconsistencia:** es el mayor riesgo; ocurre cuando datos repetidos tienen valores distintos, haciendo que la información no sea fiable.
+
+**Indicios de redundancia en el esquema**
+    1. **Atributos derivados:** valores que se calculan a partir de otros ya existentes (como la edad a partir de la fecha de nacimiento).
+    2. **Ciclos:** varias entidades unidas circularmente a través de relaciones. Un ciclo es redundante si al eliminar una relación no se pierde significado ni información (incluyendo sus atributos).
+
+> **Redundancia controlada:** a veces es conveniente introducir redundancia por motivos de **rendimiento**. Si un cálculo es muy complejo y ralentiza el sistema, el diseñador puede optar por almacenar el dato directamente.
+
+#### 8.5.- Propiedades deseables de un diagrama E/R
+
+Para garantizar la calidad de un esquema conceptual, se deben buscar las siguientes propiedades:
+
+| Propiedad | Descripción |
+| --- | --- |
+| **Completitud** | Todos los requerimientos están en el diagrama y cada elemento del diagrama corresponde a un requerimiento. |
+| **Corrección** | Uso adecuado de los elementos del modelo. Puede ser **sintáctica** (sin errores de dibujo/notación) o **semántica** (el significado es fiel a la realidad). |
+| **Minimalidad** | El diagrama no contiene elementos innecesarios; eliminar cualquier concepto supondría pérdida de información. |
+| **Sencillez** | Representación fácil de comprender, evitando estructuras artificialmente complejas. |
+| **Legibilidad** | El diagrama es fácil de interpretar visualmente gracias a una buena disposición estética de sus elementos. |
+| **Escalabilidad** | Capacidad del diseño para incorporar cambios o nuevos requerimientos en el futuro sin necesidad de rehacerlo todo. |
+
+### 9.- Primeros pasos del diagrama E/R al modelo relacional
+
+El diseño conceptual (diagrama E/R) es independiente del software o hardware. Una vez verificado, sirve de base para el **diseño lógico**, que adapta la información a un modelo de base de datos concreto (en este caso, el **modelo relacional**).
+
+**Pasos para obtener el esquema lógico:**
+
+1. **Simplificación:** preparar el diagrama E/R para facilitar la conversión.
+2. **Transformación:** aplicar reglas para pasar del modelo E/R al relacional.
+3. **Normalización:** validar la estructura lógica mediante técnicas específicas para asegurar que sea correcta.
+
+Tras estos pasos, se obtiene el **paso a tablas**, que permite implementar físicamente la base de datos en cualquier SGBD relacional (como Oracle), fase que ya sí depende de las características del sistema elegido.
+
+#### 9.1.- Simplificación previa de diagramas
+
+Para que la transformación al modelo relacional sea automática y fiable, es necesario aplicar normas de simplificación sobre los elementos que el modelo relacional no soporta directamente:
+
+* **Atributos compuestos:** deben descomponerse en sus **atributos simples**, ya que el modelo relacional no admite estructuras compuestas.
+* **Atributos multivaluados:** se convierten en una **nueva entidad** relacionada con la original. Esta nueva entidad tendrá un único atributo (el antiguo multivaluado) y se deberán ajustar sus claves primarias, pudiendo resultar en una entidad débil.
+* **Transformación a relaciones jerárquicas:** las relaciones **muchos a muchos (M:N)** se transforman en relaciones **uno a muchos (1:N)**. Esto suele implicar la creación de una entidad intermedia. Si la relación original tenía atributos, estos pasan a la nueva entidad.
+* **Relaciones cíclicas:** se eliminan creando una nueva entidad cuya clave se forma con los atributos clave de las ocurrencias relacionadas, estableciendo dos relaciones entre la entidad original y la nueva.
+* **Relaciones ternarias:** se tratan de forma similar a los atributos asociados a relaciones; se considera como una relación binaria a la que se asocia una tercera entidad mediante una nueva relación.
+* **Entidades débiles en fuertes:** se transforman añadiendo a la entidad débil los atributos clave de la entidad fuerte de la que depende. La nueva clave primaria será la suma de los atributos originales de la débil más los heredados de la fuerte.
+
+### 10.- Paso del diagrama E/R al Modelo Relacional
+
+Si el diseño del modelo E/R es correcto, la transformación al **Modelo Relacional** es un proceso sistemático basado en las siguientes reglas fundamentales:
+
+* **Entidades:** toda entidad se transforma en una **tabla**.
+* **Atributos:** todo atributo se convierte en una **columna** de la tabla.
+* **Clave Primaria:** el atributo clave de la entidad se convierte en la **clave primaria (PK)** de la tabla (se representa subrayado).
+
+**Reglas de transformación específicas**
+
+* **Entidades débiles:** generan una tabla con sus propios atributos más la clave primaria de la entidad fuerte relacionada. Esta última actúa como **clave foránea (FK)**. La clave primaria de la tabla resultante será la combinación de la clave de la fuerte y el discriminante de la débil.
+* **Relaciones 1:1 y 1:N:** lo más habitual es la **propagación de clave** (la clave de una entidad pasa a la otra tabla como FK). En ocasiones, pueden generar una nueva tabla independiente.
+* **Relaciones reflexivas:** pueden generar una o varias tablas según su cardinalidad.
+* **Jerarquías:** se resuelven mediante la reunión, eliminación o creación de relaciones 1 a 1 entre las tablas de superclase y subclases.
+* **Relaciones Muchos a Muchos (M:N):** siempre se transforman en una **nueva tabla**. Su clave primaria será la concatenación de las claves primarias de las entidades que relaciona.
+
+**Relaciones N-arias (3 o más entidades)**
+
+En estas relaciones, cada entidad se convierte en tabla y la relación genera una tabla adicional que incluye las claves de todas las entidades participantes como FK. La clave primaria de esta nueva tabla depende de las cardinalidades:
+
+1. **Caso N:M:P (Todas cardinalidad máxima "muchos"):** la clave de la tabla resultante es la unión de las claves de todas las entidades relacionadas.
+* *Ejemplo:* PROFESORES, CURSOS y ASIGNATURAS. La tabla `IMPARTE` tendrá como PK la combinación de `(CodProfesor, CodCurso, CodAsignatura)`.
+
+2. **Caso 1:N:M (Una entidad con cardinalidad máxima 1):** la clave de la entidad con cardinalidad 1 **no forma parte de la clave primaria** de la tabla resultante, aunque sí se incluye como un atributo (FK) más.
+* *Ejemplo:* Vventa de coches donde un coche es vendido por un solo empleado. La tabla `VENTA` tendrá como PK `(CodCoche, CodCliente)`, mientras que `CodEmpleado` será una FK pero no parte de la clave primaria.
+
+<details>
+<summary>**Ejercicio resuelto** </summary>
+
+> Sea la siguiente representación a través del modelo E/R de una relación entre dos entidades, obtén el paso a tablas de dicho esquema:  
+![Ejercicio de paso a tablas](../../static/img/bbdd-ejercicio-paso-a-tablas.jpg)
+--- 
+> El paso a tablas de dicho esquema sería el siguiente:
+>
+> EMPRESA (Codigo_empresa, razon_social, domicilio, N_Trabajadores) TRABAJADOR(DNI, Nombre, Apellido1, Apellido2, Num_SS)
+>
+> Para materializar la relación de uno a muchos LABORAL, se incluye una clave foránea en la entidad TRABAJADOR, que referencia a la entidad EMPRESA, quedando:
+>
+> EMPRESA (Codigo_empresa, razón_social, domicilio, N_Trabajadores)
+>
+> TRABAJADOR(DNI, Nombre, Apellido1, Apellido2, Num_SS, Codigo_empresa)
+</details>
+
+### 11.- Normalización de modelos relacionales
+
+La **normalización** es un proceso de refinamiento que se aplica a las tablas del modelo relacional después de realizar el "paso a tablas". Su objetivo es imponer restricciones mediante transformaciones consecutivas para garantizar que el diseño sea fiable y eficiente.
+
+Los objetivos de la normalización son:
+
+* **Suprimir dependencias erróneas** entre atributos.
+* **Optimizar operaciones DML:** evitar anomalías en la inserción, modificación y borrado de datos.
+* **Eliminar redundancia innecesaria** y asegurar que cada atributo describa fielmente la entidad a la que pertenece.
+
+**Fundamentos del proceso**
+
+La normalización se basa en el análisis de las **dependencias entre atributos**. Para entenderlo, es necesario manejar tres conceptos clave:
+
+1. **Dependencia funcional:** Cuando un atributo determina de forma única el valor de otro.
+2. **Dependencia funcional completa:** Cuando un atributo depende de una clave compuesta entera, no solo de una parte de ella.
+3. **Dependencia transitiva:** Cuando un atributo depende de otro que no es la clave primaria.
+
+**Etapas: Las Formas Normales (FN)**
+
+El proceso es **secuencial**: para alcanzar una forma normal, la tabla debe cumplir obligatoriamente los requisitos de todas las anteriores. A medida que se avanza, las restricciones son más estrictas y el esquema más robusto.
+
+* **Escala de normalización:** primera (1FN), Segunda (2FN), Tercera (3FN), Boyce-Codd (FNBC), Cuarta (4FN), Quinta (5FN) y Dominio-Clave.
+* **Recomendación práctica:** generalmente, un diseño se considera óptimo y libre de anomalías de actualización al alcanzar la **Tercera Forma Normal (3FN)** o la **Boyce-Codd (FNBC)**.
+
+> **Nota importante:** si se ha realizado un diseño E/R riguroso (eliminando atributos compuestos y multivaluados, y eligiendo correctamente las claves), es muy probable que el esquema relacional resultante ya se encuentre en 3FN o FNBC.
+
+#### 11.1.- Tipos de dependencias
+
+Para aplicar las formas normales y analizar correctamente las tablas del modelo relacional, es imprescindible comprender el concepto de **dependencia funcional** y sus variantes. Estas dependencias definen cómo los atributos de una tabla se relacionan y se determinan entre sí.
+
+**1. Dependencia Funcional (DF)**
+
+Dados dos atributos (o conjuntos de ellos) **A** y **B**, existe una dependencia funcional si para cada valor de A le corresponde exactamente un único valor de B.
+
+* **Notación:** A → B (se lee "A implica B" o "B depende funcionalmente de A").
+* **Determinante:** El atributo A, ya que determina el valor de B.
+* **Ejemplo:** DNI → NOMBRE. Si conocemos el DNI, sabemos con certeza el nombre asociado.
+
+El estudio de las DF permite identificar las **claves candidatas** y, a partir de ellas, la **clave principal**, que es el conjunto mínimo de atributos que definen a todos los demás en una tupla.
+
+**2. Dependencia Funcional Completa**
+
+Existe cuando un atributo **B** depende de un conjunto de atributos (**A1, A2, ... Ak**), pero **no depende de ninguno de sus subconjuntos**.
+
+* **Notación:** A1.A2...Ak → B
+* **Dependencia Parcial:** ocurre cuando un atributo depende solo de una *parte* de una clave compuesta.
+* **Ejemplo de DF Completa:** DNI.EMPRESA → SUELDO (suponiendo que un empleado trabaja en varias empresas con sueldos distintos). El sueldo no se sabe solo con el DNI ni solo con la empresa; se necesitan ambos.
+* **Ejemplo de Dependencia Parcial:** DNI.EMPRESA → NOMBRE. Como el nombre se puede saber solo con el DNI, no es una dependencia completa respecto a la clave compuesta.
+
+Las dependencias funcionales completas son el foco de la **2ª Forma Normal (2FN)**.
+
+**3. Dependencia Transitiva**
+
+Se produce cuando un atributo depende de la clave de forma indirecta, a través de otro atributo que no es clave. Dados A, B y C:
+
+1. A → B
+2. B → C
+3. B *no implica* A
+
+* **Ejemplo:** Num_matrícula → grupo_asig y grupo_asig → aula_grupo.
+* **Conclusión:** el atributo `aula_grupo` tiene una dependencia transitiva respecto a `Num_matrícula` a través de `grupo_asig`.
+
+Cuando existe una dependencia transitiva, la tabla no cumple con la **3ª Forma Normal (3FN)** y debe ser normalizada.
+
+<details>
+<summary>**Ejercicio resuelto** </summary>
+
+> Dadas las siguientes tablas:
+>
+> `EMPLEADO` (DNI, Nombre, Dirección, Localidad, Cod_Localidad, Nombre_hijo, Edad_hijo)
+>
+> `LIBRO` (Título_libro, Num_ejemplar, Autor, Editorial, Precio)
+>
+>   - a) Indica qué atributos presentan una dependencia funcional de la clave primaria de la tabla `EMPLEADO`
+>   - b) Indica qué atributos presentan una dependencia funcional completa en la tabla `LIBRO`
+>   - c) Indica qué atributos presentan una dependencia transitiva en la tabla `EMPLEADO`
+
+---
+
+**Apartado a)**
+
+Los atributos Nombre, y Dirección dependen funcionalmente de DNI, ya que para un DNI específico sólo podrá haber un nombre y una dirección. Pero los atributos Nombre_hijo y Edad_hijo no presentan esa dependencia funcional de DNI, ya que para un DNI específico podríamos tener varios valores diferentes en esos atributos. (Consideraremos para este ejemplo que todos los empleados registrados en esta base de datos tienen nombres distintos). Expresemos estas dependencias funcionales mediante su notación:
+
+DNI → Nombre
+
+DNI → Dirección
+
+**Apartado b)**
+
+Los atributos Editorial y Precio dependen funcionalmente del conjunto de atributos que forman la clave primaria de la tabla, pero no dependen de Título_libro o de Num_ejemplar por separado, por lo que presentan una dependencia funcional completa de la clave. El atributo Autor depende funcionalmente sólo y exclusivamente de Titulo_libro, por lo que no presenta una dependencia funcional completa de los atributos que forman la clave.
+
+**Apartado c)**
+
+Los atributos Cod_Localidad y Localidad dependen funcionalmente de DNI, pero entre Cod_Localidad y Localidad existe otra dependencia funcional. Por tanto, se establece que Localidad depende funcionalmente de Cod_Localidad, y a su vez, Cod_Localidad depende funcionalmente de DNI. Con lo que podemos afirmar que existe una dependencia transitiva entre Localidad y DNI. Si lo representamos con la notación asociada a las dependencias funcionales, quedaría: DNI → Cod_Localidad → Localidad.
+</details>
+
+#### 11.2.- Formas Normales
+
+Tras analizar los tipos de dependencias, el proceso de normalización avanza a través de las distintas **Formas Normales**. Cada una impone restricciones más estrictas para eliminar redundancias y anomalías.
+
+**1ª Forma Normal (1FN)**: una tabla está en **1FN** si todos sus atributos contienen **valores atómicos** (indivisibles) y no existen grupos repetitivos o atributos multivaluados.
+    - **Requisito:** los atributos no clave deben depender funcionalmente de la clave.
+    - **Normalización:**
+        1.  Se crea una tabla con los atributos que dependen funcionalmente de la clave primaria original.
+        2.  Con los atributos multivaluados restantes, se crea una nueva tabla con su propia clave primaria.
+    - **Ejemplo de error:** una tabla `PERSONA (DNI, Nombre, Idiomas)` donde el campo "Idiomas" contiene "Inglés, Francés". Para normalizar, "Idiomas" debe ir a una tabla independiente.
+
+**2ª Forma Normal (2FN)**: una tabla está en **2FN** si ya está en 1FN y todos los atributos que no son parte de la clave tienen **dependencia funcional completa** de ella.
+    - **Requisito:** no pueden existir dependencias parciales (atributos que solo dependen de una parte de una clave compuesta). Si la clave es simple (un solo atributo), la tabla ya está en 2FN.
+    - **Normalización:** se separan en tablas distintas aquellos atributos que solo dependen de una parte de la clave compuesta, asignándoles como clave ese subconjunto de atributos.
+
+**3ª Forma Normal (3FN)**: una tabla está en **3FN** si está en 2FN y no existen **dependencias transitivas**. Es decir, ningún atributo no clave puede depender de otro atributo no clave.
+    - **Requisito:** los atributos no clave deben depender de la clave primaria de forma directa, no "a través" de otro atributo.
+    - **Normalización:** se extraen los atributos que forman la dependencia transitiva a una nueva tabla, donde el atributo determinante se convierte en la nueva clave primaria.
+
+**Forma Normal de Boyce-Codd (FNBC)**: es una versión más estricta de la 3FN. Una tabla está en **FNBC** si todo **determinante** (atributo del que dependen otros) es una **clave candidata**.
+    - **Detección:** si existe un atributo que determina a otro pero no puede ser clave de la tabla, no se cumple la FNBC. Esto suele ocurrir por una mala elección de la clave primaria original.
+    - **Normalización:** descomponer la tabla en dos para asegurar que cada determinante sea una clave candidata.
+
+**Otras Formas Normales**
+
+Aunque llegar a **3FN o FNBC** suele ser suficiente para la mayoría de los diseños comerciales, existen niveles superiores para casos muy específicos:
+
+* **4ª Forma Normal (4FN):** elimina dependencias multivaluadas independientes.
+* **5ª Forma Normal (5FN):** basada en dependencias de unión o *join*.
+* **Forma Normal de Dominio-Clave (DKFN):** el objetivo ideal donde todas las restricciones son consecuencia de las definiciones de dominios y claves.
+
+![Mapa conceptual resumen de las formas normales](../../static/img/bbdd-mapa-conceptua-formas-normales.jpg)
+
+<details>
+<summary>**Ejercicio resuelto**</summary>
+
+> Sea la siguiente tabla: `COMPRAS` (cod_compra, cod_prod, nomb_prod, fecha, cantidad, precio, fecha_rec, cod_prov, nomb_prov, tfno).
+>
+> Se pide normalizarla hasta FNBC.
+---
+**Comprobamos 1FN:**
+
+La tabla `COMPRAS` está en 1FN ya que todos sus atributos son atómicos y todos los atributos no clave dependen funcionalmente de la clave.
+
+**Comprobamos 2FN:**
+
+Nos preguntaremos ¿Todo atributo depende de todo el conjunto de atributos que forman la clave primaria, o sólo de parte?. Como vemos, existen atributos que dependen sólo de una parte de la clave, por lo que esta tabla no está en 2FN.
+
+Veamos las dependencias:
+
+cod_prod → nomb_prod, y cod_prod es parte de la clave primaria.
+
+Al no estar en 2FN, hemos de descomponer la tabla `COMPRAS` en:  
+
+- `COMPRA1` (cod_compra, cod_prod, fecha, cantidad, precio, fecha_rec, cod_prov, nomb_prov, tfno)  
+- `PRODUCTO` (cod_prod, nomb_prod)
+
+Una vez hecha esta descomposición, ambas tablas están en 2FN. Todos los atributos no clave dependen de toda la clave primaria.
+
+**Comprobamos 3FN:**
+
+`PRODUCTO` está en 3FN, ya que por el número de atributos que tiene no puede tener dependencias transitivas. ¿`COMPRA1` está en 3FN? Hemos de preguntarnos si existen dependencias transitivas entre atributos no clave.
+
+Veamos las dependencias:
+
+cod_prov → nomb_prov cod_prov → tfno (siendo cod_prov el código del proveedor y nomb_prov el nombre del proveedor)
+
+`COMPRA1` no está en 3FN porque existen dependencias transitivas entre atributos no clave, por tanto hemos de descomponer:
+
+- `COMPRA2` (cod_compra, cod_prod, fecha, cantidad, precio, fecha_rec, cod_prov)
+- `PROVEEDOR` (cod_prov, nomb_prov, tfno)
+
+**Comprobamos FNBC:**
+
+`PRODUCTO` está en FNBC, ya que está en 3FN y todo determinante es clave candidata. `COMPRA2` está en FNBC, ya que está en 3FN y todo determinante es clave candidata. `PROVEEDOR` está en FNBC, ya que está en 3FN y todo determinante es clave candidata.
+
+La tabla inicial `COMPRAS` queda normalizada hasta FNBC del siguiente modo:
+
+`PRODUCTO` (cod_prod, nomb_prod)
+
+`COMPRA2` (cod_compra, cod_prod, fecha, cantidad, precio, fecha_rec, cod_prov)
+
+`PROVEEDOR` (cod_prov, nomb_prov, tfno)
+</details>
+
+---
+
+*Fin de la 1ª Evaluación*
+
+---
