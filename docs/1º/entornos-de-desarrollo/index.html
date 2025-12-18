@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="es" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-1º/entornos-de-desarrollo" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.8.1">
+<title data-rh="true">Entornos de Desarrollo | Apuntes DAW</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://sarabarredo.github.io/apuntes-daw/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://sarabarredo.github.io/apuntes-daw/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://sarabarredo.github.io/apuntes-daw/docs/1º/entornos-de-desarrollo"><meta data-rh="true" property="og:locale" content="es"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="es"><meta data-rh="true" name="docsearch:language" content="es"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Entornos de Desarrollo | Apuntes DAW"><meta data-rh="true" name="description" content="UD1.- Desarrollo de software"><meta data-rh="true" property="og:description" content="UD1.- Desarrollo de software"><link data-rh="true" rel="icon" href="/apuntes-daw/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://sarabarredo.github.io/apuntes-daw/docs/1º/entornos-de-desarrollo"><link data-rh="true" rel="alternate" href="https://sarabarredo.github.io/apuntes-daw/docs/1º/entornos-de-desarrollo" hreflang="es"><link data-rh="true" rel="alternate" href="https://sarabarredo.github.io/apuntes-daw/en/docs/1º/entornos-de-desarrollo" hreflang="en"><link data-rh="true" rel="alternate" href="https://sarabarredo.github.io/apuntes-daw/docs/1º/entornos-de-desarrollo" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Entornos de Desarrollo","item":"https://sarabarredo.github.io/apuntes-daw/docs/1º/entornos-de-desarrollo"}]}</script><link rel="stylesheet" href="/apuntes-daw/assets/css/styles.490b80f1.css">
+<script src="/apuntes-daw/assets/js/runtime~main.f3cdda16.js" defer="defer"></script>
+<script src="/apuntes-daw/assets/js/main.233155d4.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t="light";var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",e||t),document.documentElement.setAttribute("data-theme-choice",e||t)}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/apuntes-daw/img/logo.png"><link rel="preload" as="image" href="/img/entornos-de-desarrollo-modelo-espiral.jpg"><div role="region" aria-label="Saltar al contenido principal"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Saltar al contenido principal</a></div><nav aria-label="Principal" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Alternar barra lateral" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/apuntes-daw/"><div class="navbar__logo"><img src="/apuntes-daw/img/logo.png" alt="Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/apuntes-daw/img/logo.png" alt="Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Apuntes DAW</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/apuntes-daw/docs/recursos">Apuntes</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/sarabarredo" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link navbar-icon"><i class="fab fa-github"></i></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Cambiar entre modo oscuro y claro (actualmente system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Volver al principio" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Barra lateral de Documentos" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/apuntes-daw/docs/recursos">📎 Recursos</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/apuntes-daw/docs/1º/sistemas-informaticos">1º</a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/apuntes-daw/docs/1º/sistemas-informaticos">Sistemas Informáticos</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/apuntes-daw/docs/1º/entornos-de-desarrollo">Entornos de Desarrollo</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/apuntes-daw/docs/1º/programacion">Programación</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/apuntes-daw/docs/1º/bases-de-datos">Bases de Datos</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/apuntes-daw/docs/1º/lenguajes-de-marcas">Lenguajes de marcas y sistemas de gestión de información</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/apuntes-daw/docs/1º/ingles-profesional">Inglés Profesional</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/apuntes-daw/docs/2º/desarrollo-entorno-cliente">2º</a></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Rastro de navegación"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Página de Inicio" class="breadcrumbs__link" href="/apuntes-daw/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">1º</span></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">Entornos de Desarrollo</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">En esta página</button></div><div class="theme-doc-markdown markdown"><header><h1>Entornos de Desarrollo</h1></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="ud1--desarrollo-de-software"><strong>UD1.- Desarrollo de software</strong><a href="#ud1--desarrollo-de-software" class="hash-link" aria-label="Enlace directo al ud1--desarrollo-de-software" title="Enlace directo al ud1--desarrollo-de-software">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="Esquema Unidad 1 Entornos de Desarrollo" src="/apuntes-daw/assets/images/entornos-de-desarrollo-unidad-1-fcb5d0d85642753de77a5f94945b466c.jpg" width="4170" height="2871" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="1--software-y-programa-tipos-de-software">1.- Software y programa. Tipos de software.<a href="#1--software-y-programa-tipos-de-software" class="hash-link" aria-label="Enlace directo al 1.- Software y programa. Tipos de software." title="Enlace directo al 1.- Software y programa. Tipos de software.">​</a></h3>
+<p>El software es el conjunto de programas informáticos que actúan sobre el hardware para ejecutar lo que el usuario desee. Según su <strong>función</strong>, se distinguen tres <strong>tipos de software</strong>:</p>
+<table><thead><tr><th>Software</th><th>¿Qué es?</th></tr></thead><tbody><tr><td>De sistema</td><td>Software base que ha de estar instalado y configurado en nuestro ordenador para que las aplicaciones puedan ejecutarse y funcionar (sistema operativo)</td></tr><tr><td>De programación</td><td>Conjunto de herramientas que nos permiten desarrollar programas informáticos (editores de texto/código, compiladores, intérpretes, IDEs)</td></tr><tr><td>Aplicaciones</td><td>Conjunto de programas que tienen una finalidad más o menos concreta (procesadores de textos, las hojas de cálculo, videojuegos)</td></tr></tbody></table>
+<p>Un <strong>programa</strong> es un conjunto de instrucciones escritas en un lenguaje de programación, que indican a la máquina que operaciones realizar sobre unos determinados datos.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="2--relación-hardware---software">2.- Relación Hardware - Software<a href="#2--relación-hardware---software" class="hash-link" aria-label="Enlace directo al 2.- Relación Hardware - Software" title="Enlace directo al 2.- Relación Hardware - Software">​</a></h3>
+<p>La relación entre <strong>hardware</strong> (dispositivos físicos) y <strong>software</strong> (programas) en un ordenador es <strong>inseparable</strong>: el software se ejecuta sobre el hardware, y el hardware necesita el software para operar. La arquitectura fundamental de los ordenadores modernos se basa en los conceptos establecidos por <strong>John Von Neumann</strong> en 1946.</p>
+<p><strong>Desde el punto de vista del sistema operativo</strong></p>
+<p>El <strong>sistema operativo</strong> actúa como el <strong>intermediario</strong> esencial entre el hardware y las aplicaciones. Es el encargado de <strong>coordinar el hardware</strong> durante el funcionamiento del ordenador. Controla la asignación de <strong>recursos hardware</strong> que necesitan las aplicaciones para ejecutarse, y lo hace de forma &quot;oculta&quot; para las aplicaciones y el usuario.</p>
+<p><strong>Desde el punto de vista de las aplicaciones</strong></p>
+<p>Una <strong>aplicación</strong> es un conjunto de programas escritos en algún <strong>lenguaje de programación</strong>. El <strong>hardware</strong>, sin embargo, solo puede interpretar <strong>señales eléctricas</strong> que se traducen en <strong>secuencias de 0 y 1</strong>. Para que el ordenador pueda ejecutar el código de la aplicación, es necesario un <strong>proceso de traducción</strong> del lenguaje de programación a código binario.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="3--fases-a-seguir-en-el-desarrollo-del-software">3.- Fases a seguir en el desarrollo del software<a href="#3--fases-a-seguir-en-el-desarrollo-del-software" class="hash-link" aria-label="Enlace directo al 3.- Fases a seguir en el desarrollo del software" title="Enlace directo al 3.- Fases a seguir en el desarrollo del software">​</a></h3>
+<p>El <strong>desarrollo de software</strong> es el proceso completo que abarca desde la concepción inicial de una idea hasta que el programa está implementado y funcionando en el ordenador.</p>
+<p>Para construir software fiable y de calidad, es obligatorio seguir una serie de <strong>etapas o pasos</strong>. Cumplir rigurosamente con estas fases garantiza que los programas sean eficientes, seguros y que satisfagan las necesidades de los usuarios finales.</p>
+<p>Es crucial <strong>dedicar los recursos necesarios a las primeras etapas</strong> (análisis y diseño). Si se avanza a las fases finales con errores en el diseño o análisis, estos se propagarán por todo el proyecto, resultando en un producto final de mala calidad.</p>
+<p><strong>Fases del desarrollo del software</strong></p>
+<table><thead><tr><th>Fase</th><th>Tareas</th></tr></thead><tbody><tr><td>Análisis</td><td>Analizar las necesidades del sistema y consensuar los requisitos funcionales y no funcionales (ANÁLISIS DE REQUISITOS), sirviendo como base inamovible para el resto del proyecto</td></tr><tr><td>Diseño</td><td>Dividir el sistema en partes, determinar su función, crear los algoritmos necesarios y elegir las herramientas de codificación</td></tr><tr><td>Codificación y compilación</td><td>Escribir e implementar el código fuente y compilarlo para obtener los ficheros en código máquina</td></tr><tr><td>Pruebas</td><td>Enlazar los elementos programados, comprobar que el sistema funciona correctamente y que cumple todos los requisitos antes de ser entregado</td></tr><tr><td>Explotación</td><td>Instalar, configurar y probar la aplicación en los equipos del cliente (entorno de preproducción o pruebas) antes de pasar el producto a producción</td></tr><tr><td>Mantenimiento</td><td>Contacto con el cliente para actualizar y modificar la aplicación, generando nuevas versiones del producto a futuro</td></tr><tr><td>Documentación</td><td>Tarea continua a lo largo de todo el ciclo de vida del proyecto, donde se registra y se guarda toda la información relevante de cada etapa</td></tr></tbody></table>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="31--análisis">3.1.- Análisis<a href="#31--análisis" class="hash-link" aria-label="Enlace directo al 3.1.- Análisis" title="Enlace directo al 3.1.- Análisis">​</a></h4>
+<p>La fase de <strong>análisis</strong> es la <strong>primera y más importante</strong> del proyecto, ya que su éxito depende de la calidad y el detalle con que se especifiquen los requisitos. Es la fase más <strong>complicada</strong> porque no está automatizada y recae en gran medida en la habilidad del analista.</p>
+<p>El objetivo principal es definir las necesidades del sistema. Es crucial mantener una <strong>buena comunicación</strong> con el cliente para asegurar que la aplicación cumpla sus expectativas.</p>
+<p>De esta fase se obtienen <strong>dos documentos</strong> clave:</p>
+<ol>
+<li>
+<p><strong>Documento de especificación de requisitos software (ERS)</strong></p>
+<ul>
+<li>Detalla exhaustivamente lo que el sistema debe hacer.</li>
+<li>Incluye la planificación de reuniones, objetivos prioritarios y la gestión de contingencias.</li>
+<li><strong>Requisitos funcionales:</strong> Describen las <strong>funciones</strong> que realizará la aplicación, incluyendo la respuesta a todas las entradas y el comportamiento ante situaciones inesperadas (ej., leer códigos de barras, detallar facturas, controlar <em>stock</em>).</li>
+<li><strong>Requisitos no funcionales:</strong> Describen <strong>cómo</strong> funcionará la aplicación, incluyendo criterios de calidad, rendimiento y cumplimiento (ej., tiempos de respuesta, color del hardware, cumplimiento de normativas o certificaciones, facilidad de uso de la interfaz).</li>
+</ul>
+</li>
+<li>
+<p><strong>Documento de diseño de arquitectura</strong></p>
+<ul>
+<li>Describe la <strong>estructura relacional global</strong> del sistema.</li>
+<li>Especifica lo que debe hacer cada una de sus partes y cómo se conectan.</li>
+<li>Aunque es una salida del análisis, a veces se genera como la primera tarea de la fase de diseño.</li>
+</ul>
+</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="32--diseño">3.2.- Diseño<a href="#32--diseño" class="hash-link" aria-label="Enlace directo al 3.2.- Diseño" title="Enlace directo al 3.2.- Diseño">​</a></h4>
+<p>La fase de <strong>diseño</strong> se aborda después de que el análisis ha definido los requisitos del sistema (el &quot;qué hacer&quot;). Su objetivo es determinar <strong>cómo</strong> se implementará la solución, creando un <strong>modelo funcional-estructural</strong> de los requisitos.</p>
+<p>En esta fase se planifica la estructura del <em>software</em> y se toman decisiones técnicas fundamentales:</p>
+<ul>
+<li><strong>Estructuración:</strong> se <strong>divide el sistema en partes</strong> y se definen las <strong>relaciones</strong> entre ellas.</li>
+<li><strong>Funcionalidad por parte:</strong> se decide la función exacta que tendrá cada una de esas partes o módulos.</li>
+<li><strong>Decisiones técnicas:</strong> se seleccionan herramientas y tecnologías clave, tales como:<!-- -->
+<ul>
+<li>Definición de las <strong>entidades y relaciones</strong> de las bases de datos.</li>
+<li>Selección del <strong>lenguaje de programación</strong>.</li>
+<li>Selección del <strong>sistema gestor de base de datos</strong>.</li>
+</ul>
+</li>
+</ul>
+<p><em>(Nota: Aunque la arquitectura a veces se trata en el análisis, a menudo se considera una tarea inicial del diseño).</em></p>
+<p>De la fase de diseño se obtienen dos documentos principales:</p>
+<ol>
+<li><strong>Documento de diseño del software:</strong> recoge toda la información sobre las decisiones estructurales y técnicas mencionadas.</li>
+<li><strong>Plan de pruebas:</strong> define la estrategia general para la fase de pruebas posterior, sin entrar aún en los detalles de las mismas.</li>
+</ol>
+<p>Las organizaciones que invierten más en sus diseños suelen ser las que experimentan un mayor crecimiento.</p>
+<p>Aquí tienes el resumen de las fases de codificación y compilación del desarrollo de software:</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="33-codificación">3.3. Codificación<a href="#33-codificación" class="hash-link" aria-label="Enlace directo al 3.3. Codificación" title="Enlace directo al 3.3. Codificación">​</a></h4>
+<p>La <strong>codificación</strong> es la fase de <strong>programación</strong> donde se toma la información detallada del análisis y el diseño y se traduce a un <strong>código fuente</strong> (instrucciones paso a paso) utilizando un <strong>lenguaje de programación</strong> elegido.</p>
+<p>Esta tarea es realizada por el <strong>programador</strong> y debe cumplir de forma exhaustiva con todos los requisitos definidos en las fases anteriores.</p>
+<p>Las características deseables de un buen código fuente son:</p>
+<ol>
+<li><strong>Modularidad:</strong> Que esté dividido en trozos pequeños.</li>
+<li><strong>Corrección:</strong> Que haga exactamente lo que se le pide.</li>
+<li><strong>Fácil de leer:</strong> Para facilitar su desarrollo y mantenimiento futuro.</li>
+<li><strong>Eficiencia:</strong> Que utilice bien los recursos del sistema.</li>
+<li><strong>Portabilidad:</strong> Que pueda ser implementado en cualquier equipo.</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="34-compilación">3.4. Compilación<a href="#34-compilación" class="hash-link" aria-label="Enlace directo al 3.4. Compilación" title="Enlace directo al 3.4. Compilación">​</a></h4>
+<p>El <strong>código fuente</strong> (escrito en un lenguaje de alto nivel) no es directamente ejecutable por la máquina, por lo que debe ser <strong>traducido</strong> a <strong>lenguaje máquina</strong> (código binario) para que el ordenador lo entienda y ejecute.</p>
+<p>El proceso de traducción de código fuente a código ejecutable se realiza de dos formas:</p>
+<ol>
+<li>
+<p><strong>Compilación:</strong></p>
+<ul>
+<li>La traducción se realiza sobre <strong>todo el código fuente en un solo paso</strong>.</li>
+<li>Se crea un <strong>código objeto</strong> intermedio que luego debe ser enlazado.</li>
+<li>El <em>software</em> encargado es el <strong>compilador</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Interpretación:</strong></p>
+<ul>
+<li>La traducción del código fuente se realiza <strong>línea a línea</strong> y se ejecuta <strong>simultáneamente</strong>.</li>
+<li><strong>No existe código objeto intermedio</strong>.</li>
+<li>El <em>software</em> encargado es el <strong>intérprete</strong>.</li>
+<li>Aunque el proceso es más lento que la compilación, es recomendable para programadores inexpertos, ya que ofrece una detección de errores más detallada.</li>
+</ul>
+</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="35--pruebas">3.5.- Pruebas<a href="#35--pruebas" class="hash-link" aria-label="Enlace directo al 3.5.- Pruebas" title="Enlace directo al 3.5.- Pruebas">​</a></h4>
+<p>Una vez que se obtiene el <em>software</em>, la fase de <strong>pruebas</strong> es imprescindible para asegurar la <strong>validación y verificación</strong> del producto construido. Generalmente, las pruebas se realizan utilizando un <strong>conjunto seleccionado y predefinido de datos de prueba</strong>, que incluyen datos límite a los que la aplicación es sometida.</p>
+<p>Se distinguen dos tipos de pruebas:</p>
+<ol>
+<li>
+<p><strong>Pruebas unitarias</strong></p>
+<ul>
+<li>Consisten en probar, una a una, las <strong>diferentes partes o módulos</strong> del <em>software</em> de manera <strong>separada e independiente</strong>.</li>
+<li>Como resultado, se genera un <strong>documento de procedimiento de pruebas</strong> que compara los resultados obtenidos con los <strong>resultados esperados</strong>, previamente definidos en el plan de la fase de diseño.</li>
+<li>Un ejemplo de entorno de pruebas unitarias para Java es <strong>JUnit</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Pruebas de integración</strong></p>
+<ul>
+<li>Se realizan después de que cada programa individual ha pasado sus pruebas unitarias.</li>
+<li>Consisten en la <strong>puesta en común</strong> de todos los programas desarrollados para comprobar que funcionan correctamente <strong>en conjunto</strong> como un sistema completo.</li>
+<li>Al igual que en las unitarias, se genera un <strong>documento de procedimiento de pruebas de integración</strong> para comparar los resultados obtenidos con los esperados.</li>
+</ul>
+</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="36--explotación">3.6.- Explotación<a href="#36--explotación" class="hash-link" aria-label="Enlace directo al 3.6.- Explotación" title="Enlace directo al 3.6.- Explotación">​</a></h4>
+<p>La <strong>explotación</strong> es la fase en la que el <em>software</em>, una vez verificado y documentado, se entrega a los usuarios finales. Aunque algunos autores la agrupan con el mantenimiento, se diferencia por el momento en que se realiza.</p>
+<p>La explotación abarca tres pasos clave:</p>
+<ol>
+<li>
+<p><strong>Instalación</strong></p>
+<ul>
+<li>Los programas se transfieren al equipo final del cliente.</li>
+<li>Es recomendable que los futuros usuarios estén presentes para entender el proceso.</li>
+<li>En este momento se suelen realizar las <strong>Beta Test</strong>, que son las pruebas finales que se llevan a cabo directamente en los equipos del cliente y con sus cargas de trabajo habituales.</li>
+</ul>
+</li>
+<li>
+<p><strong>Configuración</strong></p>
+<ul>
+<li>Se asignan los <strong>parámetros de funcionamiento normal</strong> de la empresa para que la aplicación sea operativa.</li>
+<li>La configuración puede ser realizada por los fabricantes (lo más aconsejable para <em>software</em> a medida), por los propios usuarios (siguiendo una guía), o programarse para que sea <strong>automática</strong> tras la instalación.</li>
+</ul>
+</li>
+<li>
+<p><strong>Producción normal</strong></p>
+<ul>
+<li>Una vez instalado y configurado, el <em>software</em> pasa a manos de los usuarios finales y comienza el <strong>funcionamiento</strong> o la <strong>explotación</strong> normal de la aplicación.</li>
+</ul>
+</li>
+</ol>
+<p>Es fundamental que todo esté completamente preparado antes de este punto, ya que la presentación al cliente es el <strong>momento crítico</strong> del proyecto.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="37--mantenimiento">3.7.- Mantenimiento<a href="#37--mantenimiento" class="hash-link" aria-label="Enlace directo al 3.7.- Mantenimiento" title="Enlace directo al 3.7.- Mantenimiento">​</a></h4>
+<p>La etapa de <strong>mantenimiento</strong> es la <strong>más larga</strong> de todo el ciclo de vida del <em>software</em> y se define como el proceso de <strong>control, mejora y optimización</strong> del producto. Es necesario porque el <em>software</em> debe actualizarse y evolucionar para adaptarse a las mejoras del <em>hardware</em> y afrontar nuevas situaciones o corregir errores que siempre surgen.</p>
+<p>Por esta razón, se pacta un servicio de mantenimiento con el cliente, el cual conlleva un coste temporal y económico.</p>
+<p>Los cambios que hacen necesario el mantenimiento del <em>software</em> se clasifican en cuatro tipos:</p>
+<ul>
+<li><strong>Perfectivos:</strong> Enfocados en <strong>mejorar la funcionalidad</strong> interna y la eficiencia del <em>software</em>.</li>
+<li><strong>Evolutivos:</strong> Implican la adición de <strong>nuevos requisitos</strong> o funcionalidades propuestas por el cliente (haciendo evolucionar el producto).</li>
+<li><strong>Adaptativos:</strong> Modificaciones o actualizaciones necesarias para <strong>adaptarse a cambios externos</strong>, como nuevas tendencias del mercado, nuevos componentes de <em>hardware</em> o nuevas condiciones de organismos reguladores.</li>
+<li><strong>Correctivos:</strong> Necesarios para <strong>resolver y corregir errores</strong> o defectos que hayan sido detectados en el <em>software</em>.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="38--documentación">3.8.- Documentación<a href="#38--documentación" class="hash-link" aria-label="Enlace directo al 3.8.- Documentación" title="Enlace directo al 3.8.- Documentación">​</a></h4>
+<p>La <strong>documentación</strong> no debe considerarse una etapa separada, sino una <strong>labor constante</strong> que acompaña a todas las fases del ciclo de vida del <em>software</em>. Es crucial para proporcionar información a los usuarios, permitir futuras revisiones, y facilitar el paso claro y definido de una etapa a otra. También es imprescindible para la <strong>reutilización</strong> de módulos de código en otras aplicaciones.</p>
+<p>La documentación se clasifica según su destinatario final:</p>
+<table><thead><tr><th>Tipo de guía</th><th>Destinatario</th><th>Aspectos reflejados</th><th>Objetivo</th></tr></thead><tbody><tr><td>Técnicas</td><td>Personal técnico (analistas y programadores)</td><td>Diseño, codificación de programas y pruebas realizadas</td><td>Facilitar el desarrollo, realizar correcciones y permitir el <strong>mantenimiento futuro</strong></td></tr><tr><td>De uso</td><td>Usuarios finales (clientes)</td><td>Descripción de la funcionalidad, forma de ejecución, ejemplos de uso, requisitos de <em>software</em> y solución de problemas</td><td>Dar a los usuarios toda la información necesaria para <strong>utilizar la aplicación</strong></td></tr><tr><td>De instalación</td><td>Personal informático responsable de la instalación</td><td>Puesta en marcha, explotación y seguridad del sistema</td><td>Garantizar que la <strong>implantación</strong> de la aplicación se realice de forma segura, confiable y precisa</td></tr></tbody></table>
+<p>El <strong>fracaso en grandes proyectos de <em>software</em></strong> es notable: solo el <strong>26% tiene éxito</strong>, mientras que la mayoría (74%) o bien requiere modificaciones drásticas o fracasa por completo. La causa principal es la <strong>mala planificación y gestión</strong> de las etapas iniciales, ya que los errores cometidos al principio se <strong>propagan en cascada</strong> al resto del desarrollo.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="4--ciclos-de-vida-del-software">4.- Ciclos de vida del software<a href="#4--ciclos-de-vida-del-software" class="hash-link" aria-label="Enlace directo al 4.- Ciclos de vida del software" title="Enlace directo al 4.- Ciclos de vida del software">​</a></h3>
+<p>El <strong>ciclo de vida del <em>software</em></strong> es el conjunto de fases, procesos y actividades requeridas para planificar, desarrollar, probar, integrar, explotar y mantener un producto <em>software</em>.</p>
+<p>La necesidad de un ciclo de vida surgió debido a los inconvenientes del desarrollo individualizado y sin planificación, tales como: desconocimiento del progreso y calidad, falta de flexibilidad ante cambios, dependencia del programador y riesgo de no cumplir con las necesidades del cliente.</p>
+<p>Implementar un ciclo de vida aporta valor y calidad al producto final, ofreciendo varias ventajas:</p>
+<ul>
+<li><strong>Detección temprana de defectos</strong> mediante controles sistemáticos.</li>
+<li><strong>Control de costes y plazos</strong> gracias al seguimiento del proceso.</li>
+<li><strong>Documentación formal y estandarizada</strong> que facilita la comunicación.</li>
+<li>Mayor <strong>visibilidad y control</strong> para la gestión del proyecto.</li>
+<li><strong>Guía</strong> clara para el personal de desarrollo, minimizando la necesidad de rehacer trabajo.</li>
+</ul>
+<p>Los modelos de ciclos de vida más conocidos son:</p>
+<ol>
+<li><strong>Modelo en cascada</strong></li>
+</ol>
+<p>Es el modelo <strong>clásico</strong>, pero es casi <strong>utópico</strong> y solo aplicable a <strong>pequeños desarrollos</strong>.</p>
+<ul>
+<li>Las etapas se suceden <strong>sin retorno posible</strong>.</li>
+<li>Cualquier error en fases iniciales es <strong>insubsanable</strong> más adelante.</li>
+<li>Requiere conocimiento <strong>absoluto y previo</strong> de todos los requerimientos.</li>
+<li>No permite modificaciones ni actualizaciones una vez iniciado.</li>
+</ul>
+<ol start="2">
+<li><strong>Modelo en cascada con realimentación</strong></li>
+</ol>
+<p>Es uno de los modelos <strong>más utilizados</strong> y proviene del modelo en cascada.</p>
+<ul>
+<li>Introduce la posibilidad de <strong>retornar a etapas anteriores</strong> para corregir, modificar o depurar aspectos.</li>
+<li><strong>Idóneo</strong> para proyectos <strong>rígidos</strong> (pocos cambios, poco evolutivos) y con <strong>requisitos claros</strong>.</li>
+<li>Si se esperan muchos cambios, no es el más recomendable.</li>
+</ul>
+<ol start="3">
+<li><strong>Modelos evolutivos</strong></li>
+</ol>
+<p>Tienen en cuenta la naturaleza cambiante del <em>software</em> y se distinguen dos variantes:</p>
+<ul>
+<li>
+<p><strong>Modelo iterativo incremental:</strong></p>
+<ul>
+<li>Basado en el modelo en cascada con realimentación, donde las fases se <strong>repiten y refinan</strong>.</li>
+<li>Cada <strong>iteración</strong> cubre una parte de los requisitos, generando <strong>versiones parciales y crecientes</strong> del producto (incrementos). La versión obtenida es el punto de partida para la siguiente.</li>
+<li>Permite una <strong>evolución temporal</strong> del producto, reflejando la práctica actual de lanzar versiones en lugar de productos completos.</li>
+</ul>
+</li>
+<li>
+<p><strong>Modelo en espiral:</strong></p>
+<ul>
+<li>Combina el modelo incremental con el modelo en cascada.</li>
+<li>El <em>software</em> se construye en versiones que mejoran y aumentan su funcionalidad en cada vuelta. Es un modelo <strong>complejo</strong>.</li>
+<li><strong>Características:</strong> Se divide en <strong>seis regiones de tareas</strong> (Comunicación, Planificación, <strong>Análisis de riesgos</strong>, Representación, Codificación y Explotación, y Evaluación del cliente). Se adapta completamente a la naturaleza evolutiva del <em>software</em> y <strong>reduce riesgos</strong> proactivamente.</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li><strong>Modelos ágiles</strong></li>
+</ol>
+<ul>
+<li>Son metodologías modernas y <strong>muy flexibles</strong> que ganan gran presencia en el desarrollo.</li>
+<li>Están muy centrados en la <strong>satisfacción del cliente</strong> y permiten la aparición de <strong>nuevos requisitos</strong> incluso durante el desarrollo.</li>
+<li>El desarrollo es <strong>incremental</strong>, con <strong>incrementos cortos</strong> y fases que se <strong>solapan</strong>.</li>
+<li>La <strong>comunicación</strong> entre el equipo y el cliente es <strong>constante</strong>. Un ejemplo conocido es <strong>Scrum</strong>.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="5--herramientas-de-apoyo-al-desarrollo-del-software">5.- Herramientas de apoyo al desarrollo del software<a href="#5--herramientas-de-apoyo-al-desarrollo-del-software" class="hash-link" aria-label="Enlace directo al 5.- Herramientas de apoyo al desarrollo del software" title="Enlace directo al 5.- Herramientas de apoyo al desarrollo del software">​</a></h3>
+<p>Las herramientas informáticas se utilizan para <strong>automatizar tareas</strong> en las etapas del desarrollo de <em>software</em>, con el fin de aumentar la <strong>fiabilidad</strong> y <strong>reducir el tiempo y los costes</strong>. Esto permite a los desarrolladores centrarse en los requisitos y el análisis, que son las principales causas de los fallos.</p>
+<p>Las <strong>Herramientas CASE</strong> (<em>Computer Aided Software Engineering</em>) son aplicaciones diseñadas para automatizar las fases del desarrollo de <em>software</em>.</p>
+<p><strong>Objetivos y beneficios:</strong></p>
+<ul>
+<li><strong>Mejorar la productividad y calidad</strong> del proceso y del resultado final.</li>
+<li>Mejorar la <strong>planificación</strong> y darle <strong>agilidad</strong> al proceso.</li>
+<li>Permitir la <strong>reutilización</strong> de partes del <em>software</em>.</li>
+<li>Hacer que las aplicaciones respondan a <strong>estándares</strong>.</li>
+<li>Facilitar la tarea del <strong>mantenimiento</strong>.</li>
+<li>Mejorar la visualización de las fases de desarrollo de forma <strong>gráfica</strong>.</li>
+</ul>
+<p>Estas herramientas pueden ayudar en tareas como el diseño, la codificación a partir de la apariencia visual y la detección de errores.</p>
+<p>Las herramientas CASE se clasifican según las fases del ciclo de vida del <em>software</em> en las que ofrecen ayuda:</p>
+<table><thead><tr><th style="text-align:left">Clasificación</th><th style="text-align:left">Fases del ciclo de vida</th><th style="text-align:left">Tareas de apoyo</th></tr></thead><tbody><tr><td style="text-align:left">U-CASE (<em>Upper CASE</em>)</td><td style="text-align:left">Planificación y análisis de requisitos</td><td style="text-align:left">Ayuda en la definición y gestión inicial del proyecto</td></tr><tr><td style="text-align:left">M-CASE (<em>Middle CASE</em>)</td><td style="text-align:left">Análisis y diseño</td><td style="text-align:left">Apoyo en la modelización de la estructura del sistema</td></tr><tr><td style="text-align:left">L-CASE (<em>Lower CASE</em>)</td><td style="text-align:left">Codificación, pruebas y documentación</td><td style="text-align:left">Programación, detección de errores, depuración de programas y generación de documentación</td></tr></tbody></table>
+<p>Algunos ejemplos de herramientas CASE libres son <strong>ArgoUML</strong>, <strong>Use Case Maker</strong> y <strong>ObjectBuilder</strong>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="6--frameworks">6.- Frameworks<a href="#6--frameworks" class="hash-link" aria-label="Enlace directo al 6.- Frameworks" title="Enlace directo al 6.- Frameworks">​</a></h3>
+<p>Un <strong>Framework</strong> es una <strong>estructura de ayuda</strong> o plataforma <em>software</em> que permite a los programadores desarrollar proyectos sin empezar desde cero. Define programas de soporte, bibliotecas, lenguaje interpretado y otros recursos que facilitan la creación y unión de los diferentes módulos de un proyecto.</p>
+<p>El uso de un <em>framework</em> permite dedicar más tiempo al <strong>análisis de requerimientos</strong> y las <strong>especificaciones técnicas</strong>, ya que las tareas más laboriosas y detalladas de programación ya están resueltas.</p>
+<p><strong>Ventajas</strong>:</p>
+<ul>
+<li><strong>Desarrollo rápido</strong> de <em>software</em>.</li>
+<li><strong>Reutilización</strong> de partes de código en otras aplicaciones.</li>
+<li>Diseño <strong>uniforme</strong> del <em>software</em>.</li>
+<li><strong>Portabilidad</strong> de aplicaciones (los <em>bytecodes</em> generados pueden ejecutarse sobre cualquier máquina virtual).</li>
+</ul>
+<p><strong>Inconvenientes</strong>:</p>
+<ul>
+<li>Gran <strong>dependencia</strong> del código respecto al <em>framework</em> (cambiar de <em>framework</em> implica reescribir gran parte de la aplicación).</li>
+<li>El uso y la <strong>implementación</strong> del <em>framework</em> consumen bastantes <strong>recursos</strong> del sistema.</li>
+</ul>
+<p><strong>Ejemplos de frameworks</strong>:</p>
+<ul>
+<li><strong>.NET:</strong> Utilizado para desarrollar aplicaciones en Windows. Incluye <em>Visual Studio .NET</em> para la construcción de aplicaciones y el <em>.NET Framework</em> para su ejecución.</li>
+<li><strong>Spring:</strong> Un conjunto de bibliotecas (<em>API&#x27;s</em>) para el desarrollo y ejecución de aplicaciones en <strong>Java</strong>.</li>
+<li><strong>Qt:</strong> Un <em>framework</em> <strong>multiplataforma</strong> para el lenguaje <strong>C++</strong>, aunque admite adaptaciones a otros lenguajes.</li>
+<li><strong>Angular:</strong> Un <em>framework</em> de <strong>Javascript</strong> centrado en el desarrollo de <strong>aplicaciones web</strong>.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="7--lenguajes-de-programación">7.- Lenguajes de programación<a href="#7--lenguajes-de-programación" class="hash-link" aria-label="Enlace directo al 7.- Lenguajes de programación" title="Enlace directo al 7.- Lenguajes de programación">​</a></h3>
+<p>Un <strong>lenguaje de programación</strong> es un idioma creado de forma artificial, compuesto por un conjunto de <strong>símbolos y normas</strong> que se usan para obtener un <strong>código</strong> que el <em>hardware</em> de la computadora puede entender y ejecutar. Son los instrumentos esenciales que permiten comunicarnos con el ordenador para que realice las tareas necesarias.</p>
+<p>La elección del lenguaje es crucial, ya que cada uno está enfocado a diferentes tipos de tareas y áreas de programación. Esta decisión se toma típicamente durante la fase de <strong>diseño</strong> del proyecto, basándose en los <strong>requerimientos del cliente</strong>.</p>
+<p><strong>Componentes de un lenguaje de programación</strong></p>
+<ul>
+<li><strong>Alfabeto:</strong> el conjunto de <strong>símbolos</strong> permitidos para escribir código.</li>
+<li><strong>Sintaxis:</strong> las <strong>normas de construcción</strong> que rigen cómo deben combinarse los símbolos del lenguaje.</li>
+<li><strong>Semántica:</strong> el <strong>significado</strong> de las construcciones, es decir, las acciones válidas que el <em>hardware</em> realizará.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="71--características-de-los-lenguajes-de-programación">7.1.- Características de los lenguajes de programación<a href="#71--características-de-los-lenguajes-de-programación" class="hash-link" aria-label="Enlace directo al 7.1.- Características de los lenguajes de programación" title="Enlace directo al 7.1.- Características de los lenguajes de programación">​</a></h4>
+<p>Los lenguajes de programación han evolucionado para facilitar la labor del programador, pasando de ser directamente interpretables por la máquina a ser más cercanos al razonamiento humano.</p>
+<p><strong>Lenguaje máquina</strong></p>
+<ul>
+<li><strong>Instrucciones:</strong> combinaciones de unos y ceros (código binario).</li>
+<li><strong>Traducción:</strong> es el <strong>único</strong> lenguaje que el ordenador entiende <strong>directamente</strong> (no necesita traducción).</li>
+<li><strong>Portabilidad:</strong> <strong>no es portable</strong>; es único para cada tipo de procesador.</li>
+<li><strong>Uso:</strong> fue el primer lenguaje, pero ya <strong>no se utiliza</strong> para programar.</li>
+</ul>
+<p><strong>Lenguaje ensamblador</strong></p>
+<ul>
+<li><strong>Instrucciones:</strong> utiliza <strong>mnemotécnicos</strong> (instrucciones complejas) en lugar de unos y ceros.</li>
+<li><strong>Traducción:</strong> <strong>necesita traducción</strong> al lenguaje máquina para ejecutarse.</li>
+<li><strong>Características:</strong> sus sentencias hacen referencia a la <strong>ubicación física</strong> de los archivos en el equipo. Es difícil de utilizar.</li>
+</ul>
+<p><strong>Lenguajes de alto nivel (basados en código)</strong></p>
+<ul>
+<li><strong>Instrucciones:</strong> usan sentencias y órdenes derivadas del <strong>idioma inglés</strong>, siendo más cercanos al <strong>razonamiento humano</strong>.</li>
+<li><strong>Traducción:</strong> <strong>necesitan traducción</strong> al lenguaje máquina.</li>
+<li><strong>Uso:</strong> son los lenguajes que <strong>se utilizan hoy día</strong>, aunque su uso tiende a disminuir.</li>
+</ul>
+<p><strong>Lenguajes visuales</strong></p>
+<ul>
+<li><strong>Instrucciones:</strong> están sustituyendo a los lenguajes basados en código. Se programa <strong>gráficamente usando el ratón</strong> y diseñando directamente la apariencia (<em>look and feel</em>) del <em>software</em>.</li>
+<li><strong>Código:</strong> el código fuente correspondiente <strong>se genera automáticamente</strong>.</li>
+<li><strong>Traducción:</strong> <strong>necesitan traducción</strong> al lenguaje máquina.</li>
+<li><strong>Portabilidad:</strong> son <strong>completamente portables</strong> de un equipo a otro.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="72--clasificación-de-los-lenguajes-de-programación">7.2.- Clasificación de los lenguajes de programación<a href="#72--clasificación-de-los-lenguajes-de-programación" class="hash-link" aria-label="Enlace directo al 7.2.- Clasificación de los lenguajes de programación" title="Enlace directo al 7.2.- Clasificación de los lenguajes de programación">​</a></h4>
+<p>La elección del lenguaje de programación depende de las características del problema a resolver. Los lenguajes se clasifican según varios criterios:</p>
+<p><strong>Según la cercanía al lenguaje humano</strong></p>
+<table><thead><tr><th style="text-align:left">Tipo de Lenguaje</th><th style="text-align:left">Características</th><th style="text-align:left">Inconvenientes</th></tr></thead><tbody><tr><td style="text-align:left"><strong>Alto nivel</strong></td><td style="text-align:left">Traducen los algoritmos a un lenguaje fácil de entender para el programador. Son <strong>portables</strong> (no orientados a una máquina específica)</td><td style="text-align:left">Las instrucciones <strong>no son directamente ejecutables</strong> por la máquina, requieren traducción</td></tr><tr><td style="text-align:left"><strong>Bajo nivel</strong></td><td style="text-align:left">Aprovechan al máximo los recursos del ordenador</td><td style="text-align:left"><strong>No portables</strong> (adaptados a la máquina específica) y difíciles de manejar</td></tr><tr><td style="text-align:left">&gt; <em>Lenguaje máquina</em></td><td style="text-align:left">Programación directa con 0s y 1s</td><td style="text-align:left">Muy difícil de programar y corregir errores</td></tr><tr><td style="text-align:left">&gt; <em>Lenguaje ensamblador</em></td><td style="text-align:left">Primer nivel de abstracción; usa <strong>mnemotécnicos</strong>, pero está conceptualmente cercano al <em>hardware</em></td><td style="text-align:left">Difícil de usar y dependiente de las características del <em>hardware</em></td></tr></tbody></table>
+<p><strong>Según su forma de ejecución</strong></p>
+<p>La ejecución depende de si el programa, que no está en lenguaje máquina, necesita una traducción completa o una traducción paso a paso:</p>
+<ul>
+<li><strong>Lenguajes compilados:</strong> se traducen completamente al lenguaje máquina mediante un <strong>compilador</strong>, generando un <strong>nuevo fichero ejecutable</strong>. Una vez traducido, no necesita volverse a compilar si no hay cambios. Un inconveniente es que el programa no puede ejecutarse hasta que no esté <strong>libre de errores</strong>. (Ej.: C, Pascal).</li>
+<li><strong>Lenguajes interpretados:</strong> el programa es traducido y ejecutado <strong>instrucción a instrucción</strong> cada vez que se quiere ejecutar, usando un <strong>intérprete</strong>. No genera un fichero ejecutable. La ventaja es que permite ejecutar hasta que se encuentra una instrucción errónea. (Ej.: Basic).</li>
+<li><strong>Lenguajes intermediarios (Híbridos):</strong> combinan compilación e interpretación (ej. Java). Primero, el código fuente se compila a un <strong>lenguaje intermedio</strong> (<em>bytecode</em>), y luego este archivo intermedio es traducido (interpretado) a lenguaje máquina en cada ejecución por la Máquina Virtual.</li>
+</ul>
+<p><strong>Tipos de código y proceso de traducción</strong></p>
+<table><thead><tr><th style="text-align:left">Tipo de Código</th><th style="text-align:left">Descripción</th><th style="text-align:left">Generación</th></tr></thead><tbody><tr><td style="text-align:left">Código fuente</td><td style="text-align:left">Escrito por el programador en un lenguaje de alto nivel. <strong>No ejecutable</strong> directamente por la máquina. Se obtiene tras diseñar un algoritmo en pseudocódigo</td><td style="text-align:left">Puede ser <strong>abierto</strong> (disponible para estudio/modificación) o <strong>cerrado</strong> (sin permiso de edición)</td></tr><tr><td style="text-align:left">Código objeto</td><td style="text-align:left"><strong>Código intermedio</strong> (generalmente <em>bytecode</em>). No es ejecutable por la computadora ni inteligible por el ser humano</td><td style="text-align:left">Se obtiene del código fuente mediante un <strong>compilador</strong>, solo si está libre de errores sintácticos</td></tr><tr><td style="text-align:left">Código ejecutable</td><td style="text-align:left">El <strong>código máquina</strong> final, directamente inteligible y ejecutable por la computadora</td><td style="text-align:left">Se obtiene al <strong>enlazar</strong> los archivos de código objeto con rutinas y bibliotecas (mediante un <em>linker</em> o enlazador). En lenguajes puramente compilados, se obtiene directamente del código fuente</td></tr></tbody></table>
+<p><strong>Otras clasificaciones</strong></p>
+<ul>
+<li>
+<p><strong>Lenguajes imperativos:</strong> Describen <strong>paso a paso</strong> el conjunto de instrucciones (algoritmo) para cambiar el estado del programa y hallar la solución. (Ej.: C, Java, PHP).</p>
+</li>
+<li>
+<p><strong>Lenguajes declarativos:</strong> Las sentencias <strong>describen el problema</strong> que se quiere solucionar, pero no las instrucciones detalladas para hacerlo. (Ej.: Lógicos como Prolog, Algebraicos como SQL, Funcionales como Haskell).</p>
+</li>
+<li>
+<p><strong>Según la técnica de programación:</strong></p>
+<ul>
+<li><strong>Estructurados</strong> (Ej.: Pascal, C).</li>
+<li><strong>Orientados a objetos (POO)</strong> (Ej.: C++, Java, C#).</li>
+<li><strong>Visuales</strong> (Permiten programar gráficamente; Ej.: Visual Basic .Net).</li>
+</ul>
+</li>
+</ul>
+<p>A pesar de la cantidad de lenguajes, <strong>Java, C, C++, PHP y Visual Basic</strong> concentran alrededor del 60% del interés de la comunidad informática global.</p>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="721--lenguajes-de-programación-estructurados">7.2.1.- Lenguajes de programación estructurados<a href="#721--lenguajes-de-programación-estructurados" class="hash-link" aria-label="Enlace directo al 7.2.1.- Lenguajes de programación estructurados" title="Enlace directo al 7.2.1.- Lenguajes de programación estructurados">​</a></h5>
+<p>La <strong>programación estructurada</strong> es una técnica fundamental que sentó las bases para el desarrollo de lenguajes más modernos, como los orientados a objetos.</p>
+<p>Se define como una técnica para escribir programas que permite usar solo <strong>tres tipos de estructuras de control</strong> o sentencias:</p>
+<ol>
+<li><strong>Sentencias secuenciales</strong></li>
+<li><strong>Sentencias selectivas</strong> (condicionales)</li>
+<li><strong>Sentencias repetitivas</strong> (iteraciones o bucles)</li>
+</ol>
+<p>Los lenguajes basados en esta técnica se denominan <strong>lenguajes de programación estructurados</strong>. Su principal éxito fue su <strong>sencillez</strong> para construir y leer programas.</p>
+<p>La programación estructurada evolucionó hacia la <strong>programación modular</strong>, que aplicaba la técnica de &quot;divide y vencerás&quot; separando el código en trozos llamados <strong>módulos</strong> con funcionalidades concretas y reutilizables.</p>
+<table><thead><tr><th style="text-align:left">Ventajas</th><th style="text-align:left">Inconvenientes</th></tr></thead><tbody><tr><td style="text-align:left">Los programas son <strong>fáciles de leer</strong>, sencillos y rápidos</td><td style="text-align:left">El programa se concentra en un <strong>único bloque</strong>, lo que lo hace difícil de manejar si crece demasiado</td></tr><tr><td style="text-align:left">El <strong>mantenimiento</strong> de los programas es sencillo</td><td style="text-align:left"><strong>No permite la reutilización eficaz de código</strong>, pues todo está concentrado</td></tr><tr><td style="text-align:left">La estructura del programa es <strong>sencilla y clara</strong></td><td style="text-align:left">Fue sustituida por la modular para mejorar la funcionalidad</td></tr></tbody></table>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="722--lenguajes-de-programación-orientados-a-objetos-poo">7.2.2.- Lenguajes de programación orientados a objetos (POO)<a href="#722--lenguajes-de-programación-orientados-a-objetos-poo" class="hash-link" aria-label="Enlace directo al 7.2.2.- Lenguajes de programación orientados a objetos (POO)" title="Enlace directo al 7.2.2.- Lenguajes de programación orientados a objetos (POO)">​</a></h5>
+<p>La <strong>Programación Orientada a Objetos (POO)</strong> surgió como solución a las limitaciones de la programación estructurada en proyectos grandes. En lugar de ver el programa como una secuencia de instrucciones, la POO lo trata como un <strong>conjunto de objetos independientes</strong> que colaboran entre sí para realizar acciones.</p>
+<p><strong>Características principales</strong></p>
+<ul>
+<li><strong>Clase:</strong> plano o plantilla que define un conjunto de objetos con características similares. (Ejemplo: la clase <em>Persona</em>).</li>
+<li><strong>Objeto:</strong> <strong>instancia concreta</strong> de una clase. (Ejemplo: <em>Noa</em> o <em>Valeria</em> son objetos de la clase <em>Persona</em>).</li>
+<li><strong>Atributos (Propiedades):</strong> definen las <strong>características</strong> que tiene cada objeto de una clase (Ejemplo: el atributo <em>edad</em> tiene un valor específico para cada persona).</li>
+<li><strong>Métodos:</strong> corresponden a las <strong>acciones</strong> que los objetos pueden realizar. Contienen el código que implementa la acción. (Ejemplo: el método <em>Saludar</em> en la clase <em>Persona</em>).</li>
+<li><strong>Envío de mensajes:</strong> mecanismo por el cual los objetos se comunican entre sí mediante <strong>llamadas a los métodos</strong>, provocando un cambio en el estado de los objetos.</li>
+<li><strong>Reutilización:</strong> el código se vuelve <strong>más reutilizable</strong>.</li>
+<li><strong>Depuración:</strong> es más fácil <strong>localizar y corregir errores</strong> dentro de una clase específica que en un programa completo.</li>
+</ul>
+<p>Además de los elementos básicos, la POO incluye conceptos avanzados como:</p>
+<ul>
+<li><strong>Abstracción</strong></li>
+<li><strong>Encapsulamiento</strong></li>
+<li><strong>Polimorfismo</strong></li>
+<li><strong>Herencia</strong></li>
+</ul>
+<p><em>La POO es menos intuitiva que la programación estructurada inicialmente.</em></p>
+<p>Ejemplos de lenguajes orientados a objetos son: <strong>Java, C++, C#, Ada</strong> y <strong>VB.NET</strong>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="8-máquinas-virtuales">8. Máquinas virtuales<a href="#8-máquinas-virtuales" class="hash-link" aria-label="Enlace directo al 8. Máquinas virtuales" title="Enlace directo al 8. Máquinas virtuales">​</a></h3>
+<p>Una <strong>máquina virtual (MV)</strong> es un tipo especial de <em>software</em> cuya misión principal es <strong>separar el funcionamiento de una aplicación de los componentes <em>hardware</em> instalados</strong>.</p>
+<p>Actúa como una capa de <em>software</em> de bajo nivel, haciendo de <strong>puente</strong> entre el <em>bytecode</em> (código intermedio u objeto) de la aplicación y el <em>hardware</em> físico del equipo.</p>
+<p>El uso de máquinas virtuales es esencial en lenguajes como Java (lenguajes intermediarios), garantizando la <strong>portabilidad</strong> de las aplicaciones, lo que significa que pueden ejecutarse en cualquier equipo independientemente de sus características físicas.</p>
+<ul>
+<li><strong>Portabilidad:</strong> aísla la aplicación de los detalles físicos del equipo, permitiendo que el <em>bytecode</em> se ejecute universalmente.</li>
+<li><strong>Gestión de memoria:</strong> se encarga de <strong>reservar memoria</strong> para los objetos creados y <strong>liberar la memoria</strong> no utilizada (garbage collection).</li>
+<li><strong>Comunicación con el <em>hardware</em>:</strong> se comunica con el sistema donde está instalada (huésped) para controlar los dispositivos <em>hardware</em> implicados en los procesos.</li>
+<li><strong>Seguridad:</strong> la MV <strong>verifica todo el <em>bytecode</em></strong> antes de su ejecución y <strong>protege las direcciones de memoria</strong> para asegurar el cumplimiento de las normas de seguridad de las aplicaciones.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="81--entornos-de-ejecución">8.1.- Entornos de ejecución<a href="#81--entornos-de-ejecución" class="hash-link" aria-label="Enlace directo al 8.1.- Entornos de ejecución" title="Enlace directo al 8.1.- Entornos de ejecución">​</a></h4>
+<p>Un <strong>entorno de ejecución</strong> es un servicio de <em>software</em> (a veces parte del sistema operativo, otras veces independiente) que actúa como la <strong>base <em>software</em></strong> para que los programas puedan ejecutarse. El tiempo que un programa tarda en ejecutarse se denomina <strong>runtime</strong>.</p>
+<p>El entorno funciona como un <strong>intermediario</strong> clave entre el lenguaje fuente y el sistema operativo para ejecutar aplicaciones.</p>
+<p><strong>Componentes y funciones</strong></p>
+<p>El entorno de ejecución está compuesto por la <strong>máquina virtual (MV)</strong> y las <strong>API&#x27;s (bibliotecas de clases estándar)</strong>. Estos dos componentes se distribuyen conjuntamente, ya que deben ser compatibles entre sí.</p>
+<p>Durante el <em>runtime</em>, los entornos se encargan de varias tareas esenciales:</p>
+<ul>
+<li><strong>Gestión de memoria:</strong> configurar la memoria principal disponible para el sistema.</li>
+<li><strong>Enlace:</strong> conectar los archivos del programa con las <strong>bibliotecas</strong> (<em>subprogramas que ya existen</em>) y con los <strong>subprogramas</strong> que han sido creados específicamente para el programa.</li>
+<li><strong>Depuración:</strong> comprobar si existen <strong>errores semánticos</strong> en el lenguaje. (Los errores sintácticos se detectan previamente en la compilación).</li>
+</ul>
+<p>Es importante notar que el entorno de ejecución solo permite <strong>ejecutar</strong> programas; para <strong>desarrollar</strong> nuevas aplicaciones, se requiere un <strong>entorno de desarrollo</strong>.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="82--java-runtime-environment-jre">8.2.- Java Runtime Environment (JRE)<a href="#82--java-runtime-environment-jre" class="hash-link" aria-label="Enlace directo al 8.2.- Java Runtime Environment (JRE)" title="Enlace directo al 8.2.- Java Runtime Environment (JRE)">​</a></h4>
+<p>El <strong>Java Runtime Environment (JRE)</strong> es el <strong>entorno en tiempo de ejecución de Java</strong>. Es un conjunto de utilidades que permite que los programas escritos en Java se ejecuten sobre <strong>cualquier tipo de plataforma</strong>, garantizando la portabilidad del <em>software</em>.</p>
+<p>El JRE está formado por dos componentes principales que son distribuidos conjuntamente, ya que deben ser consistentes entre sí:</p>
+<ol>
+<li><strong>Máquina Virtual Java (JVM)</strong>: Es el programa que se encarga de <strong>interpretar</strong> el código de la aplicación escrito en Java (<em>bytecode</em>).</li>
+<li><strong>Bibliotecas de clase estándar</strong>: Estas bibliotecas implementan la <strong>API de Java</strong> (<em>Application Programming Interface</em>), que proporciona las funcionalidades esenciales para que la aplicación pueda funcionar.</li>
+</ol>
+<p>Aquí tienes el resumen de las sentencias de control de la programación estructurada:</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="anexo-i-sentencias-de-control-de-la-programación-estructurada">Anexo I. Sentencias de control de la programación estructurada.<a href="#anexo-i-sentencias-de-control-de-la-programación-estructurada" class="hash-link" aria-label="Enlace directo al Anexo I. Sentencias de control de la programación estructurada." title="Enlace directo al Anexo I. Sentencias de control de la programación estructurada.">​</a></h3>
+<p>La programación estructurada se basa en el uso de solo tres tipos de sentencias o estructuras de control para escribir programas de forma clara y sencilla:</p>
+<ol>
+<li>
+<p><strong>Sentencias secuenciales</strong>: se ejecutan una tras otra en el orden exacto en que han sido escritas.</p>
+<div class="language-c codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockTitle_OeMC">Ejemplo en C</div><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-c codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token function" style="color:#d73a49">printf</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">“declaración de variables”</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">int</span><span class="token plain"> numero_entero</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">espacio</span><span class="token operator" style="color:#393A34">=</span><span class="token plain">espacio_inicio </span><span class="token operator" style="color:#393A34">+</span><span class="token plain"> veloc</span><span class="token operator" style="color:#393A34">*</span><span class="token plain">tiempo</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+</li>
+<li>
+<p><strong>Sentencias selectivas (condicionales)</strong>: permiten evaluar una condición. Se ejecuta un bloque de acciones si la condición es verdadera y, opcionalmente, otro bloque si es falsa.</p>
+<ul>
+<li><strong><code>if</code>:</strong> señala la condición a evaluar.</li>
+<li><strong><code>then</code>:</strong> acciones a ejecutar si la condición es cierta (se omite en C).</li>
+<li><strong><code>else</code>:</strong> acciones a ejecutar si la condición es falsa.</li>
+</ul>
+<div class="language-c codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockTitle_OeMC">Ejemplo en C</div><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-c codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">if</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">a </span><span class="token operator" style="color:#393A34">&gt;=</span><span class="token plain"> b</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    c </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> a </span><span class="token operator" style="color:#393A34">-</span><span class="token plain"> b</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">else</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    c </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> a </span><span class="token operator" style="color:#393A34">+</span><span class="token plain"> b</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+</li>
+<li>
+<p><strong>Sentencias repetitivas (iteraciones o bucles)</strong>: hacen que una serie de acciones se repitan mientras o **hasta que una determinada condición deje de ser cierta (o se cumpla).</p>
+<ul>
+<li><strong><code>while</code>:</strong> marca el comienzo del bucle, seguido de la condición de parada (o continuación).</li>
+<li><strong><code>do</code> / <code>done</code>:</strong> marcan el inicio y el fin de las acciones a repetir (se omiten en C, se usan llaves <code>{}</code>).</li>
+</ul>
+<div class="language-c codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockTitle_OeMC">Ejemplo en C</div><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-c codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">int</span><span class="token plain"> num </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">0</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">while</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">num </span><span class="token operator" style="color:#393A34">&lt;=</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">10</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   </span><span class="token function" style="color:#d73a49">printf</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;Repetición numero %d\n&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> num</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    num </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> num </span><span class="token operator" style="color:#393A34">+</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">1</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"> </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="ud2--instalación-y-uso-de-entornos-de-desarrollo"><strong>UD2.- Instalación y uso de entornos de desarrollo</strong><a href="#ud2--instalación-y-uso-de-entornos-de-desarrollo" class="hash-link" aria-label="Enlace directo al ud2--instalación-y-uso-de-entornos-de-desarrollo" title="Enlace directo al ud2--instalación-y-uso-de-entornos-de-desarrollo">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="Esquema Unidad 2 Entornos de Desarrollo" src="/apuntes-daw/assets/images/entornos-de-desarrollo-unidad-2-d5b3bd28ec7490498e63e452e2ef14c9.jpg" width="5151" height="1577" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="1--concepto-de-entorno-de-desarrollo-evolución-histórica">1.- Concepto de entorno de desarrollo. Evolución histórica.<a href="#1--concepto-de-entorno-de-desarrollo-evolución-histórica" class="hash-link" aria-label="Enlace directo al 1.- Concepto de entorno de desarrollo. Evolución histórica." title="Enlace directo al 1.- Concepto de entorno de desarrollo. Evolución histórica.">​</a></h3>
+<p>Un <strong>Entorno Integrado de Desarrollo (IDE)</strong> es un <em>software</em> que agrupa un <strong>conjunto de herramientas de programación</strong> esenciales en una única interfaz gráfica. Aunque la codificación puede hacerse con un editor de texto y un compilador por separado, la mayoría de los programadores usan un IDE para ganar <strong>fiabilidad y tiempo</strong> en los proyectos.</p>
+<p>Un IDE típicamente incluye:</p>
+<ul>
+<li><strong>Editor de código.</strong></li>
+<li>Acceso integrado al <strong>compilador</strong> (botones/menú).</li>
+<li>Acceso integrado a la <strong>ejecución</strong> del programa.</li>
+<li><strong>Depurador</strong> (Debugger).</li>
+<li><strong>Constructor de interfaz gráfico</strong> (GUI Builder).</li>
+</ul>
+<p>El principal objetivo es proporcionar al programador componentes con una interfaz uniforme, lo que aumenta la <strong>eficiencia</strong> y reduce el tiempo de codificación.</p>
+<p>Originalmente, un IDE estaba dedicado a un solo lenguaje, pero las versiones modernas (como <strong>Eclipse</strong>, <strong>NetBeans</strong> y <strong>Microsoft Visual Studio</strong>) suelen ser <strong>compatibles con varios lenguajes</strong> mediante la instalación de <em>plugins</em>.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="11--evolución-histórica">1.1.- Evolución Histórica<a href="#11--evolución-histórica" class="hash-link" aria-label="Enlace directo al 1.1.- Evolución Histórica" title="Enlace directo al 1.1.- Evolución Histórica">​</a></h4>
+<p>El concepto de IDE no existía en las décadas de la <strong>tarjeta perforada</strong>. La programación se realizaba mediante diagramas de flujo y el código se compilaba tras ser introducido al sistema.</p>
+<table><thead><tr><th style="text-align:left">Período</th><th style="text-align:left">Hito</th><th style="text-align:left">Detalles</th></tr></thead><tbody><tr><td style="text-align:left">Primer IDE</td><td style="text-align:left">El lenguaje <strong>BASIC</strong> fue el primero en utilizar un IDE</td><td style="text-align:left">Estaba basado exclusivamente en una <strong>consola de comandos</strong> (antes de la interfaz gráfica), pero ya manejaba gestión de archivos, compilación y depuración</td></tr><tr><td style="text-align:left">Años 70 y 80</td><td style="text-align:left">El IDE <strong>Maestro</strong> se considera el primer IDE popular</td><td style="text-align:left">Nació a principios de los 70 y lideró el campo, siendo instalado por miles de programadores</td></tr><tr><td style="text-align:left">Años 90 - Actualidad</td><td style="text-align:left">Masificación de los sistemas con interfaz gráfica</td><td style="text-align:left">El uso de los IDE se <strong>ratifica y afianza</strong>, llevando a una vasta oferta de herramientas propietarias y de código abierto (ej., NetBeans, Eclipse)</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="2--funciones-de-un-entorno-de-desarrollo">2.- Funciones de un entorno de desarrollo<a href="#2--funciones-de-un-entorno-de-desarrollo" class="hash-link" aria-label="Enlace directo al 2.- Funciones de un entorno de desarrollo" title="Enlace directo al 2.- Funciones de un entorno de desarrollo">​</a></h3>
+<table><thead><tr><th style="text-align:left">Función</th><th style="text-align:left">Tareas clave del IDE</th></tr></thead><tbody><tr><td style="text-align:left">Asistencia de Código</td><td style="text-align:left"><strong>Coloración</strong> de la sintaxis, <strong>auto-completado</strong> de código, y <strong>refactorización</strong> (cambios de legibilidad sin alterar funcionalidad)</td></tr><tr><td style="text-align:left">Detección y Corrección</td><td style="text-align:left"><strong>Detección de errores de sintaxis</strong> en tiempo real, <strong>identificación automática</strong> de código y <strong>depuración</strong> avanzada (puntos de ruptura, seguimiento de variables)</td></tr><tr><td style="text-align:left">Automatización y Gestión</td><td style="text-align:left"><strong>Compilación</strong> de proyectos complejos en un solo paso, <strong>generación automática</strong> de herramientas y documentación, y <strong>organización</strong> de archivos fuente/compilados en carpetas</td></tr><tr><td style="text-align:left">Visual y Diseño</td><td style="text-align:left">Herramientas de <strong>concepción visual</strong> para crear interfaces gráficas (GUI)</td></tr><tr><td style="text-align:left">Control de Proyecto</td><td style="text-align:left"><strong>Control de versiones</strong> (almacén compartido, soporte a cambios simultáneos), mecanismos de <strong>auto-recuperación</strong> ante errores, y gestión de <strong>plugins</strong> para aumentar funcionalidades</td></tr><tr><td style="text-align:left">Despliegue</td><td style="text-align:left"><strong>Empaquetar</strong> el <em>software</em> para su posterior instalación en el entorno de ejecución</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="3--entornos-integrados-libres-y-propietarios">3.- Entornos integrados libres y propietarios<a href="#3--entornos-integrados-libres-y-propietarios" class="hash-link" aria-label="Enlace directo al 3.- Entornos integrados libres y propietarios" title="Enlace directo al 3.- Entornos integrados libres y propietarios">​</a></h3>
+<table><thead><tr><th style="text-align:left">Tipo de IDE</th><th style="text-align:left">Características</th><th style="text-align:left">Ejemplos</th></tr></thead><tbody><tr><td style="text-align:left">Libre</td><td style="text-align:left">Tiene <strong>licencia de uso público</strong> (gratis)</td><td style="text-align:left">Eclipse, NetBeans, CodeLite, JDeveloper</td></tr><tr><td style="text-align:left">Propietario</td><td style="text-align:left">Requiere <strong>licencia de pago</strong></td><td style="text-align:left">Microsoft Visual Studio, C++ Builder, QtCreator</td></tr></tbody></table>
+<p><strong>Entornos más relevantes</strong></p>
+<table><thead><tr><th style="text-align:left">IDE</th><th style="text-align:left">Licencia</th><th style="text-align:left">Lenguajes soportados</th></tr></thead><tbody><tr><td style="text-align:left">NetBeans</td><td style="text-align:left">Libre</td><td style="text-align:left">C/C++, Java, JavaScript, PHP, HTML5</td></tr><tr><td style="text-align:left">Eclipse</td><td style="text-align:left">Libre</td><td style="text-align:left">Ada, C/C++, Java, JavaScript, PHP</td></tr><tr><td style="text-align:left">JDeveloper</td><td style="text-align:left">Libre</td><td style="text-align:left">Java, HTML, XML, SQL, Javascript, PHP, UML</td></tr><tr><td style="text-align:left">CodeLite</td><td style="text-align:left">Libre</td><td style="text-align:left">C/C++, PHP, Node.js</td></tr><tr><td style="text-align:left">IntelliJ</td><td style="text-align:left">Mixta</td><td style="text-align:left">Java, Groovy, Python, XML/XSL</td></tr><tr><td style="text-align:left">Microsoft Visual Studio</td><td style="text-align:left">Propietario</td><td style="text-align:left">C#, Visual Basic, C++, Python, JavaScript</td></tr><tr><td style="text-align:left">C++ Builder</td><td style="text-align:left">Propietario</td><td style="text-align:left">C++</td></tr><tr><td style="text-align:left">QtCreator</td><td style="text-align:left">Propietario</td><td style="text-align:left">C++ (con framework QT)</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="4--estructura-de-entornos-de-desarrollo">4.- Estructura de entornos de desarrollo<a href="#4--estructura-de-entornos-de-desarrollo" class="hash-link" aria-label="Enlace directo al 4.- Estructura de entornos de desarrollo" title="Enlace directo al 4.- Estructura de entornos de desarrollo">​</a></h3>
+<p>Los <strong>IDEs</strong>, ya sean libres o propietarios, se componen de varios elementos clave que definen sus funciones:</p>
+<table><thead><tr><th style="text-align:left">Componente</th><th style="text-align:left">Funciones principales</th></tr></thead><tbody><tr><td style="text-align:left">Editor de textos</td><td style="text-align:left"><strong>Resaltado y coloreado de la sintaxis</strong>, auto-completado de código, inserción automática de paréntesis/tabulaciones, y ayuda con parámetros de funciones/métodos</td></tr><tr><td style="text-align:left">Compilador/Intérprete</td><td style="text-align:left"><strong>Detección de errores</strong> de sintaxis en tiempo real</td></tr><tr><td style="text-align:left">Depurador</td><td style="text-align:left"><strong>Ejecución del programa paso a paso</strong>, definición de <strong>puntos de ruptura</strong> y <strong>seguimiento de variables</strong>. Permite depuración en servidores remotos</td></tr><tr><td style="text-align:left">Generador automático de herramientas</td><td style="text-align:left">Herramientas para la <strong>visualización, creación y manipulación de componentes visuales</strong> (interfaces gráficas), además de asistentes y utilidades de gestión de código</td></tr><tr><td style="text-align:left">Interfaz gráfica</td><td style="text-align:left">Proporciona una interfaz agradable que puede acceder a <strong>bibliotecas y <em>plugins</em></strong>, permitiendo programar en <strong>varios lenguajes</strong> con el mismo IDE</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="5--instalación-de-entornos-integrados-de-desarrollo">5.- Instalación de entornos integrados de desarrollo<a href="#5--instalación-de-entornos-integrados-de-desarrollo" class="hash-link" aria-label="Enlace directo al 5.- Instalación de entornos integrados de desarrollo" title="Enlace directo al 5.- Instalación de entornos integrados de desarrollo">​</a></h3>
+<p>Este apartado trata sobre la instalación del <strong>JDK</strong>, <strong>Netbeans</strong> y <strong>Eclipse</strong>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="6--configuración-y-personalización-de-entornos-de-desarrollo">6.- Configuración y personalización de entornos de desarrollo<a href="#6--configuración-y-personalización-de-entornos-de-desarrollo" class="hash-link" aria-label="Enlace directo al 6.- Configuración y personalización de entornos de desarrollo" title="Enlace directo al 6.- Configuración y personalización de entornos de desarrollo">​</a></h3>
+<p>La configuración de un entorno de desarrollo se realiza al crear o abrir un proyecto. Los ajustes pueden ser aplicados solo al <strong>proyecto actual</strong> o de forma <strong>global</strong> a todos los proyectos.</p>
+<p>Los parámetros configurables abarcan varios aspectos del proyecto y del editor:</p>
+<ul>
+<li><strong>Organización del proyecto:</strong>
+<ul>
+<li>Definición de las <strong>carpetas</strong> donde se alojarán los archivos fuente y de prueba (para mantener la estructura ordenada).</li>
+<li>Descripción de los proyectos para su mejor localización.</li>
+</ul>
+</li>
+<li><strong>Gestión del código y la compilación:</strong>
+<ul>
+<li>Opciones de <strong>compilación</strong> (ej., compilar al grabar, generar información de depuración).</li>
+<li>Opciones de <strong>generación de documentación</strong>.</li>
+<li>Opciones de <strong>empaquetado</strong> de la aplicación (ej., nombre del archivo <code>.jar</code> y momento del empaquetado).</li>
+<li>Administración de la plataforma del entorno.</li>
+</ul>
+</li>
+<li><strong>Personalización del editor:</strong>
+<ul>
+<li>Opciones de <strong>formato global</strong> del editor (ej., número de espaciados en las sangrías).</li>
+<li>Definición del <strong>color</strong> para errores de sintaxis o etiquetas.</li>
+<li>Configuración del <strong>autocompletado</strong> de código y la inserción automática de código.</li>
+<li>Opciones de <strong>combinación de teclas</strong> (<em>shortcuts</em>).</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="7--gestión-de-módulos">7.- Gestión de módulos<a href="#7--gestión-de-módulos" class="hash-link" aria-label="Enlace directo al 7.- Gestión de módulos" title="Enlace directo al 7.- Gestión de módulos">​</a></h3>
+<p>En entornos de desarrollo como <strong>NetBeans</strong>, se utilizan <strong>módulos</strong> y <strong>plugins</strong> para ampliar las capacidades básicas de la plataforma y facilitar el desarrollo de aplicaciones.</p>
+<ul>
+<li>Un <strong>módulo</strong> es un componente <em>software</em> que contiene clases de Java que interactúan con las API del IDE. Se identifica mediante un <strong>manifest file</strong> (archivo especial que lo identifica como módulo).</li>
+<li>Los módulos se pueden construir y desarrollar de forma <strong>independiente</strong>, lo que facilita su <strong>reutilización</strong> e inserción en otras aplicaciones.</li>
+<li>Los módulos permiten que una aplicación sea <strong>extendida</strong> (añadiendo nuevas funcionalidades) o <strong>construida</strong> a partir de componentes con finalidades concretas.</li>
+<li>Existe una gran cantidad de módulos y plugins disponibles, a menudo clasificados por categorías, en la página oficial del IDE.</li>
+</ul>
+<p>Las tareas asociadas a la gestión de módulos incluyen la instalación, desinstalación, desactivación y actualización de los mismos, todo gestionable desde el propio entorno.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="71--añadir">7.1.- Añadir<a href="#71--añadir" class="hash-link" aria-label="Enlace directo al 7.1.- Añadir" title="Enlace directo al 7.1.- Añadir">​</a></h4>
+<p>Añadir un módulo o <em>plugin</em> dota de <strong>mayor funcionalidad</strong> a los proyectos desarrollados en NetBeans. Existen varias formas de incorporar módulos:</p>
+<ol>
+<li><strong>Módulos por defecto:</strong> usar módulos que NetBeans ya instaló.</li>
+<li><strong>Creación propia:</strong> desarrollar el módulo uno mismo.</li>
+<li><strong>Adición <em>Off-line</em></strong> (Descarga manual):<!-- -->
+<ul>
+<li>El módulo se descarga desde la web oficial de NetBeans en formato <strong><code>.nbm</code></strong>.</li>
+<li>Posteriormente, el <em>plugin</em> se <strong>carga e instala</strong> desde dentro del IDE.</li>
+</ul>
+</li>
+<li><strong>Adición <em>On-line</em></strong> (Instalación desde el IDE):<!-- -->
+<ul>
+<li>Se instalan complementos <strong>sin salir del IDE</strong> ni descargarlos previamente.</li>
+<li>Este método requiere que el <em>plugin</em> <strong>Portal Update Center</strong> esté instalado.</li>
+</ul>
+</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="72--eliminar">7.2.- Eliminar<a href="#72--eliminar" class="hash-link" aria-label="Enlace directo al 7.2.- Eliminar" title="Enlace directo al 7.2.- Eliminar">​</a></h4>
+<p>Eliminar un módulo o <em>plugin</em> se plantea cuando deja de ser útil o el proyecto que lo requería ha finalizado. Es un proceso sencillo que implica encontrar el complemento en la lista de instalados y elegir la acción deseada.</p>
+<p>Al eliminar un módulo, siempre se ofrecen dos opciones:</p>
+<ol>
+<li><strong>Desactivar:</strong> el módulo o <em>plugin</em> <strong>sigue instalado</strong> físicamente en el sistema, pero su estado cambia a <strong>inactivo</strong> (deja de aparecer y funcionar en el entorno).</li>
+<li><strong>Desinstalar:</strong> el módulo o <em>plugin</em> se <strong>elimina físicamente y de forma permanente</strong> del entorno.</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="73--funcionalidades">7.3.- Funcionalidades<a href="#73--funcionalidades" class="hash-link" aria-label="Enlace directo al 7.3.- Funcionalidades" title="Enlace directo al 7.3.- Funcionalidades">​</a></h4>
+<p>Los módulos y <em>plugins</em> se clasifican en varias categorías según el área que mejoran:</p>
+<ul>
+<li><strong>Lenguajes de programación y bibliotecas:</strong> permiten programar con lenguajes que el IDE no soporta inicialmente.</li>
+<li><strong>Construcción de código:</strong> facilitan la labor de programación.</li>
+<li><strong>Edición:</strong> hacen el editor más preciso y cómodo para el programador.</li>
+<li><strong>Refactorización:</strong> permiten realizar cambios menores en el código para aumentar su legibilidad sin alterar su función.</li>
+<li><strong>Depuradores:</strong> hacen más eficiente la depuración de programas.</li>
+<li><strong>Prueba:</strong> incorporan utilidades específicas para el <em>testing</em> del <em>software</em>.</li>
+<li><strong>Bases de datos:</strong> ofrecen nuevas funcionalidades para el mantenimiento de las aplicaciones.</li>
+<li><strong>Aplicaciones web:</strong> integran utilidades específicas para el desarrollo de aplicaciones web.</li>
+<li><strong>Documentación de aplicaciones:</strong> permiten generar la documentación de los proyectos en el formato deseado.</li>
+<li><strong>Interfaz gráfica de usuario (GUI):</strong> mejoran la presentación de diversos aspectos del entorno al usuario.</li>
+<li><strong>Aplicaciones:</strong> añaden nuevas aplicaciones independientes que pueden ser útiles.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="74--herramientas-concretas">7.4.- Herramientas concretas<a href="#74--herramientas-concretas" class="hash-link" aria-label="Enlace directo al 7.4.- Herramientas concretas" title="Enlace directo al 7.4.- Herramientas concretas">​</a></h4>
+<p>NetBeans ofrece una serie de herramientas integradas diseñadas para simplificar el desarrollo de <em>software</em>, especialmente en entornos empresariales y web, cubriendo todas las etapas del ciclo de vida:</p>
+<ul>
+<li><strong>Importador de Proyectos:</strong> permite trabajar con proyectos creados en otros entornos, como <strong>JBuilder</strong>.</li>
+<li><strong>Servidor de Aplicaciones GlassFish:</strong> proporciona una plataforma completa para el desarrollo y despliegue de <strong>aplicaciones empresariales</strong>.</li>
+<li><strong>Soporte Java Enterprise Edition (JEE):</strong> asegura el cumplimiento de estándares y mejora el rendimiento para la creación ágil de aplicaciones empresariales.</li>
+<li><strong>NetBeans Swing GUI Builder:</strong> simplifica la <strong>creación de interfaces gráficas de usuario (GUI)</strong> para aplicaciones cliente, permitiendo el manejo visual sin salir del IDE.</li>
+<li><strong>NetBeans Profiler:</strong> evalúa la <strong>eficiencia y rendimiento</strong> del <em>software</em> de forma inmediata para los usuarios finales.</li>
+<li><strong>Herramientas XML y Servicios Web:</strong> iIncluye el <strong>Editor WSDL</strong> (para Servicios Web basados en XML) y el <strong>Editor XML Schema Editor</strong> (para refinar la estructura de documentos XML).</li>
+<li><strong>Seguridad:</strong> asegura la protección de datos mediante herramientas como <strong>Sun Java System Access Manager</strong>.</li>
+<li><strong>Soporte UML (Beta):</strong> cubre actividades de modelado como clases, comportamiento, interacción y secuencias.</li>
+<li><strong>Soporte Bidireccional:</strong> permite la <strong>sincronización rápida</strong> de modelos de desarrollo con los cambios en el código a medida que se avanza en las etapas del ciclo de vida de la aplicación.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="8--uso-básico-de-entornos-de-desarrollo">8.- Uso básico de entornos de desarrollo<a href="#8--uso-básico-de-entornos-de-desarrollo" class="hash-link" aria-label="Enlace directo al 8.- Uso básico de entornos de desarrollo" title="Enlace directo al 8.- Uso básico de entornos de desarrollo">​</a></h3>
+<p>La interfaz principal de un IDE como NetBeans se divide en secciones clave para la gestión y la codificación de proyectos:</p>
+<ul>
+<li>
+<p><strong>Ventana izquierda (Ventana de proyectos):</strong></p>
+<ul>
+<li>Muestra la relación jerárquica de <strong>proyectos, archivos, módulos o clases</strong> abiertos durante la sesión.</li>
+<li>Cada proyecto contiene sus archivos fuente y bibliotecas.</li>
+<li>El archivo principal de ejecución en Java suele ser `Main.java* (o la clase que contiene el método principal), siendo recomendable mantener este nombre para facilitar la identificación del punto de inicio del programa.</li>
+</ul>
+</li>
+<li>
+<p><strong>Ventana derecha (Espacio de escritura/Editor):</strong></p>
+<ul>
+<li>Es el área principal donde se <strong>escribe el código fuente</strong>.</li>
+<li>Al crear un nuevo proyecto, muestra automáticamente el esqueleto básico del programa (por ejemplo, la estructura de la clase principal en Java).</li>
+</ul>
+</li>
+<li>
+<p><strong>Barra de Herramientas:</strong></p>
+<ul>
+<li>Permite acceder rápidamente a todas las funciones y opciones principales del IDE (ej., guardar, compilar, ejecutar).</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="81--edición-de-programas">8.1.- Edición de programas<a href="#81--edición-de-programas" class="hash-link" aria-label="Enlace directo al 8.1.- Edición de programas" title="Enlace directo al 8.1.- Edición de programas">​</a></h4>
+<p>La <strong>ventana de codificación</strong> del IDE es donde se escriben las instrucciones del programa. Mientras se edita el código, NetBeans proporciona varias ayudas clave:</p>
+<ul>
+<li><strong>Autocompletado de código:</strong> sugiere comandos, métodos y variables a medida que se escribe.</li>
+<li><strong>Coloración de comandos:</strong> aplica diferentes colores a las palabras reservadas, comentarios y elementos de la sintaxis para facilitar la lectura.</li>
+<li><strong>Detección de errores en tiempo real:</strong> muestra un <strong>subrayado en rojo</strong> (y un icono visual a la izquierda) cuando detecta un error de sintaxis o de compilación, ofreciendo opciones de depuración y corrección inmediata.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="82--generación-de-ejecutables">8.2.- Generación de ejecutables<a href="#82--generación-de-ejecutables" class="hash-link" aria-label="Enlace directo al 8.2.- Generación de ejecutables" title="Enlace directo al 8.2.- Generación de ejecutables">​</a></h4>
+<p>Una vez que el código fuente está escrito en la ventana de edición y <strong>libre de errores de sintaxis</strong>, el proceso para obtener y probar el programa ejecutable sigue estos pasos secuenciales:</p>
+<ol>
+<li><strong>Compilación</strong></li>
+<li><strong>Depuración</strong></li>
+<li><strong>Ejecución</strong></li>
+</ol>
+<p>Para ejecutar el programa directamente desde NetBeans, se utiliza el atajo <code>Shift + F6</code>. Esto compila y ejecuta el archivo de código que hay abierto.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="9--actualización-y-mantenimiento-de-entornos-de-desarrollo">9.- Actualización y mantenimiento de entornos de desarrollo<a href="#9--actualización-y-mantenimiento-de-entornos-de-desarrollo" class="hash-link" aria-label="Enlace directo al 9.- Actualización y mantenimiento de entornos de desarrollo" title="Enlace directo al 9.- Actualización y mantenimiento de entornos de desarrollo">​</a></h3>
+<p>El <strong>mantenimiento</strong> del entorno de desarrollo es crucial y consiste en mantener todos sus componentes periódicamente <strong>actualizados</strong>.</p>
+<p>Las tareas de mantenimiento y actualización se realizan generalmente de forma <strong>online</strong>. En NetBeans, el complemento llamado <strong>Auto Update Services</strong> es el encargado de gestionar y aplicar las continuas revisiones y actualizaciones de todos los <em>plugins</em>. Este mismo complemento debe estar instalado para poder realizar la adición de nuevos módulos de forma <em>on-line</em> (sin descarga previa).</p>
+<p>También es de <strong>vital importancia</strong> realizar <strong>copias de seguridad</strong> de las bases de datos asociadas a los proyectos de forma periódica. Esto asegura que, en caso de un fallo o proceso defectuoso, los proyectos puedan ser <strong>restaurados</strong> a un estado anterior estable y que sean compatibles con futuras versiones del entorno.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="anexo-i--crear-compilar-y-ejecutar-un-programa-sin-usar-ide">Anexo I.- Crear, compilar y ejecutar un programa (sin usar IDE)<a href="#anexo-i--crear-compilar-y-ejecutar-un-programa-sin-usar-ide" class="hash-link" aria-label="Enlace directo al Anexo I.- Crear, compilar y ejecutar un programa (sin usar IDE)" title="Enlace directo al Anexo I.- Crear, compilar y ejecutar un programa (sin usar IDE)">​</a></h3>
+<p>Este proceso demuestra cómo ejecutar un programa Java utilizando solo un editor de texto y el <strong>JDK</strong>, prescindiendo de un IDE. Para ello, se asume que las variables de entorno <strong><code>JAVA_HOME</code></strong> y <strong><code>PATH</code></strong> están configuradas correctamente.</p>
+<p><strong>1. Crear el código fuente</strong></p>
+<ul>
+<li>Utiliza un editor de texto (como el Bloc de Notas) para crear un archivo llamado <strong><code>Hola.java</code></strong>.</li>
+<li>El nombre del archivo (<code>Hola.java</code>) <strong>debe coincidir</strong> con el nombre de la clase pública (<code>public class Hola</code>).</li>
+<li>Guarda el archivo en una ubicación conocida.</li>
+</ul>
+<div class="language-java codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-java codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">public class Hola {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    public static void main(String[ ] args) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        System.out.println(&quot;Hola&quot;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<p><strong>2. Abrir el terminal y situarse en la ruta</strong></p>
+<ul>
+<li>Abre la línea de comandos.</li>
+<li>Si no estás en la ruta, usa el comando <code>cd</code> para navegar al directorio del archivo.</li>
+</ul>
+<p><strong>3. Compilar el código fuente</strong></p>
+<ul>
+<li>Ejecuta el compilador de Java (<strong><code>javac</code></strong>) sobre el archivo fuente.<!-- -->
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">javac Hola.java</span><br></span></code></pre></div></div>
+</li>
+<li><strong>Resultado:</strong> el compilador <strong><code>javac</code></strong> traduce el código fuente a <em>bytecode</em> y genera un nuevo archivo llamado <strong><code>Hola.class</code></strong>.</li>
+</ul>
+<p><strong>4. Ejecutar el programa</strong></p>
+<ul>
+<li>Ejecuta el intérprete de Java (<strong><code>java</code></strong>) sobre el nombre de la clase compilada (sin la extensión <code>.class</code>).<!-- -->
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">java Hola</span><br></span></code></pre></div></div>
+</li>
+<li><strong>Resultado:</strong> el intérprete <strong><code>java</code></strong> traduce y ejecuta el <em>bytecode</em> línea a línea, mostrando el mensaje &quot;Hola&quot; en la consola.</li>
+</ul>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>Diferencia clave</div><div class="admonitionContent_BuS1"><ul>
+<li><code>javac</code> es el <strong>compilador</strong> (genera el archivo <code>.class</code>).</li>
+<li><code>java</code> es el <strong>intérprete</strong> (ejecuta el archivo <code>.class</code> a código máquina y no genera ningún archivo nuevo).</li>
+</ul></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="anexo-ii--crear-compilar-y-ejecutar-un-programa-con-varias-clases-sin-usar-ide">Anexo II.- Crear, compilar y ejecutar un programa con varias clases (sin usar IDE)<a href="#anexo-ii--crear-compilar-y-ejecutar-un-programa-con-varias-clases-sin-usar-ide" class="hash-link" aria-label="Enlace directo al Anexo II.- Crear, compilar y ejecutar un programa con varias clases (sin usar IDE)" title="Enlace directo al Anexo II.- Crear, compilar y ejecutar un programa con varias clases (sin usar IDE)">​</a></h3>
+<p>Este ejercicio demuestra la implementación de un problema utilizando múltiples <strong>clases de Java</strong> (simulando tres actores/objetos: Profesor, Estudiante, Ordenador) y la gestión de la compilación e interpretación sin un IDE.</p>
+<p>La solución se estructura en un <strong>proyecto</strong> (<code>semaforo</code>) con <strong>paquetes</strong> (<code>principal</code> y <code>clases</code>), donde cada paquete contiene los ficheros de código fuente (<code>.java</code>).</p>
+<p>El diseño utiliza conceptos de Programación Orientada a Objetos (POO), especialmente la <strong>Herencia</strong> y la <strong>Comunicación entre objetos</strong>:</p>
+<table><thead><tr><th style="text-align:left">Clase</th><th style="text-align:left">Paquete</th><th style="text-align:left">Conceptos clave</th><th style="text-align:left">Función en el Programa</th></tr></thead><tbody><tr><td style="text-align:left"><code>ClaseColor</code></td><td style="text-align:left"><code>principal</code></td><td style="text-align:left">Contiene la función <strong><code>main</code></strong> (inicio del programa). Utiliza <code>import</code> para acceder a la clase <code>Profesor</code></td><td style="text-align:left">Crea el objeto <code>Profesor</code> y recibe la respuesta del sistema</td></tr><tr><td style="text-align:left"><code>Ordenador</code></td><td style="text-align:left"><code>clases</code></td><td style="text-align:left">Utiliza el método <strong><code>Random</code></strong> de Java</td><td style="text-align:left">Devuelve aleatoriamente el color del semáforo (<code>&quot;rojo&quot;</code>, <code>&quot;amarillo&quot;</code>, <code>&quot;verde&quot;</code>)</td></tr><tr><td style="text-align:left"><code>Persona</code></td><td style="text-align:left"><code>clases</code></td><td style="text-align:left"><strong>Clase Padre</strong>. No se instancia directamente</td><td style="text-align:left">Define variables miembro que son <strong>heredadas</strong> por <code>Estudiante</code> y <code>Profesor</code> (ej., <code>i_Edad</code>, <code>s_Nombre</code>)</td></tr><tr><td style="text-align:left"><code>Estudiante</code></td><td style="text-align:left"><code>clases</code></td><td style="text-align:left"><strong>Hereda</strong> de <code>Persona</code> (cláusula <code>extends</code>)</td><td style="text-align:left">Sobrescribe el constructor y define el método <code>preguntacolor</code>, el cual crea un objeto <code>Ordenador</code> para obtener el color</td></tr><tr><td style="text-align:left"><code>Profesor</code></td><td style="text-align:left"><code>clases</code></td><td style="text-align:left"><strong>Hereda</strong> de <code>Persona</code>.</td><td style="text-align:left">Define el método <code>preguntacolor</code>, que a su vez <strong>llama</strong> al método <code>preguntacolor</code> de la clase <code>Estudiante</code> para obtener la respuesta</td></tr></tbody></table>
+<p>Los ficheros de código (<code>.java</code>) deben estar organizados en directorios que coincidan con sus declaraciones de <strong><code>package</code></strong>.</p>
+<p><strong>1. Compilación:</strong></p>
+<ul>
+<li>Se inicia desde el directorio raíz del proyecto (ej., <code>/home/debian/Escritorio/semaforo</code>).</li>
+<li>Se utiliza el compilador <code>javac</code>, indicando la ruta relativa del fichero principal (<code>ClaseColor.java</code>):<!-- -->
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">javac principal/ClaseColor.java</span><br></span></code></pre></div></div>
+</li>
+<li><strong>Nota:</strong> al ser clases dependientes entre sí, compilar el fichero principal puede compilar automáticamente los demás. Si no es así, se deben compilar individualmente en orden de dependencia.</li>
+<li><strong>Resultado:</strong> se generan los cinco ficheros <code>bytecode</code> (<code>.class</code>).</li>
+</ul>
+<p><strong>2. Ejecución:</strong></p>
+<ul>
+<li>Se utiliza el intérprete <strong><code>java</code></strong> sobre la ruta relativa de la clase que contiene <code>main</code>:<!-- -->
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">java principal/ClaseColor</span><br></span></code></pre></div></div>
+</li>
+</ul>
+<hr>
+<p>Para distribuir el proyecto como un único archivo comprimido (<code>.jar</code>), se usa el programa <code>jar</code> incluido en el JDK.</p>
+<ol>
+<li><strong>Crear <code>MANIFEST.MF</code>:</strong> se crea un directorio <code>META-INF</code> y dentro un fichero <code>MANIFEST.MF</code> que indica la clase de inicio (la que contiene <code>main</code>):<!-- -->
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Main-Class: principal.ClaseColor</span><br></span></code></pre></div></div>
+<em>(Debe incluirse un fin de línea después de la última línea de texto).</em></li>
+<li><strong>Generar el archivo <code>.jar</code>:</strong> desde la consola, se ejecuta el comando <code>jar</code> para empaquetar todos los recursos:<!-- -->
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">jar cmf META-INF/MANIFEST.MF semaforo.jar clases/*.class principal/*.class</span><br></span></code></pre></div></div>
+</li>
+<li><strong>Ejecutar el <code>.jar</code>:</strong>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">java -jar semaforo.jar</span><br></span></code></pre></div></div>
+</li>
+</ol>
+<p>El programa <code>jar</code> también permite ver el contenido (<code>jar tf semaforo.jar</code>) y descomprimirlo (<code>jar xf semaforo.jar</code>).</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="ud3--diseño-y-realización-de-pruebas"><strong>UD3.- Diseño y realización de pruebas</strong><a href="#ud3--diseño-y-realización-de-pruebas" class="hash-link" aria-label="Enlace directo al ud3--diseño-y-realización-de-pruebas" title="Enlace directo al ud3--diseño-y-realización-de-pruebas">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="Esquema Unidad 3 Entornos de Desarrollo" src="/apuntes-daw/assets/images/entornos-de-desarrollo-unidad-3-716fa1d5ea0b520030ecf109c07dfe45.jpg" width="4649" height="1236" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="1--planificación-de-las-pruebas">1.- Planificación de las pruebas<a href="#1--planificación-de-las-pruebas" class="hash-link" aria-label="Enlace directo al 1.- Planificación de las pruebas" title="Enlace directo al 1.- Planificación de las pruebas">​</a></h3>
+<p>Durante el desarrollo de <em>software</em> es inevitable incurrir en errores (de especificación, diseño o codificación). Por ello, es necesario un conjunto de pruebas para asegurar que el producto es <strong>correcto</strong> y <strong>cumple con los requisitos</strong> del usuario.</p>
+<p>Las pruebas tienen dos objetivos clave:</p>
+<ul>
+<li><strong>Verificación:</strong> comprueba que el sistema se está <strong>construyendo correctamente</strong>; es decir, que cumple con las <strong>condiciones internas</strong> impuestas (ej. el código sigue el diseño).</li>
+<li><strong>Validación:</strong> evalúa si el sistema <strong>satisface los requisitos</strong> especificados por el usuario (ej., el producto final hace lo que el cliente pidió).</li>
+</ul>
+<p><strong>Estrategias y proceso de pruebas</strong></p>
+<img src="/img/entornos-de-desarrollo-modelo-espiral.jpg" alt="Representación del modelo en espiral" width="50%">
+<p>Siguiendo una metodología como el <strong>modelo en espiral</strong> , las pruebas se planifican y ejecutan de manera progresiva y secuencial:</p>
+<ol>
+<li><strong>Pruebas unitarias:</strong> comienzan con la validación de cada <strong>porción individual</strong> de código.</li>
+<li><strong>Pruebas de integración:</strong> ensamblan todas las partes del código para comprobar que su interconexión y funcionamiento conjunto cumplen con lo establecido en la fase de <strong>diseño</strong>.</li>
+<li><strong>Prueba de validación:</strong> verifica que el sistema construido cumple con las especificaciones del <strong>análisis de requisitos</strong> de <em>software</em>.</li>
+<li><strong>Prueba de sistema:</strong> fase final, que verifica el <strong>funcionamiento total</strong> del <em>software</em> y su interacción con otros elementos del sistema.</li>
+</ol>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>Recomendación</div><div class="admonitionContent_BuS1"><p>Se recomienda que el <strong>programador evite probar sus propios programas</strong>, ya que la misma persona podría pasar por alto aspectos no considerados durante la codificación.</p></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="2--tipos-de-prueba">2.- Tipos de prueba<a href="#2--tipos-de-prueba" class="hash-link" aria-label="Enlace directo al 2.- Tipos de prueba" title="Enlace directo al 2.- Tipos de prueba">​</a></h3>
+<p>En la Ingeniería del Software, los enfoques fundamentales para realizar pruebas se centran en el conocimiento que se tiene de la estructura interna del código:</p>
+<ul>
+<li>
+<p><strong>Prueba de la Caja Negra (<em>Black Box Testing</em>):</strong> se prueba la aplicación usando únicamente su <strong>interfaz externa</strong>, sin conocer o preocuparse por su implementación interna. El foco está en verificar que los <strong>resultados de la ejecución son los esperados</strong> para una entrada dada.</p>
+</li>
+<li>
+<p><strong>Prueba de la Caja Blanca (<em>White Box Testing</em>):</strong> se prueba la aplicación <strong>desde dentro</strong>, analizando y probando directamente el <strong>código fuente</strong> para localizar <strong>estructuras incorrectas</strong> o <strong>ineficientes</strong> en la implementación. Requiere un conocimiento específico de la lógica interna.</p>
+</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="21--funcionales-pruebas-de-la-caja-negra">2.1.- Funcionales (pruebas de la caja negra)<a href="#21--funcionales-pruebas-de-la-caja-negra" class="hash-link" aria-label="Enlace directo al 2.1.- Funcionales (pruebas de la caja negra)" title="Enlace directo al 2.1.- Funcionales (pruebas de la caja negra)">​</a></h4>
+<p>Las <strong>pruebas funcionales</strong> siguen el enfoque de la Caja Negra. Tienen como objetivo verificar que la aplicación o componente realiza las <strong>funciones</strong> que se esperan de él, basándose exclusivamente en sus entradas y salidas, sin considerar la estructura interna. Se enfocan en responder: &quot;¿Puede el usuario hacer esto?&quot; o &quot;¿Funciona correctamente esta utilidad?&quot;</p>
+<p>Dentro de las pruebas funcionales, se pueden destacar tres tipos de estrategias para la selección de casos de prueba:</p>
+<ul>
+<li><strong>Particiones equivalentes:</strong> consiste en reducir el número de casos de prueba creando <strong>clases de equivalencia</strong>. Se prueba solo un valor representativo de cada clase, asumiendo que el resultado es extrapolable a todos los demás valores de esa clase.</li>
+<li><strong>Análisis de valores límite:</strong> se eligen como entradas aquellos valores que se encuentran justo en los <strong>límites de las clases de equivalencia</strong>.</li>
+<li><strong>Pruebas aleatorias:</strong> consiste en generar un <strong>gran volumen de entradas aleatorias</strong> para alimentar la aplicación (usando generadores de prueba). Es más adecuado para aplicaciones no interactivas.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="22--pruebas-estructurales-pruebas-de-la-caja-blanca">2.2.- Pruebas estructurales (pruebas de la caja blanca)<a href="#22--pruebas-estructurales-pruebas-de-la-caja-blanca" class="hash-link" aria-label="Enlace directo al 2.2.- Pruebas estructurales (pruebas de la caja blanca)" title="Enlace directo al 2.2.- Pruebas estructurales (pruebas de la caja blanca)">​</a></h4>
+<p>Las <strong>pruebas estructurales</strong> son el conjunto de pruebas de la <strong>Caja Blanca</strong> (<em>White Box Testing</em>). Se centran en verificar la <strong>estructura interna</strong> de los componentes de la aplicación, analizando <strong>cómo</strong> se ejecuta el programa, en lugar de solo el resultado (como hacen las pruebas funcionales).</p>
+<p>Su función principal es garantizar que:</p>
+<ul>
+<li>Se ejecutan <strong>todas las instrucciones</strong> del programa.</li>
+<li><strong>No existe código no usado</strong> (<em>código muerto</em>).</li>
+<li>Se recorren los <strong>caminos lógicos</strong> del programa.</li>
+</ul>
+<p><strong>Criterios de cobertura lógica</strong></p>
+<p>El cumplimiento de estos criterios determina el nivel de seguridad en la detección de errores y el nivel de <strong>cubrimiento</strong> de la prueba:</p>
+<table><thead><tr><th style="text-align:left">Criterio de cobertura</th><th style="text-align:left">Ejecución mínima requerida</th></tr></thead><tbody><tr><td style="text-align:left">Cobertura de sentencias</td><td style="text-align:left">Cada <strong>instrucción</strong> del programa debe ser ejecutada, al menos, una vez</td></tr><tr><td style="text-align:left">Cobertura de decisiones</td><td style="text-align:left">Cada <strong>prueba lógica</strong> (ej. la condición de un <code>if</code>) debe evaluarse al menos una vez a <strong>cierto</strong> y otra a <strong>falso</strong></td></tr><tr><td style="text-align:left">Cobertura de condiciones</td><td style="text-align:left">Cada <strong>elemento individual</strong> dentro de una condición compuesta (ej. <code>x&lt;0</code> o <code>y&gt;0</code>) debe evaluarse a <strong>cierto</strong> y a <strong>falso</strong> al menos una vez</td></tr><tr><td style="text-align:left">Cobertura de condiciones y decisiones</td><td style="text-align:left">Se cumplen <strong>simultáneamente</strong> los dos criterios anteriores</td></tr><tr><td style="text-align:left">Cobertura de caminos</td><td style="text-align:left">Se establece que se debe ejecutar al menos una vez cada <strong>secuencia encadenada de sentencias</strong> (<em>camino</em>) desde el inicio hasta el fin del programa</td></tr></tbody></table>
+<p><strong>Cobertura de caminos de prueba</strong></p>
+<p>Debido a que el número de caminos puede ser enorme, este criterio se reduce al <strong>camino prueba</strong>. La variante más rigurosa recomienda probar cada <strong>bucle</strong> de control tres veces:</p>
+<ol>
+<li>Sin entrar en su interior (0 veces).</li>
+<li>Ejecutándolo una vez.</li>
+<li>Ejecutándolo dos veces.</li>
+</ol>
+<blockquote>
+<p><strong>CUBRIMIENTO:</strong> tarea realizada por el programador para verificar que todas las funciones, sentencias, decisiones y condiciones son susceptibles de ser ejecutadas y recorridas con éxito.</p>
+</blockquote>
+<p>Existen herramientas (ej. <strong>Clover para Java</strong>) que automatizan y facilitan estas pruebas de cubrimiento.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="23--pruebas-de-regresión">2.3.- Pruebas de regresión<a href="#23--pruebas-de-regresión" class="hash-link" aria-label="Enlace directo al 2.3.- Pruebas de regresión" title="Enlace directo al 2.3.- Pruebas de regresión">​</a></h4>
+<p>Las <strong>pruebas de regresión</strong> son la repetición de pruebas realizadas previamente para <strong>verificar</strong> que los cambios (correcciones de errores o nuevas mejoras) no han introducido <strong>efectos no deseados</strong> o <strong>errores adicionales</strong> (<em>errores colaterales</em>) en componentes que no fueron modificados.</p>
+<ul>
+<li><strong>Momento de ejecución:</strong> deben llevarse a cabo <strong>cada vez</strong> que se realiza un cambio en el sistema.</li>
+<li><strong>Objetivo:</strong> asegurar que el sistema sigue funcionando correctamente y que la modificación no ha comprometido la integridad de otros componentes.</li>
+<li><strong>Composición del Conjunto de Pruebas de Regresión:</strong>
+<ol>
+<li>Una <strong>muestra representativa</strong> que ejercite todas las funciones principales del <em>software</em>.</li>
+<li>Pruebas que se centran en las funciones que tienen mayor <strong>probabilidad de verse afectadas</strong> por el cambio.</li>
+<li>Pruebas que se centran directamente en los <strong>componentes modificados</strong>.</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li><strong>Eficiencia:</strong> para evitar que el número de pruebas crezca excesivamente, el diseño debe ser <strong>selectivo</strong>, incluyendo solo aquellas pruebas que cubran una o más clases de errores en las funciones principales del programa.</li>
+<li><strong>Métodos:</strong> se pueden realizar <strong>manualmente</strong> (seleccionando un subconjunto de casos) o utilizando <strong>herramientas automáticas</strong>.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="3--procedimientos-y-casos-de-prueba">3.- Procedimientos y casos de prueba<a href="#3--procedimientos-y-casos-de-prueba" class="hash-link" aria-label="Enlace directo al 3.- Procedimientos y casos de prueba" title="Enlace directo al 3.- Procedimientos y casos de prueba">​</a></h3>
+<p>Una <strong>prueba</strong> es la ejecución de un programa bajo condiciones específicas para encontrar errores. Un <strong>caso de prueba</strong> es un artefacto documentado que consta de tres elementos definidos por el IEEE:</p>
+<ol>
+<li>Un conjunto de entradas</li>
+<li>Condiciones de ejecución</li>
+<li>Resultados esperados</li>
+</ol>
+<p>Debido a la complejidad de las aplicaciones, es imposible probar todas las combinaciones posibles. Por lo tanto, el diseño de casos de prueba debe buscar un <strong>compromiso</strong> entre los <strong>recursos consumidos</strong> y la <strong>probabilidad de detectar errores</strong>.</p>
+<p>Existen tres procedimientos principales para el diseño de casos de prueba:</p>
+<ul>
+<li><strong>Enfoque Funcional o de Caja Negra:</strong>
+<ul>
+<li>Se centra en <strong>funciones, entradas y salidas</strong>.</li>
+<li>Verifica que la salida es correcta sin verificar el proceso interno.</li>
+<li>Se utilizan técnicas como el <strong>análisis de valores límite</strong> y <strong>clases de equivalencia</strong>.</li>
+</ul>
+</li>
+<li><strong>Enfoque Estructural o de Caja Blanca:</strong>
+<ul>
+<li>Se centra en la <strong>implementación interna</strong> del programa.</li>
+<li>El objetivo es probar todos los <strong>caminos de ejecución</strong> posibles dentro del código.</li>
+</ul>
+</li>
+<li><strong>Enfoque Aleatorio:</strong>
+<ul>
+<li>Se centra en modelos estadísticos para elaborar casos de prueba.</li>
+<li>Se utilizan <strong>generadores automáticos</strong> de casos de prueba para alimentar la aplicación con entradas al azar.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="4--herramientas-de-depuración">4.- Herramientas de depuración<a href="#4--herramientas-de-depuración" class="hash-link" aria-label="Enlace directo al 4.- Herramientas de depuración" title="Enlace directo al 4.- Herramientas de depuración">​</a></h3>
+<p>Cada IDE suministra herramientas de depuración esenciales para verificar el código y realizar pruebas estructurales y funcionales.</p>
+<p>Durante el desarrollo de <em>software</em>, se distinguen dos tipos de errores:</p>
+<ol>
+<li><strong>Errores de compilación (errores de codificación):</strong> son fallos <strong>sintácticos</strong>. Estos errores <strong>impiden que el programa se compile</strong> y el IDE proporciona información inmediata para su corrección.</li>
+<li><strong>Errores lógicos (Bugs):</strong> no impiden la compilación, pero causan que el programa devuelva <strong>resultados erróneos</strong>, termine antes de tiempo, o no termine nunca.</li>
+</ol>
+<p>El <strong>depurador</strong> es la herramienta del IDE utilizada para supervisar la ejecución de programas compilados y localizar y eliminar estos <strong>errores lógicos</strong>. Permite suspender la ejecución, examinar y establecer valores de variables, y comprobar resultados de métodos o comparaciones.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="41--puntos-de-ruptura">4.1.- Puntos de ruptura<a href="#41--puntos-de-ruptura" class="hash-link" aria-label="Enlace directo al 4.1.- Puntos de ruptura" title="Enlace directo al 4.1.- Puntos de ruptura">​</a></h4>
+<p>Los <strong>puntos de ruptura (<em>breakpoints</em>)</strong> son marcadores que se establecen en cualquier <strong>línea de código ejecutable</strong> para detener temporalmente la ejecución del programa:</p>
+<ul>
+<li>Permiten al programador inspeccionar una parte específica del código sin necesidad de ejecutar el programa completo. Una vez que se alcanza el punto de ruptura, el programa se suspende.</li>
+<li>El programador puede <strong>examinar las variables</strong> para verificar sus valores y confirmar que son correctos, o iniciar una <strong>ejecución paso a paso</strong> para seguir el camino lógico que toma el programa a partir de ese punto.</li>
+<li>Se pueden insertar varios puntos de ruptura en un programa y se eliminan con la misma facilidad con la que se insertan.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="42--tipos-de-ejecución">4.2.- Tipos de ejecución<a href="#42--tipos-de-ejecución" class="hash-link" aria-label="Enlace directo al 4.2.- Tipos de ejecución" title="Enlace directo al 4.2.- Tipos de ejecución">​</a></h4>
+<p>El depurador de un IDE permite ejecutar un programa de diversas maneras para simplificar la detección de errores lógicos:</p>
+<ul>
+<li><strong>Ejecución paso a paso (por instrucción):</strong> ejecuta el programa <strong>línea por línea</strong> para verificar el flujo y corregir errores lógicos.</li>
+<li><strong>Ejecución paso a paso (por procedimiento):</strong> permite saltarse la ejecución interna de un método o función, ejecutándolo por completo y devolviendo solo el <strong>resultado</strong>. Es útil cuando se sabe que el procedimiento ya funciona correctamente y solo interesa el valor que devuelve.</li>
+<li><strong>Ejecución hasta una instrucción:</strong> el programa se ejecuta normalmente hasta que el cursor lo detiene en una línea específica, a partir de la cual se puede iniciar la depuración paso a paso.</li>
+<li><strong>Ejecución hasta el final:</strong> ejecuta el programa de forma completa sin detenerse en instrucciones intermedias.</li>
+</ul>
+<p>Estos modos se ajustan a las necesidades del momento, permitiendo concentrar el esfuerzo de inspección solo en las partes del código que se sospecha que contienen errores.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="43--examinadores-de-variables">4.3.- Examinadores de variables<a href="#43--examinadores-de-variables" class="hash-link" aria-label="Enlace directo al 4.3.- Examinadores de variables" title="Enlace directo al 4.3.- Examinadores de variables">​</a></h4>
+<p>Los <strong>examinadores de variables</strong> son herramientas fundamentales en el proceso de depuración. Su función es permitir al programador <strong>supervisar los valores</strong> que adquieren las variables y sus tipos a medida que el programa avanza instrucción por instrucción.</p>
+<ul>
+<li><strong>Utilidad:</strong> al seguir la ejecución paso a paso, el programador puede comprobar si las variables toman los valores esperados. Si el programa no devuelve el resultado correcto, el examinador ayuda a <strong>localizar la instrucción incorrecta</strong> que causó el desvío.</li>
+<li><strong>Implementación:</strong> NetBeans utiliza un panel llamado <strong>Ventana de Inspección</strong>, donde se pueden agregar variables de interés para observar cómo cambian sus valores durante la ejecución del código.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="5--validaciones">5.- Validaciones<a href="#5--validaciones" class="hash-link" aria-label="Enlace directo al 5.- Validaciones" title="Enlace directo al 5.- Validaciones">​</a></h3>
+<p>La <strong>validación</strong> es la etapa del proceso de prueba donde interviene de manera decisiva el <strong>cliente</strong>. Su objetivo es determinar si la aplicación desarrollada <strong>satisface los requisitos</strong> establecidos durante la fase de análisis. En esencia, se busca descubrir errores desde la <strong>perspectiva del cliente y de los requisitos funcionales</strong>.</p>
+<p>La validación se consigue mediante una serie de <strong>pruebas de caja negra</strong> diseñadas para demostrar la conformidad con los requisitos.</p>
+<ul>
+<li><strong>Plan de Prueba:</strong> traza y define la <strong>clase general de pruebas</strong> que se llevarán a cabo.</li>
+<li><strong>Procedimiento de Prueba:</strong> define los <strong>casos de prueba específicos</strong> que intentarán descubrir errores de acuerdo con los requisitos.</li>
+</ul>
+<p>Tanto el plan como el procedimiento están diseñados para asegurar que se cumplen todos los <strong>requisitos funcionales</strong>, se alcanzan los <strong>requisitos de rendimiento</strong>, la <strong>documentación es correcta</strong> e inteligible, y se satisfacen otros requisitos como la portabilidad, compatibilidad, recuperación de errores y facilidad de mantenimiento.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="6--normas-de-calidad">6.- Normas de calidad<a href="#6--normas-de-calidad" class="hash-link" aria-label="Enlace directo al 6.- Normas de calidad" title="Enlace directo al 6.- Normas de calidad">​</a></h3>
+<p>Los estándares de calidad se utilizan para formalizar y guiar la fase de prueba de <em>software</em>. Anteriormente, existía una dispersión de normas que no cubrían todos los aspectos del proceso de prueba.</p>
+<p>Antes de la norma unificadora, los estándares clave utilizados eran:</p>
+<ul>
+<li><strong>Estándares BSI:</strong>
+<ul>
+<li><strong>BS 7925-1:</strong> define el <strong>vocabulario</strong> de las pruebas de <em>software</em>.</li>
+<li><strong>BS 7925-2:</strong> regula las pruebas de los componentes de <em>software</em> (junto con IEEE 1008).</li>
+</ul>
+</li>
+<li><strong>Estándares IEEE:</strong>
+<ul>
+<li><strong>IEEE 829:</strong> define la <strong>documentación</strong> de la prueba de <em>software</em>.</li>
+<li><strong>IEEE 1008:</strong> regula las <strong>pruebas de unidad</strong> (<em>unit testing</em>).</li>
+</ul>
+</li>
+<li>Otros estándares incluyen Metodología Métrica v3, ISO/IEC 12207 y 15289.</li>
+</ul>
+<p>Esta falta de cobertura total en la organización, gestión y pruebas no funcionales motivó el desarrollo de un estándar unificado.</p>
+<p><strong>Norma ISO/IEC 29119 (Unificación)</strong></p>
+<p>La norma <strong>ISO/IEC 29119</strong> fue creada para <strong>unificar</strong> todos los estándares de prueba, proporcionando una estructura completa que cubre <strong>todo el ciclo de vida</strong> de las pruebas (<em>testing</em>) para cualquier proyecto de desarrollo o mantenimiento de <em>software</em>.</p>
+<p>Esta norma abarca desde estrategias organizativas y políticas de prueba hasta la ejecución e informe final.</p>
+<p><strong>Estructura de la norma ISO/IEC 29119</strong></p>
+<p>La norma se compone de <strong>cuatro partes</strong> principales:</p>
+<table><thead><tr><th style="text-align:left">Parte</th><th style="text-align:left">Contenido</th><th style="text-align:left">Estándares relacionados</th></tr></thead><tbody><tr><td style="text-align:left">1</td><td style="text-align:left"><strong>Conceptos y vocabulario</strong>. Introduce conceptos clave, pruebas basadas en riesgo, tipos de prueba (unidad, integración, validación), ciclos de vida, roles y métricas</td><td style="text-align:left">BS 7925-1</td></tr><tr><td style="text-align:left">2</td><td style="text-align:left"><strong>Procesos de prueba</strong>. Define la política de la organización, la gestión del proyecto de prueba y los procesos de prueba estática y dinámica</td><td style="text-align:left">BS 7925-2, IEEE 1008</td></tr><tr><td style="text-align:left">3</td><td style="text-align:left"><strong>Documentación</strong>. Establece el contenido y las plantillas requeridas para la documentación de las pruebas</td><td style="text-align:left">IEEE 829</td></tr><tr><td style="text-align:left">4</td><td style="text-align:left"><strong>Técnicas de prueba</strong>. Describe y ejemplifica las técnicas de prueba: <strong>estáticas</strong> (revisiones, inspecciones) y <strong>dinámicas</strong> (caja negra, caja blanca, y técnicas de pruebas no funcionales como rendimiento y usabilidad)</td><td style="text-align:left">BS 7925-2</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="7--pruebas-unitarias">7.- Pruebas unitarias<a href="#7--pruebas-unitarias" class="hash-link" aria-label="Enlace directo al 7.- Pruebas unitarias" title="Enlace directo al 7.- Pruebas unitarias">​</a></h3>
+<p>Las <strong>pruebas unitarias</strong> tienen como objetivo principal verificar el correcto funcionamiento de la <strong>unidad</strong> (la parte más pequeña y aislada de la aplicación que se puede probar), que puede ser una <strong>función</strong>, <strong>procedimiento</strong> o <strong>método</strong>. El fin es asegurar que cada módulo funciona correctamente por <strong>separado</strong>, antes de la integración.</p>
+<table><thead><tr><th style="text-align:left">Categoría</th><th style="text-align:left">Requisitos</th><th style="text-align:left">Ventajas</th></tr></thead><tbody><tr><td style="text-align:left">Diseño</td><td style="text-align:left">Automatizables</td><td style="text-align:left">Fomentan el cambio</td></tr><tr><td style="text-align:left">Ejecución</td><td style="text-align:left">Repetibles o Reutilizables</td><td style="text-align:left">Simplifican la integración</td></tr><tr><td style="text-align:left">Cobertura</td><td style="text-align:left">Completas</td><td style="text-align:left">Documentan el código</td></tr><tr><td style="text-align:left">Aislamiento</td><td style="text-align:left">Independientes</td><td style="text-align:left">Aíslan y acotan errores</td></tr><tr><td style="text-align:left">Estándar</td><td style="text-align:left">Profesionales</td><td style="text-align:left">Separación</td></tr></tbody></table>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="71--herramientas-para-java">7.1.- Herramientas para Java<a href="#71--herramientas-para-java" class="hash-link" aria-label="Enlace directo al 7.1.- Herramientas para Java" title="Enlace directo al 7.1.- Herramientas para Java">​</a></h4>
+<p>Existen varios <em>frameworks</em> que automatizan la elaboración de pruebas unitarias en Java:</p>
+<table><thead><tr><th style="text-align:left">Herramienta</th><th style="text-align:left">Base</th><th style="text-align:left">Características</th></tr></thead><tbody><tr><td style="text-align:left">JUnit</td><td style="text-align:left">Estándar de facto</td><td style="text-align:left">El más extendido y soportado por la mayoría de los IDEs. Utiliza anotaciones de Java desde la versión 4. Soporta múltiples aserciones y organiza pruebas en Suites.</td></tr><tr><td style="text-align:left">TestNG</td><td style="text-align:left">Inspirado en JUnit y NUnit</td><td style="text-align:left">Diseñado para cubrir todo tipo de pruebas. Utiliza anotaciones de Java 1.5. Permite distribución de pruebas en máquinas esclavas y organización de métodos en*grupos</td></tr><tr><td style="text-align:left">Jtiger</td><td style="text-align:left">Framework de código abierto</td><td style="text-align:left">Utiliza anotaciones de Java para metadatos. Permite la exportación de informes en HTML, XML o texto, e incluye tareas de Ant para automatizar</td></tr></tbody></table>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="72--herramientas-para-otros-lenguajes">7.2.- Herramientas para otros lenguajes<a href="#72--herramientas-para-otros-lenguajes" class="hash-link" aria-label="Enlace directo al 7.2.- Herramientas para otros lenguajes" title="Enlace directo al 7.2.- Herramientas para otros lenguajes">​</a></h4>
+<p>Existe una amplia gama de <em>frameworks</em> de automatización de pruebas unitarias para la mayoría de los lenguajes de programación modernos. Muchos de estos <em>frameworks</em> se basan en la arquitectura <strong>xUnit</strong> (el diseño original de JUnit).</p>
+<table><thead><tr><th style="text-align:left">Herramienta</th><th style="text-align:left">Lenguaje / Plataforma</th><th style="text-align:left">Características</th></tr></thead><tbody><tr><td style="text-align:left">CppUnit</td><td style="text-align:left">C++</td><td style="text-align:left">Framework libre basado en xUnit. Puede integrarse con IDEs como Eclipse y utiliza entornos gráficos de ejecución</td></tr><tr><td style="text-align:left">Nunit</td><td style="text-align:left">Plataforma .NET</td><td style="text-align:left">Framework de código abierto basado en xUnit. Dispone de expansiones específicas para entornos web y formularios</td></tr><tr><td style="text-align:left">PHPUnit</td><td style="text-align:left">PHP</td><td style="text-align:left">Framework principal para realizar pruebas unitarias en PHP</td></tr><tr><td style="text-align:left">SimpleTest</td><td style="text-align:left">PHP</td><td style="text-align:left">Entorno de pruebas para aplicaciones PHP</td></tr><tr><td style="text-align:left">FoxUnit</td><td style="text-align:left">Microsoft Visual FoxPro</td><td style="text-align:left">Framework OpenSource para pruebas unitarias</td></tr><tr><td style="text-align:left">MOQ</td><td style="text-align:left">Genérico</td><td style="text-align:left">Framework especializado en la creación dinámica de objetos simuladores (<em>mocks</em>), usados para aislar dependencias durante las pruebas</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="8--documentación-de-la-prueba">8.- Documentación de la prueba<a href="#8--documentación-de-la-prueba" class="hash-link" aria-label="Enlace directo al 8.- Documentación de la prueba" title="Enlace directo al 8.- Documentación de la prueba">​</a></h3>
+<p>La <strong>documentación de las pruebas</strong> es un requisito indispensable en el desarrollo de aplicaciones. Unas pruebas bien documentadas sirven como base de conocimiento para futuras tareas de comprobación.</p>
+<p>Las metodologías modernas (como <strong>Métrica v3</strong>) se basan en los <strong>estándares ANSI/IEEE</strong> sobre verificación y validación de <em>software</em> para la documentación. Estos estándares tienen como objetivo facilitar la <strong>comunicación</strong> entre desarrolladores y asegurar que se ha cubierto <strong>todo el proceso de prueba</strong>.</p>
+<p>Los documentos que se van a generar son:</p>
+<table><thead><tr><th style="text-align:left">Documento</th><th style="text-align:left">Etapa</th><th style="text-align:left">Contenido</th></tr></thead><tbody><tr><td style="text-align:left">Plan de pruebas</td><td style="text-align:left">Inicia con el análisis del sistema</td><td style="text-align:left">Es la planificación general de las pruebas a realizar</td></tr><tr><td style="text-align:left">Especificación del diseño de pruebas</td><td style="text-align:left">Detalle del plan de pruebas</td><td style="text-align:left">Define la ampliación y el detalle de la estrategia de pruebas</td></tr><tr><td style="text-align:left">Especificación de un caso de prueba</td><td style="text-align:left">Detalle del diseño de pruebas</td><td style="text-align:left">Concreta un conjunto de entradas, condiciones y resultados esperados para un objetivo específico</td></tr><tr><td style="text-align:left">Especificación de procedimiento de prueba</td><td style="text-align:left">Ejecución</td><td style="text-align:left">Detalla el modo exacto en que se ejecutarán los casos de prueba</td></tr><tr><td style="text-align:left">Registro de pruebas</td><td style="text-align:left">Ejecución</td><td style="text-align:left">Documenta los sucesos que tienen lugar durante la ejecución de las pruebas</td></tr><tr><td style="text-align:left">Informe de incidente de pruebas</td><td style="text-align:left">Resultados</td><td style="text-align:left">Se elabora por cada defecto detectado, incidente, o solicitud de mejora</td></tr><tr><td style="text-align:left">Informe sumario de pruebas</td><td style="text-align:left">Final</td><td style="text-align:left">Resume las actividades y resultados de prueba vinculados a las especificaciones de diseño</td></tr></tbody></table>
+<hr>
+<p><em>Fin de la 1ª Evaluación</em></p>
+<hr></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Página del documento"><a class="pagination-nav__link pagination-nav__link--prev" href="/apuntes-daw/docs/1º/sistemas-informaticos"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Sistemas Informáticos</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/apuntes-daw/docs/1º/programacion"><div class="pagination-nav__sublabel">Siguiente</div><div class="pagination-nav__label">Programación</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#ud1--desarrollo-de-software" class="table-of-contents__link toc-highlight"><strong>UD1.- Desarrollo de software</strong></a><ul><li><a href="#1--software-y-programa-tipos-de-software" class="table-of-contents__link toc-highlight">1.- Software y programa. Tipos de software.</a></li><li><a href="#2--relación-hardware---software" class="table-of-contents__link toc-highlight">2.- Relación Hardware - Software</a></li><li><a href="#3--fases-a-seguir-en-el-desarrollo-del-software" class="table-of-contents__link toc-highlight">3.- Fases a seguir en el desarrollo del software</a></li><li><a href="#4--ciclos-de-vida-del-software" class="table-of-contents__link toc-highlight">4.- Ciclos de vida del software</a></li><li><a href="#5--herramientas-de-apoyo-al-desarrollo-del-software" class="table-of-contents__link toc-highlight">5.- Herramientas de apoyo al desarrollo del software</a></li><li><a href="#6--frameworks" class="table-of-contents__link toc-highlight">6.- Frameworks</a></li><li><a href="#7--lenguajes-de-programación" class="table-of-contents__link toc-highlight">7.- Lenguajes de programación</a></li><li><a href="#8-máquinas-virtuales" class="table-of-contents__link toc-highlight">8. Máquinas virtuales</a></li><li><a href="#anexo-i-sentencias-de-control-de-la-programación-estructurada" class="table-of-contents__link toc-highlight">Anexo I. Sentencias de control de la programación estructurada.</a></li></ul></li><li><a href="#ud2--instalación-y-uso-de-entornos-de-desarrollo" class="table-of-contents__link toc-highlight"><strong>UD2.- Instalación y uso de entornos de desarrollo</strong></a><ul><li><a href="#1--concepto-de-entorno-de-desarrollo-evolución-histórica" class="table-of-contents__link toc-highlight">1.- Concepto de entorno de desarrollo. Evolución histórica.</a></li><li><a href="#2--funciones-de-un-entorno-de-desarrollo" class="table-of-contents__link toc-highlight">2.- Funciones de un entorno de desarrollo</a></li><li><a href="#3--entornos-integrados-libres-y-propietarios" class="table-of-contents__link toc-highlight">3.- Entornos integrados libres y propietarios</a></li><li><a href="#4--estructura-de-entornos-de-desarrollo" class="table-of-contents__link toc-highlight">4.- Estructura de entornos de desarrollo</a></li><li><a href="#5--instalación-de-entornos-integrados-de-desarrollo" class="table-of-contents__link toc-highlight">5.- Instalación de entornos integrados de desarrollo</a></li><li><a href="#6--configuración-y-personalización-de-entornos-de-desarrollo" class="table-of-contents__link toc-highlight">6.- Configuración y personalización de entornos de desarrollo</a></li><li><a href="#7--gestión-de-módulos" class="table-of-contents__link toc-highlight">7.- Gestión de módulos</a></li><li><a href="#8--uso-básico-de-entornos-de-desarrollo" class="table-of-contents__link toc-highlight">8.- Uso básico de entornos de desarrollo</a></li><li><a href="#9--actualización-y-mantenimiento-de-entornos-de-desarrollo" class="table-of-contents__link toc-highlight">9.- Actualización y mantenimiento de entornos de desarrollo</a></li><li><a href="#anexo-i--crear-compilar-y-ejecutar-un-programa-sin-usar-ide" class="table-of-contents__link toc-highlight">Anexo I.- Crear, compilar y ejecutar un programa (sin usar IDE)</a></li><li><a href="#anexo-ii--crear-compilar-y-ejecutar-un-programa-con-varias-clases-sin-usar-ide" class="table-of-contents__link toc-highlight">Anexo II.- Crear, compilar y ejecutar un programa con varias clases (sin usar IDE)</a></li></ul></li><li><a href="#ud3--diseño-y-realización-de-pruebas" class="table-of-contents__link toc-highlight"><strong>UD3.- Diseño y realización de pruebas</strong></a><ul><li><a href="#1--planificación-de-las-pruebas" class="table-of-contents__link toc-highlight">1.- Planificación de las pruebas</a></li><li><a href="#2--tipos-de-prueba" class="table-of-contents__link toc-highlight">2.- Tipos de prueba</a></li><li><a href="#3--procedimientos-y-casos-de-prueba" class="table-of-contents__link toc-highlight">3.- Procedimientos y casos de prueba</a></li><li><a href="#4--herramientas-de-depuración" class="table-of-contents__link toc-highlight">4.- Herramientas de depuración</a></li><li><a href="#5--validaciones" class="table-of-contents__link toc-highlight">5.- Validaciones</a></li><li><a href="#6--normas-de-calidad" class="table-of-contents__link toc-highlight">6.- Normas de calidad</a></li><li><a href="#7--pruebas-unitarias" class="table-of-contents__link toc-highlight">7.- Pruebas unitarias</a></li><li><a href="#8--documentación-de-la-prueba" class="table-of-contents__link toc-highlight">8.- Documentación de la prueba</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright"><b>© 2025.</b> Creado por <a href="https://github.com/sarabarredo" target="_blank" rel="noopener noreferrer">Sara</a></div></div></div></footer></div>
+</body>
+</html>
