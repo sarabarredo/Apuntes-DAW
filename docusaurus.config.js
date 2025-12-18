@@ -10,11 +10,13 @@ const config = {
     v4: true,
   },
 
-  url: 'https://your-docusaurus-site.example.com',
-  baseUrl: '/',
+  url: 'https://sarabarredo.github.io',
+  baseUrl: '/apuntes-daw/',
 
   organizationName: 'sarabarredo',
   projectName: 'apuntes-daw',
+
+  deploymentBranch: 'gh-pages',
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
